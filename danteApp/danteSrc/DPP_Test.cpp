@@ -1,7 +1,7 @@
 // Test Library.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+#include <inttypes.h>
 #ifdef POLLINGLIB
 	#include "DLL_DPP_Polling.h"
 #else
@@ -20,6 +20,7 @@
 #include <stdio.h>
 
 #ifdef WIN32
+//#include "stdafx.h"
 	#include <direct.h>
 char* GetCurrentWorkingDir(void) {
 	char buff[FILENAME_MAX];
@@ -224,7 +225,7 @@ int main(int argc, char* argv[])
 
 	// Test add_to_query() Start.
 	std::cout << "Test add_to_query().\n";
-	char ip[] = "10.96.0.110";	
+	char ip[] = "164.54.160.232";	
 	result = add_to_query(ip);
 	if (result)
 		std::cout << "Test add_to_query(): Ok.\n\n";
