@@ -1,0 +1,2163 @@
+
+file {
+	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante.adl"
+	version=030109
+}
+display {
+	object {
+		x=22
+		y=238
+		width=1300
+		height=800
+	}
+	clr=14
+	bclr=4
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=145
+		y=2
+		width=900
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+}
+text {
+	object {
+		x=415
+		y=3
+		width=360
+		height=25
+	}
+	"basic attribute" {
+		clr=0
+	}
+	textix="Dante MCA Control ($(P)$(R))"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=410
+		y=35
+		width=420
+		height=420
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+text {
+	object {
+		x=555
+		y=40
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=53
+	}
+	textix="Configuration"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=5
+		y=35
+		width=400
+		height=560
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+text {
+	object {
+		x=167
+		y=40
+		width=76
+		height=20
+	}
+	"basic attribute" {
+		clr=53
+	}
+	textix="Acquire"
+}
+text {
+	object {
+		x=140
+		y=131
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Status"
+}
+text {
+	object {
+		x=94
+		y=131
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=21
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(M).ACQG"
+	}
+	textix="Done"
+	align="horiz. right"
+}
+text {
+	object {
+		x=37
+		y=131
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=18
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(M).ACQG"
+	}
+	textix="Acquiring"
+}
+rectangle {
+	object {
+		x=97
+		y=65
+		width=216
+		height=60
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+"message button" {
+	object {
+		x=207
+		y=97
+		width=97
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Erase"
+		clr=14
+		bclr=51
+	}
+	label="Erase"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=103
+		y=97
+		width=97
+		height=20
+	}
+	control {
+		chan="$(P)$(M)EraseStart"
+		clr=14
+		bclr=51
+	}
+	label="Erase/Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=103
+		y=72
+		width=97
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Start"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=207
+		y=72
+		width=97
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Stop"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="1"
+}
+menu {
+	object {
+		x=107
+		y=416
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Status.SCAN"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=199
+		y=417
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA Status rate"
+}
+menu {
+	object {
+		x=107
+		y=441
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Read.SCAN"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=199
+		y=442
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA Read rate"
+}
+menu {
+	object {
+		x=107
+		y=466
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadStatus.SCAN"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=199
+		y=467
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Dante status rate"
+}
+"message button" {
+	object {
+		x=48
+		y=416
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Status.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=48
+		y=441
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(M)Read.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=48
+		y=466
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadStatus.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
+}
+menu {
+	object {
+		x=108
+		y=492
+		width=86
+		height=20
+	}
+	control {
+		chan="$(P)$(M)EnableWait"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=200
+		y=492
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Wait for client"
+}
+menu {
+	object {
+		x=108
+		y=517
+		width=86
+		height=20
+	}
+	control {
+		chan="$(P)$(M)ClientWait"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=200
+		y=517
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Client Wait"
+}
+text {
+	object {
+		x=26
+		y=156
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Elapsed"
+}
+"text update" {
+	object {
+		x=20
+		y=182
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).ERTM"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=20
+		y=209
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).ELTM"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+text {
+	object {
+		x=119
+		y=156
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Preset"
+}
+"text entry" {
+	object {
+		x=101
+		y=181
+		width=103
+		height=22
+	}
+	control {
+		chan="$(P)$(M).PRTM"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=102
+		y=208
+		width=103
+		height=22
+	}
+	control {
+		chan="$(P)$(M).PLTM"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=210
+		y=182
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Real time"
+}
+text {
+	object {
+		x=210
+		y=209
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Live time"
+}
+"text update" {
+	object {
+		x=20
+		y=316
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).IDTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. right"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=20
+		y=341
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).DTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. right"
+	limits {
+	}
+}
+text {
+	object {
+		x=102
+		y=316
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Instant dead time (%)"
+}
+text {
+	object {
+		x=102
+		y=341
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Average dead time (%)"
+}
+"related display" {
+	object {
+		x=108
+		y=542
+		width=86
+		height=20
+	}
+	display[0] {
+		label="MCA Display"
+		name="mca.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="MCA Plot"
+}
+text {
+	object {
+		x=200
+		y=543
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA Plot"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=108
+		y=567
+		width=86
+		height=20
+	}
+	display[0] {
+		label="Save/restore status"
+		name="save_restoreStatus_more.adl"
+		args="P=$(P)"
+	}
+	display[1] {
+		label="asyn record"
+		name="asynRecord.adl"
+		args="P=$(P),R=asyn1"
+	}
+	clr=14
+	bclr=51
+	label="More"
+}
+text {
+	object {
+		x=200
+		y=568
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Status and debugging"
+}
+rectangle {
+	object {
+		x=410
+		y=712
+		width=400
+		height=80
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+text {
+	object {
+		x=590
+		y=718
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=53
+	}
+	textix="Info"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=487
+		y=742
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Model"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=432
+		y=742
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Model"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=715
+		y=742
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)SerialNumber"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=630
+		y=742
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Serial #"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=505
+		y=767
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Firmware"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=420
+		y=767
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Firmware"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=744
+		y=767
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FPGA"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=699
+		y=767
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="FPGA"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=630
+		y=767
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Build"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=575
+		y=767
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Build"
+	align="horiz. right"
+}
+rectangle {
+	object {
+		x=410
+		y=517
+		width=400
+		height=190
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+text {
+	object {
+		x=525
+		y=522
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=53
+	}
+	textix="MCA/MCS/SCA Setup"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=501
+		y=550
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA source"
+}
+"text update" {
+	object {
+		x=687
+		y=550
+		width=70
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MCASource_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=606
+		y=550
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MCASource"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=619
+		y=370
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Gain"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=744
+		y=370
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=664
+		y=370
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=440
+		y=170
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy threshold (keV)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=170
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=170
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=420
+		y=195
+		width=240
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline threshold (keV)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=195
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=195
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=470
+		y=270
+		width=190
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Max. rise time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=270
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=270
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=490
+		y=95
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Peaking time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=95
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=95
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=440
+		y=120
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Max. peaking time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=120
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=120
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=480
+		y=245
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Flat top time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=245
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=245
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=420
+		y=295
+		width=240
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset recovery time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=295
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=295
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=460
+		y=320
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Zero peak freq. (Hz)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=320
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=320
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=500
+		y=345
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline samples"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=345
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=345
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=519
+		y=395
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input polarity"
+	align="horiz. centered"
+}
+menu {
+	object {
+		x=664
+		y=395
+		width=75
+		height=20
+	}
+	control {
+		chan="$(P)$(R)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=395
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=530
+		y=420
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Time constant"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=420
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=420
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=430
+		y=220
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast flat top time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=220
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=220
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=460
+		y=145
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast threshold (keV)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=145
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=145
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=440
+		y=70
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast peaking time (us)"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=665
+		y=70
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=744
+		y=70
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+composite {
+	object {
+		x=835
+		y=369
+		width=400
+		height=85
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=945
+				y=374
+				width=180
+				height=20
+			}
+			"basic attribute" {
+				clr=53
+			}
+			textix="Configuration file"
+		}
+		rectangle {
+			object {
+				x=835
+				y=369
+				width=400
+				height=85
+			}
+			"basic attribute" {
+				clr=54
+				fill="outline"
+				width=2
+			}
+		}
+		"text entry" {
+			object {
+				x=949
+				y=399
+				width=280
+				height=20
+			}
+			control {
+				chan="$(P)$(R)ConfigFileName"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=853
+				y=399
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="File name"
+			align="horiz. right"
+		}
+		"message button" {
+			object {
+				x=955
+				y=424
+				width=65
+				height=20
+			}
+			control {
+				chan="$(P)$(R)LoadConfigFile"
+				clr=14
+				bclr=51
+			}
+			label="Load"
+			press_msg="1"
+		}
+		"message button" {
+			object {
+				x=1051
+				y=424
+				width=65
+				height=20
+			}
+			control {
+				chan="$(P)$(R)SaveConfigFile"
+				clr=14
+				bclr=51
+			}
+			label="Save"
+			press_msg="1"
+		}
+	}
+}
+rectangle {
+	object {
+		x=835
+		y=35
+		width=400
+		height=330
+	}
+	"basic attribute" {
+		clr=54
+		fill="outline"
+		width=2
+	}
+}
+text {
+	object {
+		x=970
+		y=40
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=53
+	}
+	textix="Statistics"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=856
+		y=65
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input count rate (kHz)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=846
+		y=90
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Output count rate (kHz)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=996
+		y=115
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Triggers"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1016
+		y=140
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Events"
+	align="horiz. right"
+}
+text {
+	object {
+		x=936
+		y=165
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast dead time"
+	align="horiz. right"
+}
+text {
+	object {
+		x=986
+		y=190
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Dead time"
+	align="horiz. right"
+}
+text {
+	object {
+		x=966
+		y=215
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Zero counts"
+	align="horiz. right"
+}
+text {
+	object {
+		x=936
+		y=240
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline count"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1016
+		y=265
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Pileup"
+	align="horiz. right"
+}
+text {
+	object {
+		x=986
+		y=290
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="F1 Pileup"
+	align="horiz. right"
+}
+text {
+	object {
+		x=946
+		y=315
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Not F1 Pileup"
+	align="horiz. right"
+}
+text {
+	object {
+		x=956
+		y=340
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset counts"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=1081
+		y=65
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=90
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=115
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=140
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=165
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=190
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=215
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=240
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=265
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=290
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=315
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1081
+		y=340
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+composite {
+	object {
+		x=481
+		y=575
+		width=276
+		height=22
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=481
+				y=576
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="MCA channels"
+		}
+		"text update" {
+			object {
+				x=687
+				y=575
+				width=70
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)MCANumChannels_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=606
+				y=575
+				width=75
+				height=22
+			}
+			control {
+				chan="$(P)$(M).NUSE"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+	}
+}
+composite {
+	object {
+		x=461
+		y=600
+		width=296
+		height=22
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=461
+				y=601
+				width=140
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Maximum energy"
+		}
+		"text entry" {
+			object {
+				x=606
+				y=600
+				width=75
+				height=22
+			}
+			control {
+				chan="$(P)$(R)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=687
+				y=600
+				width=70
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+	}
+}
+text {
+	object {
+		x=13
+		y=392
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Poll time"
+}
+"text entry" {
+	object {
+		x=107
+		y=391
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)PollTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=199
+		y=391
+		width=70
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PollTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
