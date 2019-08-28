@@ -1,0 +1,17 @@
+file "$(DANTE)/db/dante.template" {
+{P=Dante:, R=dante1:, PORT=DANTE1}
+}
+
+file "$(MCA)/db/mca.db"
+{
+pattern
+{   P,      M,       DTYP,         INP,         PREC,    NCHAN}
+{Dante:,   mca1,  "asynMCA",  "@asyn(DANTE1,0)",   2,     4096}
+}
+
+file "$(ASYN)/db/asynRecord.db"
+{
+pattern
+{P,      R,      PORT,   ADDR,  IMAX,  OMAX}
+{Dante:, Asyn, DANTE1,      0,    80,    80}
+}
