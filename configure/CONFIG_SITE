@@ -35,11 +35,6 @@ CHECK_RELEASE = YES
 #HOST_OPT = NO
 #CROSS_OPT = NO
 
-# If your system has libusb-1.0 uncomment this line
-LINUX_LIBUSB-1.0_INSTALLED = YES
-
-# The following control build of Canberra
-LINUX_NET_INSTALLED = YES
 -include $(SUPPORT)/configure/CONFIG_SITE
 
 # These allow developers to override the CONFIG_SITE variable
@@ -47,4 +42,13 @@ LINUX_NET_INSTALLED = YES
 # file itself.
 -include $(TOP)/../CONFIG_SITE.local
 -include $(TOP)/configure/CONFIG_SITE.local
+
+# Get settings from AREA_DETECTOR, so we only have to configure once for all detectors if we want to
+-include $(AREA_DETECTOR)/configure/CONFIG_SITE
+-include $(AREA_DETECTOR)/configure/CONFIG_SITE.$(EPICS_HOST_ARCH)
+-include $(AREA_DETECTOR)/configure/CONFIG_SITE.$(EPICS_HOST_ARCH).Common
+ifdef T_A
+  -include $(AREA_DETECTOR)/configure/CONFIG_SITE.Common.$(T_A)
+  -include $(AREA_DETECTOR)/configure/CONFIG_SITE.$(EPICS_HOST_ARCH).$(T_A)
+endif
 
