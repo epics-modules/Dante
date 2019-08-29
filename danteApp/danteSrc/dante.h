@@ -8,16 +8,22 @@
 typedef enum {
     DanteModeMCA, 
     DanteModeSpectraMapping,
-    DanteModeListMapping
+    DanteModeListMapping,
 } danteCollectMode_t;
 
 #define MAX_DANTE_REPLY_LEN       16
 #define MAX_DANTE_IDENTIFIER_LEN  16
 
+/* Things that are in ADDriver.h that we want to use */
+#define ADManufacturerString        "MANUFACTURER"          /**< (asynOctet,    r/o) Detector manufacturer name */
+#define ADModelString               "MODEL"                 /**< (asynOctet,    r/o) Detector model name */
+#define ADSerialNumberString        "SERIAL_NUMBER"         /**< (asynOctet,    r/o) Detector serial number */
+#define ADSDKVersionString          "SDK_VERSION"           /**< (asynOctet,    r/o) Vendor SDK version */
+#define ADFirmwareVersionString     "FIRMWARE_VERSION"      /**< (asynOctet,    r/o) Detector firmware version */
+
 /* General parameters */
 #define DanteCollectModeString              "DanteCollectMode"
 #define DanteCurrentPixelString             "DanteCurrentPixel"
-#define DanteReadRateString                 "DanteReadRate"
 #define DanteMaxEnergyString                "DanteMaxEnergy"
 #define DanteSpectrumXAxisString            "DanteSpectrumXAxis"
 
@@ -30,6 +36,13 @@ typedef enum {
 /* Diagnostic trace parameters */
 #define DanteTraceDataString                "DanteTraceData"
 #define DanteTraceTimeArrayString           "DanteTraceTimeArray"
+#define DanteTraceTimeString                "DanteTraceTime"
+#define DanteTraceTriggerInstantString      "DanteTraceTriggerInstant"
+#define DanteTraceTriggerRisingString       "DanteTraceTriggerRising"
+#define DanteTraceTriggerFallingString      "DanteTraceTriggerFalling"
+#define DanteTraceTriggerLevelString        "DanteTraceTriggerLevel"
+#define DanteTraceTriggerWaitString         "DanteTraceTriggerWait"
+#define DanteTraceLengthString              "DanteTraceLength"
 
 /* Runtime statistics */
 #define DanteInputCountRateString           "DanteInputCountRate"
@@ -63,7 +76,7 @@ typedef enum {
 #define DanteInvertedInputString            "DanteInvertedInput"
 #define DanteTimeConstantString             "DanteTimeConstant"
 #define DanteBaseOffsetString               "DanteBaseOffset"
-#define DanteOverflowRecoveryString         "DanteOverflowRecovery"
+#define DanteOverflowRecoveryTimeString     "DanteOverflowRecoveryTime"
 #define DanteResetThresholdString           "DanteResetThreshold"
 #define DanteTailCoefficientString          "DanteTailCoefficient"
 
@@ -84,25 +97,31 @@ public:
     void acquisitionTask();
     asynStatus pollMappingMode();
     int getChannel(asynUser *pasynUser, int *addr);
-    asynStatus setDanteConfiguration(asynUser *pasynUser, int addr);
-    asynStatus getAcquisitionStatus(asynUser *pasynUser, int addr);
-    asynStatus getAcquisitionStatistics(asynUser *pasynUser, int addr);
-    asynStatus getMcaData(asynUser *pasynUser, int addr);
+    asynStatus setDanteConfiguration(int addr);
+    asynStatus getAcquisitionStatus(int addr);
+    asynStatus getAcquisitionStatistics(int addr);
+    asynStatus getMcaData(int addr);
     asynStatus getMappingData();
-    asynStatus getTrace(asynUser* pasynUser, int addr,
-                        epicsInt32* data, size_t maxLen, size_t *actualLen);
+    asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
     asynStatus configureCollectMode();
-    asynStatus startAcquiring(asynUser *pasynUser);
+    asynStatus startAcquiring();
     asynStatus waitReply(uint32_t callId, char *reply);
     void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data);
     epicsMessageQueue *msgQ_;
 
 protected:
+
+    /* From ADDriver.h */
+    int ADManufacturer;
+    int ADModel;
+    int ADSerialNumber;
+    int ADSDKVersion;
+    int ADFirmwareVersion;
+
     /* General parameters */
     int DanteCollectMode;                   /** < Change mapping mode (0=mca; 1=spectra mapping; 2=sca mapping) (int32 read/write) addr: all/any */
     #define FIRST_DANTE_PARAM DanteCollectMode
     int DanteCurrentPixel;                  /** < Mapping mode only: read the current pixel that is being acquired into (int) */
-    int DanteReadRate;
     int DanteMaxEnergy;
     int DanteSpectrumXAxis;
 
@@ -113,8 +132,15 @@ protected:
     int DanteForceRead;            /** < Force reading MCA spectra - used for mcaData when addr=ALL */
 
     /* Diagnostic trace parameters */
-    int DanteTraceData;            /** < The trace array data (read) */
-    int DanteTraceTimeArray;       /** < The trace timebase array (read) */
+    int DanteTraceData;            /** < The trace array data (read) int32 array */
+    int DanteTraceTimeArray;       /** < The trace timebase array (read) float64 array */
+    int DanteTraceTime;            /** < The trace time per point, float64 */
+    int DanteTraceTriggerInstant;  /** < Trigger instant int32 */
+    int DanteTraceTriggerRising;   /** < Trigger rising crossing of trigger level int32 */
+    int DanteTraceTriggerFalling;  /** < Trigger falling crossing of trigger level int32 */
+    int DanteTraceTriggerLevel;    /** < Trigger level (0 - 65535) int32 */
+    int DanteTraceTriggerWait;     /** < Time to wait for trigger float64 */
+    int DanteTraceLength;          /** < Length of trace, multiples of 16K int32 */
 
     /* Runtime statistics */
     int DanteInputCountRate;      /* float64 */
@@ -148,7 +174,7 @@ protected:
     int DanteInvertedInput;               /* uint32 */
     int DanteTimeConstant;                /* float64, units? */
     int DanteBaseOffset;                  /* uint32, bits */
-    int DanteOverflowRecovery;            /* float64, usec */
+    int DanteOverflowRecoveryTime;        /* float64, usec */
     int DanteResetThreshold;              /* uint32, bits */
     int DanteTailCoefficient;             /* float64, units? */
 
@@ -196,8 +222,9 @@ private:
     uint32_t callId_;
     char danteReply_[MAX_DANTE_REPLY_LEN];
 
-    int traceLength_;
-    epicsInt32 *traceBuffer_;
+    uint32_t traceLength_;
+    bool newTraceTime_;
+    uint16_t *traceBuffer_;
     epicsFloat64 *traceTimeBuffer_;
     epicsFloat64 *spectrumXAxisBuffer_;
     
