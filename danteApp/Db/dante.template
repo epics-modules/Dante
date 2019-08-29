@@ -2,6 +2,49 @@
 #   Mark Rivers
 #   August 26, 2019
 
+include "NDArrayBase.template"
+
+record(stringin, "$(P)$(R)Manufacturer_RBV")
+{
+   field(DTYP, "asynOctetRead")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))MANUFACTURER")
+   field(VAL,  "Unknown")
+   field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P)$(R)Model_RBV")
+{
+   field(DTYP, "asynOctetRead")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))MODEL")
+   field(VAL,  "Unknown")
+   field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P)$(R)SerialNumber_RBV")
+{
+   field(DTYP, "asynOctetRead")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))SERIAL_NUMBER")
+   field(VAL,  "Unknown")
+   field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P)$(R)SDKVersion_RBV")
+{
+   field(DTYP, "asynOctetRead")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))SDK_VERSION")
+   field(VAL,  "Unknown")
+   field(SCAN, "I/O Intr")
+}
+
+record(stringin, "$(P)$(R)FirmwareVersion_RBV")
+{
+   field(DTYP, "asynOctetRead")
+   field(INP,  "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))FIRMWARE_VERSION")
+   field(VAL,  "Unknown")
+   field(SCAN, "I/O Intr")
+}
+
+
 record(mbbo,"$(P)$(R)CollectMode") {
     field(DESC,"Collection mode")
     field(PINI,"YES")
@@ -424,79 +467,204 @@ record(ai,"$(P)$(R)TimeConstant_RBV") {
     field(SCAN, "I/O Intr")
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-record(mbbo,"$(P)$(R)Gate") {
-    field(DESC,"FPGA clock")
+record(longout,"$(P)$(R)BaseOffset") {
+    field(DESC,"Base offset")
     field(PINI,"YES")
-    field(ZRST,"Off")
-    field(ZRVL,"0")
-    field(ONST,"High")
-    field(ONVL,"1")
-    field(TWST,"Low")
-    field(TWVL,"2")
     field(DTYP, "asynInt32")
-    field(OUT,"@asyn($(PORT),0)AMPTEK_GATE")
+    field(OUT,"@asyn($(PORT))DanteBaseOffset")
 }
 
-record(mbbi,"$(P)$(R)Gate_RBV") {
-    field(DESC,"FPGA clock")
-    field(ZRST,"Off")
-    field(ZRVL,"0")
-    field(ONST,"High")
-    field(ONVL,"1")
-    field(TWST,"Low")
-    field(TWVL,"2")
+record(longin,"$(P)$(R)BaseOffset_RBV") {
+    field(DESC,"Base offset")
     field(DTYP, "asynInt32")
-    field(INP,"@asyn($(PORT),0)AMPTEK_GATE")
+    field(INP,"@asyn($(PORT))DanteBaseOffset")
     field(SCAN, "I/O Intr")
 }
 
-
-# This record will read the Amptek status even when the MCA is not acquiring
-record(bo, "$(P)$(R)ReadStatus")
-{
-    field(DTYP, "asynInt32")
-    field(OUT,  "@asyn($(PORT),0)MCA_READ_STATUS")
-    field(ZNAM, "Done")
-    field(ONAM, "Read")
-    field(SCAN, "1 second")
+record(ao,"$(P)$(R)OverflowRecoveryTime") {
+    field(DESC,"Overflow recovery time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteOverflowRecoveryTime")
 }
 
-record(stringin,"$(P)$(R)Firmware") {
-    field(DESC,"Amptek firmware")
-    field(DTYP, "asynOctetRead")
-    field(INP, "@asyn($(PORT))AMPTEK_FIRMWARE")
+record(ai,"$(P)$(R)OverflowRecoveryTime_RBV") {
+    field(DESC,"Overflow recovery time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteOverflowRecoveryTime")
     field(SCAN, "I/O Intr")
 }
 
-record(stringin,"$(P)$(R)FPGA") {
-    field(DESC,"Amptek FPGA")
-    field(DTYP, "asynOctetRead")
-    field(INP, "@asyn($(PORT))AMPTEK_FPGA")
+record(longout,"$(P)$(R)ResetThreshold") {
+    field(DESC,"Reset threshold")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteResetThreshold")
+}
+
+record(longin,"$(P)$(R)ResetThreshold_RBV") {
+    field(DESC,"Reset threshold")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteResetThreshold")
     field(SCAN, "I/O Intr")
 }
 
-record(longin,"$(P)$(R)Build") {
-    field(DESC,"Amptek build")
-    field(DTYP, "asynInt32")
-    field(INP, "@asyn($(PORT))AMPTEK_BUILD")
+record(ao,"$(P)$(R)TailCoefficient") {
+    field(DESC,"Tail coefficient")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTailCoefficient")
+}
+
+record(ai,"$(P)$(R)TailCoefficient_RBV") {
+    field(DESC,"Tail coefficient")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteTailCoefficient")
     field(SCAN, "I/O Intr")
 }
 
-record(longin,"$(P)$(R)SerialNumber") {
-    field(DESC,"Amptek serial number")
+#############################
+# Trace waveform parameters #
+#############################
+
+record(waveform, "$(P)$(R)TraceData") {
+    field(DESC, "Trace data")
+    field(DTYP, "asynInt32ArrayIn")
+    field(PREC, "0")
+    field(INP, "@asyn($(PORT))DanteTraceData")
+    field(NELM, "$(TRACE_LEN)")
+    field(FTVL, "LONG")
+}
+
+record(waveform, "$(P)$(R)TraceTimeArray") {
+    field(DESC, "Trace data")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(PREC, "0")
+    field(INP, "@asyn($(PORT))DanteTraceTimeArray")
+    field(NELM, "$(TRACE_LEN)")
+    field(FTVL, "DOUBLE")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TraceTime") {
+    field(DESC,"Trace time/point")
+    field(PINI,"YES")
+    field(PREC, "3")
+    field(DRVL, "0.016")
+    field(DRVH, "0.512")
+    field(VAL,  "0.016")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTraceTime")
+}
+
+record(ai,"$(P)$(R)TraceTime_RBV") {
+    field(DESC,"Base offset")
+    field(DTYP, "asynFloat64")
+    field(PREC, "3")
+    field(INP,"@asyn($(PORT))DanteTraceTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerInstant") {
+    field(DESC,"Trace trigger instant")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
     field(DTYP, "asynInt32")
-    field(INP, "@asyn($(PORT))AMPTEK_SERIAL_NUMBER")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerInstant")
+}
+
+record(bi,"$(P)$(R)TraceTriggerInstant_RBV") {
+    field(DESC,"Trace trigger instant")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerInstant")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerRising") {
+    field(DESC,"Trace trigger rising")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerRising")
+}
+
+record(bi,"$(P)$(R)TraceTriggerRising_RBV") {
+    field(DESC,"Trace trigger rising")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerRising")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerFalling") {
+    field(DESC,"Trace trigger falling")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerFalling")
+}
+
+record(bi,"$(P)$(R)TraceTriggerFalling_RBV") {
+    field(DESC,"Trace trigger falling")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerFalling")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)TraceTriggerLevel") {
+    field(DESC,"Trace trigger level")
+    field(PINI,"YES")
+    field(DRVL, "0")
+    field(DRVH, "65535")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteTraceTriggerLevel")
+}
+
+record(longin,"$(P)$(R)TraceTriggerLevel_RBV") {
+    field(DESC,"Trace trigger level")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteTraceTriggerLevel")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TraceTriggerWait") {
+    field(DESC,"Trigger wait time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTraceTriggerWait")
+}
+
+record(ai,"$(P)$(R)TraceTriggerWait_RBV") {
+    field(DESC,"Trigger wait time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteTraceTriggerWait")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)TraceLength") {
+    field(DESC,"Trace length")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteTraceLength")
+}
+
+record(longin,"$(P)$(R)TraceLength_RBV") {
+    field(DESC,"Trace length")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteTraceLength")
     field(SCAN, "I/O Intr")
 }
