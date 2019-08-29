@@ -1,6 +1,6 @@
 
 file {
-	name="/home/epics/devel/mca-7-7/mcaApp/op/adl/amptekTop.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/danteTop.adl"
 	version=030109
 }
 display {
@@ -95,11 +95,11 @@ display {
 		height=26
 	}
 	display[0] {
-		label="Amptek1"
-		name="Amptek.adl"
-		args="P=mcaTest:,M=mca1,R=Amptek1:"
+		label="Dante"
+		name="dante.adl"
+		args="P=Dante:,M=mca1,R=dante1:"
 	}
 	clr=14
 	bclr=4
-	label="Amptek1"
+	label="Dante1"
 }
