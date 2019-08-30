@@ -642,6 +642,8 @@ record(longin,"$(P)$(R)TraceTriggerLevel_RBV") {
 record(ao,"$(P)$(R)TraceTriggerWait") {
     field(DESC,"Trigger wait time")
     field(PINI,"YES")
+    field(DRVL, "0.001")
+    field(DRVH, "100")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
     field(OUT,"@asyn($(PORT))DanteTraceTriggerWait")
