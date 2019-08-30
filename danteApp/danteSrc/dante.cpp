@@ -1223,7 +1223,10 @@ asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Reading trace waveform\n");
                       "%s::%s error calling getWaveData\n", driverName, functionName);
             return asynError;
         }
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Finished reading trace waveform\n");
+asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Finished reading trace waveform.\n");
+        // There is a bug in their firmware, the last waveform entry is always 0.
+        // This messes up auto-scaling displays.  Replace it with the next to last value for now
+        traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
         *actualLen = traceLength_;
         if (maxLen < *actualLen) *actualLen = maxLen;
         unsigned int i;
