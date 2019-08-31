@@ -6,7 +6,7 @@ file "$(MCA)/db/mca.db"
 {
 pattern
 {   P,      M,       DTYP,         INP,         PREC,    NCHAN}
-{Dante:,   mca1,  "asynMCA",  "@asyn(DANTE1,0)",   2,     4096}
+{Dante:,   mca1,  "asynMCA",  "@asyn(DANTE1,0)",   2,     2048}
 }
 
 file "$(ASYN)/db/asynRecord.db"
