@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=194
-		y=237
+		x=92
+		y=305
 		width=1140
 		height=765
 	}
@@ -769,7 +769,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Time constant"
+	textix="Analog offset"
 	align="horiz. centered"
 }
 "text entry" {
@@ -780,7 +780,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)TimeConstant"
+		chan="$(P)$(R)AnalogOffset"
 		clr=14
 		bclr=51
 	}
@@ -795,7 +795,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)TimeConstant_RBV"
+		chan="$(P)$(R)AnalogOffset_RBV"
 		clr=54
 		bclr=3
 	}
