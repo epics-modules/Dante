@@ -79,6 +79,7 @@ typedef enum {
 #define DanteOverflowRecoveryTimeString     "DanteOverflowRecoveryTime"
 #define DanteResetThresholdString           "DanteResetThreshold"
 #define DanteTailCoefficientString          "DanteTailCoefficient"
+#define DanteAnalogOffsetString             "DanteAnalogOffset"
 
 
 class Dante : public asynNDArrayDriver
@@ -177,6 +178,7 @@ protected:
     int DanteOverflowRecoveryTime;        /* float64, usec */
     int DanteResetThreshold;              /* uint32, bits */
     int DanteTailCoefficient;             /* float64, units? */
+    int DanteAnalogOffset;                /* int32, 8-bit DAC units */
 
     /* Commands from MCA interface */
     int mcaData;                   /* int32Array, write/read */
