@@ -20,6 +20,7 @@ $(P)$(R)BaseOffset
 $(P)$(R)OverflowRecoveryTime
 $(P)$(R)ResetThreshold
 $(P)$(R)TailCoefficient
+$(P)$(R)AnalogOffset
 $(P)$(R)TraceTime
 $(P)$(R)TraceTriggerInstant
 $(P)$(R)TraceTriggerRising
