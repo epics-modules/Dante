@@ -527,6 +527,23 @@ record(ai,"$(P)$(R)TailCoefficient_RBV") {
     field(SCAN, "I/O Intr")
 }
 
+record(longout,"$(P)$(R)AnalogOffset") {
+    field(DESC,"Analog offset")
+    field(PINI,"YES")
+    field(DRVL, "0")
+    field(DRVH, "255")
+    field(VAL, "128")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteAnalogOffset")
+}
+
+record(longin,"$(P)$(R)AnalogOffset_RBV") {
+    field(DESC,"Analog offset")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteAnalogOffset")
+    field(SCAN, "I/O Intr")
+}
+
 #############################
 # Trace waveform parameters #
 #############################
