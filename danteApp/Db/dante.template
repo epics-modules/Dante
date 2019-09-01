@@ -544,6 +544,37 @@ record(longin,"$(P)$(R)AnalogOffset_RBV") {
     field(SCAN, "I/O Intr")
 }
 
+record(mbbo,"$(P)$(R)GatingMode") {
+    field(DESC,"Gating mode")
+    field(PINI,"YES")
+    field(ZRST,"Disable")
+    field(ZRVL,"0")
+    field(ONST,"High level")
+    field(ONVL,"1")
+    field(TWST,"Low level")
+    field(TWVL,"2")
+    field(THST,"Map latched")
+    field(THVL,"3")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteGatingMode")
+}
+
+record(mbbi,"$(P)$(R)GatingMode_RBV") {
+    field(DESC,"Gating mode")
+    field(ZRST,"Disable")
+    field(ZRVL,"0")
+    field(ONST,"High level")
+    field(ONVL,"1")
+    field(TWST,"Low level")
+    field(TWVL,"2")
+    field(THST,"Map latched")
+    field(THVL,"3")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteGatingMode")
+    field(SCAN, "I/O Intr")
+}
+
+
 #############################
 # Trace waveform parameters #
 #############################
