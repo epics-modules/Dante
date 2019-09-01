@@ -241,8 +241,11 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     createParam(DanteOverflowRecoveryTimeString,    asynParamFloat64, &DanteOverflowRecoveryTime);
     createParam(DanteResetThresholdString,          asynParamInt32,   &DanteResetThreshold);
     createParam(DanteTailCoefficientString,         asynParamFloat64, &DanteTailCoefficient);
+    
+    /* Other parameters */
     createParam(DanteAnalogOffsetString,            asynParamInt32,   &DanteAnalogOffset);
     createParam(DanteGatingModeString,              asynParamInt32,   &DanteGatingMode);
+    createParam(DanteMappingPointsString,           asynParamInt32,   &DanteMappingPoints);
 
     /* Commands from MCA interface */
     createParam(mcaDataString,                     asynParamInt32Array, &mcaData);
@@ -645,7 +648,7 @@ asynStatus Dante::readInt32Array(asynUser *pasynUser, epicsInt32 *value, size_t 
             {
                 /* While acquiring we'll force reading the data from the HW */
                 this->getMcaData(addr);
-            } else if (mode == DanteModeSpectraMapping)
+            } else if (mode == DanteModeMCAMapping)
             {
                 /*  Nothing needed here, the last data read from the mapping buffer has already been
                  *  copied to the buffer pointed to by pMcaRaw_. */
@@ -1282,11 +1285,20 @@ asynStatus Dante::startAcquiring()
     double presetReal;
     int numChannels;
     int collectMode;
+    int mappingPoints;
     getDoubleParam(mcaPresetRealTime, &presetReal);
     getIntegerParam(mcaNumChannels, &numChannels);
     getIntegerParam(DanteCollectMode, &collectMode);
-    callId_ = start(danteIdentifier_, presetReal, numChannels);
-    waitReply(callId_, danteReply_);
+    getIntegerParam(DanteMappingPoints, &mappingPoints);
+    switch (collectMode){
+      case DanteModeMCA:
+        callId_ = start(danteIdentifier_, presetReal, numChannels);
+        waitReply(callId_, danteReply_);
+        break;
+      case DanteModeMCAMapping:
+        callId_ = start_map(danteIdentifier_, presetReal, mappingPoints, numChannels);
+        waitReply(callId_, danteReply_);
+    }
 
     setIntegerParam(DanteErased, 0); /* reset the erased flag */
     setIntegerParam(mcaAcquiring, 1); /* Set the acquiring flag */

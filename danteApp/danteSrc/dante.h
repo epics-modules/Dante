@@ -7,7 +7,7 @@
 
 typedef enum {
     DanteModeMCA, 
-    DanteModeSpectraMapping,
+    DanteModeMCAMapping,
     DanteModeListMapping,
 } danteCollectMode_t;
 
@@ -79,8 +79,11 @@ typedef enum {
 #define DanteOverflowRecoveryTimeString     "DanteOverflowRecoveryTime"
 #define DanteResetThresholdString           "DanteResetThreshold"
 #define DanteTailCoefficientString          "DanteTailCoefficient"
+
+/* Other parameters */
 #define DanteAnalogOffsetString             "DanteAnalogOffset"
 #define DanteGatingModeString               "DanteGatingMode"
+#define DanteMappingPointsString            "DanteMappingPoints"
 
 
 class Dante : public asynNDArrayDriver
@@ -179,8 +182,11 @@ protected:
     int DanteOverflowRecoveryTime;        /* float64, usec */
     int DanteResetThreshold;              /* uint32, bits */
     int DanteTailCoefficient;             /* float64, units? */
+    
+    /* Other parameters */
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
     int DanteGatingMode;                  /* int32 */
+    int DanteMappingPoints;               /* int32 */
 
     /* Commands from MCA interface */
     int mcaData;                   /* int32Array, write/read */
