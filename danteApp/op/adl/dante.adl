@@ -2156,217 +2156,248 @@ text {
 	limits {
 	}
 }
-composite {
+rectangle {
+	object {
+		x=510
+		y=559
+		width=120
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
 	object {
 		x=360
 		y=555
 		width=420
-		height=140
+		height=165
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=510
-				y=559
-				width=120
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		rectangle {
-			object {
-				x=360
-				y=555
-				width=420
-				height=140
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		text {
-			object {
-				x=525
-				y=559
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="MCA Setup"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=390
-				y=588
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Collect mode"
-		}
-		text {
-			object {
-				x=390
-				y=613
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="MCA channels"
-		}
-		text {
-			object {
-				x=370
-				y=638
-				width=140
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Maximum energy"
-		}
-		menu {
-			object {
-				x=515
-				y=588
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CollectMode"
-				clr=14
-				bclr=51
-			}
-		}
-		"text entry" {
-			object {
-				x=515
-				y=613
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(M).NUSE"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=515
-				y=638
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)MaxEnergy"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=620
-				y=588
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)CollectMode_RBV"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=620
-				y=613
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(M).NUSE"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=620
-				y=638
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)MaxEnergy_RBV"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		text {
-			object {
-				x=400
-				y=663
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Gating mode"
-			align="horiz. centered"
-		}
-		menu {
-			object {
-				x=515
-				y=663
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)GatingMode"
-				clr=14
-				bclr=51
-			}
-		}
-		"text update" {
-			object {
-				x=620
-				y=663
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)GatingMode_RBV"
-				clr=54
-				bclr=3
-			}
-			format="string"
-			limits {
-			}
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=525
+		y=559
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="MCA Setup"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=405
+		y=588
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Collect mode"
+}
+menu {
+	object {
+		x=530
+		y=588
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CollectMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=588
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)CollectMode_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=385
+		y=663
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Maximum energy"
+}
+"text entry" {
+	object {
+		x=530
+		y=663
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=663
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=415
+		y=688
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Gating mode"
+	align="horiz. centered"
+}
+menu {
+	object {
+		x=530
+		y=688
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)GatingMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=688
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)GatingMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=405
+		y=613
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA channels"
+}
+"text entry" {
+	object {
+		x=530
+		y=613
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(M).NUSE"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=613
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).NUSE"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=385
+		y=638
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Mapping points"
+}
+"text entry" {
+	object {
+		x=530
+		y=638
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MappingPoints"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=638
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MappingPoints_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
 	}
 }
