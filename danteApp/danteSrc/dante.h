@@ -80,6 +80,7 @@ typedef enum {
 #define DanteResetThresholdString           "DanteResetThreshold"
 #define DanteTailCoefficientString          "DanteTailCoefficient"
 #define DanteAnalogOffsetString             "DanteAnalogOffset"
+#define DanteGatingModeString               "DanteGatingMode"
 
 
 class Dante : public asynNDArrayDriver
@@ -179,6 +180,7 @@ protected:
     int DanteResetThreshold;              /* uint32, bits */
     int DanteTailCoefficient;             /* float64, units? */
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
+    int DanteGatingMode;                  /* int32 */
 
     /* Commands from MCA interface */
     int mcaData;                   /* int32Array, write/read */

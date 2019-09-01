@@ -242,6 +242,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     createParam(DanteResetThresholdString,          asynParamInt32,   &DanteResetThreshold);
     createParam(DanteTailCoefficientString,         asynParamFloat64, &DanteTailCoefficient);
     createParam(DanteAnalogOffsetString,            asynParamInt32,   &DanteAnalogOffset);
+    createParam(DanteGatingModeString,              asynParamInt32,   &DanteGatingMode);
 
     /* Commands from MCA interface */
     createParam(mcaDataString,                     asynParamInt32Array, &mcaData);
@@ -495,6 +496,11 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
         callId_ = configure_offset(danteIdentifier_, addr, cfgOffset);
         waitReply(callId_, danteReply_);
     }
+    else if (function == DanteGatingMode) {
+        GatingMode gatingMode = (GatingMode)value;
+        callId_ = configure_gating(danteIdentifier_, gatingMode);
+        waitReply(callId_, danteReply_);
+    }  
     else if (function == DanteTraceLength) {
         // For length to be a multiple of 16K.
         uint16_t length = value / TRACE_LEN_INC;
