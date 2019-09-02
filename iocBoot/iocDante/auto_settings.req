@@ -1,2 +1,3 @@
-file "dante_settings.req",       P=$(P), R=$(R)
-file "mca_settings.req",         P=$(P), M=$(M)
+file "dante_settings.req",        P=$(P), R=$(R)
+file "mca_settings.req",          P=$(P), M=$(M)
+file "commonPlugin_settings.req", P=$(P)
