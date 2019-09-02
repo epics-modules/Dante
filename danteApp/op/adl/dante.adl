@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=158
-		y=251
+		x=222
+		y=183
 		width=1140
-		height=765
+		height=930
 	}
 	clr=14
 	bclr=4
@@ -86,6 +86,24 @@ display {
 		289315,
 		1a7309,
 	}
+}
+text {
+	object {
+		x=159
+		y=500
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		calc="A"
+		chan="$(P)$(M).ACQG"
+	}
+	textix="Collecting"
+	align="horiz. centered"
 }
 rectangle {
 	object {
@@ -1036,479 +1054,6 @@ text {
 }
 rectangle {
 	object {
-		x=120
-		y=384
-		width=120
-		height=21
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-rectangle {
-	object {
-		x=5
-		y=380
-		width=350
-		height=380
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=1
-	}
-}
-text {
-	object {
-		x=142
-		y=384
-		width=70
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Acquire"
-}
-text {
-	object {
-		x=140
-		y=476
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Status"
-}
-text {
-	object {
-		x=94
-		y=476
-		width=40
-		height=20
-	}
-	"basic attribute" {
-		clr=21
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(M).ACQG"
-	}
-	textix="Done"
-	align="horiz. right"
-}
-text {
-	object {
-		x=37
-		y=476
-		width=90
-		height=20
-	}
-	"basic attribute" {
-		clr=18
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(M).ACQG"
-	}
-	textix="Acquiring"
-}
-text {
-	object {
-		x=26
-		y=501
-		width=70
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Elapsed"
-}
-"text update" {
-	object {
-		x=20
-		y=527
-		width=76
-		height=20
-	}
-	monitor {
-		chan="$(P)$(M).ERTM"
-		clr=54
-		bclr=4
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=20
-		y=554
-		width=76
-		height=20
-	}
-	monitor {
-		chan="$(P)$(M).ELTM"
-		clr=54
-		bclr=4
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=119
-		y=501
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Preset"
-}
-"text entry" {
-	object {
-		x=101
-		y=526
-		width=103
-		height=22
-	}
-	control {
-		chan="$(P)$(M).PRTM"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=210
-		y=527
-		width=90
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Real time"
-}
-text {
-	object {
-		x=210
-		y=554
-		width=90
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Live time"
-}
-"text update" {
-	object {
-		x=20
-		y=579
-		width=76
-		height=20
-	}
-	monitor {
-		chan="$(P)$(M).IDTIM"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. right"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=20
-		y=604
-		width=76
-		height=20
-	}
-	monitor {
-		chan="$(P)$(M).DTIM"
-		clr=15
-		bclr=14
-	}
-	clrmod="alarm"
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=102
-		y=579
-		width=210
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Instant dead time (%)"
-}
-text {
-	object {
-		x=102
-		y=604
-		width=210
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Average dead time (%)"
-}
-text {
-	object {
-		x=13
-		y=630
-		width=90
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Poll time"
-}
-"text entry" {
-	object {
-		x=107
-		y=629
-		width=87
-		height=20
-	}
-	control {
-		chan="$(P)$(R)PollTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=199
-		y=629
-		width=70
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)PollTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-menu {
-	object {
-		x=107
-		y=655
-		width=87
-		height=20
-	}
-	control {
-		chan="$(P)$(M)Read.SCAN"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=199
-		y=656
-		width=130
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="MCA Read rate"
-}
-"message button" {
-	object {
-		x=48
-		y=655
-		width=54
-		height=20
-	}
-	control {
-		chan="$(P)$(M)Read.PROC"
-		clr=14
-		bclr=51
-	}
-	label="Read"
-	press_msg="1"
-}
-menu {
-	object {
-		x=108
-		y=681
-		width=86
-		height=20
-	}
-	control {
-		chan="$(P)$(M)EnableWait"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=200
-		y=681
-		width=150
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Wait for client"
-}
-menu {
-	object {
-		x=108
-		y=706
-		width=86
-		height=20
-	}
-	control {
-		chan="$(P)$(M)ClientWait"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=200
-		y=706
-		width=110
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Client Wait"
-}
-"related display" {
-	object {
-		x=108
-		y=731
-		width=86
-		height=20
-	}
-	display[0] {
-		label="MCA Display"
-		name="mca.adl"
-		args="P=$(P),M=$(M)"
-	}
-	display[1] {
-		label="Trace display"
-		name="danteTrace.adl"
-		args="P=$(P),R=$(R)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
-}
-text {
-	object {
-		x=200
-		y=732
-		width=80
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Plots"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=72
-		y=412
-		width=216
-		height=60
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=1
-	}
-}
-"message button" {
-	object {
-		x=182
-		y=444
-		width=97
-		height=20
-	}
-	control {
-		chan="$(P)$(M)Erase"
-		clr=14
-		bclr=51
-	}
-	label="Erase"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=78
-		y=444
-		width=97
-		height=20
-	}
-	control {
-		chan="$(P)$(M)EraseStart"
-		clr=14
-		bclr=51
-	}
-	label="Erase/Start"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=78
-		y=419
-		width=97
-		height=20
-	}
-	control {
-		chan="$(P)$(M)Start"
-		clr=14
-		bclr=51
-	}
-	label="Start"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=182
-		y=419
-		width=97
-		height=20
-	}
-	control {
-		chan="$(P)$(M)Stop"
-		clr=14
-		bclr=51
-	}
-	label="Stop"
-	press_msg="1"
-}
-rectangle {
-	object {
 		x=917
 		y=374
 		width=120
@@ -2235,48 +1780,6 @@ menu {
 }
 text {
 	object {
-		x=385
-		y=663
-		width=140
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Maximum energy"
-}
-"text entry" {
-	object {
-		x=530
-		y=663
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=635
-		y=663
-		width=120
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-text {
-	object {
 		x=415
 		y=688
 		width=110
@@ -2397,6 +1900,718 @@ text {
 		chan="$(P)$(R)MappingPoints_RBV"
 		clr=54
 		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=385
+		y=663
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Maximum energy"
+}
+"text entry" {
+	object {
+		x=530
+		y=663
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=663
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=120
+		y=469
+		width=120
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=5
+		y=465
+		width=350
+		height=460
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=142
+		y=469
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Acquire"
+}
+text {
+	object {
+		x=122
+		y=550
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Elapsed"
+}
+"text update" {
+	object {
+		x=125
+		y=600
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).ELTM"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+text {
+	object {
+		x=254
+		y=550
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Preset"
+}
+"text update" {
+	object {
+		x=235
+		y=625
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).IDTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. right"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=235
+		y=650
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).DTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	align="horiz. right"
+	limits {
+	}
+}
+composite {
+	object {
+		x=5
+		y=380
+		width=350
+		height=80
+	}
+	"composite name"=""
+	"composite file"="ADPlugins.adl"
+}
+text {
+	object {
+		x=188
+		y=500
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=63
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		calc="A"
+		chan="$(P)$(M).ACQG"
+	}
+	textix="Done"
+	align="horiz. centered"
+}
+"message button" {
+	object {
+		x=145
+		y=520
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(M).ERST"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=212
+		y=520
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(M).STOP"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="1"
+}
+text {
+	object {
+		x=70
+		y=520
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire"
+	align="horiz. right"
+}
+text {
+	object {
+		x=30
+		y=600
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Live time"
+}
+text {
+	object {
+		x=10
+		y=625
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Instant dead time (%)"
+}
+text {
+	object {
+		x=10
+		y=650
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Average dead time (%)"
+}
+composite {
+	object {
+		x=175
+		y=674
+		width=175
+		height=245
+	}
+	"composite name"=""
+	children {
+		"text update" {
+			object {
+				x=175
+				y=674
+				width=60
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)CurrentPixel"
+				clr=54
+				bclr=4
+			}
+			align="horiz. right"
+			limits {
+			}
+		}
+		composite {
+			object {
+				x=175
+				y=699
+				width=162
+				height=20
+			}
+			"composite name"=""
+			children {
+				"text entry" {
+					object {
+						x=175
+						y=699
+						width=87
+						height=20
+					}
+					control {
+						chan="$(P)$(R)PollTime"
+						clr=14
+						bclr=51
+					}
+					limits {
+					}
+				}
+				"text update" {
+					object {
+						x=267
+						y=699
+						width=70
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)PollTime_RBV"
+						clr=54
+						bclr=4
+					}
+					limits {
+					}
+				}
+			}
+		}
+		composite {
+			object {
+				x=175
+				y=724
+				width=146
+				height=20
+			}
+			"composite name"=""
+			children {
+				menu {
+					object {
+						x=175
+						y=724
+						width=87
+						height=20
+					}
+					control {
+						chan="$(P)$(M)Read.SCAN"
+						clr=14
+						bclr=51
+					}
+				}
+				"message button" {
+					object {
+						x=267
+						y=724
+						width=54
+						height=20
+					}
+					control {
+						chan="$(P)$(M)Read.PROC"
+						clr=14
+						bclr=51
+					}
+					label="Read"
+					press_msg="1"
+				}
+			}
+		}
+		"text update" {
+			object {
+				x=175
+				y=749
+				width=60
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)NumQueuedArrays"
+				clr=54
+				bclr=4
+			}
+			align="horiz. right"
+			limits {
+			}
+		}
+		menu {
+			object {
+				x=175
+				y=774
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(R)WaitForPlugins"
+				clr=14
+				bclr=51
+			}
+		}
+		"text update" {
+			object {
+				x=175
+				y=799
+				width=160
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)AcquireBusy"
+				clr=54
+				bclr=2
+			}
+			clrmod="alarm"
+			format="string"
+			limits {
+			}
+		}
+		composite {
+			object {
+				x=175
+				y=824
+				width=145
+				height=20
+			}
+			"composite name"=""
+			children {
+				"text entry" {
+					object {
+						x=175
+						y=824
+						width=60
+						height=20
+					}
+					control {
+						chan="$(P)$(R)ArrayCounter"
+						clr=14
+						bclr=51
+					}
+					limits {
+					}
+				}
+				"text update" {
+					object {
+						x=240
+						y=824
+						width=80
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)ArrayCounter_RBV"
+						clr=54
+						bclr=4
+					}
+					limits {
+					}
+				}
+			}
+		}
+		"text update" {
+			object {
+				x=175
+				y=849
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)ArrayRate_RBV"
+				clr=54
+				bclr=4
+			}
+			limits {
+			}
+		}
+		composite {
+			object {
+				x=175
+				y=874
+				width=175
+				height=20
+			}
+			"composite name"=""
+			children {
+				menu {
+					object {
+						x=175
+						y=874
+						width=90
+						height=20
+					}
+					control {
+						chan="$(P)$(R)ArrayCallbacks"
+						clr=14
+						bclr=51
+					}
+				}
+				"text update" {
+					object {
+						x=270
+						y=874
+						width=80
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)ArrayCallbacks_RBV"
+						clr=54
+						bclr=4
+					}
+					align="horiz. centered"
+					format="string"
+					limits {
+					}
+				}
+			}
+		}
+		"related display" {
+			object {
+				x=175
+				y=899
+				width=86
+				height=20
+			}
+			display[0] {
+				label="MCA Display"
+				name="mca.adl"
+				args="P=$(P),M=$(M)"
+			}
+			display[1] {
+				label="Trace display"
+				name="danteTrace.adl"
+				args="P=$(P),R=$(R)"
+			}
+			clr=14
+			bclr=51
+			label="Plots"
+		}
+	}
+}
+composite {
+	object {
+		x=10
+		y=674
+		width=160
+		height=245
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=50
+				y=674
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="CurrentPixel"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=80
+				y=699
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Poll time"
+		}
+		text {
+			object {
+				x=80
+				y=724
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Read rate"
+		}
+		text {
+			object {
+				x=20
+				y=749
+				width=150
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="# Queued arrays"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=50
+				y=799
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Acquire busy"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=40
+				y=824
+				width=130
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Image counter"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=70
+				y=849
+				width=100
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Image rate"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=20
+				y=874
+				width=150
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Array callbacks"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=120
+				y=899
+				width=50
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Plots"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=10
+				y=772
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Wait for plugins"
+			align="horiz. right"
+		}
+	}
+}
+text {
+	object {
+		x=30
+		y=575
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Real time"
+}
+"text update" {
+	object {
+		x=125
+		y=575
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).ERTM"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=205
+		y=575
+		width=103
+		height=22
+	}
+	control {
+		chan="$(P)$(M).PRTM"
+		clr=14
+		bclr=51
 	}
 	limits {
 	}
