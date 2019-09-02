@@ -8,35 +8,35 @@ mcaDanteApp_registerRecordDeviceDriver(pdbbase)
 # The search path for database files
 epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
-# The detector prefix
+# Prefix for all records
 epicsEnvSet("PREFIX", "Dante:")
-epicsEnvSet("PORT", "DANTE1")
+# The port name for the detector
+epicsEnvSet("PORT",   "DANTE1")
+# The queue size for all plugins
+epicsEnvSet("QSIZE",  "20")
+# The maximum image width; used to set the maximum size for row profiles in the NDPluginStats plugin
+epicsEnvSet("XSIZE",  "1024")
+# The maximum image height; used to set the maximum size for column profiles in the NDPluginStats plugin
+epicsEnvSet("YSIZE",  "1024")
+# The maximum number of time series points in the NDPluginStats plugin
+epicsEnvSet("NCHANS", "2048")
+# The maximum number of frames buffered in the NDPluginCircularBuff plugin
+epicsEnvSet("CBUFFS", "500")
+# The maximum number of threads for plugins which can run in multiple threads
+epicsEnvSet("MAX_THREADS", "8")
+# The search path for database files
+epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
 # DanteConfig(portName, ipAddress, numDetectors, maxBuffers, maxMemory)
-DanteConfig("DANTE1",  164.54.160.232, 1, 0, 0)
+DanteConfig("$(PORT)",  164.54.160.232, 1, 0, 0)
 
 dbLoadTemplate("dante.substitutions")
 
-# Create a netCDF file saving plugin
-NDFileNetCDFConfigure("NetCDF1", 100, 0, $(PORT), 0)
-dbLoadRecords("$(ADCORE)/db/NDFileNetCDF.template","P=$(PREFIX),R=netCDF1:,PORT=NetCDF1,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(PORT)")
+# Load all other plugins using commonPlugins.cmd
+< $(ADCORE)/iocBoot/commonPlugins.cmd
 
-# Create a TIFF file saving plugin
-NDFileTIFFConfigure("TIFF1", 20, 0, "$(PORT)", 0)
-dbLoadRecords("$(ADCORE)/db/NDFileTIFF.template",  "P=$(PREFIX),R=TIFF1:,PORT=TIFF1,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(PORT)")
-
-### Scan-support software
-# crate-resident scan.  This executes 1D, 2D, 3D, and 4D scans, and caches
-# 1D data, but it doesn't store anything to disk.  (See 'saveData' below for that.)
-dbLoadRecords("$(SSCAN)/sscanApp/Db/scan.db","P=$(PREFIX),MAXPTS1=2000,MAXPTS2=1000,MAXPTS3=10,MAXPTS4=10,MAXPTSH=2048")
-
-# Load devIocStats
-dbLoadRecords("$(DEVIOCSTATS)/db/iocAdminSoft.db", "IOC=$(PREFIX)")
-
-# Setup for save_restore
-< save_restore.cmd
-save_restoreSet_status_prefix("$(PREFIX)")
-dbLoadRecords("$(AUTOSAVE)/asApp/Db/save_restoreStatus.db", "P=$(PREFIX)")
+set_requestfile_path("$(DANTE)/danteApp/Db")
+set_requestfile_path("$(MCA)/mcaApp/Db")
 
 iocInit
 
