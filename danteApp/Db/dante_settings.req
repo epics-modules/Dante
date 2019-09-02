@@ -30,3 +30,4 @@ $(P)$(R)TraceTriggerFalling
 $(P)$(R)TraceTriggerLevel
 $(P)$(R)TraceTriggerWait
 $(P)$(R)TraceLength
+file "NDArrayBase_settings.req", P=$(P), R=$(R)
