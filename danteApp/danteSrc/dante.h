@@ -100,19 +100,7 @@ public:
     /* Local methods to this class */
     void shutdown();
     void acquisitionTask();
-    asynStatus pollMappingMode();
-    int getChannel(asynUser *pasynUser, int *addr);
-    asynStatus setDanteConfiguration(int addr);
-    asynStatus getAcquisitionStatus(int addr);
-    asynStatus getAcquisitionStatistics(int addr);
-    asynStatus getMcaData(int addr);
-    asynStatus getMappingData();
-    asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
-    asynStatus configureCollectMode();
-    asynStatus startAcquiring();
-    asynStatus waitReply(uint32_t callId, char *reply);
     void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data);
-    epicsMessageQueue *msgQ_;
 
 protected:
 
@@ -213,20 +201,32 @@ protected:
 
 
 private:
+    int getBoard(asynUser *pasynUser, int *addr);
+    asynStatus setDanteConfiguration(int addr);
+    asynStatus getAcquisitionStatus(int addr);
+    asynStatus getAcquisitionStatistics(int addr);
+    asynStatus getMcaData(int addr);
+    asynStatus pollMappingMode();
+    asynStatus getMappingData();
+    asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
+    asynStatus startAcquiring();
+    asynStatus waitReply(uint32_t callId, char *reply);
+
     /* Data */
     std::vector<configuration> configurations_;
     std::vector<statistics> statistics_;
     uint64_t **pMcaRaw_;
-    unsigned long *pMapTemp_;
-    epicsUInt16 *pMapRaw_;
+    uint16_t **pMappingMCAData_;
+    double   **pMappingStats_;
+    uint64_t **pMappingAdvStats_;
 
-    int nCards_;
-    int nChannels_;
-    int channelsPerCard_;
-    
+    int numBoards_;
+    int uniqueId_;
+
     epicsEvent *cmdStartEvent_;
     epicsEvent *cmdStopEvent_;
     epicsEvent *stoppedEvent_;
+    epicsMessageQueue *msgQ_;
     
     char danteIdentifier_[MAX_DANTE_IDENTIFIER_LEN];
     uint32_t callId_;
