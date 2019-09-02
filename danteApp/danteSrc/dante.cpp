@@ -40,12 +40,14 @@
 #define DRIVER_VERSION       "1.0.0"
 #define MAX_CHANNELS_PER_CARD      8
 #define MAX_MCA_BINS            4096
-#define ALL_CHANNELS              -1
+#define ALL_BOARDS              -1
 #define MAX_MESSAGE_DATA          20
 #define MSG_QUEUE_SIZE            50
 #define MESSAGE_TIMEOUT           10.
 #define MIN_TRACE_TIME         0.016
 #define TRACE_LEN_INC          16384
+#define NUM_MAPPING_STATS          4
+#define NUM_MAPPING_ADV_STATS     24
 
 /** Only used for debugging/error messages to identify where the message comes from*/
 static const char *driverName = "Dante";
@@ -87,13 +89,13 @@ extern "C" int DanteConfig(const char *portName, const char *ipAddress, int nCha
     return 0;
 }
 
-/* Note: we use nChannels+1 for maxAddr because the last address is used for "all" channels" */
+/* Note: we use nChannels+1 for maxAddr because the last address is used for "all" boards" */
 Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int maxBuffers, size_t maxMemory)
     : asynNDArrayDriver(portName, nChannels + 1, maxBuffers, maxMemory,
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask | asynDrvUserMask,
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask,
             ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0),
-    nChannels_(nChannels), traceLength_(0), newTraceTime_(true), traceBuffer_(0), traceTimeBuffer_(0)
+    numBoards_(nChannels), uniqueId_(0), traceLength_(0), newTraceTime_(true), traceBuffer_(0), traceTimeBuffer_(0)
 
 {
     int status = asynSuccess;
@@ -277,7 +279,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     status |= setIntegerParam(DanteCollectMode, 0);
     /* Clear the acquiring flag, must do this or things don't work right because acquisitionTask does not set till 
      * acquire first starts */
-    for (i=0; i<=nChannels_; i++) {
+    for (i=0; i<=numBoards_; i++) {
         setIntegerParam(i, mcaAcquiring, 0);
     }
 
@@ -288,15 +290,18 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     stoppedEvent_ = new epicsEvent();
     msgQ_ = new epicsMessageQueue(MSG_QUEUE_SIZE, MESSAGE_SIZE);
 
-    /* Allocate a memory pointer for each of the channels */
-    pMcaRaw_ = (unsigned long**) calloc(nChannels_, sizeof(unsigned long*));
+    /* Allocate memory pointers for each of the boards */
+    pMcaRaw_          = (uint64_t**)  calloc(numBoards_, sizeof(uint64_t*));
+    pMappingMCAData_  = (uint16_t**) calloc(numBoards_, sizeof(uint16_t*));
+    pMappingStats_    = (double**)   calloc(numBoards_, sizeof(double*));
+    pMappingAdvStats_ = (uint64_t**) calloc(numBoards_, sizeof(uint64_t*));
     /* Allocate a memory area for each spectrum */
-    for (ch=0; ch<nChannels_; ch++) {
+    for (ch=0; ch<numBoards_; ch++) {
         pMcaRaw_[ch] = (unsigned long*)calloc(MAX_MCA_BINS, sizeof(unsigned long));
     }
     
     // Allocate configuration and statistics buffers
-    for (i=0; i<nChannels_; i++) {
+    for (i=0; i<numBoards_; i++) {
         configurations_.push_back(config);
         statistics_.push_back(stats);
     }
@@ -324,7 +329,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     setStringParam(ADSerialNumber, danteIdentifier_);
 
     /* Set default values for parameters that cannot be read */
-    for (i=0; i<=nChannels_; i++) {
+    for (i=0; i<=numBoards_; i++) {
         char firmwareVersion[20];
         callId_ = getFirmware(danteIdentifier_, i);
         waitReply(callId_, danteReply_);
@@ -360,8 +365,8 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     }
 
     /* Read the MCA and DXP parameters once */
-    this->getAcquisitionStatus(ALL_CHANNELS);
-    this->getAcquisitionStatistics(ALL_CHANNELS);
+    this->getAcquisitionStatus(ALL_BOARDS);
+    this->getAcquisitionStatistics(ALL_BOARDS);
     
     // Enable array callbacks by default
     setIntegerParam(NDArrayCallbacks, 1);
@@ -413,24 +418,20 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
 {
     asynStatus status = asynSuccess;
     int function = pasynUser->reason;
-    int channel;
+    int board;
     int addr, i;
     int acquiring, numChans, mode;
     const char* functionName = "writeInt32";
 
-    channel = this->getChannel(pasynUser, &addr);
+    board = this->getBoard(pasynUser, &addr);
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: [%s]: function=%d value=%d addr=%d channel=%d\n",
-        driverName, functionName, this->portName, function, value, addr, channel);
+        "%s:%s: [%s]: function=%d value=%d addr=%d board=%d\n",
+        driverName, functionName, this->portName, function, value, addr, board);
 
     /* Set the parameter and readback in the parameter library.  This may be overwritten later but that's OK */
     status = setIntegerParam(addr, function, value);
 
-    if (function == DanteCollectMode)
-    {
-        status = this->configureCollectMode();
-    } 
-    else if (function == mcaErase) 
+    if (function == mcaErase) 
     {
         getIntegerParam(addr, mcaNumChannels, &numChans);
         getIntegerParam(addr, mcaAcquiring, &acquiring);
@@ -440,8 +441,8 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
             startAcquiring();
         } else {
             setIntegerParam(addr, DanteErased, 1);
-            if (channel == ALL_CHANNELS) {
-                for (i=0; i<nChannels_; i++) {
+            if (board == ALL_BOARDS) {
+                for (i=0; i<numBoards_; i++) {
                     setIntegerParam(i, DanteErased, 1);
                     memset(this->pMcaRaw_[i], 0, numChans * sizeof(pMcaRaw_[0][0]));
                 }
@@ -532,13 +533,13 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
     asynStatus status = asynSuccess;
     int function = pasynUser->reason;
     int addr;
-    int channel;
+    int board;
     const char *functionName = "writeFloat64";
 
-    channel = this->getChannel(pasynUser, &addr);
+    board = this->getBoard(pasynUser, &addr);
     asynPrint(pasynUser, ASYN_TRACE_FLOW,
-        "%s:%s: [%s]: function=%d value=%f addr=%d channel=%d\n",
-        driverName, functionName, this->portName, function, value, addr, channel);
+        "%s:%s: [%s]: function=%d value=%f addr=%d board=%d\n",
+        driverName, functionName, this->portName, function, value, addr, board);
 
     /* Set the parameter and readback in the parameter library.  This may be overwritten later but that's OK */
     status = setDoubleParam(addr, function, value);
@@ -600,28 +601,28 @@ asynStatus Dante::readInt32Array(asynUser *pasynUser, epicsInt32 *value, size_t 
     asynStatus status = asynSuccess;
     int function = pasynUser->reason;
     int addr;
-    int channel;
+    int board;
     int nBins, acquiring,mode;
     int ch;
     int i;
     const char *functionName = "readInt32Array";
 
-    channel = this->getChannel(pasynUser, &addr);
+    board = this->getBoard(pasynUser, &addr);
 
     asynPrint(pasynUser, ASYN_TRACE_FLOW, 
-        "%s::%s addr=%d channel=%d function=%d\n",
-        driverName, functionName, addr, channel, function);
+        "%s::%s addr=%d board=%d function=%d\n",
+        driverName, functionName, addr, board, function);
     if (function == DanteTraceData) 
     {
-        status = this->getTrace(channel, value, nElements, nIn);
+        status = this->getTrace(board, value, nElements, nIn);
     } 
     else if (function == mcaData) 
     {
-        if (channel == ALL_CHANNELS)
+        if (board == ALL_BOARDS)
         {
-            // if the MCA ALL channel is being read - force reading of all individual
-            // channels using the DanteForceRead command.
-            for (ch=0; ch<nChannels_; ch++)
+            // if the MCA ALL board is being read - force reading of all individual
+            // boards using the DanteForceRead command.
+            for (ch=0; ch<numBoards_; ch++)
             {
                 setIntegerParam(ch, DanteForceRead, 1);
                 callParamCallbacks(ch, ch);
@@ -630,12 +631,12 @@ asynStatus Dante::readInt32Array(asynUser *pasynUser, epicsInt32 *value, size_t 
             }
             goto done;
         }
-        getIntegerParam(channel, mcaNumChannels, &nBins);
+        getIntegerParam(board, mcaNumChannels, &nBins);
         if (nBins > (int)nElements) nBins = (int)nElements;
-        getIntegerParam(channel, mcaAcquiring, &acquiring);
+        getIntegerParam(board, mcaAcquiring, &acquiring);
         asynPrint(pasynUser, ASYN_TRACEIO_DRIVER, 
             "%s::%s getting mcaData. ch=%d mcaNumChannels=%d mcaAcquiring=%d\n",
-            driverName, functionName, channel, nBins, acquiring);
+            driverName, functionName, board, nBins, acquiring);
         *nIn = nBins;
         getIntegerParam(DanteCollectMode, &mode);
 
@@ -672,14 +673,14 @@ asynStatus Dante::readInt32Array(asynUser *pasynUser, epicsInt32 *value, size_t 
     return(status);
 }
 
-int Dante::getChannel(asynUser *pasynUser, int *addr)
+int Dante::getBoard(asynUser *pasynUser, int *addr)
 {
-    int channel;
+    int board;
     pasynManager->getAddr(pasynUser, addr);
 
-    channel = *addr;
-    if (*addr == nChannels_) channel = ALL_CHANNELS;
-    return channel;
+    board = *addr;
+    if (*addr == numBoards_) board = ALL_BOARDS;
+    return board;
 }
 
 asynStatus Dante::setDanteConfiguration(int addr)
@@ -777,30 +778,14 @@ asynStatus Dante::setDanteConfiguration(int addr)
             return asynError;
     }
     waitReply(callId_, danteReply_);
-//    if (runActive) xiaStartRun(channel, 1);
-    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: exit\n",
-        driverName, functionName);
     return asynSuccess;
-}
-
-
-asynStatus Dante::configureCollectMode()
-{
-    asynStatus status = asynSuccess;
-    static const char *functionName = "configureCollectMode";
-
-    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: returning status=%d\n",
-        driverName, functionName, status);
-    return status;
 }
 
 asynStatus Dante::getAcquisitionStatus(int addr)
 {
     int acquiring=0;
     int ivalue;
-    int channel=addr;
+    int board=addr;
     asynStatus status=asynSuccess;
     int i;
     //static const char *functionName = "getAcquisitionStatus";
@@ -809,11 +794,11 @@ asynStatus Dante::getAcquisitionStatus(int addr)
      * because we need to do callbacks in acquisitionTask() on all other parameters before
      * we do callbacks on mcaAcquiring, and callParamCallbacks does not allow control over the order. */
 
-    if (addr == nChannels_) channel = ALL_CHANNELS;
-    else if (addr == ALL_CHANNELS) addr = nChannels_;
-    if (channel == ALL_CHANNELS) { /* All channels */
-        for (i=0; i<nChannels_; i++) {
-            /* Call ourselves recursively but with a specific channel */
+    if (addr == numBoards_) board = ALL_BOARDS;
+    else if (addr == ALL_BOARDS) addr = numBoards_;
+    if (board == ALL_BOARDS) { /* All boards */
+        for (i=0; i<numBoards_; i++) {
+            /* Call ourselves recursively but with a specific board */
             this->getAcquisitionStatus(i);
             getIntegerParam(i, DanteAcquiring, &ivalue);
             acquiring = std::max(acquiring, ivalue);
@@ -826,8 +811,8 @@ asynStatus Dante::getAcquisitionStatus(int addr)
         setIntegerParam(addr, DanteAcquiring, danteReply_[0]);
     }
     //asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-    //    "%s::%s addr=%d channel=%d: acquiring=%d\n",
-    //    driverName, functionName, addr, channel, acquiring);
+    //    "%s::%s addr=%d board=%d: acquiring=%d\n",
+    //    driverName, functionName, addr, board, acquiring);
     return(status);
 }
 
@@ -837,22 +822,22 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
     int events=0, triggers=0, edgeDT=0, filt1DT=0, zeroCounts=0, baselinesValue=0;
     int pupValue=0, pupF1Value=0, pupNotF1Value=0, resetCounterValue=0;
     int ivalue;
-    int channel=addr;
+    int board=addr;
     int erased;
     int i;
     const char *functionName = "getAcquisitionStatistics";
 
-    if (addr == nChannels_) channel = ALL_CHANNELS;
+    if (addr == numBoards_) board = ALL_BOARDS;
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s::%s addr=%d channel=%d\n", 
-        driverName, functionName, addr, channel);
-    if (channel == ALL_CHANNELS) { /* All channels */
+        "%s::%s addr=%d board=%d\n", 
+        driverName, functionName, addr, board);
+    if (board == ALL_BOARDS) { /* All boards */
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-            "%s::%s start ALL_CHANNELS\n", 
+            "%s::%s start ALL_BOARDS\n", 
             driverName, functionName);
-        addr = nChannels_;
-        for (i=0; i<nChannels_; i++) {
-            /* Call ourselves recursively but with a specific channel */
+        addr = numBoards_;
+        for (i=0; i<numBoards_; i++) {
+            /* Call ourselves recursively but with a specific board */
             this->getAcquisitionStatistics(i);
             getDoubleParam(i, mcaElapsedRealTime, &realTime);
             realTime = std::max(realTime, dvalue);
@@ -899,11 +884,11 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
         setIntegerParam(addr, DantePupNotF1Value,   pupNotF1Value);
         setIntegerParam(addr, DanteResetCounterValue, resetCounterValue);
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-            "%s::%s end ALL_CHANNELS\n", 
+            "%s::%s end ALL_BOARDS\n", 
             driverName, functionName);
     } else {
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-            "%s::%s start channel %d\n", 
+            "%s::%s start board %d\n", 
             driverName, functionName, addr);
         getIntegerParam(addr, DanteErased, &erased);
         if (erased) {
@@ -943,7 +928,7 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
             setIntegerParam(addr, DanteResetCounterValue, pStats->reset_counter_value);
   
             asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-                "%s::%s  channel %d \n"
+                "%s::%s  board %d \n"
                 "           real time=%f\n" 
                 "            livetime=%f\n" 
                 "    input count rate=%f\n" 
@@ -989,7 +974,7 @@ asynStatus Dante::getMcaData(int addr)
     asynStatus status = asynSuccess;
     int arrayCallbacks;
     int nChannels;
-    int channel=addr;
+    int board=addr;
     int i;
     //NDArray *pArray;
     NDDataType_t dataType;
@@ -999,7 +984,7 @@ asynStatus Dante::getMcaData(int addr)
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
         "%s:%s: enter addr=%d\n",
         driverName, functionName, addr);
-    if (addr == nChannels_) channel = ALL_CHANNELS;
+    if (addr == numBoards_) board = ALL_BOARDS;
 
     getIntegerParam(mcaNumChannels, &nChannels);
     getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
@@ -1007,9 +992,9 @@ asynStatus Dante::getMcaData(int addr)
 
     epicsTimeGetCurrent(&now);
 
-    if (channel == ALL_CHANNELS) {  /* All channels */
-        for (i=0; i<nChannels_; i++) {
-            /* Call ourselves recursively but with a specific channel */
+    if (board == ALL_BOARDS) {  /* All boards */
+        for (i=0; i<numBoards_; i++) {
+            /* Call ourselves recursively but with a specific board */
             this->getMcaData(i);
         }
     } else {
@@ -1017,8 +1002,8 @@ asynStatus Dante::getMcaData(int addr)
         uint32_t id, spectraSize = nChannels;
         getData(danteIdentifier_, addr, pMcaRaw_[addr], id, statistics_[addr], spectraSize);
         asynPrintIO(pasynUserSelf, ASYN_TRACEIO_DRIVER, (const char *)pMcaRaw_[addr], nChannels*sizeof(pMcaRaw_[0][0]),
-            "%s::%s Got MCA spectrum channel:%d ptr:%p\n",
-            driverName, functionName, channel, pMcaRaw_[addr]);
+            "%s::%s Got MCA spectrum board:%d ptr:%p\n",
+            driverName, functionName, board, pMcaRaw_[addr]);
 
 // In the future we may want to do array callbacks with the MCA data.  For now we are not doing this.
 //        if (arrayCallbacks)
@@ -1038,159 +1023,20 @@ asynStatus Dante::getMcaData(int addr)
     return status;
 }
 
-/** Reads the mapping data for all of the modules in the system */
-asynStatus Dante::getMappingData()
-{
-    asynStatus status = asynSuccess;
-/*
-    int xiastatus;
-    int arrayCallbacks;
-    NDDataType_t dataType;
-    int buf = 0, channel, i, k, l;
-    NDArray *pArray=NULL;
-    epicsUInt16 *pOut=0;
-    epicsUInt16 *pStats;
-    int mappingMode, pixelOffset, dataOffset, events, triggers, nChans;
-    double realTime, triggerLiveTime, energyLiveTime, icr, ocr;
-    size_t dims[2];
-    int bufferCounter, arraySize;
-    epicsTimeStamp now, after;
-    double mBytesRead;
-    double readoutTime, readoutBurstRate, MBbufSize;
-    const char* functionName = "getMappingData";
-
-    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: enter\n",
-        driverName, functionName);
-
-    getIntegerParam(NDDataType, (int *)&dataType);
-    getIntegerParam(DanteBufferCounter, &bufferCounter);
-    bufferCounter++;
-    setIntegerParam(DanteBufferCounter, bufferCounter);
-    getIntegerParam(NDArraySize, &arraySize);
-    getDoubleParam(DanteMBytesRead, &mBytesRead);
-    getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
-    MBbufSize = (double)((arraySize)*sizeof(epicsUInt16)) / (double)MEGABYTE;
-
-    // First read and reset the buffers, do this as quickly as possible
-    for (channel=0; channel<nChannels_; channel+=this->channelsPerCard)
-    {
-        buf = this->currentBuf[channel];
-
-        // The buffer is full so read it out
-        epicsTimeGetCurrent(&now);
-        xiastatus = xiaGetRunData(channel, DanteBufferString[buf], this->pMapTemp);
-        status = xia_checkError(this->pasynUserSelf, xiastatus, "GetRunData mapping");
-        epicsTimeGetCurrent(&after);
-        readoutTime = epicsTimeDiffInSeconds(&after, &now);
-        readoutBurstRate = MBbufSize / readoutTime;
-        mBytesRead += MBbufSize;
-        setDoubleParam(DanteMBytesRead, mBytesRead);
-        setDoubleParam(DanteReadRate, readoutBurstRate);
-        // Notify system that we read out the buffer
-        xiastatus = xiaBoardOperation(channel, "buffer_done", DanteBufferCharString[buf]);
-        status = xia_checkError(this->pasynUserSelf, xiastatus, "buffer_done");
-        if (buf == 0) this->currentBuf[channel] = 1;
-        else this->currentBuf[channel] = 0;
-        callParamCallbacks();
-        // xiaGetRunData requires an unsigned long buffer, but the data are actually only 16 bits.
-        // Convert to 16-bit data here
-        for (i=0; i<arraySize; i++) {
-            pMapRaw[i] = (epicsUInt16) pMapTemp[i];
-        }
-    
-        asynPrint(this->pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-            "%s::%s Got data! size=%.3fMB (%d) dt=%.3fs speed=%.3fMB/s\n",
-            driverName, functionName, MBbufSize, arraySize, readoutTime, readoutBurstRate);
-        asynPrint(this->pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-            "%s::%s channel=%d, tag0=0x%x, tag1=0x%x, headerSize=%d, mappingMode=%d, runNumber=%d, bufferNumber=%d, bufferID=%d, numPixels=%d, firstPixel=%d\n",
-            driverName, functionName, channel, pMapRaw[0], pMapRaw[1], pMapRaw[2], pMapRaw[3], pMapRaw[4], pMapRaw[5], pMapRaw[7], pMapRaw[8], pMapRaw[9]);
-    
-        // If this is MCA mapping mode then copy the spectral data for the first pixel
-        // in this buffer to the mcaRaw buffers.
-        // This provides an update of the spectra and statistics while mapping is in progress
-        // if the user sets the MCA spectra to periodically read.
-        mappingMode = pMapRaw[3];
-        if (mappingMode == DanteModeSpectraMapping) {
-            pixelOffset = 256;
-            dataOffset = pixelOffset + 256;
-            for (i=0; i<this->channelsPerCard; i++) {
-                k = channel + i;
-                nChans = pMapRaw[pixelOffset + 8 + i];
-                for (l=0; l<nChans; l++) {
-                    pMcaRaw_[k][l] = pMapRaw[dataOffset + l];
-                }
-                dataOffset += nChans;
-                pStats = &pMapRaw[pixelOffset + 32 + i*8];
-                realTime        = (pStats[0] + (pStats[1]<<16)) * MAPPING_CLOCK_PERIOD;
-                triggerLiveTime = (pStats[2] + (pStats[3]<<16)) * MAPPING_CLOCK_PERIOD;
-                triggers        =  pStats[4] + (pStats[5]<<16);
-                events          =  pStats[6] + (pStats[7]<<16);
-                if (triggers > 0.) 
-                    energyLiveTime = (triggerLiveTime * events) / triggers;
-                else
-                    energyLiveTime = triggerLiveTime;
-                if (triggerLiveTime > 0.)
-                    icr = triggers / triggerLiveTime;
-                else
-                    icr = 0.;
-                if (realTime > 0.)
-                    ocr = events / realTime;
-                else
-                    ocr = 0.;
-                setDoubleParam(k, mcaElapsedRealTime, realTime);
-                setDoubleParam(k, mcaElapsedLiveTime, energyLiveTime);
-                setDoubleParam(k, DanteTriggerLiveTime, triggerLiveTime);
-                setIntegerParam(k,DanteEvents, events);
-                setIntegerParam(k, DanteTriggers, triggers);
-                setDoubleParam(k, DanteInputCountRate, icr);
-                setDoubleParam(k, DanteOutputCountRate, ocr);
-                callParamCallbacks(k, k);
-            }
-        }
-            
-        if (arrayCallbacks)
-        {
-            // Now rearrange the data and do the callbacks
-            // If this is the first module then allocate an NDArray for the callback
-            if (channel == 0) {
-               dims[0] = arraySize;
-               dims[1] = this->nCards;
-               pArray = this->pNDArrayPool->alloc(2, dims, dataType, 0, NULL );
-               pOut = (epicsUInt16 *)pArray->pData;
-            }
-            
-            memcpy(pOut, pMapRaw, arraySize * sizeof(epicsUInt16));
-            pOut += arraySize;
-        }
-    }
-    if (arrayCallbacks) 
-    {
-        pArray->timeStamp = now.secPastEpoch + now.nsec / 1.e9;
-        pArray->uniqueId = bufferCounter;
-        doCallbacksGenericPointer(pArray, NDArrayData, 0);
-        pArray->release();
-    }
-    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s::%s Done reading! Ch=%d bufchar=%s\n",
-        driverName, functionName, channel, DanteBufferCharString[buf]);
-*/
-    return status;
-}
 
 /* Get trace data */
 asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen)
 {
-    int channel=addr;
+    int board=addr;
     const char *functionName = "getTrace";
 
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
         "%s:%s: enter addr=%d\n",
         driverName, functionName, addr);
-    if (addr == nChannels_) channel = ALL_CHANNELS;
-    if (channel == ALL_CHANNELS) {  // All channels
-        for (int i=0; i<nChannels_; i++) {
-            // Call ourselves recursively but with a specific channel
+    if (addr == numBoards_) board = ALL_BOARDS;
+    if (board == ALL_BOARDS) {  // All boards
+        for (int i=0; i<numBoards_; i++) {
+            // Call ourselves recursively but with a specific board
             this->getTrace(i, data, maxLen, actualLen);
         }
     } else {
@@ -1219,14 +1065,10 @@ asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *ac
         if (length < 1) length = 1;
         setIntegerParam(DanteTraceLength, length * TRACE_LEN_INC);
         callParamCallbacks();
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, 
-"Calling start waveform, mode=%d, decRatio=%d, triggerMask=%d, triggerLevel=%d, triggerWaitTime=%f, length=%d\n",
-mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
         callId_ = start_waveform(danteIdentifier_, mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
         waitReply(callId_, danteReply_);
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Waiting for trace acquisition to complete\n");
         while(1) {
-            getAcquisitionStatus(ALL_CHANNELS);
+            getAcquisitionStatus(ALL_BOARDS);
             int danteAcquiring;
             getIntegerParam(DanteAcquiring, &danteAcquiring);
             if (danteAcquiring) {
@@ -1235,13 +1077,11 @@ asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Waiting for trace acquisition to com
                 break;
             }
         }
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Reading trace waveform\n");
-        if (!getWaveData(danteIdentifier_, channel, traceBuffer_, traceLength_)) {
+        if (!getWaveData(danteIdentifier_, board, traceBuffer_, traceLength_)) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
                       "%s::%s error calling getWaveData\n", driverName, functionName);
             return asynError;
         }
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Finished reading trace waveform.\n");
         // There is a bug in their firmware, the last waveform entry is always 0.
         // This messes up auto-scaling displays.  Replace it with the next to last value for now
         traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
@@ -1253,12 +1093,12 @@ asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Finished reading trace waveform.\n")
         }
         if (newTraceTime_) {
             double traceTime;
-            getDoubleParam(channel, DanteTraceTime, &traceTime);
+            getDoubleParam(board, DanteTraceTime, &traceTime);
             newTraceTime_ = false;
             for (i=0; i<traceLength_; i++) {
                 traceTimeBuffer_[i] = i * traceTime;
             }
-            doCallbacksFloat64Array(traceTimeBuffer_, traceLength_, DanteTraceTimeArray, channel);
+            doCallbacksFloat64Array(traceTimeBuffer_, traceLength_, DanteTraceTimeArray, board);
         }
     }
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
@@ -1296,7 +1136,10 @@ asynStatus Dante::startAcquiring()
         waitReply(callId_, danteReply_);
         break;
       case DanteModeMCAMapping:
-        callId_ = start_map(danteIdentifier_, presetReal, mappingPoints, numChannels);
+        uint32_t msTime = presetReal * 1000;
+        //  Work around bug, it only collects N-1 points
+        uint32_t mapPts = mappingPoints + 1;
+        callId_ = start_map(danteIdentifier_, msTime, mapPts, numChannels);
         waitReply(callId_, danteReply_);
     }
 
@@ -1322,7 +1165,7 @@ void Dante::acquisitionTask()
     int i;
     int mode;
     int acquiring = 0;
-    epicsFloat64 pollTime, sleeptime, dtmp;
+    epicsFloat64 pollTime, sleepTime, dtmp;
     epicsTimeStamp now, start;
     const char* functionName = "acquisitionTask";
 
@@ -1335,7 +1178,7 @@ void Dante::acquisitionTask()
     while (polling_) /* ... round and round and round we go until the IOC is shut down */
     {
 
-        getIntegerParam(nChannels_, mcaAcquiring, &acquiring);
+        getIntegerParam(numBoards_, mcaAcquiring, &acquiring);
 
         if (!acquiring)
         {
@@ -1357,8 +1200,8 @@ void Dante::acquisitionTask()
         /* In this loop we only read the acquisition status to minimise overhead.
          * If a transition from acquiring to done is detected then we read the statistics
          * and the data. */
-        getAcquisitionStatus(ALL_CHANNELS);
-        getIntegerParam(nChannels_, DanteAcquiring, &acquiring);
+        getAcquisitionStatus(ALL_BOARDS);
+        getIntegerParam(numBoards_, DanteAcquiring, &acquiring);
         if (!acquiring)
         {
             /* There must have just been a transition from acquiring to not acquiring */
@@ -1368,8 +1211,8 @@ void Dante::acquisitionTask()
                 asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
                     "%s::%s Detected acquisition stop! Now reading statistics\n",
                     driverName, functionName);
-                getMcaData(ALL_CHANNELS);
-                getAcquisitionStatistics(ALL_CHANNELS);
+                getMcaData(ALL_BOARDS);
+                getAcquisitionStatistics(ALL_BOARDS);
                 asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
                     "%s::%s Detected acquisition stop! Now reading data\n",
                     driverName, functionName);
@@ -1383,15 +1226,14 @@ void Dante::acquisitionTask()
                  this->pollMappingMode();
             }
         } 
-        if (mode != DanteModeMCA)
-        {
+        if (mode != DanteModeMCA) {
             this->pollMappingMode();
         }
 
-        /* Do callbacks for all channels for everything except mcaAcquiring*/
-        for (i=0; i<=nChannels_; i++) callParamCallbacks(i);
+        /* Do callbacks for all boards for everything except mcaAcquiring*/
+        for (i=0; i<=numBoards_; i++) callParamCallbacks(i);
         /* Copy internal acquiring flag to mcaAcquiring */
-        for (i=0; i<=nChannels_; i++) {
+        for (i=0; i<=numBoards_; i++) {
             getIntegerParam(i, DanteAcquiring, &acquiring);
             setIntegerParam(i, mcaAcquiring, acquiring);
             callParamCallbacks(i);
@@ -1400,77 +1242,129 @@ void Dante::acquisitionTask()
         paramStatus |= getDoubleParam(DantePollTime, &pollTime);
         epicsTimeGetCurrent(&now);
         dtmp = epicsTimeDiffInSeconds(&now, &start);
-        sleeptime = pollTime - dtmp;
-        if (sleeptime > 0.0)
-        {
-            //asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-            //    "%s::%s Sleeping for %f seconds\n",
-            //    driverName, functionName, sleeptime);
-            this->unlock();
-            epicsThreadSleep(sleeptime);
-            this->lock();
+        sleepTime = pollTime - dtmp;
+        if (mode == DanteModeMCAMapping) {
+            //  In MCA Mapping mode need to sleep for no more than 10*realTime to prevent stack overflow? */
+            double presetReal;
+            getDoubleParam(mcaPresetRealTime, &presetReal);
+            if (sleepTime > 10*presetReal) sleepTime = 10*presetReal;
         }
+        if (sleepTime < 0) sleepTime = 0.01;
+        this->unlock();
+        epicsThreadSleep(sleepTime);
+        this->lock();
     }
 }
 
-/** Check if the current mapping buffer is full in which case it reads out the data */
+/** Check if there are any spectra to be read and read them */
 asynStatus Dante::pollMappingMode()
 {
+    int collectMode;
     asynStatus status = asynSuccess;
-/*
-    int xiastatus;
-    int ignored;
-    int ch, buf=0, allFull=1, anyFull=0;
-    unsigned short isFull;
-    unsigned long currentPixel = 0;
+    uint32_t numAvailable=0;
+    int numMCAChannels;
+    int arrayCallbacks;
+    uint16_t board;
+    uint32_t spectraId;
     const char* functionName = "pollMappingMode";
-    DanteCollectMode_t mappingMode;
     
-    getIntegerParam(DanteCollectMode, (int *)&mappingMode);
-
-    for (ch=0; ch<nChannels_; ch+=this->channelsPerCard)
-    {
-        buf = this->currentBuf[ch];
-
-        if (mappingMode == DanteModeListMapping) {
-            CALLHANDEL( xiaGetRunData(ch, DanteListBufferLenString[buf], &currentPixel), "DanteListBufferLenString[buf]")
+    getIntegerParam(DanteCollectMode, &collectMode);
+    getIntegerParam(mcaNumChannels, &numMCAChannels);
+    getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
+    
+    // First see which board has fewest spectra available
+    for (board=0; board<numBoards_; board++) {
+        uint32_t itemp;
+        if (!getAvailableData(danteIdentifier_, board, itemp)) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAvailableData\n", driverName, functionName);
+            return asynError;
         }
-        else {
-            CALLHANDEL( xiaGetRunData(ch, "current_pixel", &currentPixel) , "current_pixel" )
+        if (board == 0) {
+            numAvailable = itemp;
+        } else if (itemp < numAvailable) {
+            numAvailable = itemp;
         }
-        setIntegerParam(ch, DanteCurrentPixel, (int)currentPixel);
-        callParamCallbacks(ch);
-        CALLHANDEL( xiaGetRunData(ch, DanteBufferFullString[buf], &isFull), "DanteBufferFullString[buf]" )
-        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-            "%s::%s %s isfull=%d\n",
-            driverName, functionName, DanteBufferFullString[buf], isFull);
-        if (!isFull) allFull = 0;
-        if (isFull)  anyFull = 1;
     }
+    if (numAvailable == 0) return asynSuccess;
 
-    // In list mapping mode if any buffer is full then switch buffers on the non-full ones.
-    // Note: this is prone to error because they could have already switched!
-    if (anyFull && (mappingMode == DanteModeListMapping)) {
-        for (ch=0; ch<nChannels_; ch+=this->channelsPerCard) {
-            CALLHANDEL( xiaGetRunData(ch, DanteBufferFullString[buf], &isFull), "DanteBufferFullString[buf]" )
-            if (isFull) continue;
-            CALLHANDEL( xiaBoardOperation(ch, "buffer_switch", &ignored), "buffer_switch" )
+    epicsTimeStamp now;
+    epicsTimeGetCurrent(&now);
+    uint32_t spectraSize = numMCAChannels;
+
+    // Now read the same number of spectra from each board
+    for (board=0; board<numBoards_; board++) {
+        pMappingMCAData_ [board] = (uint16_t *)malloc(numAvailable * numMCAChannels        * sizeof(uint16_t));
+        pMappingStats_   [board] = (double *)  malloc(numAvailable * NUM_MAPPING_STATS     * sizeof(double));
+        pMappingAdvStats_[board] = (uint64_t *)malloc(numAvailable * NUM_MAPPING_ADV_STATS * sizeof(uint64_t));
+        if (!getAllData(danteIdentifier_, board, pMappingMCAData_[board], &spectraId, 
+                        pMappingStats_[board], pMappingAdvStats_[board], spectraSize, numAvailable)) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAllData\n", driverName, functionName);
+            status = asynError;
+            goto done;
         }
-        // Now wait until all modules report they are full
-        do {
-            allFull = 1;
-            for (ch=0; ch<nChannels_; ch+=this->channelsPerCard) {
-                CALLHANDEL( xiaGetRunData(ch, DanteBufferFullString[buf], &isFull), "DanteBufferFullString[buf]" )
-                if (!isFull) allFull = 0;
+    }
+    if (arrayCallbacks) {
+        size_t dims[2]; 
+        dims[0] = numMCAChannels;
+        dims[1] = numBoards_;
+        NDArray *pArray;
+        for (uint32_t pixel=0; pixel<numAvailable; pixel++) {
+            pArray = this->pNDArrayPool->alloc(2, dims, NDUInt16, 0, NULL );
+            epicsUInt16 *pOut = (epicsUInt16 *)pArray->pData;
+            for (board=0; board<numBoards_; board++) {
+                char tempString[20];
+                uint16_t *pIn = pMappingMCAData_[board] + numMCAChannels * pixel;
+                memcpy(pOut, pIn, numMCAChannels * sizeof(epicsUInt16));
+                pOut += numMCAChannels;
+                double *pStats = pMappingStats_[board] + NUM_MAPPING_STATS * pixel;
+                double realTime = pStats[0]/1.e6;
+                sprintf(tempString, "RealTime_%d", board);
+                pArray->pAttributeList->add(tempString, "Real time",         NDAttrFloat64, &realTime);
+                double liveTime = pStats[1]/1.e6;
+                sprintf(tempString, "LiveTime_%d", board);
+                pArray->pAttributeList->add(tempString, "Live time",         NDAttrFloat64, &liveTime);
+                double ICR = pStats[2];
+                sprintf(tempString, "ICR_%d", board);
+                pArray->pAttributeList->add(tempString, "Input count rate",  NDAttrFloat64, &ICR);
+                double OCR = pStats[3];
+                sprintf(tempString, "OCR_%d", board);
+                pArray->pAttributeList->add(tempString, "Output count rate", NDAttrFloat64, &OCR);
             }
-        } while (allFull != 1);
+            pArray->timeStamp = now.secPastEpoch + now.nsec / 1.e9;
+            updateTimeStamp(&pArray->epicsTS);
+            pArray->uniqueId = uniqueId_;
+            uniqueId_++;
+            getAttributes(pArray->pAttributeList);
+            doCallbacksGenericPointer(pArray, NDArrayData, 0);
+            pArray->release();
+        }
     }
-    // If all of the modules have full buffers then read them all out
-    if (allFull)
-    {
-        status = this->getMappingData();
+
+    // Copy the spectral data for the first pixel in this buffer to the mcaRaw buffers.
+    // This provides an update of the spectra and statistics while mapping is in progress
+    // if the user sets the MCA spectra to periodically read.
+    for (board=0; board<numBoards_; board++) {
+        uint16_t *pIn = pMappingMCAData_[board];
+        uint64_t *pOut = pMcaRaw_[board];
+        for (int chan=0; chan<numMCAChannels; chan++) {
+            pOut[chan] = pIn[chan];
+        }
+        double *pStats = pMappingStats_[board];
+        setDoubleParam(board, mcaElapsedRealTime,   pStats[0]/1.e6);
+        setDoubleParam(board, mcaElapsedLiveTime,   pStats[1]/1.e6);
+        setDoubleParam(board, DanteInputCountRate,  pStats[2]);
+        setDoubleParam(board, DanteOutputCountRate, pStats[3]);
+        // Need to get structure of advStats buffer
+        //setIntegerParam(board, DanteEvents,   advStats[offset + 0]);
+        //setIntegerParam(board, DanteTriggers, advStats[offset + 1]);
+        callParamCallbacks(board);
     }
-*/
+    done:
+    for (board=0; board<numBoards_; board++) {
+        free(pMappingMCAData_[board]);
+        free(pMappingStats_[board]);
+        free(pMappingAdvStats_[board]);
+    }
     return status;
 }
 
@@ -1478,7 +1372,7 @@ asynStatus Dante::pollMappingMode()
 void Dante::report(FILE *fp, int details)
 {
     if (details > 0) {
-        for (int i=0; i<nChannels_; i++) {
+        for (int i=0; i<numBoards_; i++) {
             fprintf(fp, "Configuration %d:\n", i);
             configuration *pConfig = &configurations_[i];
             fprintf(fp, "      fast_filter_thr: %d\n", pConfig->fast_filter_thr);
@@ -1526,20 +1420,23 @@ void Dante::report(FILE *fp, int details)
 void Dante::shutdown()
 {
     double pollTime;
+    static const char *functionName = "shutdown";
     
     getDoubleParam(DantePollTime, &pollTime);
     asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s: shutting down in %f seconds\n", driverName, 2*pollTime);
+        "%s::%s shutting down in %f seconds\n", driverName, functionName, 2*pollTime);
     polling_ = 0;
     epicsThreadSleep(2*pollTime);
+
+    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, "%s::%s calling clear_chain\n", driverName, functionName);
     clear_chain(danteIdentifier_);
+    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, "%s::%s calling CloseLibrary\n", driverName, functionName);
     if (CloseLibrary()) {
-        printf("%s shut down successfully.\n",
-                driverName);
+    asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, "%s::%s called CloseLibrary successfully\n", driverName, functionName);
         return;
     }
     else {
-        printf("Error calling CloseLibrary()\n");
+        asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling CloseLibrary()\n", driverName, functionName);
         return;
     }
 }
@@ -1547,7 +1444,7 @@ void Dante::shutdown()
 
 static const iocshArg DanteConfigArg0 = {"Asyn port name", iocshArgString};
 static const iocshArg DanteConfigArg1 = {"IP address", iocshArgString};
-static const iocshArg DanteConfigArg2 = {"Number of channels", iocshArgInt};
+static const iocshArg DanteConfigArg2 = {"Number of boards", iocshArgInt};
 static const iocshArg DanteConfigArg3 = {"Maximum number of buffers", iocshArgInt};
 static const iocshArg DanteConfigArg4 = {"Maximum amount of memory (bytes)", iocshArgInt};
 static const iocshArg * const DanteConfigArgs[] =  {&DanteConfigArg0,
