@@ -291,10 +291,10 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     msgQ_ = new epicsMessageQueue(MSG_QUEUE_SIZE, MESSAGE_SIZE);
 
     /* Allocate memory pointers for each of the boards */
-    pMcaRaw_          = (uint64_t**)  calloc(numBoards_, sizeof(uint64_t*));
-    pMappingMCAData_  = (uint16_t**) calloc(numBoards_, sizeof(uint16_t*));
-    pMappingStats_    = (double**)   calloc(numBoards_, sizeof(double*));
-    pMappingAdvStats_ = (uint64_t**) calloc(numBoards_, sizeof(uint64_t*));
+    pMcaRaw_          = (uint64_t**)        calloc(numBoards_, sizeof(uint64_t*));
+    pMappingMCAData_  = (uint16_t**)        calloc(numBoards_, sizeof(uint16_t*));
+    pMappingStats_    = (mappingStats**)    calloc(numBoards_, sizeof(mappingStats*));
+    pMappingAdvStats_ = (mappingAdvStats**) calloc(numBoards_, sizeof(mappingAdvStats*));
     /* Allocate a memory area for each spectrum */
     for (ch=0; ch<numBoards_; ch++) {
         pMcaRaw_[ch] = (unsigned long*)calloc(MAX_MCA_BINS, sizeof(unsigned long));
@@ -502,7 +502,7 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     }
     else if (function == DanteGatingMode) {
         GatingMode gatingMode = (GatingMode)value;
-        callId_ = configure_gating(danteIdentifier_, gatingMode);
+        callId_ = configure_gating(danteIdentifier_, gatingMode, addr);
         waitReply(callId_, danteReply_);
     }  
     else if (function == DanteTraceLength) {
@@ -1136,6 +1136,7 @@ asynStatus Dante::startAcquiring()
         waitReply(callId_, danteReply_);
         break;
       case DanteModeMCAMapping:
+        setIntegerParam(DanteCurrentPixel, 0);
         uint32_t msTime = presetReal * 1000;
         //  Work around bug, it only collects N-1 points
         uint32_t mapPts = mappingPoints + 1;
@@ -1293,11 +1294,11 @@ asynStatus Dante::pollMappingMode()
 
     // Now read the same number of spectra from each board
     for (board=0; board<numBoards_; board++) {
-        pMappingMCAData_ [board] = (uint16_t *)malloc(numAvailable * numMCAChannels        * sizeof(uint16_t));
-        pMappingStats_   [board] = (double *)  malloc(numAvailable * NUM_MAPPING_STATS     * sizeof(double));
-        pMappingAdvStats_[board] = (uint64_t *)malloc(numAvailable * NUM_MAPPING_ADV_STATS * sizeof(uint64_t));
+        pMappingMCAData_ [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels        * sizeof(uint16_t));
+        pMappingStats_   [board] = (mappingStats *)   malloc(numAvailable * sizeof(mappingStats));
+        pMappingAdvStats_[board] = (mappingAdvStats *)malloc(numAvailable * sizeof(mappingAdvStats));
         if (!getAllData(danteIdentifier_, board, pMappingMCAData_[board], &spectraId, 
-                        pMappingStats_[board], pMappingAdvStats_[board], spectraSize, numAvailable)) {
+                        (double *)pMappingStats_[board], (uint64_t*)pMappingAdvStats_[board], spectraSize, numAvailable)) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAllData\n", driverName, functionName);
             status = asynError;
             goto done;
@@ -1316,17 +1317,17 @@ asynStatus Dante::pollMappingMode()
                 uint16_t *pIn = pMappingMCAData_[board] + numMCAChannels * pixel;
                 memcpy(pOut, pIn, numMCAChannels * sizeof(epicsUInt16));
                 pOut += numMCAChannels;
-                double *pStats = pMappingStats_[board] + NUM_MAPPING_STATS * pixel;
-                double realTime = pStats[0]/1.e6;
+                mappingStats *pStats = pMappingStats_[board] + sizeof(mappingStats) * pixel;
+                double realTime = pStats->real_time/1.e6;
                 sprintf(tempString, "RealTime_%d", board);
                 pArray->pAttributeList->add(tempString, "Real time",         NDAttrFloat64, &realTime);
-                double liveTime = pStats[1]/1.e6;
+                double liveTime = pStats->live_time/1.e6;
                 sprintf(tempString, "LiveTime_%d", board);
                 pArray->pAttributeList->add(tempString, "Live time",         NDAttrFloat64, &liveTime);
-                double ICR = pStats[2];
+                double ICR = pStats->ICR;
                 sprintf(tempString, "ICR_%d", board);
                 pArray->pAttributeList->add(tempString, "Input count rate",  NDAttrFloat64, &ICR);
-                double OCR = pStats[3];
+                double OCR = pStats->OCR;
                 sprintf(tempString, "OCR_%d", board);
                 pArray->pAttributeList->add(tempString, "Output count rate", NDAttrFloat64, &OCR);
             }
@@ -1349,17 +1350,30 @@ asynStatus Dante::pollMappingMode()
         for (int chan=0; chan<numMCAChannels; chan++) {
             pOut[chan] = pIn[chan];
         }
-        double *pStats = pMappingStats_[board];
-        setDoubleParam(board, mcaElapsedRealTime,   pStats[0]/1.e6);
-        setDoubleParam(board, mcaElapsedLiveTime,   pStats[1]/1.e6);
-        setDoubleParam(board, DanteInputCountRate,  pStats[2]);
-        setDoubleParam(board, DanteOutputCountRate, pStats[3]);
-        // Need to get structure of advStats buffer
-        //setIntegerParam(board, DanteEvents,   advStats[offset + 0]);
-        //setIntegerParam(board, DanteTriggers, advStats[offset + 1]);
+        mappingStats *pStats = pMappingStats_[board];
+        mappingAdvStats *pAdvStats = pMappingAdvStats_[board];
+        setDoubleParam(board, mcaElapsedRealTime,   pStats->real_time/1.e6);
+        setDoubleParam(board, mcaElapsedLiveTime,   pStats->live_time/1.e6);
+        setDoubleParam(board, DanteInputCountRate,  pStats->ICR);
+        setDoubleParam(board, DanteOutputCountRate, pStats->OCR);
+        setDoubleParam(board, DanteLastTimeStamp,   (double)pAdvStats->last_timestamp);
+        setIntegerParam(board, DanteEvents,         pAdvStats->detected);
+        setIntegerParam(board, DanteTriggers,       pAdvStats->measured);
+        setIntegerParam(board, DanteEdgeDT,         pAdvStats->edge_dt);
+        setIntegerParam(board, DanteFilt1DT,        pAdvStats->filt1_dt);
+        setIntegerParam(board, DanteZeroCounts,     pAdvStats->zerocounts);
+        setIntegerParam(board, DanteBaselinesValue, pAdvStats->baselines_value);
+        setIntegerParam(board, DantePupValue,       pAdvStats->pup_value);
+        setIntegerParam(board, DantePupF1Value,     pAdvStats->pup_f1_value);
+        setIntegerParam(board, DantePupNotF1Value,  pAdvStats->pup_notf1_value);
+        setIntegerParam(board, DanteResetCounterValue, pAdvStats->reset_counter_value);
         callParamCallbacks(board);
     }
     done:
+    int currentPixel;
+    getIntegerParam(DanteCurrentPixel, &currentPixel);
+    currentPixel += numAvailable;
+    setIntegerParam(DanteCurrentPixel, currentPixel);
     for (board=0; board<numBoards_; board++) {
         free(pMappingMCAData_[board]);
         free(pMappingStats_[board]);
