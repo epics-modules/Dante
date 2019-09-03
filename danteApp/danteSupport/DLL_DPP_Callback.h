@@ -137,26 +137,27 @@ EXTERN DECLSPEC bool   CALL_CONV get_boards_in_chain(const char* identifier, uin
 */
 
 struct configuration {
-	uint32_t fast_filter_thr = 0;	// Detection threshold [unit: spectrum BINs]
-	uint32_t energy_filter_thr = 0;	// Detection threshold [unit: spectrum BINs]
-	uint32_t energy_baseline_thr = 0;	// Energy threshold for baseline [unit: spectrum BINs]
-	double max_risetime = 30;	// Max risetime setting for pileup detection 
-	double gain = 1;	// Main gain: (spectrum BIN)/(ADC's LSB)
-	uint32_t peaking_time = 25;	// Main energy filter peaking time   [unit: 32 ns samples]
-	uint32_t max_peaking_time = 0;	// Max energy filter peaking time   [unit: 32 ns samples]
-	uint32_t flat_top = 5;	// Main energy filter flat top   [unit: 32 ns samples]
-	uint32_t edge_peaking_time = 4;	// Edge detection filter peaking time   [unit: 8 ns samples]
-	uint32_t edge_flat_top = 1;	// Edge detection filter flat top   [unit: 8 ns samples]
-	uint32_t reset_recovery_time = 300;	// Reset recovery time [unit: 8 ns samples]
-	double zero_peak_freq = 1;	// Zero peak rate [kcps]
-	uint32_t baseline_samples = 64;	// Baseline samples for baseline correction [32 ns samples]
-	bool inverted_input = 0;
-	double time_constant = 0;	// Time constant for continuos reset signal
-	uint32_t base_offset = 0;	// Baseline of the continous reset signal [ADC's LSB]
-	uint32_t overflow_recovery = 0;	// Overflow recovery time [8ns samples]
-	uint32_t reset_threshold = 0;	// Reset detection threshold [ADC's LSB]
-	double tail_coefficient = 0;	// Tail coefficient
-	uint32_t other_param = 0;	
+	uint32_t fast_filter_thr		= 0;	// Detection threshold [unit: spectrum BINs]
+	uint32_t energy_filter_thr		= 0;	// Detection threshold [unit: spectrum BINs]
+	uint32_t energy_baseline_thr	= 0;	// Energy threshold for baseline [unit: spectrum BINs]
+	double max_risetime				= 30;	// Max risetime setting for pileup detection 
+	double gain						= 1;	// Main gain: (spectrum BIN)/(ADC's LSB)
+	uint32_t peaking_time			= 25;	// Main energy filter peaking time   [unit: 32 ns samples]
+	uint32_t max_peaking_time		= 0;	// Max energy filter peaking time   [unit: 32 ns samples]
+	uint32_t flat_top				= 5;	// Main energy filter flat top   [unit: 32 ns samples]
+	uint32_t edge_peaking_time		= 4;	// Edge detection filter peaking time   [unit: 8 ns samples]
+	uint32_t edge_flat_top			= 1;	// Edge detection filter flat top   [unit: 8 ns samples]
+	uint32_t reset_recovery_time	= 300;	// Reset recovery time [unit: 8 ns samples]
+	double zero_peak_freq			= 1;	// Zero peak rate [kcps]
+	uint32_t baseline_samples		= 64;	// Baseline samples for baseline correction [32 ns samples]
+	bool inverted_input				= 0;
+	double time_constant			= 0;	// Time constant for continuos reset signal
+	uint32_t base_offset			= 0;	// Baseline of the continous reset signal [ADC's LSB]
+	uint32_t overflow_recovery		= 0;	// Overflow recovery time [8ns samples]
+	uint32_t reset_threshold		= 1000;	// Reset detection threshold [ADC's LSB]
+	double tail_coefficient			= 0;	// Tail coefficient
+	uint32_t trigger_mode			= 0;	// External trigger mode (no, rising, falling, both)
+	uint32_t other_param			= 0;	
 };
 
 struct configuration_offset {
@@ -165,15 +166,17 @@ struct configuration_offset {
 };
 
 enum GatingMode {
-	Disabled,
-	EnabledHighLevel,	// Spectrum is acquired only with gating signal at high level
-	EnabledLowLevel,	// Spectrum is acquired only with gating signal at low level
-	MapLatched			// For each spectrum of map mode, gating value is stored and saved togheter with spectrum.
+	FreeRunning,			// Gating signal is ignored
+	TriggerRising,			// A new spectrum is acquired whenever a RISING edge of ext_trigger signal is detected
+	TriggerFalling,			// A new spectrum is acquired whenever a FALLING edge of ext_trigger signal is detected
+	TriggerBoth,			// A new spectrum is acquired whenever ANY edge of ext_trigger signal is detected
+	GatedHigh,				// Spectra are only acquired when the gating signal is HIGH
+	GatedLow				// Spectra are only acquired when the gating signal is LOW
 };
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure(const char* identifier, uint16_t Board, const configuration cfg);
 
-EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, const GatingMode GatingMode);
+EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, const GatingMode GatingMode, uint16_t Board);
 
 EXTERN DECLSPEC bool		   CALL_CONV configure_baseline(const char* identifier, uint16_t Board, const uint16_t * baseline_vector);
 
@@ -343,10 +346,11 @@ EXTERN DECLSPEC uint32_t CALL_CONV write_IP_configuration(const char* identifier
 /*
 Loads a new firmware via USB. With store to false, it will load to the system a temporary firmware (20 seconds) that will be lost if rebooted.
 Otherwise whith store to true it will store the firmware on memory and it will persist even after power cycles.
+If board_no is set, the FW update on the defined number of boards; otherwise, autodiscovery is performed
 This last operation could take up to 40 seconds.
 The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
 */
-EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char* identifier, bool store, char* filename);
+EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char* identifier, bool store, char* filename, uint16_t board_num = 0);
 
 // Resets the communication on the entire chain.
 EXTERN DECLSPEC uint32_t  CALL_CONV global_reset(const char* identifier);
