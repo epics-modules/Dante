@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 222
-y 183
+x 274
+y 148
 w 1140
 h 930
 font "helvetica-medium-r-18.0"
@@ -1602,7 +1602,7 @@ release 0
 x 785
 y 370
 w 349
-h 209
+h 259
 lineColor rgb 0 0 0
 fillColor rgb 0 0 0
 endObjectProperties
@@ -1626,19 +1626,6 @@ value {
   "Trace Setup"
 }
 endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 790
-y 400
-w 170
-h 166
-
-beginGroup
 
 # (Static Text)
 object activeXTextClass
@@ -1772,11 +1759,6 @@ value {
   "Trigger wait"
 }
 endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
@@ -3148,7 +3130,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 10
+x 20
 y 625
 w 210
 h 20
@@ -3167,7 +3149,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 10
+x 20
 y 650
 w 210
 h 20
@@ -3179,19 +3161,6 @@ value {
   "Average dead time (%)"
 }
 endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 674
-w 175
-h 245
-
-beginGroup
 
 # (Text Monitor)
 object activeXTextDspClass:noedit
@@ -3486,24 +3455,6 @@ endGroup
 endObjectProperties
 
 
-endGroup
-
-endObjectProperties
-
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 10
-y 674
-w 160
-h 245
-
-beginGroup
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -3702,11 +3653,6 @@ value {
 }
 endObjectProperties
 
-endGroup
-
-endObjectProperties
-
-
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -3775,23 +3721,46 @@ fastUpdate
 newPos
 objType "controls"
 endObjectProperties
-# (Group)
-object activeGroupClass
+
+# (Static Text)
+object activeXTextClass
 beginObjectProperties
 major 4
-minor 0
-release 0
-x 790
-y 400
-w 170
-h 166
-
-beginGroup
-
-endGroup
-
+minor 1
+release 1
+x 870
+y 575
+w 90
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Read Rate"
+}
 endObjectProperties
 
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 910
+y 600
+w 50
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Plot"
+}
+endObjectProperties
 
 # (Menu Button)
 object activeMenuButtonClass
@@ -3962,18 +3931,6 @@ offLabel "Stop"
 useEnumNumeric
 font "helvetica-medium-r-12.0"
 endObjectProperties
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 674
-w 175
-h 245
-
-beginGroup
 # (Group)
 object activeGroupClass
 beginObjectProperties
@@ -4165,25 +4122,81 @@ replaceSymbols {
 }
 endObjectProperties
 
-endGroup
-
-endObjectProperties
-
-# (Group)
-object activeGroupClass
+# (Menu Button)
+object activeMenuButtonClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 10
-y 674
-w 160
-h 245
-
-beginGroup
-
-endGroup
-
+x 963
+y 576
+w 80
+h 18
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+inconsistentColor rgb 17920 17920 17920
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+controlPv "$(P)$(R)TraceData.SCAN"
+indicatorPv "$(P)$(R)TraceData.SCAN"
+font "helvetica-medium-r-10.0"
 endObjectProperties
 
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1048
+y 575
+w 80
+h 20
+fgColor rgb 0 0 0
+onColor rgb 29440 57088 65280
+offColor rgb 29440 57088 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P)$(R)TraceData.PROC"
+pressValue "1"
+releaseValue 
+onLabel "Read Once"
+offLabel "Read Once"
+3d
+useEnumNumeric
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 963
+y 600
+w 86
+h 20
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+font "helvetica-medium-r-12.0"
+icon
+buttonLabel "Plot"
+numPvs 2
+numDsps 1
+displayFileName {
+  0 danteTrace.edl
+}
+menuLabel {
+  0 Trace display
+}
+symbols {
+  0 "P=$(P),R=$(R)"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
 
