@@ -11,6 +11,40 @@ typedef enum {
     DanteModeListMapping,
 } danteCollectMode_t;
 
+struct mappingStats {
+  	double real_time;
+  	double live_time;
+  	double ICR;
+  	double OCR;
+};
+
+struct mappingAdvStats {
+  	uint64_t last_timestamp;
+  	uint64_t detected;
+  	uint64_t measured;
+  	uint64_t edge_dt;
+  	uint64_t filt1_dt;
+  	uint64_t zerocounts;
+  	uint64_t baselines_value;
+  	uint64_t pup_value;
+  	uint64_t pup_f1_value;
+  	uint64_t pup_notf1_value;
+  	uint64_t reset_counter_value;
+  	uint64_t spectra_in_FIFO;
+    uint64_t x_position;
+    uint64_t x_timestamp;
+    uint64_t gateRising;
+    uint64_t gateFalling;
+    uint64_t gateHigh;
+    uint64_t gateLow;
+    uint64_t y_position;
+    uint64_t y_timestamp;
+    uint64_t z_position;
+    uint64_t z_timestamp;
+    uint64_t unused1;
+    uint64_t unused2;
+};
+
 #define MAX_DANTE_REPLY_LEN       16
 #define MAX_DANTE_IDENTIFIER_LEN  16
 
@@ -207,7 +241,6 @@ private:
     asynStatus getAcquisitionStatistics(int addr);
     asynStatus getMcaData(int addr);
     asynStatus pollMappingMode();
-    asynStatus getMappingData();
     asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
     asynStatus startAcquiring();
     asynStatus waitReply(uint32_t callId, char *reply);
@@ -217,8 +250,8 @@ private:
     std::vector<statistics> statistics_;
     uint64_t **pMcaRaw_;
     uint16_t **pMappingMCAData_;
-    double   **pMappingStats_;
-    uint64_t **pMappingAdvStats_;
+    struct mappingStats **pMappingStats_;
+    struct mappingAdvStats **pMappingAdvStats_;
 
     int numBoards_;
     int uniqueId_;
