@@ -353,7 +353,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
         setDoubleParam (i, DanteFlatTop,                  0.05);
         setDoubleParam (i, DanteEdgePeakingTime,          0.03);
         setDoubleParam (i, DanteEdgeFlatTop,              0.01);
-        setDoubleParam (i, DanteResetRecoveryTime,        0.25);
+        setDoubleParam (i, DanteResetRecoveryTime,        6.0);
         setDoubleParam (i, DanteZeroPeakFreq,             1000.);
         setIntegerParam(i, DanteBaselineSamples,          64);
         setIntegerParam(i, DanteInvertedInput,            0);
@@ -502,6 +502,9 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     }
     else if (function == DanteGatingMode) {
         GatingMode gatingMode = (GatingMode)value;
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
+            "%s::%s calling configure_gating, gatingMode=%d, addr=%d\n",
+            driverName, functionName, gatingMode, addr);
         callId_ = configure_gating(danteIdentifier_, gatingMode, addr);
         waitReply(callId_, danteReply_);
     }  
