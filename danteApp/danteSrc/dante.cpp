@@ -291,10 +291,11 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     msgQ_ = new epicsMessageQueue(MSG_QUEUE_SIZE, MESSAGE_SIZE);
 
     /* Allocate memory pointers for each of the boards */
-    pMcaRaw_          = (uint64_t**)        calloc(numBoards_, sizeof(uint64_t*));
-    pMappingMCAData_  = (uint16_t**)        calloc(numBoards_, sizeof(uint16_t*));
-    pMappingStats_    = (mappingStats**)    calloc(numBoards_, sizeof(mappingStats*));
-    pMappingAdvStats_ = (mappingAdvStats**) calloc(numBoards_, sizeof(mappingAdvStats*));
+    pMcaRaw_            = (uint64_t**)        calloc(numBoards_, sizeof(uint64_t*));
+    pMappingMCAData_    = (uint16_t**)        calloc(numBoards_, sizeof(uint16_t*));
+    pMappingSpectrumId_ = (uint32_t**)        calloc(numBoards_, sizeof(uint32_t*));
+    pMappingStats_      = (mappingStats**)    calloc(numBoards_, sizeof(mappingStats*));
+    pMappingAdvStats_   = (mappingAdvStats**) calloc(numBoards_, sizeof(mappingAdvStats*));
     /* Allocate a memory area for each spectrum */
     for (ch=0; ch<numBoards_; ch++) {
         pMcaRaw_[ch] = (unsigned long*)calloc(MAX_MCA_BINS, sizeof(unsigned long));
@@ -1222,12 +1223,7 @@ void Dante::acquisitionTask()
                     driverName, functionName);
             }
             else {
-                /* In mapping modes need to make an extra call to pollMappingMode because there could be
-                 * 2 mapping mode buffers that still need to be read out. 
-                 * This call will read out the first one, and just below this !acquiring block
-                 * there is a second call to pollMapping mode which is
-                 * done on every main loop in mapping modes. */
-                 this->pollMappingMode();
+                this->pollMappingMode();
             }
         } 
         if (mode != DanteModeMCA) {
@@ -1247,13 +1243,7 @@ void Dante::acquisitionTask()
         epicsTimeGetCurrent(&now);
         dtmp = epicsTimeDiffInSeconds(&now, &start);
         sleepTime = pollTime - dtmp;
-        if (mode == DanteModeMCAMapping) {
-            //  In MCA Mapping mode need to sleep for no more than 10*realTime to prevent stack overflow? */
-            double presetReal;
-            getDoubleParam(mcaPresetRealTime, &presetReal);
-            if (sleepTime > 10*presetReal) sleepTime = 10*presetReal;
-        }
-        if (sleepTime < 0) sleepTime = 0.01;
+        if (sleepTime < 0) sleepTime = 0.001;
         this->unlock();
         epicsThreadSleep(sleepTime);
         this->lock();
@@ -1269,7 +1259,6 @@ asynStatus Dante::pollMappingMode()
     int numMCAChannels;
     int arrayCallbacks;
     uint16_t board;
-    uint32_t spectraId;
     const char* functionName = "pollMappingMode";
     
     getIntegerParam(DanteCollectMode, &collectMode);
@@ -1297,10 +1286,11 @@ asynStatus Dante::pollMappingMode()
 
     // Now read the same number of spectra from each board
     for (board=0; board<numBoards_; board++) {
-        pMappingMCAData_ [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels        * sizeof(uint16_t));
-        pMappingStats_   [board] = (mappingStats *)   malloc(numAvailable * sizeof(mappingStats));
-        pMappingAdvStats_[board] = (mappingAdvStats *)malloc(numAvailable * sizeof(mappingAdvStats));
-        if (!getAllData(danteIdentifier_, board, pMappingMCAData_[board], &spectraId, 
+        pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
+        pMappingSpectrumId_[board] = (uint32_t *)       malloc(numAvailable * sizeof(uint32_t));
+        pMappingStats_     [board] = (mappingStats *)   malloc(numAvailable * sizeof(mappingStats));
+        pMappingAdvStats_  [board] = (mappingAdvStats *)malloc(numAvailable * sizeof(mappingAdvStats));
+        if (!getAllData(danteIdentifier_, board, pMappingMCAData_[board], pMappingSpectrumId_[board], 
                         (double *)pMappingStats_[board], (uint64_t*)pMappingAdvStats_[board], spectraSize, numAvailable)) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAllData\n", driverName, functionName);
             status = asynError;
@@ -1320,7 +1310,7 @@ asynStatus Dante::pollMappingMode()
                 uint16_t *pIn = pMappingMCAData_[board] + numMCAChannels * pixel;
                 memcpy(pOut, pIn, numMCAChannels * sizeof(epicsUInt16));
                 pOut += numMCAChannels;
-                mappingStats *pStats = pMappingStats_[board] + sizeof(mappingStats) * pixel;
+                mappingStats *pStats = pMappingStats_[board] + pixel;
                 double realTime = pStats->real_time/1.e6;
                 sprintf(tempString, "RealTime_%d", board);
                 pArray->pAttributeList->add(tempString, "Real time",         NDAttrFloat64, &realTime);
@@ -1379,6 +1369,7 @@ asynStatus Dante::pollMappingMode()
     setIntegerParam(DanteCurrentPixel, currentPixel);
     for (board=0; board<numBoards_; board++) {
         free(pMappingMCAData_[board]);
+        free(pMappingSpectrumId_[board]);
         free(pMappingStats_[board]);
         free(pMappingAdvStats_[board]);
     }
