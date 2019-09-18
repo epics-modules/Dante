@@ -43,6 +43,14 @@ DPP_Test_SYS_LIBS_Linux  += XGL_DPP
 DPP_Test_LIBS_WIN32      += XGL_DPP
 DPP_Test_SYS_LIBS_Linux += python2.7
 
+#=============================
+PROD_IOC_Linux += test_mapping
+PROD_IOC_WIN32 += test_mapping
+test_mapping_SRCS  += test_mapping.cpp
+test_mapping_SYS_LIBS_Linux  += XGL_DPP
+test_mapping_LIBS_WIN32      += XGL_DPP
+test_mapping_SYS_LIBS_Linux += python2.7
+
 include $(ADCORE)/ADApp/commonDriverMakefile
 
 include $(TOP)/configure/RULES
