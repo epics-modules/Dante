@@ -250,6 +250,7 @@ private:
     std::vector<statistics> statistics_;
     uint64_t **pMcaRaw_;
     uint16_t **pMappingMCAData_;
+    uint32_t **pMappingSpectrumId_;
     struct mappingStats **pMappingStats_;
     struct mappingAdvStats **pMappingAdvStats_;
 
