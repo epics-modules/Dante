@@ -389,6 +389,8 @@ record(ao,"$(P)$(R)ResetRecoveryTime") {
     field(PINI,"YES")
     field(PREC,"3")
     field(VAL,"2")
+    field(DRVL, ".008")
+    field(DRVH, "134217.72")
     field(DTYP, "asynFloat64")
     field(OUT,"@asyn($(PORT))DanteResetRecoveryTime")
 }
