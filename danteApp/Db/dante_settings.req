@@ -23,6 +23,7 @@ $(P)$(R)TailCoefficient
 $(P)$(R)AnalogOffset
 $(P)$(R)GatingMode
 $(P)$(R)MappingPoints
+$(P)$(R)ListBufferSize
 $(P)$(R)TraceTime
 $(P)$(R)TraceTriggerInstant
 $(P)$(R)TraceTriggerRising
