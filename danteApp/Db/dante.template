@@ -603,6 +603,22 @@ record(longin,"$(P)$(R)MappingPoints_RBV") {
     field(SCAN, "I/O Intr")
 }
 
+record(longout,"$(P)$(R)ListBufferSize") {
+    field(DESC,"List mode buffer events")
+    field(PINI,"YES")
+    field(VAL, "4096")
+    field(DRVL, "512")
+    field(DRVH, "2000000000")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteListBufferSize")
+}
+
+record(longin,"$(P)$(R)ListBufferSize_RBV") {
+    field(DESC,"List mode buffer events")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteListBufferSize")
+    field(SCAN, "I/O Intr")
+}
 
 
 #############################
