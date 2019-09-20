@@ -8,7 +8,7 @@
 typedef enum {
     DanteModeMCA, 
     DanteModeMCAMapping,
-    DanteModeListMapping,
+    DanteModeList,
 } danteCollectMode_t;
 
 struct mappingStats {
@@ -118,6 +118,7 @@ struct mappingAdvStats {
 #define DanteAnalogOffsetString             "DanteAnalogOffset"
 #define DanteGatingModeString               "DanteGatingMode"
 #define DanteMappingPointsString            "DanteMappingPoints"
+#define DanteListBufferSizeString           "DanteListBufferSize"
 
 
 class Dante : public asynNDArrayDriver
@@ -209,6 +210,7 @@ protected:
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
     int DanteGatingMode;                  /* int32 */
     int DanteMappingPoints;               /* int32 */
+    int DanteListBufferSize;              /* int32 */
 
     /* Commands from MCA interface */
     int mcaData;                   /* int32Array, write/read */
@@ -240,7 +242,8 @@ private:
     asynStatus getAcquisitionStatus(int addr);
     asynStatus getAcquisitionStatistics(int addr);
     asynStatus getMcaData(int addr);
-    asynStatus pollMappingMode();
+    asynStatus pollMCAMappingMode();
+    asynStatus pollListMode();
     asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
     asynStatus startAcquiring();
     asynStatus waitReply(uint32_t callId, char *reply);
@@ -250,6 +253,7 @@ private:
     std::vector<statistics> statistics_;
     uint64_t **pMcaRaw_;
     uint16_t **pMappingMCAData_;
+    uint64_t **pListData_;
     uint32_t **pMappingSpectrumId_;
     struct mappingStats **pMappingStats_;
     struct mappingAdvStats **pMappingAdvStats_;
