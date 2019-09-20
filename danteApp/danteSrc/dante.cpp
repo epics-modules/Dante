@@ -248,6 +248,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     createParam(DanteAnalogOffsetString,            asynParamInt32,   &DanteAnalogOffset);
     createParam(DanteGatingModeString,              asynParamInt32,   &DanteGatingMode);
     createParam(DanteMappingPointsString,           asynParamInt32,   &DanteMappingPoints);
+    createParam(DanteListBufferSizeString,          asynParamInt32,   &DanteListBufferSize);
 
     /* Commands from MCA interface */
     createParam(mcaDataString,                     asynParamInt32Array, &mcaData);
@@ -293,6 +294,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int max
     /* Allocate memory pointers for each of the boards */
     pMcaRaw_            = (uint64_t**)        calloc(numBoards_, sizeof(uint64_t*));
     pMappingMCAData_    = (uint16_t**)        calloc(numBoards_, sizeof(uint16_t*));
+    pListData_          = (uint64_t**)        calloc(numBoards_, sizeof(uint64_t*));
     pMappingSpectrumId_ = (uint32_t**)        calloc(numBoards_, sizeof(uint32_t*));
     pMappingStats_      = (mappingStats**)    calloc(numBoards_, sizeof(mappingStats*));
     pMappingAdvStats_   = (mappingAdvStats**) calloc(numBoards_, sizeof(mappingAdvStats*));
@@ -1130,6 +1132,9 @@ asynStatus Dante::startAcquiring()
     int numChannels;
     int collectMode;
     int mappingPoints;
+    uint32_t msTime;
+    uint32_t mapPts;
+
     getDoubleParam(mcaPresetRealTime, &presetReal);
     getIntegerParam(mcaNumChannels, &numChannels);
     getIntegerParam(DanteCollectMode, &collectMode);
@@ -1141,11 +1146,17 @@ asynStatus Dante::startAcquiring()
         break;
       case DanteModeMCAMapping:
         setIntegerParam(DanteCurrentPixel, 0);
-        uint32_t msTime = presetReal * 1000;
+        msTime = presetReal * 1000;
         //  Work around bug, it only collects N-1 points
-        uint32_t mapPts = mappingPoints + 1;
+        mapPts = mappingPoints + 1;
         callId_ = start_map(danteIdentifier_, msTime, mapPts, numChannels);
         waitReply(callId_, danteReply_);
+        break;
+      case DanteModeList:
+        setIntegerParam(DanteCurrentPixel, 0);
+        callId_ = start_list(danteIdentifier_, presetReal);
+        waitReply(callId_, danteReply_);
+        break;
     }
 
     setIntegerParam(DanteErased, 0); /* reset the erased flag */
@@ -1210,8 +1221,7 @@ void Dante::acquisitionTask()
         if (!acquiring)
         {
             /* There must have just been a transition from acquiring to not acquiring */
-
-            if (mode == DanteModeMCA) {
+           if (mode == DanteModeMCA) {
                 /* In MCA mode we force a read of the data */
                 asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
                     "%s::%s Detected acquisition stop! Now reading statistics\n",
@@ -1222,12 +1232,12 @@ void Dante::acquisitionTask()
                     "%s::%s Detected acquisition stop! Now reading data\n",
                     driverName, functionName);
             }
-            else {
-                this->pollMappingMode();
-            }
         } 
-        if (mode != DanteModeMCA) {
-            this->pollMappingMode();
+        if (mode == DanteModeMCAMapping) {
+            pollMCAMappingMode();
+        }
+        else if (mode == DanteModeList) {
+            pollListMode();
         }
 
         /* Do callbacks for all boards for everything except mcaAcquiring*/
@@ -1251,7 +1261,7 @@ void Dante::acquisitionTask()
 }
 
 /** Check if there are any spectra to be read and read them */
-asynStatus Dante::pollMappingMode()
+asynStatus Dante::pollMCAMappingMode()
 {
     int collectMode;
     asynStatus status = asynSuccess;
@@ -1259,7 +1269,7 @@ asynStatus Dante::pollMappingMode()
     int numMCAChannels;
     int arrayCallbacks;
     uint16_t board;
-    const char* functionName = "pollMappingMode";
+    const char* functionName = "pollMCAMappingMode";
     
     getIntegerParam(DanteCollectMode, &collectMode);
     getIntegerParam(mcaNumChannels, &numMCAChannels);
@@ -1372,6 +1382,126 @@ asynStatus Dante::pollMappingMode()
         free(pMappingSpectrumId_[board]);
         free(pMappingStats_[board]);
         free(pMappingAdvStats_[board]);
+    }
+    return status;
+}
+
+/** Check if there are enough events to be read and read them */
+asynStatus Dante::pollListMode()
+{
+    int collectMode;
+    asynStatus status = asynSuccess;
+    uint32_t numAvailable=0;
+    int itemp;
+    uint32_t listSize;
+    int arrayCallbacks;
+    int numMCAChannels;
+    uint16_t board;
+    uint32_t spectrumId;
+    epicsTimeStamp now;
+    const char* functionName = "pollMCAMappingMode";
+    
+    getIntegerParam(DanteCollectMode, &collectMode);
+    getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
+    getIntegerParam(DanteListBufferSize, &itemp);
+    listSize = itemp;
+    getIntegerParam(mcaNumChannels, &numMCAChannels);
+    
+    // First see which board has fewest events available
+    for (board=0; board<numBoards_; board++) {
+        uint32_t itemp;
+        if (!getAvailableData(danteIdentifier_, board, itemp)) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAvailableData\n", driverName, functionName);
+            return asynError;
+        }
+        if (board == 0) {
+            numAvailable = itemp;
+        } else if (itemp < numAvailable) {
+            numAvailable = itemp;
+        }
+    }
+    if (numAvailable < listSize) return asynSuccess;
+
+    epicsTimeGetCurrent(&now);
+
+    // Now read the same number of events from each board
+    for (board=0; board<numBoards_; board++) {
+        pListData_[board] = (uint64_t *) malloc(listSize * sizeof(uint64_t));
+        if (!getData(danteIdentifier_, board, pListData_[board], spectrumId, statistics_[board], listSize)) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getData\n", driverName, functionName);
+            status = asynError;
+            goto done;
+        }
+    }
+    if (arrayCallbacks) {
+        size_t dims[2]; 
+        dims[0] = listSize * sizeof(uint64_t);
+        dims[1] = numBoards_;
+        NDArray *pArray;
+        pArray = this->pNDArrayPool->alloc(2, dims, NDUInt8, 0, NULL );
+        epicsUInt16 *pOut = (epicsUInt16 *)pArray->pData;
+        for (board=0; board<numBoards_; board++) {
+            char tempString[20];
+            uint64_t *pIn = pListData_[board];
+            memcpy(pOut, pIn, dims[0]);
+            statistics *pStats = &statistics_[board];
+            double realTime = pStats->real_time/1.e6;
+            sprintf(tempString, "RealTime_%d", board);
+            pArray->pAttributeList->add(tempString, "Real time",         NDAttrFloat64, &realTime);
+            double liveTime = pStats->live_time/1.e6;
+            sprintf(tempString, "LiveTime_%d", board);
+            pArray->pAttributeList->add(tempString, "Live time",         NDAttrFloat64, &liveTime);
+            double ICR = pStats->ICR;
+            sprintf(tempString, "ICR_%d", board);
+            pArray->pAttributeList->add(tempString, "Input count rate",  NDAttrFloat64, &ICR);
+            double OCR = pStats->OCR;
+            sprintf(tempString, "OCR_%d", board);
+            pArray->pAttributeList->add(tempString, "Output count rate", NDAttrFloat64, &OCR);
+        }
+        pArray->timeStamp = now.secPastEpoch + now.nsec / 1.e9;
+        updateTimeStamp(&pArray->epicsTS);
+        pArray->uniqueId = uniqueId_;
+        uniqueId_++;
+        getAttributes(pArray->pAttributeList);
+        doCallbacksGenericPointer(pArray, NDArrayData, 0);
+        pArray->release();
+    }
+
+    // Copy the spectral data for the first pixel in this buffer to the mcaRaw buffers.
+    // This provides an update of the spectra and statistics while mapping is in progress
+    // if the user sets the MCA spectra to periodically read.
+    for (board=0; board<numBoards_; board++) {
+        uint64_t *pIn = pListData_[board];
+        uint64_t *pOut = pMcaRaw_[board];
+        for (int chan=0; chan<numMCAChannels; chan++) {
+            pOut[chan] = pIn[chan] & 0xffff;
+        }
+        statistics *pStats = &statistics_[board];
+        setDoubleParam(board, mcaElapsedRealTime,      pStats->real_time/1.e6);
+        setDoubleParam(board, mcaElapsedLiveTime,      pStats->live_time/1.e6);
+        setDoubleParam(board, DanteInputCountRate,     pStats->ICR);
+        setDoubleParam(board, DanteOutputCountRate,    pStats->OCR);
+        setDoubleParam(board, DanteLastTimeStamp,      (double)pStats->last_timestamp);
+        setIntegerParam(board, DanteEvents,            pStats->detected);
+        setIntegerParam(board, DanteTriggers,          pStats->measured);
+        setIntegerParam(board, DanteEdgeDT,            pStats->edge_dt);
+        setIntegerParam(board, DanteFilt1DT,           pStats->filt1_dt);
+        setIntegerParam(board, DanteZeroCounts,        pStats->zerocounts);
+        setIntegerParam(board, DanteBaselinesValue,    pStats->baselines_value);
+        setIntegerParam(board, DantePupValue,          pStats->pup_value);
+        setIntegerParam(board, DantePupF1Value,        pStats->pup_f1_value);
+        setIntegerParam(board, DantePupNotF1Value,     pStats->pup_notf1_value);
+        setIntegerParam(board, DanteResetCounterValue, pStats->reset_counter_value);
+        callParamCallbacks(board);
+    }
+
+    done:
+    int currentPixel;
+    getIntegerParam(DanteCurrentPixel, &currentPixel);
+    currentPixel += numAvailable;
+    setIntegerParam(DanteCurrentPixel, currentPixel);
+    for (board=0; board<numBoards_; board++) {
+        free(pListData_[board]);
     }
     return status;
 }
