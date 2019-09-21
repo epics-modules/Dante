@@ -1,6 +1,6 @@
-======================================
+=====
 Dante
-======================================
+=====
 
 :author: Mark Rivers, University of Chicago
 
@@ -239,7 +239,25 @@ These are the records for run-time statistics.
      - ai
      - DanteLastTimeStamp
      - The last timestamp time in clock ticks.
- 
+
+The following is the main MEDM screen dante.adl.
+
+.. figure:: dante.png
+    :align: center
+
+MCA mode
+--------
+The MCA mode collects a single MCA record at a time.  It is compatible with the MCA record, and is the same
+as MCA operation on many other EPICS MCAs, e.g. Canberra AIM, Amptek, XIA (Saturn, Mercury, xMAP, FalconX), SIS38XX, and others.
+
+It only supports counting for a preset real time, or counting indefinitely (PresetReal=0).
+It does not support PresetLive or PresetCounts which some other MCAs do.
+
+The following is the MEDM screen mca.adl displaying the mca spectrum as it is acquiring.
+
+.. figure:: dante_mca.png
+    :align: center
+
 
 MCA mapping mode
 ----------------
@@ -275,6 +293,12 @@ NDArray. The attribute names contain the board number, for example "RealTime_0".
 
 The NDArrays can be used by any of the standard areaDetector plugins.  For example, they can be streamed
 to HDF5, netCDF, or TIFF files.
+
+The following is the MEDM screen NDFileHDF5.adl when the Dante is saving MCA mapping data to an HDF5 file.
+
+.. figure:: dante_mapping_hdf5.png
+    :align: center
+
 
 List mode
 ---------
@@ -332,49 +356,80 @@ cast them to unsigned 64-bit arrays before operating on them.
 In the future support for 64-bit integers will be added to asyn and areaDetector, and the NDArrays will
 have the correct new NDUInt64 datatype.
 
-IOC startup script
-------------------
-The command to configure an ADSpinnaker camera in the startup script is::
+ADC trace waveforms
+-------------------
+The Dante can collect ADC trace waveforms, which is effectively a digital oscilloscope of the pre-amp input signal.
+This very useful for setting the AnalogOffset record, and for diagnosing issues with the input.
 
-  ADSpinnakerConfig(const char *portName, const char *cameraId, int traceMask, int memoryChannel,
-                    size_t maxMemory, int priority, int stackSize)
+These are the records to control ADC traces.
 
-``portName`` is the name for the ADSpinnaker port driver
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+   :header-rows: 1
+   :widths: auto
 
-``cameraId`` is the either the serial number of the camera or the camera index number in the system.  The serial number is normally printed
-on the camera, and it is also the last part of the camera name returned by arv-tool, for example for
-``"Point Grey Research-Blackfly S BFS-PGE-50S5C-18585624"``, it would be 18585624. 
-If cameraId is less than 1000 it is assumed to be the system index number, if 1000 or greater it is assumed to be a serial number.
-
-``traceMask`` is the initial value of asynTraceMask to be used for debugging problems in the constructor.
-
-``memoryChannel`` is the internal channel number in the camera to be used for saved cameras settings.
-
-``maxMemory`` is the maximum amount of memory the NDArrayPool is allowed to allocate.  0 means unlimited.
-
-``priority`` is the priority of the port thread.  0 means medium priority.
-
-``stackSize`` is the stack size.  0 means medium size.
-
-MEDM screens
-------------
-The following is the main MEDM screen dante.adl.
-
-.. figure:: dante.png
-    :align: center
-
-The following is the MEDM screen mca.adl displaying the mca spectrum as it is acquiring.
-
-.. figure:: dante_mca.png
-    :align: center
+   * - EPICS record names
+     - Record types
+     - drvInfo string
+     - Description
+   * - TraceData
+     - waveform
+     - DanteTraceData
+     - Waveform record containing the ADC trace data. 32-bit integer data type.
+   * - TraceTimeArray
+     - waveform
+     - DanteTraceTimeArray
+     - Waveform record containing the time values for each point in TraceData. 64-bit float data type.
+   * - TraceTime, TraceTime_RBV
+     - ao, ai
+     - DanteTraceTime
+     - Time per sample of the ADC trace data in microseconds. Allowed range is 0.016 to 0.512.
+   * - TraceLength, TraceLength_RBV
+     - longout, longin
+     - DanteTraceLength
+     - The number of samples to read in the ADC trace.  This must be a multiple of 16384, and will be limited by the 
+       NELM field of the TraceData and TraceTimeArray waveform records.
+   * - TraceTriggerLevel, TraceTriggerLevel_RBV
+     - longout, longin
+     - DanteTraceTriggerLevel
+     - The trigger level in ADC units (0 to 65535).
+   * - TraceTriggerRising, TraceTriggerRising_RBV
+     - bo, bi
+     - DanteTraceTriggerRising
+     - Trigger the ADC trace as it rises through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerFalling, TraceTriggerFalling_RBV
+     - bo, bi
+     - DanteTraceTriggerFaling
+     - Trigger the ADC trace as it fals through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerInstant, TraceTriggerInstant_RBV
+     - bo, bi
+     - DanteTraceTriggerInstant
+     - Trigger the ADC trace even if a rising or falling trigger is not detected. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerWait, TraceTriggerWait_RBV
+     - ao, ai
+     - DanteTraceTriggerWait
+     - The delay time after the trigger condition is satisfied before beginning the ADC trace.
 
 The following is the MEDM screen danteTrace.adl displaying the ADC trace. One reset is visible on this trace.
+This happens to be from a Ge detector with a very long (350 microsecond) reset time.
+Most detectors have a much faster reset time.
 
 .. figure:: dante_trace.png
     :align: center
 
-The following is the MEDM screen NDFileHDF5.adl when the Dante is saving MCA mapping data to an HDF5 file.
+     
+IOC startup script
+------------------
+The command to configure an ADSpinnaker camera in the startup script is::
 
-.. figure:: dante_mapping_hdf5.png
-    :align: center
+  DanteConfig(portName, ipAddress, numDetectors, maxMemory)
+
+``portName`` is the name for the Dante port driver
+
+``ipAddress`` is the IP address of the Dante 
+
+``numDetectors`` is the number of boards in the Dante system
+
+``maxMemory`` is the maximum amount of memory the NDArrayPool is allowed to allocate.  0 means unlimited.
+
 
