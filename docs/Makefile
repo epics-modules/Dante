@@ -3,8 +3,8 @@ SPHINX_MULTIBUILD=sphinx-multibuild
 DOCS_PATHS += -i .
 
 BUILD = _build
-DOCS = _docs
 SOURCE = source
+DOCS = _docs
 #OPTS = -v -v -v
 OPTS =
 
@@ -14,7 +14,7 @@ all: sphinx
 
 .PHONY: all
 sphinx:
-	$(SPHINX_MULTIBUILD) $(DOCS_PATHS) -s $(DOCS) -o $(BUILD)/html $(OPTS) -b html
+	$(SPHINX_MULTIBUILD) -i $(SOURCE) -s $(DOCS) -o $(BUILD)/html $(OPTS) -b html
 
 .PHONY: clean
 clean:
