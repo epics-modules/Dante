@@ -82,16 +82,15 @@ static void acquisitionTaskC(void *drvPvt)
     pDante->acquisitionTask();
 }
 
-extern "C" int DanteConfig(const char *portName, const char *ipAddress, int nChannels,
-                           int maxBuffers, size_t maxMemory)
+extern "C" int DanteConfig(const char *portName, const char *ipAddress, int nChannels, size_t maxMemory)
 {
-    new Dante(portName, ipAddress, nChannels, maxBuffers, maxMemory);
+    new Dante(portName, ipAddress, nChannels, maxMemory);
     return 0;
 }
 
 /* Note: we use nChannels+1 for maxAddr because the last address is used for "all" boards" */
-Dante::Dante(const char *portName, const char *ipAddress, int nChannels, int maxBuffers, size_t maxMemory)
-    : asynNDArrayDriver(portName, nChannels + 1, maxBuffers, maxMemory,
+Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t maxMemory)
+    : asynNDArrayDriver(portName, nChannels + 1, 0, maxMemory,
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask | asynDrvUserMask,
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask,
             ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0),
@@ -1583,17 +1582,15 @@ void Dante::shutdown()
 static const iocshArg DanteConfigArg0 = {"Asyn port name", iocshArgString};
 static const iocshArg DanteConfigArg1 = {"IP address", iocshArgString};
 static const iocshArg DanteConfigArg2 = {"Number of boards", iocshArgInt};
-static const iocshArg DanteConfigArg3 = {"Maximum number of buffers", iocshArgInt};
-static const iocshArg DanteConfigArg4 = {"Maximum amount of memory (bytes)", iocshArgInt};
+static const iocshArg DanteConfigArg3 = {"Maximum amount of memory (bytes)", iocshArgInt};
 static const iocshArg * const DanteConfigArgs[] =  {&DanteConfigArg0,
                                                     &DanteConfigArg1,
                                                     &DanteConfigArg2,
-                                                    &DanteConfigArg3,
-                                                    &DanteConfigArg4};
-static const iocshFuncDef configDante = {"DanteConfig", 5, DanteConfigArgs};
+                                                    &DanteConfigArg3};
+static const iocshFuncDef configDante = {"DanteConfig", 4, DanteConfigArgs};
 static void configDanteCallFunc(const iocshArgBuf *args)
 {
-    DanteConfig(args[0].sval, args[1].sval, args[2].ival, args[3].ival, args[4].ival);
+    DanteConfig(args[0].sval, args[1].sval, args[2].ival, args[3].ival);
 }
 
 static void mcaDanteRegister(void)
