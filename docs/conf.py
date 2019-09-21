@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'EPICS Modules'
+project = 'EPICS Dante'
 copyright = '2019, Mark Rivers'
 author = 'Mark Rivers'
 
@@ -41,9 +41,7 @@ version = '-'.join(release.split('-')[0:2])
 # ones.
 extensions = [
     'sphinx.ext.todo',
-    'sphinx.ext.githubpages',
     'm2r',
-    'breathe',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -78,11 +76,6 @@ highlight_language = 'none'
 
 # Breathe configuration
 import os
-breathe_projects = { "epics-modules":
-                        os.path.abspath('../doxy_output/xml') }
-
-breathe_default_project = "epics-modules"
-breathe_default_members = ('members', 'undoc-members')
 
 source_encoding = 'utf-8-sig'
 
@@ -102,7 +95,7 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # html_theme_options = {}
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "epics-modules",
+    'navbar_title': "EPICS Dante",
 
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Site",
@@ -180,82 +173,8 @@ html_extra_path = ['_extra']
 #
 # html_sidebars = {}
 
-html_favicon = 'favicon_t.ico'
+#html_favicon = 'favicon_t.ico'
 
-
-# -- Options for HTMLHelp output ---------------------------------------------
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = 'epics-modulesdoc'
-
-
-# -- Options for LaTeX output ------------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, 'epics-modules.tex', 'EPICS Modules Documentation',
-     'Mark Rivers', 'manual'),
-]
-
-
-# -- Options for manual page output ------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'epics-modules', 'EPICS Modules Documentation',
-     [author], 1)
-]
-
-
-# -- Options for Texinfo output ----------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (master_doc, 'epics-modules', 'EPICS Modules Documentation',
-     author, 'epics-modules', 'One line description of project.',
-     'Miscellaneous'),
-]
-
-
-# -- Options for Epub output -------------------------------------------------
-
-# Bibliographic Dublin Core info.
-epub_title = project
-
-# The unique identifier of the text. This can be a ISBN number
-# or the project homepage.
-#
-# epub_identifier = ''
-
-# A unique identification for the text.
-#
-# epub_uid = ''
-
-# A list of files that should not be packed into the epub file.
-epub_exclude_files = ['search.html']
 
 
 # -- Extension configuration -------------------------------------------------
