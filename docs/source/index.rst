@@ -6,12 +6,12 @@ Dante
 
 .. contents:: Contents
 
-.. _dante:        https://github.com/epics-modules/dante
-.. _mca:          https://github.com/epics-modules/mca
-.. _asyn:         https://github.com/epics-modules/asyn
+.. _dante:             https://github.com/epics-modules/dante
+.. _mca:               https://github.com/epics-modules/mca
+.. _asyn:              https://github.com/epics-modules/asyn
 .. _asynNDArrayDriver: https://areadetector.github.io/master/ADCore/NDArray.html#asynndarraydriver
-.. areaDetector:  https://areadetector.github.io
-.. _XGLab:        https://www.xglab.it
+.. _areaDetector:      https://areadetector.github.io
+.. _XGLab:             https://www.xglab.it
 
 Overview
 --------
@@ -19,6 +19,8 @@ Overview
 This is an EPICS driver for the XGLab_ Dante digital x-ray spectroscopy system.
 The Dante is available in single channel and 8-channel versions
 This module is intended to work with either, though it has currently only been tested on the single-channel version.
+In this document NumBoards refers to the number of input channels, e.g 1 for a single-channel Dante and 8 for an 
+8-channel Dante.
 
 The Dante can collect data in 3 different modes:
 
@@ -239,8 +241,8 @@ These are the records for run-time statistics.
      - The last timestamp time in clock ticks.
  
 
-MCA mapping mode controls
--------------------------
+MCA mapping mode
+----------------
 These are the records for MCA Mapping mode.
 
 .. cssclass:: table-bordered table-striped table-hover
@@ -274,8 +276,8 @@ NDArray. The attribute names contain the board number, for example "RealTime_0".
 The NDArrays can be used by any of the standard areaDetector plugins.  For example, they can be streamed
 to HDF5, netCDF, or TIFF files.
 
-List mode controls
-------------------
+List mode
+---------
 These are the records for list mode.
 
 .. cssclass:: table-bordered table-striped table-hover
@@ -304,11 +306,23 @@ List mode events are 64-bit unsigned integers.
 - Bits 16 to 19 are the filter that detected this event.  These bits are not used in high-rate firmware.
 - Bits 20 to 63 are the timestamp in 32 ns units.
 
-
 In list mode the x-ray events are copied into NDArrays.
 Because the EPICS asyn and areaDetector modules do not yet support 64-bit integers the data type of
 the NDArrays is set to NDUInt8, and the NDArrayDimensions are [ListBufferSize*8, NumBoards].
 For a 1-channel Dante NumBoards is 1.
+
+The run-time statistics for ListBufferSize events are copied into NDAttributes attached to each
+NDArray. The attribute names contain the board number, for example "RealTime_0".
+Note that these statistics are cummulative for the entire acquisition, not just since the
+last time the event buffer was read.
+By making ListBufferSize smaller one obtains a more frequent sampling of these statistics.
+
+These statistics also update the run-time statistics records described above, so there is feedback
+while the list mode acquisition is in progress.
+
+The first NumMCAChannels events are copied to the buffer for the MCA record for each board.
+In this case the MCA record will not contain an x-ray spectrum, but rather will contain the x-ray
+energy in ADC units on the vertical axis and the event number on the horizontal axis.
 
 The NDArrays can be used by any of the standard areaDetector plugins.  For example, they can be streamed
 to HDF5, netCDF, or TIFF files.
