@@ -124,7 +124,7 @@ struct mappingAdvStats {
 class Dante : public asynNDArrayDriver
 {
 public:
-    Dante(const char *portName, const char *ipAddress, int nChannels, int maxBuffers, size_t maxMemory);
+    Dante(const char *portName, const char *ipAddress, int nChannels, size_t maxMemory);
 
     /* virtual methods to override from asynNDArrayDriver */
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
