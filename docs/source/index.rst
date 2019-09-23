@@ -207,7 +207,7 @@ These are the records for run-time statistics.
      - longin
      - DanteEdgeDTime
      - The fast deadtime in clock ticks.
-   * - DeadTime
+   * - F1DeadTime
      - longin
      - DanteFilt1DT
      - The filter 1 deadtime in clock ticks.
