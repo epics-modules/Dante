@@ -177,13 +177,6 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
 	      printf("%s::%s register callback OK\n", driverName, functionName);
 	  }
 
-    /* Parameters that are in ADDriver.h */
-    createParam(ADManufacturerString,              asynParamOctet, &ADManufacturer);
-    createParam(ADModelString,                     asynParamOctet, &ADModel);
-    createParam(ADSerialNumberString,              asynParamOctet, &ADSerialNumber);
-    createParam(ADSDKVersionString,                asynParamOctet, &ADSDKVersion);
-    createParam(ADFirmwareVersionString,           asynParamOctet, &ADFirmwareVersion);
-    
     /* General parameters */
     createParam(DanteCollectModeString,            asynParamInt32,   &DanteCollectMode);
     createParam(DanteCurrentPixelString,           asynParamInt32,   &DanteCurrentPixel);
@@ -421,8 +414,8 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     asynStatus status = asynSuccess;
     int function = pasynUser->reason;
     int board;
-    int addr, i;
-    int acquiring, numChans, mode;
+    int addr;
+    int acquiring, mode;
     const char* functionName = "writeInt32";
 
     board = this->getBoard(pasynUser, &addr);
@@ -433,33 +426,11 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     /* Set the parameter and readback in the parameter library.  This may be overwritten later but that's OK */
     status = setIntegerParam(addr, function, value);
 
-    if (function == mcaErase) 
-    {
-        getIntegerParam(addr, mcaNumChannels, &numChans);
-        getIntegerParam(addr, mcaAcquiring, &acquiring);
-        if (acquiring) {
-            callId_ = stop(danteIdentifier_);
-            waitReply(callId_, danteReply_);
-            startAcquiring();
-        } else {
-            setIntegerParam(addr, DanteErased, 1);
-            if (board == ALL_BOARDS) {
-                for (i=0; i<numBoards_; i++) {
-                    setIntegerParam(i, DanteErased, 1);
-                    memset(this->pMcaRaw_[i], 0, numChans * sizeof(pMcaRaw_[0][0]));
-                }
-            } else {
-                memset(this->pMcaRaw_[addr], 0, numChans * sizeof(pMcaRaw_[0][0]));
-            }
-            /* Need to call getAcquisitionStatistics to set elapsed values to 0 */
-            this->getAcquisitionStatistics(addr);
-        }
-    } 
-    else if (function == mcaStartAcquire) 
+    if (function == mcaStartAcquire)
     {
         status = this->startAcquiring();
     } 
-    else if (function == mcaStopAcquire) 
+    else if (function == mcaStopAcquire)
     {
         callId_ = stop(danteIdentifier_);
         waitReply(callId_, danteReply_);
@@ -1247,6 +1218,7 @@ void Dante::acquisitionTask()
             setIntegerParam(i, mcaAcquiring, acquiring);
             callParamCallbacks(i);
         }
+        setIntegerParam(ADAcquire, acquiring);
         
         paramStatus |= getDoubleParam(DantePollTime, &pollTime);
         epicsTimeGetCurrent(&now);
