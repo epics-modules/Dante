@@ -39,9 +39,10 @@ to load new firmware.  Otherwise the module can be used from either Linux or Win
 provides the Linux library built with the version of gcc on Ubuntu 18.  This means it cannot be used on RHEL7 or Centos7, for
 example.  However, they are planning to release a build done with an older compiler that with run on RHEL7/Centos7 soon.
 
-General controls
-----------------
-These are the records for general control of the system.
+System controls
+---------------
+These records are in the file ``dante.template``. This database is loaded once for the Dante system.  It provides
+control of the system-wide settings for the system.
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -62,16 +63,77 @@ These are the records for general control of the system.
      - DanteGatingMode
      - Controls the gating mode.
        Choices are "Free running" (0), "Trig rising" (1), "Trig falling" (2), "Trig both" (3), "Gate high" (4), "Gate low" (5).
-   * - MaxEnergy, MaxEnergy_RBV
-     - ao, ai
-     - DanteMaxEnergy
-     - The actual energy of the last channel.  The user must provide this value based on the energy calibration.
-       It is used to provide meaningful units for FastThreshold, EnergyThreshold, and BaselineThreshold.
+   * - NumMCAChannels, NumMCAChannels_RBV
+     - mbbo, mbbi
+     - MCA_NUM_CHANNELS
+     - The number of MCA channels to use.  Choices are 1024, 2048, 4096.
    * - PollTime, PollTime_RBV
      - ao, ai
      - DantePollTime
      - The time between polls when reading completion status, MCA mapping data, and list mode data from the driver.
        0.01 second is a reasonable value that will provide good response and resource utilization.
+   * - EraseStart
+     - bo
+     - N.A.
+     - Processing this record starts acquisition for all boards in the selected CollectMode.
+   * - MCAAcquireBusy
+     - busy
+     - N.A.
+     - This record goes to 1 ("Collecting") when EraseStart is processed. It goes back to 0 ("Done")when 3 conditions
+       are satisfied. 1) MCAAcquiring is 0; 2) All MCA records have .ACQG field=0; 3)AcquireBusy from areaDetector=0.
+       The last condition can ensure that all plugins are done processing if WaitForPlugins is set.
+   * - MCAAcquiring
+     - bi
+     - MCA_ACQUIRING
+     - This record is 1 when the Dante driver is acquiring, and 0 when it is done.
+   * - CurrentPixel
+     - longin
+     - DanteCurrentPixel
+     - In MCA Mapping mode this is the current pixel number.  In List mode it is the total number of x-ray events received so far.
+   * - MappingPoints, MappingPoints_RBV
+     - longout, longin
+     - DanteMappingPoints
+     - The number of spectra to collect in MCA mapping mode.
+   * - ListBufferSize, ListBufferSize_RBV
+     - longout, longin
+     - DanteListBufferSize
+     - The number of x-ray events per buffer in list mode. 
+       Once this number of events has been received the events read from the Dante
+       stored in NDArrays, and callbacks are done to any registered plugins.
+   * - TraceTimeArray
+     - waveform
+     - DanteTraceTimeArray
+     - Waveform record containing the time values for each point in TraceData. 64-bit float data type.
+   * - TraceTime, TraceTime_RBV
+     - ao, ai
+     - DanteTraceTime
+     - Time per sample of the ADC trace data in microseconds. Allowed range is 0.016 to 0.512.
+   * - TraceLength, TraceLength_RBV
+     - longout, longin
+     - DanteTraceLength
+     - The number of samples to read in the ADC trace.  This must be a multiple of 16384, and will be limited by the 
+       NELM field of the TraceData and TraceTimeArray waveform records.
+   * - TraceTriggerLevel, TraceTriggerLevel_RBV
+     - longout, longin
+     - DanteTraceTriggerLevel
+     - The trigger level in ADC units (0 to 65535).
+   * - TraceTriggerRising, TraceTriggerRising_RBV
+     - bo, bi
+     - DanteTraceTriggerRising
+     - Trigger the ADC trace as it rises through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerFalling, TraceTriggerFalling_RBV
+     - bo, bi
+     - DanteTraceTriggerFalling
+     - Trigger the ADC trace as it fals through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerInstant, TraceTriggerInstant_RBV
+     - bo, bi
+     - DanteTraceTriggerInstant
+     - Trigger the ADC trace even if a rising or falling trigger is not detected. Choices are "No" (0) and "Yes" (1).
+   * - TraceTriggerWait, TraceTriggerWait_RBV
+     - ao, ai
+     - DanteTraceTriggerWait
+     - The delay time after the trigger condition is satisfied before beginning the ADC trace.
+   
 
 Configuration parameters
 ------------------------
@@ -87,6 +149,11 @@ from the output values because of the discrete nature of the system clocks and M
      - Record types
      - drvInfo string
      - Description
+   * - MaxEnergy, MaxEnergy_RBV
+     - ao, ai
+     - DanteMaxEnergy
+     - The actual energy of the last channel.  The user must provide this value based on the energy calibration.
+       It is used to provide meaningful units for FastThreshold, EnergyThreshold, and BaselineThreshold.
    * - InputPolarity, InputPolarity_RBV
      - bo, bi
      - DanteInvertedInput
@@ -272,14 +339,6 @@ These are the records for MCA Mapping mode.
      - Record types
      - drvInfo string
      - Description
-   * - MappingPoints, MappingPoints_RBV
-     - longout, longin
-     - DanteMappingPoints
-     - The number of spectra to collect in MCA mapping mode.
-   * - CurrentPixel
-     - longin
-     - DanteCurrentPixel
-     - The current pixel number in MCA mapping mode.
      
 In MCA mapping mode the GatingMode can be "Free running", "Trig rising", "Trig falling", or "Trig both".
 In free-running mode the Dante will begin the next spectrum when the PresetReal time has elapsed.
@@ -313,16 +372,6 @@ These are the records for list mode.
      - Record types
      - drvInfo string
      - Description
-   * - ListBufferSize, ListBufferSize_RBV
-     - longout, longin
-     - DanteListBufferSize
-     - The number of x-ray events per buffer in list mode. 
-       Once this number of events has been received the events read from the Dante
-       stored in NDArrays, and callbacks are done to any registered plugins.
-   * - CurrentPixel
-     - longin
-     - DanteCurrentPixel
-     - The total number of x-ray events received so far.
 
 List mode events are 64-bit unsigned integers.
 
@@ -376,39 +425,6 @@ These are the records to control ADC traces.
      - waveform
      - DanteTraceData
      - Waveform record containing the ADC trace data. 32-bit integer data type.
-   * - TraceTimeArray
-     - waveform
-     - DanteTraceTimeArray
-     - Waveform record containing the time values for each point in TraceData. 64-bit float data type.
-   * - TraceTime, TraceTime_RBV
-     - ao, ai
-     - DanteTraceTime
-     - Time per sample of the ADC trace data in microseconds. Allowed range is 0.016 to 0.512.
-   * - TraceLength, TraceLength_RBV
-     - longout, longin
-     - DanteTraceLength
-     - The number of samples to read in the ADC trace.  This must be a multiple of 16384, and will be limited by the 
-       NELM field of the TraceData and TraceTimeArray waveform records.
-   * - TraceTriggerLevel, TraceTriggerLevel_RBV
-     - longout, longin
-     - DanteTraceTriggerLevel
-     - The trigger level in ADC units (0 to 65535).
-   * - TraceTriggerRising, TraceTriggerRising_RBV
-     - bo, bi
-     - DanteTraceTriggerRising
-     - Trigger the ADC trace as it rises through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
-   * - TraceTriggerFalling, TraceTriggerFalling_RBV
-     - bo, bi
-     - DanteTraceTriggerFaling
-     - Trigger the ADC trace as it fals through TraceTriggerLevel. Choices are "No" (0) and "Yes" (1).
-   * - TraceTriggerInstant, TraceTriggerInstant_RBV
-     - bo, bi
-     - DanteTraceTriggerInstant
-     - Trigger the ADC trace even if a rising or falling trigger is not detected. Choices are "No" (0) and "Yes" (1).
-   * - TraceTriggerWait, TraceTriggerWait_RBV
-     - ao, ai
-     - DanteTraceTriggerWait
-     - The delay time after the trigger condition is satisfied before beginning the ADC trace.
 
 The following is the MEDM screen danteTrace.adl displaying the ADC trace. One reset is visible on this trace.
 This happens to be from a Ge detector with a very long (350 microsecond) reset time.
