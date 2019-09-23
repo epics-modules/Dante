@@ -1821,21 +1821,6 @@ text {
 	}
 	textix="MCA channels"
 }
-"text entry" {
-	object {
-		x=530
-		y=613
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)NumMCAChannels"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
 "text update" {
 	object {
 		x=635
@@ -1953,7 +1938,6 @@ text {
 		clr=54
 		bclr=4
 	}
-	align="horiz. right"
 	limits {
 	}
 }
@@ -1982,7 +1966,6 @@ text {
 		bclr=14
 	}
 	clrmod="alarm"
-	align="horiz. right"
 	limits {
 	}
 }
@@ -1999,7 +1982,6 @@ text {
 		bclr=14
 	}
 	clrmod="alarm"
-	align="horiz. right"
 	limits {
 	}
 }
@@ -2126,45 +2108,34 @@ text {
 	limits {
 	}
 }
-composite {
+"text entry" {
 	object {
 		x=175
 		y=699
-		width=162
+		width=87
 		height=20
 	}
-	"composite name"=""
-	children {
-		"text entry" {
-			object {
-				x=175
-				y=699
-				width=87
-				height=20
-			}
-			control {
-				chan="$(P)$(R)PollTime"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=267
-				y=699
-				width=70
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)PollTime_RBV"
-				clr=54
-				bclr=4
-			}
-			limits {
-			}
-		}
+	control {
+		chan="$(P)$(R)PollTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=267
+		y=699
+		width=70
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PollTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
 	}
 }
 menu {
@@ -2207,7 +2178,6 @@ menu {
 		clr=54
 		bclr=4
 	}
-	align="horiz. right"
 	limits {
 	}
 }
@@ -2241,45 +2211,34 @@ menu {
 	limits {
 	}
 }
-composite {
+"text entry" {
 	object {
 		x=175
 		y=824
-		width=145
+		width=60
 		height=20
 	}
-	"composite name"=""
-	children {
-		"text entry" {
-			object {
-				x=175
-				y=824
-				width=60
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ArrayCounter"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=240
-				y=824
-				width=80
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)ArrayCounter_RBV"
-				clr=54
-				bclr=4
-			}
-			limits {
-			}
-		}
+	control {
+		chan="$(P)$(R)ArrayCounter"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=240
+		y=824
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCounter_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
 	}
 }
 "text update" {
@@ -2297,45 +2256,33 @@ composite {
 	limits {
 	}
 }
-composite {
+menu {
 	object {
 		x=175
 		y=874
-		width=175
+		width=90
 		height=20
 	}
-	"composite name"=""
-	children {
-		menu {
-			object {
-				x=175
-				y=874
-				width=90
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ArrayCallbacks"
-				clr=14
-				bclr=51
-			}
-		}
-		"text update" {
-			object {
-				x=270
-				y=874
-				width=80
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)ArrayCallbacks_RBV"
-				clr=54
-				bclr=4
-			}
-			align="horiz. centered"
-			format="string"
-			limits {
-			}
-		}
+	control {
+		chan="$(P)$(R)ArrayCallbacks"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=270
+		y=874
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCallbacks_RBV"
+		clr=54
+		bclr=4
+	}
+	format="string"
+	limits {
 	}
 }
 "related display" {
@@ -2511,7 +2458,6 @@ text {
 		clr=54
 		bclr=4
 	}
-	align="horiz. right"
 	limits {
 	}
 }
@@ -2682,5 +2628,18 @@ text {
 		bclr=3
 	}
 	limits {
+	}
+}
+menu {
+	object {
+		x=530
+		y=613
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)NumMCAChannels"
+		clr=14
+		bclr=51
 	}
 }
