@@ -48,13 +48,6 @@ struct mappingAdvStats {
 #define MAX_DANTE_REPLY_LEN       16
 #define MAX_DANTE_IDENTIFIER_LEN  16
 
-/* Things that are in ADDriver.h that we want to use */
-#define ADManufacturerString        "MANUFACTURER"          /**< (asynOctet,    r/o) Detector manufacturer name */
-#define ADModelString               "MODEL"                 /**< (asynOctet,    r/o) Detector model name */
-#define ADSerialNumberString        "SERIAL_NUMBER"         /**< (asynOctet,    r/o) Detector serial number */
-#define ADSDKVersionString          "SDK_VERSION"           /**< (asynOctet,    r/o) Vendor SDK version */
-#define ADFirmwareVersionString     "FIRMWARE_VERSION"      /**< (asynOctet,    r/o) Detector firmware version */
-
 /* General parameters */
 #define DanteCollectModeString              "DanteCollectMode"
 #define DanteCurrentPixelString             "DanteCurrentPixel"
@@ -138,13 +131,6 @@ public:
     void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data);
 
 protected:
-
-    /* From ADDriver.h */
-    int ADManufacturer;
-    int ADModel;
-    int ADSerialNumber;
-    int ADSDKVersion;
-    int ADFirmwareVersion;
 
     /* General parameters */
     int DanteCollectMode;                   /** < Change mapping mode (0=mca; 1=spectra mapping; 2=sca mapping) (int32 read/write) addr: all/any */
