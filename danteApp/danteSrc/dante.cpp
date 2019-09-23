@@ -1309,6 +1309,10 @@ asynStatus Dante::pollMCAMappingMode()
             updateTimeStamp(&pArray->epicsTS);
             pArray->uniqueId = uniqueId_;
             uniqueId_++;
+            int arrayCounter;
+            getIntegerParam(NDArrayCounter, &arrayCounter);
+            arrayCounter++;
+            setIntegerParam(NDArrayCounter, arrayCounter);
             getAttributes(pArray->pAttributeList);
             doCallbacksGenericPointer(pArray, NDArrayData, 0);
             pArray->release();
@@ -1363,19 +1367,20 @@ asynStatus Dante::pollListMode()
     int collectMode;
     asynStatus status = asynSuccess;
     uint32_t numAvailable=0;
-    int itemp;
-    uint32_t listSize;
+    uint32_t numEventsToRead;
+    int listBufferSize;
     int arrayCallbacks;
+    int acquiring;
     int numMCAChannels;
     uint16_t board;
     uint32_t spectrumId;
     epicsTimeStamp now;
-    const char* functionName = "pollMCAMappingMode";
+    const char* functionName = "pollListMode";
     
     getIntegerParam(DanteCollectMode, &collectMode);
+    getIntegerParam(DanteAcquiring, &acquiring);
     getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
-    getIntegerParam(DanteListBufferSize, &itemp);
-    listSize = itemp;
+    getIntegerParam(DanteListBufferSize, &listBufferSize);
     getIntegerParam(mcaNumChannels, &numMCAChannels);
     
     // First see which board has fewest events available
@@ -1391,14 +1396,23 @@ asynStatus Dante::pollListMode()
             numAvailable = itemp;
         }
     }
-    if (numAvailable < listSize) return asynSuccess;
+ 
+    numEventsToRead = listBufferSize;
+    if ((int)numAvailable < listBufferSize) {
+        if (acquiring) {
+            return asynSuccess;
+        } else {
+            // Read partial buffer when acquisition is done
+            numEventsToRead = numAvailable;
+        }
+    }
 
     epicsTimeGetCurrent(&now);
 
     // Now read the same number of events from each board
     for (board=0; board<numBoards_; board++) {
-        pListData_[board] = (uint64_t *) malloc(listSize * sizeof(uint64_t));
-        if (!getData(danteIdentifier_, board, pListData_[board], spectrumId, statistics_[board], listSize)) {
+        pListData_[board] = (uint64_t *) calloc(listBufferSize, sizeof(uint64_t));
+        if (!getData(danteIdentifier_, board, pListData_[board], spectrumId, statistics_[board], numEventsToRead)) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getData\n", driverName, functionName);
             status = asynError;
             goto done;
@@ -1406,7 +1420,7 @@ asynStatus Dante::pollListMode()
     }
     if (arrayCallbacks) {
         size_t dims[2]; 
-        dims[0] = listSize * sizeof(uint64_t);
+        dims[0] = listBufferSize * sizeof(uint64_t);
         dims[1] = numBoards_;
         NDArray *pArray;
         pArray = this->pNDArrayPool->alloc(2, dims, NDUInt8, 0, NULL );
@@ -1433,6 +1447,10 @@ asynStatus Dante::pollListMode()
         updateTimeStamp(&pArray->epicsTS);
         pArray->uniqueId = uniqueId_;
         uniqueId_++;
+        int arrayCounter;
+        getIntegerParam(NDArrayCounter, &arrayCounter);
+        arrayCounter++;
+        setIntegerParam(NDArrayCounter, arrayCounter);
         getAttributes(pArray->pAttributeList);
         doCallbacksGenericPointer(pArray, NDArrayData, 0);
         pArray->release();
@@ -1444,7 +1462,7 @@ asynStatus Dante::pollListMode()
     for (board=0; board<numBoards_; board++) {
         uint64_t *pIn = pListData_[board];
         uint64_t *pOut = pMcaRaw_[board];
-        for (int chan=0; chan<numMCAChannels; chan++) {
+        for (int chan=0; ((chan<numMCAChannels) && (chan<(int)numEventsToRead)); chan++) {
             pOut[chan] = pIn[chan] & 0xffff;
         }
         statistics *pStats = &statistics_[board];
