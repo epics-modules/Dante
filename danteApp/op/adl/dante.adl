@@ -100,7 +100,7 @@ text {
 	"dynamic attribute" {
 		vis="if not zero"
 		calc="A"
-		chan="$(P)$(M).ACQG"
+		chan="$(P)$(R)MCAAcquiring"
 	}
 	textix="Collecting"
 	align="horiz. centered"
@@ -839,15 +839,15 @@ text {
 }
 text {
 	object {
-		x=880
+		x=850
 		y=190
-		width=90
+		width=120
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Dead time"
+	textix="F1 Dead time"
 	align="horiz. right"
 }
 text {
@@ -985,7 +985,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)DeadTime"
+		chan="$(P)$(R)F1DeadTime"
 		clr=54
 		bclr=3
 	}
@@ -1829,7 +1829,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(M).NUSE"
+		chan="$(P)$(R)NumMCAChannels"
 		clr=14
 		bclr=51
 	}
@@ -1844,7 +1844,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(M).NUSE"
+		chan="$(P)$(R)NumMCAChannels_RBV"
 		clr=54
 		bclr=3
 	}
@@ -1949,7 +1949,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(M).ELTM"
+		chan="$(P)$(R)ElapsedLive"
 		clr=54
 		bclr=4
 	}
@@ -2026,7 +2026,7 @@ text {
 	"dynamic attribute" {
 		vis="if zero"
 		calc="A"
-		chan="$(P)$(M).ACQG"
+		chan="$(P)$(R)MCAAcquiring"
 	}
 	textix="Done"
 	align="horiz. centered"
@@ -2039,7 +2039,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(M).ERST"
+		chan="$(P)$(R)EraseStart"
 		clr=14
 		bclr=51
 	}
@@ -2054,7 +2054,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(M).STOP"
+		chan="$(P)$(R)StopAll"
 		clr=14
 		bclr=51
 	}
@@ -2167,44 +2167,33 @@ composite {
 		}
 	}
 }
-composite {
+menu {
 	object {
 		x=175
 		y=724
-		width=146
+		width=87
 		height=20
 	}
-	"composite name"=""
-	children {
-		menu {
-			object {
-				x=175
-				y=724
-				width=87
-				height=20
-			}
-			control {
-				chan="$(P)$(M)Read.SCAN"
-				clr=14
-				bclr=51
-			}
-		}
-		"message button" {
-			object {
-				x=267
-				y=724
-				width=54
-				height=20
-			}
-			control {
-				chan="$(P)$(M)Read.PROC"
-				clr=14
-				bclr=51
-			}
-			label="Read"
-			press_msg="1"
-		}
+	control {
+		chan="$(P)$(R)ReadAll.SCAN"
+		clr=14
+		bclr=51
 	}
+}
+"message button" {
+	object {
+		x=267
+		y=724
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadAllOnce.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
 }
 "text update" {
 	object {
@@ -2518,7 +2507,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(M).ERTM"
+		chan="$(P)$(R)ElapsedReal"
 		clr=54
 		bclr=4
 	}
@@ -2534,7 +2523,7 @@ text {
 		height=22
 	}
 	control {
-		chan="$(P)$(M).PRTM"
+		chan="$(P)$(R)PresetReal"
 		clr=14
 		bclr=51
 	}
