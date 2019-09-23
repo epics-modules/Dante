@@ -69,18 +69,29 @@ record(bi,"$(P)$(R)SNL_Connected") {
     field(VAL, "0")
 }
 
-record(longout,"$(P)$(R)NumMCAChannels") {
+record(mbbo,"$(P)$(R)NumMCAChannels") {
     field(DESC,"# of MCA channels")
     field(PINI,"YES")
-    field(VAL, "2048")
     field(DTYP, "asynInt32")
     field(OUT,"@asyn($(PORT))MCA_NUM_CHANNELS")
+    field(ZRVL, "1024")
+    field(ZRST, "1024")
+    field(ONVL, "2048")
+    field(ONST, "2048")
+    field(TWVL, "4096")
+    field(TWST, "4096")
 }
 
-record(longin,"$(P)$(R)NumMCAChannels_RBV") {
+record(mbbi,"$(P)$(R)NumMCAChannels_RBV") {
     field(DESC,"# of MCA channels")
     field(DTYP, "asynInt32")
     field(INP,"@asyn($(PORT))MCA_NUM_CHANNELS")
+    field(ZRVL, "1024")
+    field(ZRST, "1024")
+    field(ONVL, "2048")
+    field(ONST, "2048")
+    field(TWVL, "4096")
+    field(TWST, "4096")
     field(SCAN, "I/O Intr")
 }
 
