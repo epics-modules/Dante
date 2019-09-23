@@ -1,0 +1,71 @@
+# dante1CH.template
+# This database is loaded for single channel Dante systems
+# It uses database links to connect the MCA record to the controls
+# Multiple channel Dante systems use a SNL program
+
+record(dfanout,"$(P)$(R)EraseStartFanout") {
+    field(OUTD, "$(P)$(M).ERST PP")
+}
+
+record(bo,"$(P)$(R)StopAll") {
+    field(FLNK, "$(P)$(R)1CHStopAll")
+}
+
+record(bo,"$(P)$(R)1CHStopAll") {
+    field(OUT, "$(P)$(M).STOP PP")
+    field(VAL, "1")
+}
+
+record(bo,"$(P)$(R)DoReadAll") {
+    field(FLNK, "$(P)$(R)1CHDoReadAll")
+}
+
+record(bo,"$(P)$(R)1CHDoReadAll") {
+    field(OUT, "$(P)$(M).READ PP")
+    field(VAL, "1")
+}
+
+record(longout,"$(P)$(R)NumMCAChannels") {
+    field(FLNK, "$(P)$(R)1CHDoNumMCAChannels")
+}
+
+record(longout,"$(P)$(R)1CHDoNumMCAChannels") {
+    field(DOL, "$(P)$(R)NumMCAChannels")
+    field(OMSL, "closed_loop")
+    field(OUT, "$(P)$(M).NUSE PP")
+}
+
+record(ao,"$(P)$(R)PresetReal") {
+    field(FLNK, "$(P)$(R)1CHDoPresetReal")
+}
+
+record(ao,"$(P)$(R)1CHDoPresetReal") {
+    field(DOL, "$(P)$(R)PresetReal")
+    field(OMSL, "closed_loop")
+    field(OUT, "$(P)$(M).PRTM PP")
+}
+
+# This record forces the MCA record to read when acquisition completes even if ReadAll.SCAN is passive
+record(calcout,"$(P)$(R)ReadMCAOnDone") {
+    field(INPA, "$(P)$(R)MCAAcquiring CP")
+    field(CALC, "A")
+    field(OOPT, "Transition To Zero")
+    field(OUT,  "$(P)$(M).READ PP")
+}
+
+# This record waits for all of the following to indicate that acquisition is complete
+#   Dante driver        This means the Dante driver says acquisition is complete
+#   MCA record.         This means the MCA record has finished
+#   asynNDArrayDriver.  This means plugins are done if WaitForPlugins is true.
+record(calcout,"$(P)$(R)ClearMCAAcquireBusy") {
+    field(INPA, "$(P)$(R)MCAAcquiring CP")
+    field(INPB, "$(P)$(M).ACQG CP")
+    field(INPC, "$(P)$(R)AcquireBusy CP")
+    field(CALC, "A | B | C")
+    field(OOPT, "Transition To Zero")
+    field(OUT,  "$(P)$(R)MCAAcquireBusy PP")
+}
+
+
+
+

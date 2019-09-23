@@ -1,0 +1,473 @@
+# Database for Dante MCAs
+# Mark Rivers
+# August 26, 2019
+#
+# This database gets loaded once for each Dante board.
+# It contains records that control a single board.
+# dante.template gets loaded once for each system.
+
+record(ao,"$(P)$(R)MaxEnergy") {
+    field(DESC,"Max energy")
+    field(PINI,"YES")
+    field(PREC,"2")
+    field(VAL,"40")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteMaxEnergy")
+}
+
+record(ai,"$(P)$(R)MaxEnergy_RBV") {
+    field(DESC,"Max energy")
+    field(PREC,"2")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteMaxEnergy")
+    field(SCAN, "I/O Intr")
+}
+
+######################
+# Runtime statistics #
+######################
+
+record(ai,"$(P)$(R)InputCountRate") {
+    field(DESC,"ICR")
+    field(PREC,"2")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteInputCountRate")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)$(R)OutputCountRate") {
+    field(DESC,"OCR")
+    field(PREC,"2")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteOutputCountRate")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)$(R)LastTimeStamp") {
+    field(DESC,"Last time stamp")
+    field(PREC,"2")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteLastTimeStamp")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)Triggers") {
+    field(DESC,"Triggers")
+    field(DTYP, "asynInt32")
+    field(INP, "@asyn($(PORT))DanteTriggers")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)Events") {
+    field(DESC,"Events")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteEvents")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)FastDeadTime") {
+    field(DESC,"EdgeDT")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteEdgeDT")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)F1DeadTime") {
+    field(DESC,"Filt1DT")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteFilt1DT")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)ZeroCounts") {
+    field(DESC,"Zero counts")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteZeroCounts")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)BaselineCount") {
+    field(DESC,"Baselines value")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteBaselinesValue")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)PileUp") {
+    field(DESC,"PUP value")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DantePUPValue")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)F1PileUp") {
+    field(DESC,"PUP F1 value")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DantePUPF1Value")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)NotF1PileUp") {
+    field(DESC,"PUP Not F1 value")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DantePUPNotF1Value")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin,"$(P)$(R)ResetCounts") {
+    field(DESC,"Reset counter value")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteResetCounterValue")
+    field(SCAN, "I/O Intr")
+}
+
+
+############################
+# Configuration parameters #
+############################
+
+record(ao,"$(P)$(R)FastThreshold") {
+    field(DESC,"Fast filter threshold")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"0.1")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteFastFilterThreshold")
+}
+
+record(ai,"$(P)$(R)FastThreshold_RBV") {
+    field(DESC,"Fast filter threshold")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteFastFilterThreshold")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)EnergyThreshold") {
+    field(DESC,"Energy filter threshold")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"0")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteEnergyFilterThreshold")
+}
+
+record(ai,"$(P)$(R)EnergyThreshold_RBV") {
+    field(DESC,"Energy filter threshold")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteEnergyFilterThreshold")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)BaselineThreshold") {
+    field(DESC,"Energy baseline threshold")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"0")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteEnergyBaselineThreshold")
+}
+
+record(ai,"$(P)$(R)BaselineThreshold_RBV") {
+    field(DESC,"Energy baseline threshold")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteEnergyBaselineThreshold")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)MaxRiseTime") {
+    field(DESC,"Max rise time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"20")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteMaxRiseTime")
+}
+
+record(ai,"$(P)$(R)MaxRiseTime_RBV") {
+    field(DESC,"Max rise time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteMaxRiseTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)Gain") {
+    field(DESC,"Gain")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"1")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteGain")
+}
+
+record(ai,"$(P)$(R)Gain_RBV") {
+    field(DESC,"Gain")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteGain")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)PeakingTime") {
+    field(DESC,"Peaking time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"2")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DantePeakingTime")
+}
+
+record(ai,"$(P)$(R)PeakingTime_RBV") {
+    field(DESC,"Peaking time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DantePeakingTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)MaxPeakingTime") {
+    field(DESC,"Max peaking time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"2")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteMaxPeakingTime")
+}
+
+record(ai,"$(P)$(R)MaxPeakingTime_RBV") {
+    field(DESC,"Max peaking time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteMaxPeakingTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)FastPeakingTime") {
+    field(DESC,"Edge peaking time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"2")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteEdgePeakingTime")
+}
+
+record(ai,"$(P)$(R)FastPeakingTime_RBV") {
+    field(DESC,"Edge peaking time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteEdgePeakingTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)FlatTopTime") {
+    field(DESC,"Flat top time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"0")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteFlatTop")
+}
+
+record(ai,"$(P)$(R)FlatTopTime_RBV") {
+    field(DESC,"Flat top time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteFlatTop")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)FastFlatTopTime") {
+    field(DESC,"Edge flat top time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"0")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteEdgeFlatTop")
+}
+
+record(ai,"$(P)$(R)FastFlatTopTime_RBV") {
+    field(DESC,"Edge flat top time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteEdgeFlatTop")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)ResetRecoveryTime") {
+    field(DESC,"Reset recovery time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"2")
+    field(DRVL, ".008")
+    field(DRVH, "134217.72")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteResetRecoveryTime")
+}
+
+record(ai,"$(P)$(R)ResetRecoveryTime_RBV") {
+    field(DESC,"Reset recovery time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteResetRecoveryTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)ZeroPeakFreq") {
+    field(DESC,"Zero peak frequency")
+    field(PINI,"YES")
+    field(PREC,"1")
+    field(VAL,"2")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteZeroPeakFreq")
+}
+
+record(ai,"$(P)$(R)ZeroPeakFreq_RBV") {
+    field(DESC,"Zero peak frequency")
+    field(PREC,"1")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteZeroPeakFreq")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)BaselineSamples") {
+    field(DESC,"Baseline samples")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteBaselineSamples")
+}
+
+record(longin,"$(P)$(R)BaselineSamples_RBV") {
+    field(DESC,"Baseline samples")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteBaselineSamples")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)InputPolarity") {
+    field(DESC,"Inverted input")
+    field(PINI,"YES")
+    field(ZNAM,"Pos.")
+    field(ONAM,"Neg.")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteInvertedInput")
+}
+
+record(bi,"$(P)$(R)InputPolarity_RBV") {
+    field(DESC,"Inverted input")
+    field(ZNAM,"Pos.")
+    field(ONAM,"Neg.")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteInvertedInput")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TimeConstant") {
+    field(DESC,"Time constant")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(VAL,"2")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTimeConstant")
+}
+
+record(ai,"$(P)$(R)TimeConstant_RBV") {
+    field(DESC,"Time constant")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteTimeConstant")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)BaseOffset") {
+    field(DESC,"Base offset")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteBaseOffset")
+}
+
+record(longin,"$(P)$(R)BaseOffset_RBV") {
+    field(DESC,"Base offset")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteBaseOffset")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)OverflowRecoveryTime") {
+    field(DESC,"Overflow recovery time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteOverflowRecoveryTime")
+}
+
+record(ai,"$(P)$(R)OverflowRecoveryTime_RBV") {
+    field(DESC,"Overflow recovery time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteOverflowRecoveryTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)ResetThreshold") {
+    field(DESC,"Reset threshold")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteResetThreshold")
+}
+
+record(longin,"$(P)$(R)ResetThreshold_RBV") {
+    field(DESC,"Reset threshold")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteResetThreshold")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TailCoefficient") {
+    field(DESC,"Tail coefficient")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTailCoefficient")
+}
+
+record(ai,"$(P)$(R)TailCoefficient_RBV") {
+    field(DESC,"Tail coefficient")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteTailCoefficient")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)AnalogOffset") {
+    field(DESC,"Analog offset")
+    field(PINI,"YES")
+    field(DRVL, "0")
+    field(DRVH, "255")
+    field(VAL, "128")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteAnalogOffset")
+}
+
+record(longin,"$(P)$(R)AnalogOffset_RBV") {
+    field(DESC,"Analog offset")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteAnalogOffset")
+    field(SCAN, "I/O Intr")
+}
+
+
+#############################
+# Trace waveform parameters #
+#############################
+
+record(waveform, "$(P)$(R)TraceData") {
+    field(DESC, "Trace data")
+    field(DTYP, "asynInt32ArrayIn")
+    field(PREC, "0")
+    field(INP, "@asyn($(PORT))DanteTraceData")
+    field(NELM, "$(TRACE_LEN)")
+    field(FTVL, "LONG")
+}
