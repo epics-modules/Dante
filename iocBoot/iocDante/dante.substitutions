@@ -2,6 +2,14 @@ file "$(DANTE)/db/dante.template" {
 {P=Dante:, R=dante1:, PORT=DANTE1, TRACE_LEN=16384}
 }
 
+file "$(DANTE)/db/danteN.template" {
+{P=Dante:, R=dante1:, PORT=DANTE1, TRACE_LEN=16384}
+}
+
+file "$(DANTE)/db/dante1CH.template" {
+{P=Dante:, R=dante1:, M=mca1, PORT=DANTE1}
+}
+
 file "$(MCA)/db/mca.db"
 {
 pattern
