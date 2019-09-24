@@ -39,6 +39,10 @@ to load new firmware.  Otherwise the module can be used from either Linux or Win
 provides the Linux library built with the version of gcc on Ubuntu 18.  This means it cannot be used on RHEL7 or Centos7, for
 example.  However, they are planning to release a build done with an older compiler that with run on RHEL7/Centos7 soon.
 
+This document does not attempt to give an explanation of the principles of operation of the Dante, or a detailed explanation
+of the many configuration parameters for the digital pulse processing.  The user should consult the
+:download:`DanteManual <DANTE-4552 Manual Rev 2.9.pdf>` for this information.
+
 System controls
 ---------------
 These records are in the file ``dante.template``. This database is loaded once for the Dante system.  It provides
