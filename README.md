@@ -3,4 +3,4 @@ module for support of Dante digital pulse processors from XGlab.
 
 Additional information:
 * [Documentation](https://epics-dante.readthedocs.io)
-* [Release notes](https://github.com/epics-modules/Dante/blob/master/Release.md)
+* [Release notes](https://github.com/epics-modules/Dante/blob/master/RELEASE.md)
