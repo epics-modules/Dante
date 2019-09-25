@@ -171,7 +171,7 @@ These parameters are specific to a single board, and are contained in DanteN.tem
    * - ResetThreshold, ResetThreshold_RBV
      - longout, longin
      - DanteResetThreshold
-     - The reset threshold in ADC units per N 8 ns (?) sample intervals. The Dante detects a reset the signal changes by more than this amount. 
+     - The reset threshold in ADC units per N 8 ns sample intervals. The Dante detects a reset the signal changes by more than this amount. 
        The standard firmware uses N=6 and this ResetThreshold value.
        The high-rate firmware uses N=1 and fixes ResetThreshold=256, so this parameter has no effect.
    * - ResetRecoveryTime, ResetRecoveryTime_RBV
@@ -230,19 +230,19 @@ These parameters are specific to a single board, and are contained in DanteN.tem
    * - TimeConstant, TimeConstant_RBV
      - ao, ai
      - DanteTimeConstant
-     - The time constant. NOT SURE WHAT THIS DOES.
+     - The time constant. Used for digital deconvolution in the case of continuous reset signals.
    * - TailCoefficient, TailCoefficient_RBV
      - ao, ai
      - DanteTailCoefficient
-     - The tail coefficient. NOT SURE WHAT THIS DOES.
+     - The tail coefficient. Not currently used.
    * - BaseOffset, BaseOffset_RBV
      - longout, longin
      - DanteBaseOffset
-     - The base offset. NOT SURE WHAT THIS DOES.
+     - The base offset. Used for digital deconvolution in the case of continuous reset signals.
    * - OverflowRecoveryTime, OverflowRecoveryTime_RBV
      - ao, ai
      - DanteOverflowRecoveryTime
-     - The overflow recovery time. NOT SURE WHAT THIS DOES.
+     - The overflow recovery time. Not currently used.
 
 Run-time statistics
 -------------------
@@ -326,11 +326,16 @@ as MCA operation on many other EPICS MCAs, e.g. Canberra AIM, Amptek, XIA (Satur
 It only supports counting for a preset real time, or counting indefinitely (PresetReal=0).
 It does not support PresetLive or PresetCounts which some other MCAs do.
 
-The following is the MEDM screen mca.adl displaying the mca spectrum as it is acquiring.
+The following is the MEDM screen mca.adl displaying the MCA spectrum as it is acquiring.
 
 .. figure:: dante_mca.png
     :align: center
 
+The following is the IDL MCA Display program showing the MCA spectrum as it is acquiring. This GUI allows defining ROIs
+graphically, fitting peaks and background, and many other features.
+
+.. figure:: dante_idl_mca.png
+    :align: center
 
 MCA mapping mode
 ----------------
@@ -504,8 +509,10 @@ TraceData is specific to each board and is in danteN.template.
      - Waveform record containing the ADC trace data. 32-bit integer data type.
 
 The following is the MEDM screen danteTrace.adl displaying the ADC trace. One reset is visible on this trace.
-This happens to be from a Ge detector with a very long (350 microsecond) reset time.
-Most detectors have a much faster reset time.
+This happens to be from a Vortex SDD detector with a pre-amp ramp range that is slightly larger than this
+Dante was factory-configured to use.  Thus the signal goes above and below the range of the ADC around the
+reset.  The total pre-amp voltage range must be specified when ordering the Dante so that the signal will
+stay in the range of the ADC.
 
 .. figure:: dante_trace.png
     :align: center
