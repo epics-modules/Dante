@@ -42,7 +42,7 @@ useDisplayBg
 value {
   "Collecting"
 }
-visPv "CALC\\\{(A)\}($(P)$(M).ACQG)"
+visPv "CALC\\\{(A)\}($(P)$(R)MCAAcquiring)"
 visInvert
 visMin 0
 visMax 1
@@ -1243,9 +1243,9 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 880
+x 850
 y 190
-w 90
+w 120
 h 20
 font "helvetica-medium-r-14.0"
 fontAlign "right"
@@ -1253,7 +1253,7 @@ fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
 value {
-  "Dead time"
+  "F1 Dead time"
 }
 endObjectProperties
 
@@ -1467,7 +1467,7 @@ x 975
 y 190
 w 100
 h 20
-controlPv "$(P)$(R)DeadTime"
+controlPv "$(P)$(R)F1DeadTime"
 format "decimal"
 font "helvetica-medium-r-14.0"
 fontAlign "left"
@@ -2670,32 +2670,6 @@ value {
 }
 endObjectProperties
 
-# (Text Control)
-object activeXTextDspClass
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 530
-y 613
-w 100
-h 20
-controlPv "$(P)$(M).NUSE"
-format "decimal"
-font "helvetica-medium-r-12.0"
-fontAlign "left"
-fgColor rgb 0 0 0
-bgColor rgb 29440 57088 65280
-editable
-motifWidget
-limitsFromDb
-nullColor rgb 60928 46592 11008
-smartRefresh
-fastUpdate
-newPos
-objType "controls"
-endObjectProperties
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
@@ -2706,7 +2680,7 @@ x 635
 y 613
 w 120
 h 20
-controlPv "$(P)$(M).NUSE"
+controlPv "$(P)$(R)NumMCAChannels_RBV"
 format "decimal"
 font "helvetica-medium-r-14.0"
 fontAlign "left"
@@ -2867,10 +2841,10 @@ x 125
 y 600
 w 75
 h 20
-controlPv "$(P)$(M).ELTM"
+controlPv "$(P)$(R)ElapsedLive"
 format "decimal"
 font "helvetica-medium-r-14.0"
-fontAlign "right"
+fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 47872 47872 47872
 limitsFromDb
@@ -2913,7 +2887,7 @@ h 20
 controlPv "$(P)$(M).IDTIM"
 format "decimal"
 font "helvetica-medium-r-14.0"
-fontAlign "right"
+fontAlign "left"
 fgColor rgb 0 65535 0
 fgAlarm
 bgColor rgb 0 0 0
@@ -2938,7 +2912,7 @@ h 20
 controlPv "$(P)$(M).DTIM"
 format "decimal"
 font "helvetica-medium-r-14.0"
-fontAlign "right"
+fontAlign "left"
 fgColor rgb 0 65535 0
 fgAlarm
 bgColor rgb 0 0 0
@@ -3011,7 +2985,7 @@ useDisplayBg
 value {
   "Done"
 }
-visPv "CALC\\\{(A)\}($(P)$(M).ACQG)"
+visPv "CALC\\\{(A)\}($(P)$(R)MCAAcquiring)"
 visMin 0
 visMax 1
 endObjectProperties
@@ -3117,19 +3091,6 @@ newPos
 objType "controls"
 endObjectProperties
 
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 699
-w 162
-h 20
-
-beginGroup
-
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
@@ -3180,29 +3141,6 @@ newPos
 objType "controls"
 endObjectProperties
 
-endGroup
-
-endObjectProperties
-
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 724
-w 146
-h 20
-
-beginGroup
-
-endGroup
-
-endObjectProperties
-
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
@@ -3216,7 +3154,7 @@ h 20
 controlPv "$(P)$(R)NumQueuedArrays"
 format "decimal"
 font "helvetica-medium-r-14.0"
-fontAlign "right"
+fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 47872 47872 47872
 limitsFromDb
@@ -3251,19 +3189,6 @@ fastUpdate
 newPos
 objType "controls"
 endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 824
-w 145
-h 20
-
-beginGroup
 
 # (Text Control)
 object activeXTextDspClass
@@ -3315,11 +3240,6 @@ newPos
 objType "controls"
 endObjectProperties
 
-endGroup
-
-endObjectProperties
-
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
@@ -3344,19 +3264,6 @@ newPos
 objType "controls"
 endObjectProperties
 
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 874
-w 175
-h 20
-
-beginGroup
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
@@ -3370,7 +3277,7 @@ h 20
 controlPv "$(P)$(R)ArrayCallbacks_RBV"
 format "string"
 font "helvetica-medium-r-14.0"
-fontAlign "center"
+fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 47872 47872 47872
 limitsFromDb
@@ -3380,11 +3287,6 @@ fastUpdate
 newPos
 objType "controls"
 endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 
 # (Static Text)
 object activeXTextClass
@@ -3613,10 +3515,10 @@ x 125
 y 575
 w 75
 h 20
-controlPv "$(P)$(M).ERTM"
+controlPv "$(P)$(R)ElapsedReal"
 format "decimal"
 font "helvetica-medium-r-14.0"
-fontAlign "right"
+fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 47872 47872 47872
 limitsFromDb
@@ -3637,7 +3539,7 @@ x 205
 y 575
 w 103
 h 22
-controlPv "$(P)$(M).PRTM"
+controlPv "$(P)$(R)PresetReal"
 format "decimal"
 font "helvetica-medium-r-12.0"
 fontAlign "left"
@@ -3966,7 +3868,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(M).ERST"
+controlPv "$(P)$(R)EraseStart"
 pressValue "1"
 releaseValue 
 onLabel "Start"
@@ -3991,7 +3893,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(M).STOP"
+controlPv "$(P)$(R)StopAll"
 pressValue "1"
 releaseValue 
 onLabel "Stop"
@@ -4000,35 +3902,6 @@ offLabel "Stop"
 useEnumNumeric
 font "helvetica-medium-r-12.0"
 endObjectProperties
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 699
-w 162
-h 20
-
-beginGroup
-
-endGroup
-
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 724
-w 146
-h 20
-
-beginGroup
 
 # (Menu Button)
 object activeMenuButtonClass
@@ -4045,8 +3918,8 @@ bgColor rgb 29440 57088 65280
 inconsistentColor rgb 17920 17920 17920
 topShadowColor rgb 55808 55808 55808
 botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(M)Read.SCAN"
-indicatorPv "$(P)$(M)Read.SCAN"
+controlPv "$(P)$(R)ReadAll.SCAN"
+indicatorPv "$(P)$(R)ReadAll.SCAN"
 font "helvetica-medium-r-12.0"
 endObjectProperties
 
@@ -4065,7 +3938,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(M)Read.PROC"
+controlPv "$(P)$(R)ReadAllOnce.PROC"
 pressValue "1"
 releaseValue 
 onLabel "Read"
@@ -4074,11 +3947,6 @@ offLabel "Read"
 useEnumNumeric
 font "helvetica-medium-r-12.0"
 endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 
 # (Menu Button)
 object activeMenuButtonClass
@@ -4099,35 +3967,6 @@ controlPv "$(P)$(R)WaitForPlugins"
 indicatorPv "$(P)$(R)WaitForPlugins"
 font "helvetica-medium-r-12.0"
 endObjectProperties
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 824
-w 145
-h 20
-
-beginGroup
-
-endGroup
-
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 175
-y 874
-w 175
-h 20
-
-beginGroup
 
 # (Menu Button)
 object activeMenuButtonClass
@@ -4148,11 +3987,6 @@ controlPv "$(P)$(R)ArrayCallbacks"
 indicatorPv "$(P)$(R)ArrayCallbacks"
 font "helvetica-medium-r-12.0"
 endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 
 # (Related Display)
 object relatedDisplayClass
@@ -4267,5 +4101,25 @@ symbols {
 replaceSymbols {
   0 1
 }
+endObjectProperties
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 530
+y 613
+w 100
+h 20
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+inconsistentColor rgb 17920 17920 17920
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+controlPv "$(P)$(R)NumMCAChannels"
+indicatorPv "$(P)$(R)NumMCAChannels"
+font "helvetica-medium-r-12.0"
 endObjectProperties
 
