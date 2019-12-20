@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>
+#include <algorithm>
 #include <math.h>
 
 /* EPICS includes */
@@ -292,7 +293,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     pMappingAdvStats_   = (mappingAdvStats**) calloc(numBoards_, sizeof(mappingAdvStats*));
     /* Allocate a memory area for each spectrum */
     for (ch=0; ch<numBoards_; ch++) {
-        pMcaRaw_[ch] = (unsigned long*)calloc(MAX_MCA_BINS, sizeof(unsigned long));
+        pMcaRaw_[ch] = (uint64_t *)calloc(MAX_MCA_BINS, sizeof(uint64_t));
     }
     
     // Allocate configuration and statistics buffers
