@@ -533,3 +533,12 @@ The command to configure an ADSpinnaker camera in the startup script is::
 ``maxMemory`` is the maximum amount of memory the NDArrayPool is allowed to allocate.  0 means unlimited.
 
 
+Known problems
+--------------
+The known problems and suggestions for fixes with the Dante are located here:
+
+https://onedrive.live.com/view.aspx?resid=B1EF6D9CFBC508F4!621&ithint=file%2cdocx&authkey=!AFZfJ0wJfFbDCAI
+
+
+
+  
