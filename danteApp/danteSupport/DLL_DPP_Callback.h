@@ -174,11 +174,20 @@ enum GatingMode {
 	GatedLow				// Spectra are only acquired when the gating signal is LOW
 };
 
+enum InputMode {
+	DC_HighImp,			// K1 closed , k2 open
+	DC_LowImp,			// k1 closed , k2 closed
+	AC_Slow,			// k1 open   , k2 open 
+	AC_Fast				// k1 open   , k2 closed
+};
+
 EXTERN DECLSPEC uint32_t   CALL_CONV configure(const char* identifier, uint16_t Board, const configuration cfg);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, const GatingMode GatingMode, uint16_t Board);
 
-EXTERN DECLSPEC bool		   CALL_CONV configure_baseline(const char* identifier, uint16_t Board, const uint16_t * baseline_vector);
+EXTERN DECLSPEC uint32_t   CALL_CONV configure_input(const char* identifier, const InputMode InputMode, uint16_t Board);
+
+EXTERN DECLSPEC bool	   CALL_CONV configure_baseline(const char* identifier, uint16_t Board, const uint16_t * baseline_vector);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_offset(const char* identifier, uint16_t Board, const configuration_offset cfg_offset);
 
