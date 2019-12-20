@@ -1,7 +1,12 @@
 #include <time.h>
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
+#include <algorithm>
+#ifdef _WIN32
+  #include <Windows.h>
+#endif
 #include "DLL_DPP_Callback.h"
 
 static const char *driverName = "Dante";
@@ -55,6 +60,9 @@ static bool callbackComplete;
 
 static void mySleep(double seconds)
 {
+#ifdef _WIN32
+    return Sleep(seconds * 1000);
+#else
     time_t sec = (int)seconds;
     long nsec = (int)((seconds - sec) * 1e9);
     struct timespec ts;
@@ -63,6 +71,7 @@ static void mySleep(double seconds)
     struct timespec tr;
     int result = nanosleep(&ts, &tr);
     if (result != 0) printf("Error return from nanosleep\n");
+#endif
 }
 
 void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data) {
