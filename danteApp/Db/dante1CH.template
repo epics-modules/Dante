@@ -25,12 +25,12 @@ record(bo,"$(P)$(R)1CHDoReadAll") {
     field(VAL, "1")
 }
 
-record(longout,"$(P)$(R)NumMCAChannels") {
+record(mbbo,"$(P)$(R)NumMCAChannels") {
     field(FLNK, "$(P)$(R)1CHDoNumMCAChannels")
 }
 
 record(longout,"$(P)$(R)1CHDoNumMCAChannels") {
-    field(DOL, "$(P)$(R)NumMCAChannels")
+    field(DOL, "$(P)$(R)NumMCAChannels.RVAL")
     field(OMSL, "closed_loop")
     field(OUT, "$(P)$(M).NUSE PP")
 }
