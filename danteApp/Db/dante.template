@@ -162,36 +162,6 @@ record(ai,"$(P)$(R)IDeadTime") {
     field(PREC, "2")
 }
 
-record(bo,"$(P)$(R)StatusAll") {
-    field(SCAN,".5 second")
-    field(DISV,"0")
-    field(SDIS,"$(P)$(R)MCAAcquireBusy NPP NMS")
-    field(ZNAM,"Done")
-    field(ONAM,"Status")
-    field(FLNK, "$(P)$(R)StatusAllOnce PP MS")
-}
-
-record(bo,"$(P)$(R)StatusAllOnce") {
-    field(VAL, "1")
-    field(OUT, "$(P)$(R)DoStatusAll PP MS")
-    field(ZNAM,"Done")
-    field(ONAM,"Status")
-    field(FLNK, "$(P)$(R)DoStatusAll1")
-}
-
-record(bo,"$(P)$(R)DoStatusAll1") {
-    field(VAL, "1")
-    field(DTYP, "asynInt32")
-    field(OUT, "@asyn($(PORT))MCA_READ_STATUS")
-    field(ZNAM,"Done")
-    field(ONAM,"Status")
-}
-
-record(bo,"$(P)$(R)DoStatusAll") {
-    field(ZNAM,"Done")
-    field(ONAM,"Status")
-}
-
 record(bo,"$(P)$(R)ReadAll") {
     field(SCAN,"1 second")
     field(DISV,"0")
