@@ -7,22 +7,26 @@ include $(TOP)/configure/CONFIG
 #=============================
 
 DBD += mcaDanteSupport.dbd
+PROD_NAME = mcaDanteApp
 
 USR_CXXFLAGS_Linux += -std=c++11 -fmax-errors=20
 ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
   LIBRARY_IOC_Linux += mcaDante
+  PROD_IOC_Linux  += $(PROD_NAME)
+  PROD_IOC_Linux += DPP_Test
+  PROD_IOC_Linux += test_mapping
 endif
-LIBRARY_IOC_WIN32   += mcaDante
+ifeq (windows-x64, $(findstring windows-x64, $(T_A)))
+  LIBRARY_IOC_WIN32   += mcaDante
+  PROD_IOC_WIN32  += $(PROD_NAME)
+  PROD_IOC_WIN32 += DPP_Test
+  PROD_IOC_WIN32 += test_mapping
+endif
 
 mcaDante_SRCS += dante.cpp
 mcaDante_LIBS += asyn 
 mcaDante_LIBS += $(EPICS_BASE_IOC_LIBS)
 
-PROD_NAME = mcaDanteApp
-ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
-  PROD_IOC_Linux  += $(PROD_NAME)
-endif
-PROD_IOC_WIN32  += $(PROD_NAME)
 DBD += $(PROD_NAME).dbd
 $(PROD_NAME)_DBD += mcaSupport.dbd
 $(PROD_NAME)_DBD += mcaDanteSupport.dbd
@@ -40,20 +44,12 @@ USR_LDFLAGS_Linux = -L/usr/lib/python2.7/config-x86_64-linux-gnu/
 
 
 #=============================
-ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
-  PROD_IOC_Linux += DPP_Test
-endif
-PROD_IOC_WIN32 += DPP_Test
 DPP_Test_SRCS  += DPP_Test.cpp
 DPP_Test_SYS_LIBS_Linux  += XGL_DPP
 DPP_Test_LIBS_WIN32      += XGL_DPP
 DPP_Test_SYS_LIBS_Linux += python2.7
 
 #=============================
-ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
-  PROD_IOC_Linux += test_mapping
-endif
-PROD_IOC_WIN32 += test_mapping
 test_mapping_SRCS  += test_mapping.cpp
 test_mapping_SYS_LIBS_Linux  += XGL_DPP
 test_mapping_LIBS_WIN32      += XGL_DPP
