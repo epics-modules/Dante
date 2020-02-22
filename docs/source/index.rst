@@ -12,6 +12,7 @@ Dante
 .. _asynNDArrayDriver: https://areadetector.github.io/master/ADCore/NDArray.html#asynndarraydriver
 .. _areaDetector:      https://areadetector.github.io
 .. _XGLab:             https://www.xglab.it
+.. _read_nd_hdf5:      https://github.com/CARS-UChicago/IDL_Detectors/blob/master/read_nd_hdf5.pro
 
 Overview
 --------
@@ -35,9 +36,8 @@ and for other purposes. It also implements the mca interface from the EPICS mca_
 The EPICS mca record can be used to display the spectra and control the basic operation including Regions-of-Interest (ROIs).
 
 The Dante driver can be used on both Windows and Linux. A Windows machine with a USB interface is currently required
-to load new firmware.  Otherwise the module can be used from either Linux or Windows over Ethernet. Currently XGLab only
-provides the Linux library built with the version of gcc on Ubuntu 18.  This means it cannot be used on RHEL7 or Centos7, for
-example.  However, they are planning to release a build done with an older compiler that with run on RHEL7/Centos7 soon.
+to load new firmware.  Otherwise the module can be used from either Linux or Windows over Ethernet. The Linux library
+provided can run on most Linux versions, including RHEL7/Centos7.
 
 This document does not attempt to give an explanation of the principles of operation of the Dante, or a detailed explanation
 of the many configuration parameters for the digital pulse processing.  The user should consult the
@@ -410,8 +410,7 @@ List mode events are 64-bit unsigned integers.
 - Bits 62 and 63 are not used.
 
 In list mode the x-ray events are copied into NDArrays.
-Because the EPICS asyn and areaDetector modules do not yet support 64-bit integers the data type of
-the NDArrays is set to NDUInt8, and the NDArrayDimensions are [ListBufferSize*8, NumBoards].
+The data type of the NDArrays is NDUInt64, and the NDArrayDimensions are [ListBufferSize, NumBoards].
 For a 1-channel Dante NumBoards is 1.
 
 The run-time statistics for ListBufferSize events are copied into NDAttributes attached to each
@@ -427,25 +426,32 @@ The first NumMCAChannels events are copied to the buffer for the MCA record for 
 In this case the MCA record will not contain an x-ray spectrum, but rather will contain the x-ray
 energy in ADC units on the vertical axis and the event number on the horizontal axis.
 
-The NDArrays can be used by any of the standard areaDetector plugins.  For example, they can be streamed
-to HDF5, netCDF, or TIFF files.
+The NDArrays can be used by most of the standard areaDetector plugins.  For example, they can be streamed
+to HDF5 or TIFF files.  List-mode data cannot be written to a netCDF file, because the netCDF classic format 
+does not support 64-bit integer data types.
 
-Note that the datatype in the files is unsigned 8-bit integers.  Applications that read the arrays must
-cast them to unsigned 64-bit arrays before operating on them.
-In the future support for 64-bit integers will be added to asyn and areaDetector, and the NDArrays will
-have the correct new NDUInt64 datatype.
-
-The following is an IDL procedure to read the List mode data from a netCDF file into two arrays, "energy" and "time"::
+The following is an IDL procedure to read the List mode data from an HDF5 file into two arrays, "energy" and "time"::
 
   pro read_dante_list_data, filename, energy, time
-     raw = read_nd_netcdf(filename)
-     data = ulong64(raw, 0, n_elements(raw)/8)
+     data = read_nd_hdf5(filename)
      energy = uint(data and 'ffff'x)
      time = double(ishft((data and '3ffffffffffc0000'x), -18))*8e-9
   end
 
-``read_nd_netcdf`` is a function provide in the areaDetector_ package that reads a netCDF file written by the areaDetector
-NDFileNetCDF plugin.
+
+read_nd_hdf5_ is a function that reads an HDF5 file written by the areaDetector NDFileHDF5 plugin::
+
+  function read_nd_hdf5, file, range=range, dataset=dataset
+    if (n_elements(dataset) eq 0) then dataset = '/entry/data/data'
+    file_id = h5f_open(file)
+    dataset_id = h5d_open(file_id, dataset)
+    data = h5d_read(dataset_id)
+    h5d_close, dataset_id
+    h5f_close, file_id
+    return, data
+  end
+
+
 The following is a plot of the energy events for the first 1 second of that data, using this IDL command::
 
   IDL> p = plot(time, energy, xrange=[0,1], yrange=[0,20000], linestyle='none', symbol='plus')
@@ -508,16 +514,19 @@ TraceData is specific to each board and is in danteN.template.
      - DanteTraceData
      - Waveform record containing the ADC trace data. 32-bit integer data type.
 
-The following is the MEDM screen danteTrace.adl displaying the ADC trace. One reset is visible on this trace.
-This happens to be from a Vortex SDD detector with a pre-amp ramp range that is slightly larger than this
-Dante was factory-configured to use.  Thus the signal goes above and below the range of the ADC around the
-reset.  The total pre-amp voltage range must be specified when ordering the Dante so that the signal will
-stay in the range of the ADC.
+The following are the MEDM screen danteTrace.adl displaying two ADC traces. These were done with a Vortex SDD detctor and a Cd109 source,
+which produces Ag K x-rays.  The traces were captured with TraceTriggerRising=Yes and TraceTriggerLevel=50000.
+The first trace was done with TraceTime=0.512 microseconds, so the total time is 8192 microseconds. 2 resets are visible on this trace. 
+The second trace was done with TraceTime=0.016 microseconds, so the total time is 256 microseconds.  The individual 22 keV Ag x-ray steps
+can be seen in this trace.
 
-.. figure:: dante_trace.png
+
+.. figure:: dante_trace1.png
     :align: center
 
-     
+.. figure:: dante_trace2.png
+    :align: center
+
 IOC startup script
 ------------------
 The command to configure an ADSpinnaker camera in the startup script is::
@@ -531,14 +540,3 @@ The command to configure an ADSpinnaker camera in the startup script is::
 ``numDetectors`` is the number of boards in the Dante system
 
 ``maxMemory`` is the maximum amount of memory the NDArrayPool is allowed to allocate.  0 means unlimited.
-
-
-Known problems
---------------
-The known problems and suggestions for fixes with the Dante are located here:
-
-https://onedrive.live.com/view.aspx?resid=B1EF6D9CFBC508F4!621&ithint=file%2cdocx&authkey=!AFZfJ0wJfFbDCAI
-
-
-
-  
