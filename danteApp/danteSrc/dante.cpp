@@ -1421,15 +1421,15 @@ asynStatus Dante::pollListMode()
     }
     if (arrayCallbacks) {
         size_t dims[2]; 
-        dims[0] = listBufferSize * sizeof(uint64_t);
+        dims[0] = listBufferSize;
         dims[1] = numBoards_;
         NDArray *pArray;
-        pArray = this->pNDArrayPool->alloc(2, dims, NDUInt8, 0, NULL );
-        epicsUInt16 *pOut = (epicsUInt16 *)pArray->pData;
+        pArray = this->pNDArrayPool->alloc(2, dims, NDUInt64, 0, NULL );
+        epicsUInt64 *pOut = (epicsUInt64 *)pArray->pData;
         for (board=0; board<numBoards_; board++) {
             char tempString[20];
             uint64_t *pIn = pListData_[board];
-            memcpy(pOut, pIn, dims[0]);
+            memcpy(pOut, pIn, dims[0]*sizeof(epicsUInt64));
             statistics *pStats = &statistics_[board];
             double realTime = pStats->real_time/1.e6;
             sprintf(tempString, "RealTime_%d", board);
