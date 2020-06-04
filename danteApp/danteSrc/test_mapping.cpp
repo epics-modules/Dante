@@ -10,7 +10,7 @@
 #include "DLL_DPP_Callback.h"
 
 static const char *driverName = "Dante";
-static const char *ipAddress = "164.54.160.232";
+static const char *ipAddress = "164.54.160.181";
 #define MAX_MESSAGE_DATA          20
 
 struct message {
@@ -21,27 +21,27 @@ struct message {
 };
 
 struct mappingStats {
-  	double real_time;
-  	double live_time;
-  	double ICR;
-  	double OCR;
+      double real_time;
+      double live_time;
+      double ICR;
+      double OCR;
 };
 
 static struct message message;
 
 struct mappingAdvStats {
-  	uint64_t last_timestamp;
-  	uint64_t detected;
-  	uint64_t measured;
-  	uint64_t edge_dt;
-  	uint64_t filt1_dt;
-  	uint64_t zerocounts;
-  	uint64_t baselines_value;
-  	uint64_t pup_value;
-  	uint64_t pup_f1_value;
-  	uint64_t pup_notf1_value;
-  	uint64_t reset_counter_value;
-  	uint64_t spectra_in_FIFO;
+      uint64_t last_timestamp;
+      uint64_t detected;
+      uint64_t measured;
+      uint64_t edge_dt;
+      uint64_t filt1_dt;
+      uint64_t zerocounts;
+      uint64_t baselines_value;
+      uint64_t pup_value;
+      uint64_t pup_f1_value;
+      uint64_t pup_notf1_value;
+      uint64_t reset_counter_value;
+      uint64_t spectra_in_FIFO;
     uint64_t x_position;
     uint64_t x_timestamp;
     uint64_t gateRising;
@@ -89,7 +89,7 @@ static int waitReply(uint32_t callId, char *reply) {
     callbackComplete = false;
     while (!callbackComplete) mySleep(0.001);
     if (message.call_id != callId) {
-        printf("%s::%s incorrect callId expected=%d actual=%d\n", 
+        printf("%s::%s incorrect callId expected=%d actual=%d\n",
             driverName, functionName, callId, message.call_id);
         return 1;
     }
@@ -124,80 +124,80 @@ int main(int argc, char *argv[])
     printf("Acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d\n", acqTimeMs, pollTimeMs, mappingPoints);
 
     if (!InitLibrary()) {
-	      printf("%s::%s error calling InitLibrary\n", driverName, functionName);
-	      return -1;
+          printf("%s::%s error calling InitLibrary\n", driverName, functionName);
+          return -1;
     }
 
     char libraryVersion[20];
     uint32_t libSize = sizeof(libraryVersion);
-  	if (!libVersion(libraryVersion, libSize)) {
-	      printf("%s::%s error calling libVersion\n", driverName, functionName);
-	      return -1;
-  	}	else {
-	      printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
-  	}
+      if (!libVersion(libraryVersion, libSize)) {
+          printf("%s::%s error calling libVersion\n", driverName, functionName);
+          return -1;
+      }    else {
+          printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
+      }
 
     if (!add_to_query((char *)ipAddress)) {
-	      printf("%s::%s error calling add_to_query\n", driverName, functionName);
-	      return -1;
-  	}	else {
-	      printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
-  	}
+          printf("%s::%s error calling add_to_query\n", driverName, functionName);
+          return -1;
+      }    else {
+          printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
+      }
 
     // Wait 5 seconds for devices to be found
     mySleep(5.);
 
-	  uint16_t numDevices;
-	  if (!get_dev_number(numDevices)) {
-	      printf("%s::%s error calling get_dev_number\n", driverName, functionName);
-	      return -1;
-	  } else {
-	      printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
-	  }
+      uint16_t numDevices;
+      if (!get_dev_number(numDevices)) {
+          printf("%s::%s error calling get_dev_number\n", driverName, functionName);
+          return -1;
+      } else {
+          printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
+      }
 
     uint16_t idSize = sizeof(danteIdentifier);
     uint16_t deviceId = 0;
-	  if (!get_ids(danteIdentifier, deviceId, idSize)) {
-	      printf("%s::%s error calling get_ids\n", driverName, functionName);
-	      return -1;
-	  } else {
-	      printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
-	  }
+      if (!get_ids(danteIdentifier, deviceId, idSize)) {
+          printf("%s::%s error calling get_ids\n", driverName, functionName);
+          return -1;
+      } else {
+          printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
+      }
 
-	  uint16_t chain = 1;
-	  if (!get_boards_in_chain(danteIdentifier, chain)) {
-	      printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-	      return -1;
-	  } else {
-	      printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-	  }
-	  
+      uint16_t chain = 1;
+      if (!get_boards_in_chain(danteIdentifier, chain)) {
+          printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+          return -1;
+      } else {
+          printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
+      }
+
     // Wait a little bit for daisy chain synchronization and ask again for connected systems.
     mySleep(1.0);
-	  if (!get_ids(danteIdentifier, deviceId, idSize)) {
-	      printf("%s::%s error calling get_ids\n", driverName, functionName);
-	      return -1;
-	  } else {
-	      printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
-	  }
+      if (!get_ids(danteIdentifier, deviceId, idSize)) {
+          printf("%s::%s error calling get_ids\n", driverName, functionName);
+          return -1;
+      } else {
+          printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
+      }
 
-	  if (!get_boards_in_chain(danteIdentifier, chain)) {
-	      printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-	      return -1;
-	  } else {
-	      printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-	  }
+      if (!get_boards_in_chain(danteIdentifier, chain)) {
+          printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+          return -1;
+      } else {
+          printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
+      }
 
-	  if (!register_callback(danteCallback)) {
-	     printf("%s::%s error calling register_callback\n", driverName, functionName);
-	     return -1;
-	  } else {
-	      printf("%s::%s register callback OK\n", driverName, functionName);
-	  }
+      if (!register_callback(danteCallback)) {
+         printf("%s::%s error calling register_callback\n", driverName, functionName);
+         return -1;
+      } else {
+          printf("%s::%s register callback OK\n", driverName, functionName);
+      }
 
 
     mcaBinWidth = maxEnergy/numMCAChannels;
-    
+
     pConfig->fast_filter_thr = uint32_t(round(0.1 / mcaBinWidth));
     pConfig->energy_filter_thr = uint32_t(round(3.0 / mcaBinWidth));
     pConfig->energy_baseline_thr = uint32_t(round(3.0 / mcaBinWidth));
@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
         struct mappingStats *pMappingStats = (mappingStats *) malloc(numAvailable * sizeof(struct mappingStats));
         struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(numAvailable * sizeof(struct mappingAdvStats));
 
-        if (!getAllData(danteIdentifier, 0, pMappingMCAData, pSpectraId, 
+        if (!getAllData(danteIdentifier, 0, pMappingMCAData, pSpectraId,
                         (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, numAvailable)) {
             printf("%s::%s error calling getAllData\n", driverName, functionName);
         }
