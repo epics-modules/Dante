@@ -9,8 +9,8 @@ include $(TOP)/configure/CONFIG
 DBD += mcaDanteSupport.dbd
 PROD_NAME = mcaDanteApp
 
-USR_CXXFLAGS_Linux += -std=c++11 -fmax-errors=20
-ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
+ifeq ($(T_A), linux-x86_64)
+  USR_CXXFLAGS_Linux += -std=c++11
   LIBRARY_IOC_Linux += mcaDante
   PROD_IOC_Linux  += $(PROD_NAME)
   PROD_IOC_Linux += DPP_Test
