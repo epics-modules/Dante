@@ -5,7 +5,7 @@ The versions of EPICS base, asyn, mca, and other synApps modules used for each r
 the configure/RELEASE file in each release of Dante.
 
 Release Notes
-~~~~~~~~~~~~~
+_____________
 
 R1-0 (September XXX, 2019)
 --------------------------
