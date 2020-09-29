@@ -23,9 +23,13 @@ ifeq (windows-x64, $(findstring windows-x64, $(T_A)))
   PROD_IOC_WIN32 += test_mapping
 endif
 
-mcaDante_SRCS += dante.cpp
-mcaDante_LIBS += asyn 
-mcaDante_LIBS += $(EPICS_BASE_IOC_LIBS)
+LIB_SRCS += dante.cpp
+
+LIB_LIBS           += asyn 
+LIB_LIBS           += ADBase
+LIB_LIBS           += $(EPICS_BASE_IOC_LIBS)
+LIB_LIBS_WIN32     += XGL_DPP
+LIB_SYS_LIBS_Linux += XGL_DPP
 
 DBD += $(PROD_NAME).dbd
 $(PROD_NAME)_DBD += mcaSupport.dbd
