@@ -529,7 +529,7 @@ can be seen in this trace.
 
 IOC startup script
 ------------------
-The command to configure an ADSpinnaker camera in the startup script is::
+The command to configure a Dante in the startup script is::
 
   DanteConfig(portName, ipAddress, numDetectors, maxMemory)
 
