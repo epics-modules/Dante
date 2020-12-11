@@ -18,6 +18,7 @@ Overview
 --------
 
 This is an EPICS driver for the XGLab_ Dante digital x-ray spectroscopy system.
+The source code is in the dante_ repository in the Github epics-modules project.
 The Dante is available in single channel and 8-channel versions
 This module is intended to work with either, though it has currently only been tested on the single-channel version.
 In this document NumBoards refers to the number of input channels, e.g 1 for a single-channel Dante and 8 for an 
