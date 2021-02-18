@@ -1,0 +1,552 @@
+# Database for Dante MCAs
+# Mark Rivers
+# August 26, 2019
+# 
+# This database gets loaded once for the Dante system.
+# It contains records that control the entire system.
+# danteN.template gets loaded once for each board.
+
+include "NDArrayBase.template"
+
+###########################
+# General parameters      #
+###########################
+
+record(longin,"$(P)$(R)CurrentPixel") {
+    field(DESC,"Current pixel")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteCurrentPixel")
+    field(SCAN, "I/O Intr")
+}
+
+record(mbbo,"$(P)$(R)CollectMode") {
+    field(DESC,"Collection mode")
+    field(PINI,"YES")
+    field(ZRST,"MCA")
+    field(ZRVL,"0")
+    field(ONST,"MCA Mapping")
+    field(ONVL,"1")
+    field(TWST,"List")
+    field(TWVL,"2")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteCollectMode")
+}
+
+record(mbbi,"$(P)$(R)CollectMode_RBV") {
+    field(DESC,"Collection mode")
+    field(ZRST,"MCA")
+    field(ZRVL,"0")
+    field(ONST,"MCA Mapping")
+    field(ONVL,"1")
+    field(TWST,"List")
+    field(TWVL,"2")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteCollectMode")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)PollTime") {
+    field(DESC,"Polling time")
+    field(PINI,"YES")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DantePollTime")
+}
+
+record(ai,"$(P)$(R)PollTime_RBV") {
+    field(DESC,"Polling time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DantePollTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(bi,"$(P)$(R)SNL_Connected") {
+    field(ZNAM,"Not connected")
+    field(ZSV, "MAJOR")
+    field(ONAM,"Connected")
+    field(OSV, "NO_ALARM")
+    field(VAL, "0")
+}
+
+record(mbbo,"$(P)$(R)NumMCAChannels") {
+    field(DESC,"# of MCA channels")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))MCA_NUM_CHANNELS")
+    field(ZRVL, "1024")
+    field(ZRST, "1024")
+    field(ONVL, "2048")
+    field(ONST, "2048")
+    field(TWVL, "4096")
+    field(TWST, "4096")
+}
+
+record(mbbi,"$(P)$(R)NumMCAChannels_RBV") {
+    field(DESC,"# of MCA channels")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))MCA_NUM_CHANNELS")
+    field(ZRVL, "1024")
+    field(ZRST, "1024")
+    field(ONVL, "2048")
+    field(ONST, "2048")
+    field(TWVL, "4096")
+    field(TWST, "4096")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)EraseStart") {
+    field(ZNAM,"Done")
+    field(ONAM,"Start")
+    field(FLNK,"$(P)$(R)EraseStartFanout")
+}
+
+record(dfanout, $(P)$(R)EraseStartFanout) {
+    field(DOL, "1")
+    field(OUTA, "$(P)$(R)StartAll PP")
+    field(OUTB, "$(P)$(R)MCAAcquireBusy PP")
+    field(OUTC, "$(P)$(R)Acquire PP")
+}
+
+record(bo,"$(P)$(R)StartAll") {
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))MCA_START_ACQUIRE")
+}
+
+record(busy,"$(P)$(R)MCAAcquireBusy") {
+    field(ZNAM,"Done")
+    field(ONAM,"Collecting")
+}
+
+record(bi,"$(P)$(R)MCAAcquiring") {
+    field(DTYP, "asynInt32")
+    field(INP, "@asyn($(PORT))MCA_ACQUIRING")
+    field(ZNAM,"Done")
+    field(ONAM,"Acquiring")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)StopAll") {
+    field(VAL,"1")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn($(PORT))MCA_STOP_ACQUIRE")
+    field(ZNAM,"Done")
+    field(ONAM,"Stop")
+}
+
+record(ao,"$(P)$(R)PresetReal") {
+    field(DTYP, "asynFloat64")
+    field(OUT, "@asyn($(PORT))MCA_PRESET_REAL")
+    field(PREC, "2")
+}
+
+record(ai,"$(P)$(R)ElapsedReal") {
+    field(SCAN,"I/O Intr")
+    field(DTYP, "asynFloat64")
+    field(INP, "@asyn($(PORT))MCA_ELAPSED_REAL")
+    field(PREC, "2")
+}
+
+record(ai,"$(P)$(R)ElapsedLive") {
+    field(SCAN,"I/O Intr")
+    field(DTYP, "asynFloat64")
+    field(INP, "@asyn($(PORT))MCA_ELAPSED_LIVE")
+    field(PREC, "2")
+}
+
+record(ai,"$(P)$(R)DeadTime") {
+    field(PREC, "2")
+}
+
+record(ai,"$(P)$(R)IDeadTime") {
+    field(PREC, "2")
+}
+
+record(bo,"$(P)$(R)ReadAll") {
+    field(SCAN,"1 second")
+    field(DISV,"0")
+    field(SDIS,"$(P)$(R)MCAAcquireBusy NPP NMS")
+    field(ZNAM,"Done")
+    field(ONAM,"Read")
+    field(FLNK, "$(P)$(R)ReadAllOnce PP MS")
+}
+
+record(bo,"$(P)$(R)ReadAllOnce") {
+    field(VAL, "1")
+    field(OUT, "$(P)$(R)DoReadAll PP MS")
+    field(ZNAM,"Done")
+    field(ONAM,"Read")
+    field(FLNK, "$(P)$(R)DoReadAll1")
+}
+
+record(bo,"$(P)$(R)DoReadAll1") {
+    field(VAL, "1")
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn($(PORT))MCA_READ_STATUS")
+    field(ZNAM,"Done")
+    field(ONAM,"Read")
+}
+
+record(bo,"$(P)$(R)DoReadAll") {
+    field(ZNAM, "Done")
+    field(ONAM, "Read")
+}
+
+record(bo,"$(P)$(R)ReadTraces") {
+    field(SCAN,"Passive")
+    field(VAL, "1")
+    field(OUT, "$(P)$(R)DoReadTraces PP MS")
+    field(ZNAM,"Done")
+    field(ONAM,"Read")
+}
+
+record(bo,"$(P)$(R)DoReadTraces") {
+    field(ZNAM, "Done")
+    field(ONAM, "Read")
+}
+
+record(ai,"$(P)$(R)TraceTimes") {
+    field(VAL,"0.1")
+    field(PREC,"2")
+}
+
+record(bo,"$(P)$(R)CopyFastPeakingTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyFastThreshold") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyFastFlatTopTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyPeakingTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyMaxPeakingTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyFlatTopTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyEnergyThreshold") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyBaselineThreshold") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyMaxRiseTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyResetRecoveryTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyZeroPeakFreq") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyBaselineSamples") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyGain") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyInputPolarity") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyAnalogOffset") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyOverflowRecoveryTime") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyResetThreshold") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyTailCoefficient") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyInputMode") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyTimeConstant") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyBaseOffset") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(mbbo,"$(P)$(R)GatingMode") {
+    field(DESC,"Gating mode")
+    field(PINI,"YES")
+    field(ZRST,"Free running")
+    field(ZRVL,"0")
+    field(ONST,"Trig rising")
+    field(ONVL,"1")
+    field(TWST,"Trig falling")
+    field(TWVL,"2")
+    field(THST,"Trig both")
+    field(THVL,"3")
+    field(FRST,"Gate high")
+    field(FRVL,"4")
+    field(FVST,"Gate low")
+    field(FVVL,"5")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteGatingMode")
+}
+
+record(mbbi,"$(P)$(R)GatingMode_RBV") {
+    field(DESC,"Gating mode")
+    field(ZRST,"Free running")
+    field(ZRVL,"0")
+    field(ONST,"Trig rising")
+    field(ONVL,"1")
+    field(TWST,"Trig falling")
+    field(TWVL,"2")
+    field(THST,"Trig both")
+    field(THVL,"3")
+    field(FRST,"Gate high")
+    field(FRVL,"4")
+    field(FVST,"Gate low")
+    field(FVVL,"5")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteGatingMode")
+    field(SCAN, "I/O Intr")
+}
+
+record(mbbo,"$(P)$(R)InputMode") {
+    field(DESC,"Input mode")
+    field(PINI,"YES")
+    field(ZRST,"DC_HighImp")
+    field(ZRVL,"0")
+    field(ONST,"DC_LowImp")
+    field(ONVL,"1")
+    field(TWST,"AC_Slow")
+    field(TWVL,"2")
+    field(THST,"AC_Fast")
+    field(THVL,"3")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteInputMode")
+}
+
+record(mbbi,"$(P)$(R)InputMode_RBV") {
+    field(DESC,"Input mode")
+    field(ZRST,"DC_HighImp")
+    field(ZRVL,"0")
+    field(ONST,"DC_LowImp")
+    field(ONVL,"1")
+    field(TWST,"AC_Slow")
+    field(TWVL,"2")
+    field(THST,"AC_Fast")
+    field(THVL,"3")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteInputMode")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)MappingPoints") {
+    field(DESC,"Mapping points")
+    field(PINI,"YES")
+    field(VAL, "100")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteMappingPoints")
+}
+
+record(longin,"$(P)$(R)MappingPoints_RBV") {
+    field(DESC,"Mapping points")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteMappingPoints")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)ListBufferSize") {
+    field(DESC,"List mode buffer events")
+    field(PINI,"YES")
+    field(VAL, "4096")
+    field(DRVL, "512")
+    field(DRVH, "2000000000")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteListBufferSize")
+}
+
+record(longin,"$(P)$(R)ListBufferSize_RBV") {
+    field(DESC,"List mode buffer events")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteListBufferSize")
+    field(SCAN, "I/O Intr")
+}
+
+
+#############################
+# Trace waveform parameters #
+#############################
+
+record(waveform, "$(P)$(R)TraceTimeArray") {
+    field(DESC, "Trace data")
+    field(DTYP, "asynFloat64ArrayIn")
+    field(PREC, "0")
+    field(INP, "@asyn($(PORT))DanteTraceTimeArray")
+    field(NELM, "$(TRACE_LEN)")
+    field(FTVL, "DOUBLE")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TraceTime") {
+    field(DESC,"Trace time/point")
+    field(PINI,"YES")
+    field(PREC, "3")
+    field(DRVL, "0.016")
+    field(DRVH, "0.512")
+    field(VAL,  "0.016")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTraceTime")
+}
+
+record(ai,"$(P)$(R)TraceTime_RBV") {
+    field(DESC,"Base offset")
+    field(DTYP, "asynFloat64")
+    field(PREC, "3")
+    field(INP,"@asyn($(PORT))DanteTraceTime")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerInstant") {
+    field(DESC,"Trace trigger instant")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerInstant")
+}
+
+record(bi,"$(P)$(R)TraceTriggerInstant_RBV") {
+    field(DESC,"Trace trigger instant")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerInstant")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerRising") {
+    field(DESC,"Trace trigger rising")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerRising")
+}
+
+record(bi,"$(P)$(R)TraceTriggerRising_RBV") {
+    field(DESC,"Trace trigger rising")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerRising")
+    field(SCAN, "I/O Intr")
+}
+
+record(bo,"$(P)$(R)TraceTriggerFalling") {
+    field(DESC,"Trace trigger falling")
+    field(PINI,"YES")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),0)DanteTraceTriggerFalling")
+}
+
+record(bi,"$(P)$(R)TraceTriggerFalling_RBV") {
+    field(DESC,"Trace trigger falling")
+    field(ZNAM,"No")
+    field(ONAM,"Yes")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),0)DanteTraceTriggerFalling")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)TraceTriggerLevel") {
+    field(DESC,"Trace trigger level")
+    field(PINI,"YES")
+    field(DRVL, "0")
+    field(DRVH, "65535")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteTraceTriggerLevel")
+}
+
+record(longin,"$(P)$(R)TraceTriggerLevel_RBV") {
+    field(DESC,"Trace trigger level")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteTraceTriggerLevel")
+    field(SCAN, "I/O Intr")
+}
+
+record(ao,"$(P)$(R)TraceTriggerWait") {
+    field(DESC,"Trigger wait time")
+    field(PINI,"YES")
+    field(DRVL, "0.001")
+    field(DRVH, "100")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(OUT,"@asyn($(PORT))DanteTraceTriggerWait")
+}
+
+record(ai,"$(P)$(R)TraceTriggerWait_RBV") {
+    field(DESC,"Trigger wait time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT))DanteTraceTriggerWait")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout,"$(P)$(R)TraceLength") {
+    field(DESC,"Trace length")
+    field(PINI,"YES")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteTraceLength")
+}
+
+record(longin,"$(P)$(R)TraceLength_RBV") {
+    field(DESC,"Trace length")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT))DanteTraceLength")
+    field(SCAN, "I/O Intr")
+}
