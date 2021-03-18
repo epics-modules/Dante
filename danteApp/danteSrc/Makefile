@@ -14,13 +14,13 @@ ifeq ($(T_A), linux-x86_64)
   LIBRARY_IOC_Linux += mcaDante
   PROD_IOC_Linux  += $(PROD_NAME)
   PROD_IOC_Linux += DPP_Test
-  PROD_IOC_Linux += test_mapping
+  #PROD_IOC_Linux += test_mapping
 endif
 ifeq (windows-x64, $(findstring windows-x64, $(T_A)))
   LIBRARY_IOC_WIN32   += mcaDante
   PROD_IOC_WIN32  += $(PROD_NAME)
   PROD_IOC_WIN32 += DPP_Test
-  PROD_IOC_WIN32 += test_mapping
+  #PROD_IOC_WIN32 += test_mapping
 endif
 
 LIB_SRCS += dante.cpp
@@ -54,10 +54,10 @@ DPP_Test_LIBS_WIN32      += XGL_DPP
 DPP_Test_SYS_LIBS_Linux += python2.7
 
 #=============================
-test_mapping_SRCS  += test_mapping.cpp
-test_mapping_SYS_LIBS_Linux  += XGL_DPP
-test_mapping_LIBS_WIN32      += XGL_DPP
-test_mapping_SYS_LIBS_Linux += python2.7
+#test_mapping_SRCS  += test_mapping.cpp
+#test_mapping_SYS_LIBS_Linux  += XGL_DPP
+#test_mapping_LIBS_WIN32      += XGL_DPP
+#test_mapping_SYS_LIBS_Linux += python2.7
 
 include $(ADCORE)/ADApp/commonDriverMakefile
 

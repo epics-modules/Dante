@@ -1,5 +1,6 @@
 $(P)$(R)CollectMode
 $(P)$(R)GatingMode
+$(P)$(R)InputMode
 $(P)$(R)PollTime
 $(P)$(R)ReadAll.SCAN
 $(P)$(R)NumMCAChannels
