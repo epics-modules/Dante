@@ -8,8 +8,8 @@ pattern
 file "$(DANTE)/db/danteN.template"
 {
 pattern
-{  R,      PORT}
-{dante1:, DANTE1}
+{  R,      PORT,  ADDR}
+{dante1:, DANTE1,    0}
 }
 
 file "$(DANTE)/db/dante1CH.template" {
