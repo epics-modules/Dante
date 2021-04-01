@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #if defined _WIN32 || defined __CYGWIN__
 	#ifdef EXPORT
 		#ifdef __GNUC__
@@ -131,33 +133,35 @@ EXTERN DECLSPEC uint32_t	CALL_CONV getFirmware(const char* identifier, uint16_t 
 /** Library will return false if not supported by firmware. */
 EXTERN DECLSPEC bool   CALL_CONV get_boards_in_chain(const char* identifier, uint16_t& devs);
 
+/** Enable/disable auto scan of connected boards of the dll */
+EXTERN DECLSPEC bool   CALL_CONV autoScanSlaves(bool enable);
+
 /**
 * Configuration.
 * Pass a "configuration" structure to the function to configure the system.
 */
 
 struct configuration {
-	uint32_t fast_filter_thr		= 0;	// Detection threshold [unit: spectrum BINs]
-	uint32_t energy_filter_thr		= 0;	// Detection threshold [unit: spectrum BINs]
-	uint32_t energy_baseline_thr	= 0;	// Energy threshold for baseline [unit: spectrum BINs]
-	double max_risetime				= 30;	// Max risetime setting for pileup detection 
-	double gain						= 1;	// Main gain: (spectrum BIN)/(ADC's LSB)
-	uint32_t peaking_time			= 25;	// Main energy filter peaking time   [unit: 32 ns samples]
-	uint32_t max_peaking_time		= 0;	// Max energy filter peaking time   [unit: 32 ns samples]
-	uint32_t flat_top				= 5;	// Main energy filter flat top   [unit: 32 ns samples]
-	uint32_t edge_peaking_time		= 4;	// Edge detection filter peaking time   [unit: 8 ns samples]
-	uint32_t edge_flat_top			= 1;	// Edge detection filter flat top   [unit: 8 ns samples]
-	uint32_t reset_recovery_time	= 300;	// Reset recovery time [unit: 8 ns samples]
-	double zero_peak_freq			= 1;	// Zero peak rate [kcps]
-	uint32_t baseline_samples		= 64;	// Baseline samples for baseline correction [32 ns samples]
-	bool inverted_input				= 0;
-	double time_constant			= 0;	// Time constant for continuos reset signal
-	uint32_t base_offset			= 0;	// Baseline of the continous reset signal [ADC's LSB]
-	uint32_t overflow_recovery		= 0;	// Overflow recovery time [8ns samples]
-	uint32_t reset_threshold		= 1000;	// Reset detection threshold [ADC's LSB]
-	double tail_coefficient			= 0;	// Tail coefficient
-	uint32_t trigger_mode			= 0;	// External trigger mode (no, rising, falling, both)
-	uint32_t other_param			= 0;	
+	uint32_t fast_filter_thr;	// Detection threshold [unit: spectrum BINs]
+	uint32_t energy_filter_thr;	// Detection threshold [unit: spectrum BINs]
+	uint32_t energy_baseline_thr;	// Energy threshold for baseline [unit: spectrum BINs]
+	double max_risetime;		// Max risetime setting for pileup detection 
+	double gain;			// Main gain: (spectrum BIN)/(ADC's LSB)
+	uint32_t peaking_time;		// Main energy filter peaking time   [unit: 32 ns samples]
+	uint32_t max_peaking_time;	// Max energy filter peaking time   [unit: 32 ns samples]
+	uint32_t flat_top;		// Main energy filter flat top   [unit: 32 ns samples]
+	uint32_t edge_peaking_time;	// Edge detection filter peaking time   [unit: 8 ns samples]
+	uint32_t edge_flat_top;		// Edge detection filter flat top   [unit: 8 ns samples]
+	uint32_t reset_recovery_time;	// Reset recovery time [unit: 8 ns samples]
+	double zero_peak_freq;		// Zero peak rate [kcps]
+	uint32_t baseline_samples;	// Baseline samples for baseline correction [32 ns samples]
+	bool inverted_input;
+	double time_constant;		// Time constant for continuos reset signal
+	uint32_t base_offset;		// Baseline of the continous reset signal [ADC's LSB]
+	uint32_t overflow_recovery;	// Overflow recovery time [8ns samples]
+	uint32_t reset_threshold;	// Reset detection threshold [ADC's LSB]
+	double tail_coefficient;	// Tail coefficient
+	uint32_t other_param;	
 };
 
 struct configuration_offset {
@@ -175,31 +179,42 @@ enum GatingMode {
 };
 
 enum InputMode {
-	DC_HighImp,			// K1 closed , k2 open
-	DC_LowImp,			// k1 closed , k2 closed
-	AC_Slow,			// k1 open   , k2 open 
-	AC_Fast				// k1 open   , k2 closed
+	DC_HighImp,				// DC coupling, 10 K Ohm input R
+	DC_LowImp,				// DC coupling, 1  K Ohm input R
+	AC_Slow,				// AC coupling, 22 us time constant
+	AC_Fast					// AC coupling, 2.2  us time constant
 };
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure(const char* identifier, uint16_t Board, const configuration cfg);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, const GatingMode GatingMode, uint16_t Board);
 
-EXTERN DECLSPEC uint32_t   CALL_CONV configure_input(const char* identifier, const InputMode InputMode, uint16_t Board);
+EXTERN DECLSPEC uint32_t   CALL_CONV configure_input(const char* identifier, uint16_t Board, const InputMode InputMode);
 
-EXTERN DECLSPEC bool	   CALL_CONV configure_baseline(const char* identifier, uint16_t Board, const uint16_t * baseline_vector);
+EXTERN DECLSPEC uint32_t   CALL_CONV configure_emulator(const char * identifier, uint16_t Board, bool enable);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_offset(const char* identifier, uint16_t Board, const configuration_offset cfg_offset);
 
-EXTERN DECLSPEC uint32_t   CALL_CONV configure_timestamp_delay(const char* identifier, uint16_t Board, int32_t timestamp_delay);
+EXTERN DECLSPEC uint32_t   CALL_CONV configure_timestamp_delay(const char* identifier, uint16_t Board, uint16_t ckpulses, uint16_t delay);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV advanced_configure(const char* identifier, uint16_t Board, uint16_t address, uint32_t data);
+
+EXTERN DECLSPEC uint32_t   CALL_CONV advanced_read(const char* identifier, uint16_t Board, uint16_t address);
 
 
 /** Used to get the status of the connected systems.
 *	Returns true if the "running" parameter is valid.
 *	Returns false if an error occours. */
 EXTERN DECLSPEC uint32_t   CALL_CONV isRunning_system(const char* identifier, uint16_t Board);
+
+/** Used to get the status of the connected systems: async check if acquisition is finished and all data have been collected by the DLL*/
+EXTERN DECLSPEC bool   CALL_CONV isTransmissionEnded(const char* identifier,uint16_t Board,bool& transmissionEnded);
+
+/** Used to get the status of the connected systems: sync check if acquisition is finished and all data have been collected by the DLL*/
+EXTERN DECLSPEC bool   CALL_CONV isLastDataReceived(const char* identifier, uint16_t Board, bool& LastDataReceived);
+
+/** Disabled board will not generate any data. */
+EXTERN DECLSPEC uint32_t   CALL_CONV disableBoard(const char* identifier, uint16_t Board, bool disable); 
 
 /** To perform a single measure:
 * Set time to "0" to get a free-running measure.
@@ -247,7 +262,6 @@ EXTERN DECLSPEC uint32_t   CALL_CONV start_list(const char* identifier, const do
 EXTERN DECLSPEC uint32_t   CALL_CONV start_listwave(const char* identifier, const double time, uint16_t dec_ratio, uint16_t length, uint16_t offset);
 
 /** To perform a map:
-* Set time to "0" to enable hardware triggering, otherwise it defines the time for each spot.
 * Time is expressed in milliseconds. */
 EXTERN DECLSPEC uint32_t   CALL_CONV start_map(const char* identifier, const uint32_t sp_time, const uint32_t points, const uint16_t spect_depth);
 
@@ -343,6 +357,11 @@ Add board to query.
 EXTERN DECLSPEC bool   CALL_CONV add_to_query(char* address);
 
 /*
+Flush sockets connection
+*/
+EXTERN DECLSPEC bool   CALL_CONV flush_local_eth_conn(char* address);
+
+/*
 Remove board from query.
 */
 EXTERN DECLSPEC bool   CALL_CONV remove_from_query(char* address);
@@ -360,6 +379,7 @@ This last operation could take up to 40 seconds.
 The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
 */
 EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char* identifier, bool store, char* filename, uint16_t board_num = 0);
+EXTERN DECLSPEC uint32_t  CALL_CONV load_new_firmware(const char* identifier, const char* filename, uint16_t board_num = 255);
 
 // Resets the communication on the entire chain.
 EXTERN DECLSPEC uint32_t  CALL_CONV global_reset(const char* identifier);
