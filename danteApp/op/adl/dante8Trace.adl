@@ -1,14 +1,14 @@
 
 file {
-	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante8Trace.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/dante8Trace.adl"
 	version=030109
 }
 display {
 	object {
-		x=384
-		y=286
+		x=320
+		y=50
 		width=1640
-		height=800
+		height=735
 	}
 	clr=14
 	bclr=4
@@ -96,408 +96,6 @@ rectangle {
 	}
 	"basic attribute" {
 		clr=54
-	}
-}
-rectangle {
-	object {
-		x=7
-		y=625
-		width=1600
-		height=160
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-rectangle {
-	object {
-		x=750
-		y=628
-		width=170
-		height=22
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=750
-		y=629
-		width=170
-		height=22
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Trace Setup"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=169
-		y=664
-		width=380
-		height=100
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-"text entry" {
-	object {
-		x=294
-		y=674
-		width=110
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceLength"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=409
-		y=674
-		width=110
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceLength_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=179
-		y=674
-		width=110
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Length"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=294
-		y=704
-		width=110
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=409
-		y=704
-		width=110
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTime_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=179
-		y=704
-		width=110
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Time/Point (us)"
-	align="horiz. right"
-}
-text {
-	object {
-		x=179
-		y=734
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Time/Point (us)"
-	align="horiz. right"
-}
-menu {
-	object {
-		x=295
-		y=734
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceData.SCAN"
-		clr=14
-		bclr=51
-	}
-}
-"message button" {
-	object {
-		x=411
-		y=734
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceData.PROC"
-		clr=14
-		bclr=51
-	}
-	label="Read Once"
-}
-rectangle {
-	object {
-		x=830
-		y=664
-		width=740
-		height=100
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-text {
-	object {
-		x=840
-		y=675
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Trigger Instant"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=1072
-		y=675
-		width=111
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTriggerInstant_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-menu {
-	object {
-		x=956
-		y=675
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTriggerInstant"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=840
-		y=707
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Trigger Rising"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=1072
-		y=707
-		width=111
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTriggerRising_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-menu {
-	object {
-		x=956
-		y=707
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTriggerRising"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=840
-		y=737
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Trigger Falling"
-	align="horiz. right"
-}
-menu {
-	object {
-		x=956
-		y=737
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTriggerFalling"
-		clr=14
-		bclr=51
-	}
-}
-"text update" {
-	object {
-		x=1072
-		y=737
-		width=111
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTriggerFalling_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=1201
-		y=706
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Trigger Level"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=1433
-		y=706
-		width=111
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTriggerLevel_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-text {
-	object {
-		x=1201
-		y=733
-		width=111
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Trigger Wait"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=1433
-		y=733
-		width=111
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)TraceTriggerWait_RBV"
-		clr=54
-		bclr=3
-	}
-	align="horiz. right"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1317
-		y=706
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTriggerLevel"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1317
-		y=733
-		width=111
-		height=20
-	}
-	control {
-		chan="$(P)$(R)TraceTriggerWait"
-		clr=14
-		bclr=51
-	}
-	limits {
 	}
 }
 text {
@@ -937,6 +535,515 @@ composite {
 			}
 			textix="Channel 8"
 			align="horiz. centered"
+		}
+	}
+}
+rectangle {
+	object {
+		x=480
+		y=595
+		width=680
+		height=135
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+composite {
+	object {
+		x=760
+		y=600
+		width=120
+		height=21
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=760
+				y=600
+				width=120
+				height=21
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=765
+				y=600
+				width=110
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Trace Setup"
+			align="horiz. centered"
+		}
+	}
+}
+composite {
+	object {
+		x=490
+		y=625
+		width=661
+		height=97
+	}
+	"composite name"=""
+	children {
+		composite {
+			object {
+				x=490
+				y=625
+				width=318
+				height=97
+			}
+			"composite name"=""
+			children {
+				composite {
+					object {
+						x=490
+						y=676
+						width=318
+						height=21
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=490
+								y=677
+								width=150
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Trigger instant"
+						}
+						"text update" {
+							object {
+								x=728
+								y=676
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTriggerInstant_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						menu {
+							object {
+								x=643
+								y=676
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTriggerInstant"
+								clr=14
+								bclr=51
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=500
+						y=650
+						width=308
+						height=21
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=500
+								y=650
+								width=140
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Trigger rising"
+						}
+						"text update" {
+							object {
+								x=728
+								y=651
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTriggerRising_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						menu {
+							object {
+								x=643
+								y=651
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTriggerRising"
+								clr=14
+								bclr=51
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=580
+						y=625
+						width=228
+						height=20
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=580
+								y=625
+								width=60
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Length"
+						}
+						"text update" {
+							object {
+								x=728
+								y=625
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceLength_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						"text entry" {
+							object {
+								x=643
+								y=625
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceLength"
+								clr=14
+								bclr=51
+							}
+							limits {
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=550
+						y=702
+						width=258
+						height=20
+					}
+					"composite name"=""
+					children {
+						composite {
+							object {
+								x=550
+								y=702
+								width=258
+								height=20
+							}
+							"composite name"=""
+							children {
+								text {
+									object {
+										x=550
+										y=702
+										width=90
+										height=20
+									}
+									"basic attribute" {
+										clr=14
+									}
+									textix="Read Rate"
+									align="horiz. right"
+								}
+								menu {
+									object {
+										x=643
+										y=703
+										width=80
+										height=18
+									}
+									control {
+										chan="$(P)$(R)TraceData.SCAN"
+										clr=14
+										bclr=51
+									}
+								}
+								"message button" {
+									object {
+										x=728
+										y=702
+										width=80
+										height=20
+									}
+									control {
+										chan="$(P)$(R)TraceData.PROC"
+										clr=14
+										bclr=51
+									}
+									label="Read Once"
+									press_msg="1"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		composite {
+			object {
+				x=813
+				y=625
+				width=338
+				height=95
+			}
+			"composite name"=""
+			children {
+				composite {
+					object {
+						x=813
+						y=625
+						width=338
+						height=20
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=813
+								y=625
+								width=170
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Time/point (usec)"
+						}
+						"text update" {
+							object {
+								x=1071
+								y=625
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTime_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						"text entry" {
+							object {
+								x=986
+								y=625
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTime"
+								clr=14
+								bclr=51
+							}
+							limits {
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=833
+						y=650
+						width=318
+						height=20
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=833
+								y=650
+								width=150
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Trigger falling"
+						}
+						menu {
+							object {
+								x=986
+								y=650
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTriggerFalling"
+								clr=14
+								bclr=51
+							}
+						}
+						"text update" {
+							object {
+								x=1071
+								y=650
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTriggerFalling_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=853
+						y=675
+						width=298
+						height=20
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=853
+								y=675
+								width=130
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Trigger Level"
+						}
+						"text update" {
+							object {
+								x=1071
+								y=675
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTriggerLevel_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						"text entry" {
+							object {
+								x=986
+								y=675
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTriggerLevel"
+								clr=14
+								bclr=51
+							}
+							limits {
+							}
+						}
+					}
+				}
+				composite {
+					object {
+						x=863
+						y=700
+						width=288
+						height=20
+					}
+					"composite name"=""
+					children {
+						text {
+							object {
+								x=863
+								y=700
+								width=120
+								height=20
+							}
+							"basic attribute" {
+								clr=14
+							}
+							textix="Trigger wait"
+						}
+						"text update" {
+							object {
+								x=1071
+								y=700
+								width=80
+								height=20
+							}
+							monitor {
+								chan="$(P)$(R)TraceTriggerWait_RBV"
+								clr=54
+								bclr=3
+							}
+							limits {
+							}
+						}
+						"text entry" {
+							object {
+								x=986
+								y=700
+								width=80
+								height=20
+							}
+							control {
+								chan="$(P)$(R)TraceTriggerWait"
+								clr=14
+								bclr=51
+							}
+							limits {
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
