@@ -21,6 +21,10 @@ epicsEnvSet("NCHANS", "2048")
 epicsEnvSet("CBUFFS", "500")
 # The maximum number of threads for plugins which can run in multiple threads
 epicsEnvSet("MAX_THREADS", "8")
+# The maximum number of channels in the MCA records
+epicsEnvSet("MCA_CHANS", "2048")
+# The maximum number of points in the ADC trace waveform records
+epicsEnvSet("TRACE_LEN", "16384")
 # The search path for database files
 epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
@@ -28,7 +32,7 @@ epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 DanteConfig("$(PORT)", 164.54.160.181, 1, 0, 0)
 #DanteConfig("$(PORT)", 164.54.160.186, 1, 0, 0)
 
-dbLoadTemplate("dante.substitutions")
+dbLoadTemplate($(DANTE)/db/"dante1.substitutions", "P=$(PREFIX), NCHAN=$(MCA_CHANS), TRACE_LEN=$(TRACE_LEN)")
 
 # Load all other plugins using commonPlugins.cmd
 < $(ADCORE)/iocBoot/commonPlugins.cmd
