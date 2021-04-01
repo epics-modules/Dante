@@ -1,14 +1,14 @@
 
 file {
-	name="C:\Users\Luca.Grittini\Desktop\adls\danteTop.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/danteTop.adl"
 	version=030109
 }
 display {
 	object {
-		x=3027
-		y=151
+		x=423
+		y=108
 		width=300
-		height=100
+		height=80
 	}
 	clr=14
 	bclr=4
@@ -92,15 +92,15 @@ display {
 		x=20
 		y=40
 		width=120
-		height=50
+		height=25
 	}
 	display[0] {
-		label="Dante"
-		name="dante.adl"
+		label="Dante 1 channel"
+		name="dante1.adl"
 		args="P=Dante:,M=mca1,R=dante1:"
 	}
 	clr=14
-	bclr=4
+	bclr=51
 	label="Dante-1CH"
 }
 "related display" {
@@ -108,22 +108,22 @@ display {
 		x=160
 		y=40
 		width=120
-		height=50
+		height=25
 	}
 	display[0] {
 		label="Dante"
 		name="dante8.adl"
-		args="P=Dante:,M=mca1,R=dante1:"
+		args="P=Dante:,M=mca,R=dante"
 	}
 	clr=14
-	bclr=4
+	bclr=51
 	label="Dante-8CH"
 }
 text {
 	object {
-		x=25
+		x=12
 		y=9
-		width=250
+		width=276
 		height=22
 	}
 	"basic attribute" {
