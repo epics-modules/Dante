@@ -1,7 +1,7 @@
 // Test Library.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+#include "inttypes.h"
 #ifdef POLLINGLIB
 	#include "DLL_DPP_Polling.h"
 #else
@@ -686,7 +686,7 @@ int32_t main(int argc, char* argv[])
 	else
 		result = false;
 	call_id = stop("SN01916|SN02712");
-	Sleep(5000);
+  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	if (call_id > 0)
 	{
 		if (!wait_answer(call_id))
