@@ -1,39 +1,41 @@
-file "$(DANTE)/db/dante.template" {
-{P=Dante:, R=dante1:, PORT=DANTE1, TRACE_LEN=16384}
+file "$(DANTE)/db/dante.template"
+{
+pattern
+{  R,      PORT}
+{dante1:, DANTE1}
 }
 
-file "$(DANTE)/db/danteN.template" {
-{P=Dante:, R=dante1:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante2:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante3:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante4:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante5:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante6:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante7:, PORT=DANTE1, TRACE_LEN=16384}
-{P=Dante:, R=dante8:, PORT=DANTE1, TRACE_LEN=16384}
+file "$(DANTE)/db/danteN.template"
+{
+pattern
+{  R,      PORT}
+{dante1:, DANTE1}
+{dante2:, DANTE1}
+{dante3:, DANTE1}
+{dante4:, DANTE1}
+{dante5:, DANTE1}
+{dante6:, DANTE1}
+{dante7:, DANTE1}
+{dante8:, DANTE1}
 }
-
-# file "$(DANTE)/db/dante1CH.template" {
-# {P=Dante:, R=dante1:, M=mca1, PORT=DANTE1}
-# } 
 
 file "$(MCA)/db/mca.db"
 {
 pattern
-{   P,      M,       DTYP,         INP,         PREC,    NCHAN}
-{Dante:,   mca1,  "asynMCA",  "@asyn(DANTE1,0)",   2,     4096}
-{Dante:,   mca2,  "asynMCA",  "@asyn(DANTE1,1)",   2,     4096}
-{Dante:,   mca3,  "asynMCA",  "@asyn(DANTE1,2)",   2,     4096}
-{Dante:,   mca4,  "asynMCA",  "@asyn(DANTE1,3)",   2,     4096}
-{Dante:,   mca5,  "asynMCA",  "@asyn(DANTE1,4)",   2,     4096}
-{Dante:,   mca6,  "asynMCA",  "@asyn(DANTE1,5)",   2,     4096}
-{Dante:,   mca7,  "asynMCA",  "@asyn(DANTE1,6)",   2,     4096}
-{Dante:,   mca8,  "asynMCA",  "@asyn(DANTE1,7)",   2,     4096}
+{  M,       DTYP,         INP,         PREC}
+{ mca1,  "asynMCA",  "@asyn(DANTE1,0)",   2}
+{ mca2,  "asynMCA",  "@asyn(DANTE1,1)",   2}
+{ mca3,  "asynMCA",  "@asyn(DANTE1,2)",   2}
+{ mca4,  "asynMCA",  "@asyn(DANTE1,3)",   2}
+{ mca5,  "asynMCA",  "@asyn(DANTE1,4)",   2}
+{ mca6,  "asynMCA",  "@asyn(DANTE1,5)",   2}
+{ mca7,  "asynMCA",  "@asyn(DANTE1,6)",   2}
+{ mca8,  "asynMCA",  "@asyn(DANTE1,7)",   2}
 }
 
 file "$(ASYN)/db/asynRecord.db"
 {
 pattern
-{P,             R,        PORT,   ADDR,  IMAX,  OMAX}
-{Dante:, dante1:AsynIO, DANTE1,      0,    80,    80}
+{       R,        PORT,   ADDR,  IMAX,  OMAX}
+{Dante1:AsynIO, DANTE1,      0,    80,    80}
 }
