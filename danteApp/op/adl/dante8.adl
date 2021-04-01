@@ -1,0 +1,1623 @@
+
+file {
+	name="C:\Users\Luca.Grittini\Desktop\dante_adl_updates\dante8.adl"
+	version=030109
+}
+display {
+	object {
+		x=1779
+		y=210
+		width=1140
+		height=510
+	}
+	clr=14
+	bclr=4
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=0
+		y=2
+		width=1140
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+}
+text {
+	object {
+		x=0
+		y=3
+		width=1140
+		height=25
+	}
+	"basic attribute" {
+		clr=0
+	}
+	textix="Dante MCA Control ($(P)$(R))"
+	align="horiz. centered"
+}
+composite {
+	object {
+		x=5
+		y=40
+		width=350
+		height=340
+	}
+	"composite name"=""
+	"composite file"="ADSetup.adl"
+}
+text {
+	object {
+		x=127
+		y=400
+		width=1
+		height=40
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+rectangle {
+	object {
+		x=5
+		y=390
+		width=350
+		height=110
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+	}
+}
+rectangle {
+	object {
+		x=127
+		y=392
+		width=107
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=145
+		y=393
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Plugins"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=95
+		y=419
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File"
+}
+text {
+	object {
+		x=235
+		y=419
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ROI"
+}
+"related display" {
+	object {
+		x=140
+		y=419
+		width=64
+		height=20
+	}
+	display[0] {
+		label="netCDF file #1"
+		name="NDFileNetCDF.adl"
+		args="P=$(P), R=netCDF1:, EXT=nc"
+	}
+	display[1] {
+		label="TIFF file #1"
+		name="NDFileTIFF.adl"
+		args="P=$(P), R=TIFF1:, EXT=tif"
+	}
+	display[2] {
+		label="JPEG file #1"
+		name="NDFileJPEG.adl"
+		args="P=$(P), R=JPEG1:, EXT=jpg"
+	}
+	display[3] {
+		label="NeXus file #1"
+		name="NDFileNexus.adl"
+		args="P=$(P), R=Nexus1:, EXT=h5"
+	}
+	display[4] {
+		label="Magick file #1"
+		name="NDFileMagick.adl"
+		args="P=$(P), R=Magick1:, EXT=tif"
+	}
+	display[5] {
+		label="HDF5 file #1"
+		name="NDFileHDF5.adl"
+		args="P=$(P), R=HDF1:, EXT=h5"
+	}
+	display[6] {
+		label="Null file #1"
+		name="NDFileNull.adl"
+		args="P=$(P), R=Null1:, EXT=null"
+	}
+	clr=14
+	bclr=51
+}
+"related display" {
+	object {
+		x=270
+		y=419
+		width=64
+		height=20
+	}
+	display[0] {
+		label="ROI #1"
+		name="NDROI.adl"
+		args="P=$(P), R=ROI1:"
+	}
+	display[1] {
+		label="ROI #2"
+		name="NDROI.adl"
+		args="P=$(P), R=ROI2:"
+	}
+	display[2] {
+		label="ROI #3"
+		name="NDROI.adl"
+		args="P=$(P), R=ROI3:"
+	}
+	display[3] {
+		label="ROI #4"
+		name="NDROI.adl"
+		args="P=$(P), R=ROI4:"
+	}
+	display[4] {
+		label="ROI 1-4 combined"
+		name="NDROI4.adl"
+		args="P=$(P), R1=ROI1:,R2=ROI2:, R3=ROI3:,R4=ROI4:"
+	}
+	clr=14
+	bclr=51
+}
+"related display" {
+	object {
+		x=15
+		y=419
+		width=64
+		height=20
+	}
+	display[0] {
+		label="Common plugins"
+		name="commonPlugins.adl"
+		args="P=$(P)"
+	}
+	clr=14
+	bclr=51
+	label="-All"
+}
+text {
+	object {
+		x=15
+		y=445
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Stats"
+}
+"related display" {
+	object {
+		x=70
+		y=445
+		width=64
+		height=20
+	}
+	display[0] {
+		label="Statistics #1"
+		name="NDStats.adl"
+		args="P=$(P), R=Stats1:"
+	}
+	display[1] {
+		label="Statistics #2"
+		name="NDStats.adl"
+		args="P=$(P), R=Stats2:"
+	}
+	display[2] {
+		label="Statistics #3"
+		name="NDStats.adl"
+		args="P=$(P), R=Stats3:"
+	}
+	display[3] {
+		label="Statistics #4"
+		name="NDStats.adl"
+		args="P=$(P), R=Stats4:"
+	}
+	display[4] {
+		label="Statistics #5"
+		name="NDStats.adl"
+		args="P=$(P), R=Stats5:"
+	}
+	display[5] {
+		label="Statistics 1-5"
+		name="NDStats5.adl"
+		args="P=$(P), R1=Stats1:,R2=Stats2:,R3=Stats3:,R4=Stats4:,R5=Stats5:"
+	}
+	clr=14
+	bclr=51
+}
+"related display" {
+	object {
+		x=182
+		y=445
+		width=80
+		height=20
+	}
+	display[0] {
+		label="Image #1"
+		name="NDStdArrays.adl"
+		args="P=$(P), R=image1:"
+	}
+	display[1] {
+		label="Pva #1"
+		name="NDPva.adl"
+		args="P=$(P), R=Pva1:"
+	}
+	display[2] {
+		label="Process #1"
+		name="NDProcess.adl"
+		args="P=$(P), R=Proc1:"
+	}
+	display[3] {
+		label="Transform #1"
+		name="NDTransform.adl"
+		args="P=$(P), R=Trans1:"
+	}
+	display[4] {
+		label="Color convert #1"
+		name="NDColorConvert.adl"
+		args="P=$(P), R=CC1:"
+	}
+	display[5] {
+		label="Color convert #2"
+		name="NDColorConvert.adl"
+		args="P=$(P), R=CC2:"
+	}
+	display[6] {
+		label="Overlay #1"
+		name="NDOverlay.adl"
+		args="P=$(P), R=Over1:"
+	}
+	display[7] {
+		label="Overlays 1-8"
+		name="NDOverlay8.adl"
+		args="P=$(P), R=Over1:,O1=Over1:1:,O2=Over1:2:,O3=Over1:3:,O4=Over1:4:,O5=Over1:5:,O6=Over1:6:,O7=Over1:7:,O8=Over1:8:"
+	}
+	display[8] {
+		label="Circular buffer #1"
+		name="NDCircularBuff.adl"
+		args="P=$(P), R=CB1:"
+	}
+	display[9] {
+		label="ROI Statistics #1"
+		name="NDROIStat.adl"
+		args="P=$(P), R=ROIStat1:"
+	}
+	display[10] {
+		label="Attribute #1"
+		name="NDPluginAttribute.adl"
+		args="P=$(P), R=Attr1:"
+	}
+	display[11] {
+		label="FFT #1"
+		name="NDFFT.adl"
+		args="P=$(P), R=FFT1:"
+	}
+	display[12] {
+		label="Scatter #1"
+		name="NDScatter.adl"
+		args="P=$(P), R=Scatter1:"
+	}
+	display[13] {
+		label="Gather #1"
+		name="NDGather8.adl"
+		args="P=$(P), R=Gather1:"
+	}
+	display[14] {
+		label="Codec #1"
+		name="NDCodec.adl"
+		args="P=$(P), R=Codec1:"
+	}
+	display[15] {
+		label="Codec #2"
+		name="NDCodec.adl"
+		args="P=$(P), R=Codec2:"
+	}
+	clr=14
+	bclr=51
+	label="Other #1"
+}
+"related display" {
+	object {
+		x=269
+		y=445
+		width=80
+		height=20
+	}
+	display[0] {
+		label="Image #2"
+		name="NDStdArrays.adl"
+		args="P=$(P), R=image2:"
+	}
+	display[1] {
+		label="Scan #1"
+		name="scan_more.adl"
+		args="P=$(P), S=scan1, N=1"
+	}
+	display[2] {
+		label="Acquire Sequence"
+		name="yySseq.adl"
+		args="P=$(P), S=AcquireSequence"
+	}
+	display[3] {
+		label="devIocStats"
+		name="ioc_stats_soft.adl"
+		args="ioc=$(P)"
+	}
+	display[4] {
+		label="Open CV #1"
+		name="ADCompVision.adl"
+		args="P=$(P), R=CV1:"
+	}
+	display[5] {
+		label="Edge #1"
+		name="NDPluginEdge.adl"
+		args="P=$(P), R=Edge1:"
+	}
+	clr=14
+	bclr=51
+	label="Other #2"
+}
+text {
+	object {
+		x=519
+		y=75
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		calc="A"
+		chan="$(P)$(R)MCAAcquiring"
+	}
+	textix="Collecting"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=480
+		y=44
+		width=120
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=365
+		y=40
+		width=350
+		height=460
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=502
+		y=44
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Acquire"
+}
+text {
+	object {
+		x=482
+		y=125
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Elapsed"
+}
+"text update" {
+	object {
+		x=485
+		y=175
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ElapsedLive"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=614
+		y=125
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Preset"
+}
+"text update" {
+	object {
+		x=595
+		y=200
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).IDTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=595
+		y=225
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(M).DTIM"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+text {
+	object {
+		x=548
+		y=75
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=63
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		calc="A"
+		chan="$(P)$(R)MCAAcquiring"
+	}
+	textix="Done"
+	align="horiz. centered"
+}
+"message button" {
+	object {
+		x=505
+		y=95
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EraseStart"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=572
+		y=95
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(R)StopAll"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="1"
+}
+text {
+	object {
+		x=430
+		y=95
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire"
+	align="horiz. right"
+}
+text {
+	object {
+		x=390
+		y=175
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Live time"
+}
+text {
+	object {
+		x=380
+		y=200
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Instant dead time (%)"
+}
+text {
+	object {
+		x=380
+		y=225
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Average dead time (%)"
+}
+"text update" {
+	object {
+		x=535
+		y=249
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)CurrentPixel"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=535
+		y=274
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)PollTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=627
+		y=274
+		width=70
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PollTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=535
+		y=299
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadAll.SCAN"
+		clr=14
+		bclr=51
+	}
+}
+"message button" {
+	object {
+		x=627
+		y=299
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadAllOnce.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
+}
+"text update" {
+	object {
+		x=535
+		y=324
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)NumQueuedArrays"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=535
+		y=349
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(R)WaitForPlugins"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=535
+		y=374
+		width=160
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)AcquireBusy"
+		clr=54
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=535
+		y=399
+		width=60
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ArrayCounter"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=600
+		y=399
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCounter_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=535
+		y=424
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayRate_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=535
+		y=449
+		width=90
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ArrayCallbacks"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=630
+		y=449
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCallbacks_RBV"
+		clr=54
+		bclr=4
+	}
+	format="string"
+	limits {
+	}
+}
+"related display" {
+	object {
+		x=535
+		y=474
+		width=86
+		height=20
+	}
+	display[0] {
+		label="MCA Display"
+		name="mca.adl"
+		args="P=$(P),M=$(M)"
+	}
+	display[1] {
+		label="Trace display"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=410
+		y=249
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="CurrentPixel"
+	align="horiz. right"
+}
+text {
+	object {
+		x=440
+		y=274
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Poll time"
+}
+text {
+	object {
+		x=440
+		y=299
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Read rate"
+}
+text {
+	object {
+		x=380
+		y=324
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="# Queued arrays"
+	align="horiz. right"
+}
+text {
+	object {
+		x=410
+		y=374
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire busy"
+	align="horiz. right"
+}
+text {
+	object {
+		x=400
+		y=399
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image counter"
+	align="horiz. right"
+}
+text {
+	object {
+		x=430
+		y=424
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image rate"
+	align="horiz. right"
+}
+text {
+	object {
+		x=380
+		y=449
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Array callbacks"
+	align="horiz. right"
+}
+text {
+	object {
+		x=480
+		y=474
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Plots"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=370
+		y=347
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Wait for plugins"
+	align="horiz. right"
+}
+text {
+	object {
+		x=390
+		y=150
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Real time"
+}
+"text update" {
+	object {
+		x=485
+		y=150
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ElapsedReal"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=565
+		y=150
+		width=103
+		height=22
+	}
+	control {
+		chan="$(P)$(R)PresetReal"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=871
+		y=45
+		width=117
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=725
+		y=40
+		width=410
+		height=220
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=886
+		y=45
+		width=88
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="MCA Setup"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=769
+		y=80
+		width=117
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Collect mode"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=891
+		y=80
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CollectMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=80
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)CollectMode_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=779
+		y=180
+		width=107
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Gating mode"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=891
+		y=180
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)GatingMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=180
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)GatingMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=779
+		y=230
+		width=107
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input mode"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=891
+		y=230
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=230
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=769
+		y=105
+		width=117
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA channels"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=993
+		y=105
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)NumMCAChannels_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=749
+		y=130
+		width=137
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Mapping points"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=891
+		y=130
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MappingPoints"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=130
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MappingPoints_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=749
+		y=155
+		width=137
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Maximum energy"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=891
+		y=155
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=155
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=730
+		y=205
+		width=156
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="List buffer size"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=891
+		y=205
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ListBufferSize"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=993
+		y=205
+		width=117
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ListBufferSize_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=891
+		y=105
+		width=98
+		height=20
+	}
+	control {
+		chan="$(P)$(R)NumMCAChannels"
+		clr=14
+		bclr=51
+	}
+}
+rectangle {
+	object {
+		x=871
+		y=275
+		width=117
+		height=22
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=725
+		y=270
+		width=410
+		height=230
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=886
+		y=275
+		width=88
+		height=21
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Panels"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=790
+		y=320
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="DPP Parameters"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=925
+		y=320
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Parameters.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=790
+		y=346
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Combined Plots"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=925
+		y=346
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8MCA.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=790
+		y=372
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Combined Traces"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=925
+		y=372
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Trace.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=790
+		y=398
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ROI"
+	align="horiz. right"
+}
+text {
+	object {
+		x=790
+		y=424
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Statistics"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=925
+		y=424
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Statistics.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=790
+		y=450
+		width=130
+		height=21
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Save"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=925
+		y=450
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Parameters.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+"related display" {
+	object {
+		x=925
+		y=398
+		width=111
+		height=21
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Trace.adl"
+		args="P=$(P),M=$(M)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
