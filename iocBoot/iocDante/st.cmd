@@ -5,9 +5,6 @@
 dbLoadDatabase("$(DANTE)/dbd/mcaDanteApp.dbd")
 mcaDanteApp_registerRecordDeviceDriver(pdbbase)
 
-# The search path for database files
-epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
-
 # Prefix for all records
 epicsEnvSet("PREFIX", "Dante:")
 # The port name for the detector
@@ -29,6 +26,7 @@ epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
 # DanteConfig(portName, ipAddress, numDetectors, maxBuffers, maxMemory)
 DanteConfig("$(PORT)", 164.54.160.181, 1, 0, 0)
+#DanteConfig("$(PORT)", 164.54.160.186, 1, 0, 0)
 
 dbLoadTemplate("dante.substitutions")
 
