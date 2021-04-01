@@ -1,13 +1,13 @@
 
 file {
-	name="C:\Users\Luca.Grittini\Desktop\dante_adl_updates\dante8.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/dante8.adl"
 	version=030109
 }
 display {
 	object {
-		x=1779
-		y=210
-		width=1140
+		x=142
+		y=270
+		width=1130
 		height=510
 	}
 	clr=14
@@ -121,360 +121,19 @@ composite {
 	"composite name"=""
 	"composite file"="ADSetup.adl"
 }
-text {
-	object {
-		x=127
-		y=400
-		width=1
-		height=40
-	}
-	"basic attribute" {
-		clr=14
-	}
-}
-rectangle {
+composite {
 	object {
 		x=5
-		y=390
+		y=385
 		width=350
-		height=110
+		height=80
 	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-rectangle {
-	object {
-		x=127
-		y=392
-		width=107
-		height=21
-	}
-	"basic attribute" {
-		clr=2
-	}
+	"composite name"=""
+	"composite file"="ADPlugins.adl"
 }
 text {
 	object {
-		x=145
-		y=393
-		width=70
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Plugins"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=95
-		y=419
-		width=40
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="File"
-}
-text {
-	object {
-		x=235
-		y=419
-		width=30
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="ROI"
-}
-"related display" {
-	object {
-		x=140
-		y=419
-		width=64
-		height=20
-	}
-	display[0] {
-		label="netCDF file #1"
-		name="NDFileNetCDF.adl"
-		args="P=$(P), R=netCDF1:, EXT=nc"
-	}
-	display[1] {
-		label="TIFF file #1"
-		name="NDFileTIFF.adl"
-		args="P=$(P), R=TIFF1:, EXT=tif"
-	}
-	display[2] {
-		label="JPEG file #1"
-		name="NDFileJPEG.adl"
-		args="P=$(P), R=JPEG1:, EXT=jpg"
-	}
-	display[3] {
-		label="NeXus file #1"
-		name="NDFileNexus.adl"
-		args="P=$(P), R=Nexus1:, EXT=h5"
-	}
-	display[4] {
-		label="Magick file #1"
-		name="NDFileMagick.adl"
-		args="P=$(P), R=Magick1:, EXT=tif"
-	}
-	display[5] {
-		label="HDF5 file #1"
-		name="NDFileHDF5.adl"
-		args="P=$(P), R=HDF1:, EXT=h5"
-	}
-	display[6] {
-		label="Null file #1"
-		name="NDFileNull.adl"
-		args="P=$(P), R=Null1:, EXT=null"
-	}
-	clr=14
-	bclr=51
-}
-"related display" {
-	object {
-		x=270
-		y=419
-		width=64
-		height=20
-	}
-	display[0] {
-		label="ROI #1"
-		name="NDROI.adl"
-		args="P=$(P), R=ROI1:"
-	}
-	display[1] {
-		label="ROI #2"
-		name="NDROI.adl"
-		args="P=$(P), R=ROI2:"
-	}
-	display[2] {
-		label="ROI #3"
-		name="NDROI.adl"
-		args="P=$(P), R=ROI3:"
-	}
-	display[3] {
-		label="ROI #4"
-		name="NDROI.adl"
-		args="P=$(P), R=ROI4:"
-	}
-	display[4] {
-		label="ROI 1-4 combined"
-		name="NDROI4.adl"
-		args="P=$(P), R1=ROI1:,R2=ROI2:, R3=ROI3:,R4=ROI4:"
-	}
-	clr=14
-	bclr=51
-}
-"related display" {
-	object {
-		x=15
-		y=419
-		width=64
-		height=20
-	}
-	display[0] {
-		label="Common plugins"
-		name="commonPlugins.adl"
-		args="P=$(P)"
-	}
-	clr=14
-	bclr=51
-	label="-All"
-}
-text {
-	object {
-		x=15
-		y=445
-		width=50
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Stats"
-}
-"related display" {
-	object {
-		x=70
-		y=445
-		width=64
-		height=20
-	}
-	display[0] {
-		label="Statistics #1"
-		name="NDStats.adl"
-		args="P=$(P), R=Stats1:"
-	}
-	display[1] {
-		label="Statistics #2"
-		name="NDStats.adl"
-		args="P=$(P), R=Stats2:"
-	}
-	display[2] {
-		label="Statistics #3"
-		name="NDStats.adl"
-		args="P=$(P), R=Stats3:"
-	}
-	display[3] {
-		label="Statistics #4"
-		name="NDStats.adl"
-		args="P=$(P), R=Stats4:"
-	}
-	display[4] {
-		label="Statistics #5"
-		name="NDStats.adl"
-		args="P=$(P), R=Stats5:"
-	}
-	display[5] {
-		label="Statistics 1-5"
-		name="NDStats5.adl"
-		args="P=$(P), R1=Stats1:,R2=Stats2:,R3=Stats3:,R4=Stats4:,R5=Stats5:"
-	}
-	clr=14
-	bclr=51
-}
-"related display" {
-	object {
-		x=182
-		y=445
-		width=80
-		height=20
-	}
-	display[0] {
-		label="Image #1"
-		name="NDStdArrays.adl"
-		args="P=$(P), R=image1:"
-	}
-	display[1] {
-		label="Pva #1"
-		name="NDPva.adl"
-		args="P=$(P), R=Pva1:"
-	}
-	display[2] {
-		label="Process #1"
-		name="NDProcess.adl"
-		args="P=$(P), R=Proc1:"
-	}
-	display[3] {
-		label="Transform #1"
-		name="NDTransform.adl"
-		args="P=$(P), R=Trans1:"
-	}
-	display[4] {
-		label="Color convert #1"
-		name="NDColorConvert.adl"
-		args="P=$(P), R=CC1:"
-	}
-	display[5] {
-		label="Color convert #2"
-		name="NDColorConvert.adl"
-		args="P=$(P), R=CC2:"
-	}
-	display[6] {
-		label="Overlay #1"
-		name="NDOverlay.adl"
-		args="P=$(P), R=Over1:"
-	}
-	display[7] {
-		label="Overlays 1-8"
-		name="NDOverlay8.adl"
-		args="P=$(P), R=Over1:,O1=Over1:1:,O2=Over1:2:,O3=Over1:3:,O4=Over1:4:,O5=Over1:5:,O6=Over1:6:,O7=Over1:7:,O8=Over1:8:"
-	}
-	display[8] {
-		label="Circular buffer #1"
-		name="NDCircularBuff.adl"
-		args="P=$(P), R=CB1:"
-	}
-	display[9] {
-		label="ROI Statistics #1"
-		name="NDROIStat.adl"
-		args="P=$(P), R=ROIStat1:"
-	}
-	display[10] {
-		label="Attribute #1"
-		name="NDPluginAttribute.adl"
-		args="P=$(P), R=Attr1:"
-	}
-	display[11] {
-		label="FFT #1"
-		name="NDFFT.adl"
-		args="P=$(P), R=FFT1:"
-	}
-	display[12] {
-		label="Scatter #1"
-		name="NDScatter.adl"
-		args="P=$(P), R=Scatter1:"
-	}
-	display[13] {
-		label="Gather #1"
-		name="NDGather8.adl"
-		args="P=$(P), R=Gather1:"
-	}
-	display[14] {
-		label="Codec #1"
-		name="NDCodec.adl"
-		args="P=$(P), R=Codec1:"
-	}
-	display[15] {
-		label="Codec #2"
-		name="NDCodec.adl"
-		args="P=$(P), R=Codec2:"
-	}
-	clr=14
-	bclr=51
-	label="Other #1"
-}
-"related display" {
-	object {
-		x=269
-		y=445
-		width=80
-		height=20
-	}
-	display[0] {
-		label="Image #2"
-		name="NDStdArrays.adl"
-		args="P=$(P), R=image2:"
-	}
-	display[1] {
-		label="Scan #1"
-		name="scan_more.adl"
-		args="P=$(P), S=scan1, N=1"
-	}
-	display[2] {
-		label="Acquire Sequence"
-		name="yySseq.adl"
-		args="P=$(P), S=AcquireSequence"
-	}
-	display[3] {
-		label="devIocStats"
-		name="ioc_stats_soft.adl"
-		args="ioc=$(P)"
-	}
-	display[4] {
-		label="Open CV #1"
-		name="ADCompVision.adl"
-		args="P=$(P), R=CV1:"
-	}
-	display[5] {
-		label="Edge #1"
-		name="NDPluginEdge.adl"
-		args="P=$(P), R=Edge1:"
-	}
-	clr=14
-	bclr=51
-	label="Other #2"
-}
-text {
-	object {
-		x=519
+		x=514
 		y=75
 		width=100
 		height=20
@@ -492,7 +151,7 @@ text {
 }
 rectangle {
 	object {
-		x=480
+		x=475
 		y=44
 		width=120
 		height=21
@@ -503,7 +162,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=365
+		x=360
 		y=40
 		width=350
 		height=460
@@ -516,7 +175,7 @@ rectangle {
 }
 text {
 	object {
-		x=502
+		x=497
 		y=44
 		width=70
 		height=20
@@ -528,7 +187,7 @@ text {
 }
 text {
 	object {
-		x=482
+		x=477
 		y=125
 		width=70
 		height=20
@@ -540,7 +199,7 @@ text {
 }
 "text update" {
 	object {
-		x=485
+		x=480
 		y=175
 		width=75
 		height=20
@@ -555,7 +214,7 @@ text {
 }
 text {
 	object {
-		x=614
+		x=609
 		y=125
 		width=60
 		height=20
@@ -567,7 +226,7 @@ text {
 }
 "text update" {
 	object {
-		x=595
+		x=590
 		y=200
 		width=76
 		height=20
@@ -583,7 +242,7 @@ text {
 }
 "text update" {
 	object {
-		x=595
+		x=590
 		y=225
 		width=76
 		height=20
@@ -599,7 +258,7 @@ text {
 }
 text {
 	object {
-		x=548
+		x=543
 		y=75
 		width=40
 		height=20
@@ -617,7 +276,7 @@ text {
 }
 "message button" {
 	object {
-		x=505
+		x=500
 		y=95
 		width=59
 		height=20
@@ -632,7 +291,7 @@ text {
 }
 "message button" {
 	object {
-		x=572
+		x=567
 		y=95
 		width=59
 		height=20
@@ -647,7 +306,7 @@ text {
 }
 text {
 	object {
-		x=430
+		x=425
 		y=95
 		width=70
 		height=20
@@ -660,7 +319,7 @@ text {
 }
 text {
 	object {
-		x=390
+		x=385
 		y=175
 		width=90
 		height=20
@@ -672,7 +331,7 @@ text {
 }
 text {
 	object {
-		x=380
+		x=375
 		y=200
 		width=210
 		height=20
@@ -684,7 +343,7 @@ text {
 }
 text {
 	object {
-		x=380
+		x=375
 		y=225
 		width=210
 		height=20
@@ -696,7 +355,7 @@ text {
 }
 "text update" {
 	object {
-		x=535
+		x=530
 		y=249
 		width=60
 		height=20
@@ -712,7 +371,7 @@ text {
 }
 "text entry" {
 	object {
-		x=535
+		x=530
 		y=274
 		width=87
 		height=20
@@ -727,7 +386,7 @@ text {
 }
 "text update" {
 	object {
-		x=627
+		x=622
 		y=274
 		width=70
 		height=20
@@ -742,7 +401,7 @@ text {
 }
 menu {
 	object {
-		x=535
+		x=530
 		y=299
 		width=87
 		height=20
@@ -755,7 +414,7 @@ menu {
 }
 "message button" {
 	object {
-		x=627
+		x=622
 		y=299
 		width=54
 		height=20
@@ -770,7 +429,7 @@ menu {
 }
 "text update" {
 	object {
-		x=535
+		x=530
 		y=324
 		width=60
 		height=20
@@ -785,7 +444,7 @@ menu {
 }
 menu {
 	object {
-		x=535
+		x=530
 		y=349
 		width=80
 		height=20
@@ -798,7 +457,7 @@ menu {
 }
 "text update" {
 	object {
-		x=535
+		x=530
 		y=374
 		width=160
 		height=20
@@ -815,7 +474,7 @@ menu {
 }
 "text entry" {
 	object {
-		x=535
+		x=530
 		y=399
 		width=60
 		height=20
@@ -830,7 +489,7 @@ menu {
 }
 "text update" {
 	object {
-		x=600
+		x=595
 		y=399
 		width=80
 		height=20
@@ -845,7 +504,7 @@ menu {
 }
 "text update" {
 	object {
-		x=535
+		x=530
 		y=424
 		width=100
 		height=20
@@ -860,7 +519,7 @@ menu {
 }
 menu {
 	object {
-		x=535
+		x=530
 		y=449
 		width=90
 		height=20
@@ -873,7 +532,7 @@ menu {
 }
 "text update" {
 	object {
-		x=630
+		x=625
 		y=449
 		width=80
 		height=20
@@ -889,7 +548,7 @@ menu {
 }
 "related display" {
 	object {
-		x=535
+		x=530
 		y=474
 		width=86
 		height=20
@@ -910,7 +569,7 @@ menu {
 }
 text {
 	object {
-		x=410
+		x=405
 		y=249
 		width=120
 		height=20
@@ -923,7 +582,7 @@ text {
 }
 text {
 	object {
-		x=440
+		x=435
 		y=274
 		width=90
 		height=20
@@ -935,7 +594,7 @@ text {
 }
 text {
 	object {
-		x=440
+		x=435
 		y=299
 		width=90
 		height=20
@@ -947,7 +606,7 @@ text {
 }
 text {
 	object {
-		x=380
+		x=375
 		y=324
 		width=150
 		height=20
@@ -960,7 +619,7 @@ text {
 }
 text {
 	object {
-		x=410
+		x=405
 		y=374
 		width=120
 		height=20
@@ -973,7 +632,7 @@ text {
 }
 text {
 	object {
-		x=400
+		x=395
 		y=399
 		width=130
 		height=20
@@ -986,7 +645,7 @@ text {
 }
 text {
 	object {
-		x=430
+		x=425
 		y=424
 		width=100
 		height=20
@@ -999,7 +658,7 @@ text {
 }
 text {
 	object {
-		x=380
+		x=375
 		y=449
 		width=150
 		height=20
@@ -1012,7 +671,7 @@ text {
 }
 text {
 	object {
-		x=480
+		x=475
 		y=474
 		width=50
 		height=20
@@ -1025,7 +684,7 @@ text {
 }
 text {
 	object {
-		x=370
+		x=365
 		y=347
 		width=160
 		height=20
@@ -1038,7 +697,7 @@ text {
 }
 text {
 	object {
-		x=390
+		x=385
 		y=150
 		width=90
 		height=20
@@ -1050,7 +709,7 @@ text {
 }
 "text update" {
 	object {
-		x=485
+		x=480
 		y=150
 		width=75
 		height=20
@@ -1065,7 +724,7 @@ text {
 }
 "text entry" {
 	object {
-		x=565
+		x=560
 		y=150
 		width=103
 		height=22
@@ -1078,343 +737,269 @@ text {
 	limits {
 	}
 }
-rectangle {
+composite {
 	object {
-		x=871
-		y=45
-		width=117
-		height=21
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-rectangle {
-	object {
-		x=725
+		x=715
 		y=40
 		width=410
-		height=220
+		height=165
 	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=1
-	}
-}
-text {
-	object {
-		x=886
-		y=45
-		width=88
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="MCA Setup"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=769
-		y=80
-		width=117
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Collect mode"
-	align="horiz. right"
-}
-menu {
-	object {
-		x=891
-		y=80
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CollectMode"
-		clr=14
-		bclr=51
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=80
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)CollectMode_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=779
-		y=180
-		width=107
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Gating mode"
-	align="horiz. right"
-}
-menu {
-	object {
-		x=891
-		y=180
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)GatingMode"
-		clr=14
-		bclr=51
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=180
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)GatingMode_RBV"
-		clr=54
-		bclr=3
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=779
-		y=230
-		width=107
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Input mode"
-	align="horiz. right"
-}
-menu {
-	object {
-		x=891
-		y=230
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)InputMode"
-		clr=14
-		bclr=51
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=230
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)InputMode_RBV"
-		clr=54
-		bclr=3
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=769
-		y=105
-		width=117
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="MCA channels"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=993
-		y=105
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)NumMCAChannels_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=749
-		y=130
-		width=137
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Mapping points"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=891
-		y=130
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)MappingPoints"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=130
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)MappingPoints_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=749
-		y=155
-		width=137
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Maximum energy"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=891
-		y=155
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=155
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=730
-		y=205
-		width=156
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="List buffer size"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=891
-		y=205
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)ListBufferSize"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=993
-		y=205
-		width=117
-		height=20
-	}
-	monitor {
-		chan="$(P)$(R)ListBufferSize_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-menu {
-	object {
-		x=891
-		y=105
-		width=98
-		height=20
-	}
-	control {
-		chan="$(P)$(R)NumMCAChannels"
-		clr=14
-		bclr=51
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=861
+				y=45
+				width=117
+				height=21
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		rectangle {
+			object {
+				x=715
+				y=40
+				width=410
+				height=165
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		text {
+			object {
+				x=876
+				y=45
+				width=88
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="MCA Setup"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=765
+				y=80
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Collect mode"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=765
+				y=105
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="MCA channels"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=745
+				y=130
+				width=140
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Mapping points"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=775
+				y=155
+				width=110
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Gating mode"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=725
+				y=180
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="List buffer size"
+			align="horiz. right"
+		}
+		menu {
+			object {
+				x=890
+				y=80
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CollectMode"
+				clr=14
+				bclr=51
+			}
+		}
+		"text entry" {
+			object {
+				x=890
+				y=130
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)MappingPoints"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		menu {
+			object {
+				x=890
+				y=105
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)NumMCAChannels"
+				clr=14
+				bclr=51
+			}
+		}
+		menu {
+			object {
+				x=890
+				y=155
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)GatingMode"
+				clr=14
+				bclr=51
+			}
+		}
+		"text entry" {
+			object {
+				x=890
+				y=180
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)ListBufferSize"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=80
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)CollectMode_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=105
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)NumMCAChannels_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=130
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)MappingPoints_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=155
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)GatingMode_RBV"
+				clr=54
+				bclr=3
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=180
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)ListBufferSize_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
 	}
 }
 rectangle {
 	object {
-		x=871
-		y=275
-		width=117
+		x=845
+		y=215
+		width=150
 		height=22
 	}
 	"basic attribute" {
@@ -1423,10 +1008,10 @@ rectangle {
 }
 rectangle {
 	object {
-		x=725
-		y=270
+		x=715
+		y=210
 		width=410
-		height=230
+		height=135
 	}
 	"basic attribute" {
 		clr=14
@@ -1436,23 +1021,71 @@ rectangle {
 }
 text {
 	object {
-		x=886
-		y=275
-		width=88
-		height=21
+		x=855
+		y=215
+		width=130
+		height=20
 	}
 	"basic attribute" {
 		clr=54
 	}
-	textix="Panels"
+	textix="Multi-channel"
 	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=962
+		y=245
+		width=111
+		height=20
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Parameters.adl"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
+	}
+	clr=14
+	bclr=51
+	label="DPP Params"
+}
+"related display" {
+	object {
+		x=962
+		y=270
+		width=111
+		height=20
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8MCA.adl"
+		args="P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8"
+	}
+	clr=14
+	bclr=51
+	label="MCA Plots"
+}
+"related display" {
+	object {
+		x=962
+		y=295
+		width=111
+		height=20
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Trace.adl"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
+	}
+	clr=14
+	bclr=51
+	label="ADC Traces"
 }
 text {
 	object {
-		x=790
-		y=320
-		width=130
-		height=21
+		x=817
+		y=245
+		width=140
+		height=20
 	}
 	"basic attribute" {
 		clr=14
@@ -1460,99 +1093,38 @@ text {
 	textix="DPP Parameters"
 	align="horiz. right"
 }
-"related display" {
+text {
 	object {
-		x=925
+		x=777
+		y=270
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Combined MCA Plots"
+	align="horiz. right"
+}
+text {
+	object {
+		x=767
+		y=295
+		width=190
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Combined ADC Traces"
+	align="horiz. right"
+}
+text {
+	object {
+		x=857
 		y=320
-		width=111
-		height=21
-	}
-	display[0] {
-		label="DPP Parameters"
-		name="dante8Parameters.adl"
-		args="P=$(P),M=$(M)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
-}
-text {
-	object {
-		x=790
-		y=346
-		width=130
-		height=21
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Combined Plots"
-	align="horiz. right"
-}
-"related display" {
-	object {
-		x=925
-		y=346
-		width=111
-		height=21
-	}
-	display[0] {
-		label="DPP Parameters"
-		name="dante8MCA.adl"
-		args="P=$(P),M=$(M)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
-}
-text {
-	object {
-		x=790
-		y=372
-		width=130
-		height=21
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Combined Traces"
-	align="horiz. right"
-}
-"related display" {
-	object {
-		x=925
-		y=372
-		width=111
-		height=21
-	}
-	display[0] {
-		label="DPP Parameters"
-		name="dante8Trace.adl"
-		args="P=$(P),M=$(M)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
-}
-text {
-	object {
-		x=790
-		y=398
-		width=130
-		height=21
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="ROI"
-	align="horiz. right"
-}
-text {
-	object {
-		x=790
-		y=424
-		width=130
-		height=21
+		width=100
+		height=20
 	}
 	"basic attribute" {
 		clr=14
@@ -1562,62 +1134,17 @@ text {
 }
 "related display" {
 	object {
-		x=925
-		y=424
+		x=962
+		y=320
 		width=111
-		height=21
+		height=20
 	}
 	display[0] {
 		label="DPP Parameters"
 		name="dante8Statistics.adl"
-		args="P=$(P),M=$(M)"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
 	}
 	clr=14
 	bclr=51
-	label="Plots"
-}
-text {
-	object {
-		x=790
-		y=450
-		width=130
-		height=21
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Save"
-	align="horiz. right"
-}
-"related display" {
-	object {
-		x=925
-		y=450
-		width=111
-		height=21
-	}
-	display[0] {
-		label="DPP Parameters"
-		name="dante8Parameters.adl"
-		args="P=$(P),M=$(M)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
-}
-"related display" {
-	object {
-		x=925
-		y=398
-		width=111
-		height=21
-	}
-	display[0] {
-		label="DPP Parameters"
-		name="dante8Trace.adl"
-		args="P=$(P),M=$(M)"
-	}
-	clr=14
-	bclr=51
-	label="Plots"
+	label="Statistics"
 }

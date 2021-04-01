@@ -1,13 +1,13 @@
 
 file {
-	name="C:\Users\Luca.Grittini\Desktop\dante_adl_updates\dante8Trace.adl"
+	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante8Trace.adl"
 	version=030109
 }
 display {
 	object {
-		x=1253
-		y=120
-		width=1670
+		x=384
+		y=286
+		width=1640
 		height=800
 	}
 	clr=14
@@ -87,439 +87,22 @@ display {
 		1a7309,
 	}
 }
-"cartesian plot" {
-	object {
-		x=20
-		y=70
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=430
-		y=70
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=840
-		y=70
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=1250
-		y=70
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
 rectangle {
 	object {
-		x=20
-		y=50
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=20
-		y=52
-		width=400
-		height=20
+		x=0
+		y=0
+		width=1640
+		height=25
 	}
 	"basic attribute" {
 		clr=54
 	}
-	textix="CHANNEL 1"
-	align="horiz. centered"
 }
 rectangle {
 	object {
-		x=430
-		y=50
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=430
-		y=52
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 2"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=840
-		y=50
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=840
-		y=52
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 3"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=1250
-		y=50
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=1250
-		y=52
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 4"
-	align="horiz. centered"
-}
-"cartesian plot" {
-	object {
-		x=20
-		y=350
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=430
-		y=350
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=840
-		y=350
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-"cartesian plot" {
-	object {
-		x=1250
-		y=350
-		width=400
-		height=250
-	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(R)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-rectangle {
-	object {
-		x=20
-		y=330
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=20
-		y=332
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 5"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=430
-		y=330
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=430
-		y=332
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 6"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=840
-		y=330
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=840
-		y=332
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 7"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=1250
-		y=330
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=1250
-		y=332
-		width=400
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="CHANNEL 8"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=10
-		y=15
-		width=1650
-		height=595
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-	}
-}
-rectangle {
-	object {
-		x=10
+		x=7
 		y=625
-		width=1650
+		width=1600
 		height=160
 	}
 	"basic attribute" {
@@ -550,41 +133,6 @@ text {
 	}
 	textix="Trace Setup"
 	align="horiz. centered"
-}
-composite {
-	object {
-		x=750
-		y=18
-		width=170
-		height=23
-	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=750
-				y=18
-				width=170
-				height=22
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=750
-				y=19
-				width=170
-				height=22
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Traces"
-			align="horiz. centered"
-		}
-	}
 }
 rectangle {
 	object {
@@ -950,5 +498,445 @@ text {
 		bclr=51
 	}
 	limits {
+	}
+}
+text {
+	object {
+		x=0
+		y=0
+		width=1640
+		height=25
+	}
+	"basic attribute" {
+		clr=0
+	}
+	textix="Dante ADC Trace ($(P)$(R))"
+	align="horiz. centered"
+}
+composite {
+	object {
+		x=5
+		y=40
+		width=1630
+		height=550
+	}
+	"composite name"=""
+	children {
+		"cartesian plot" {
+			object {
+				x=5
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D1) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D1)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=415
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D2) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D2)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=825
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D3) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D3)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=1235
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D4) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D4)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		rectangle {
+			object {
+				x=5
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=5
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 1"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=415
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=415
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 2"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=825
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=825
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 3"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=1235
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=1235
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 4"
+			align="horiz. centered"
+		}
+		"cartesian plot" {
+			object {
+				x=5
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D5) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D5)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=415
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D6) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D6)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=825
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D7) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D7)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=1235
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D8) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D8)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		rectangle {
+			object {
+				x=5
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=5
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 5"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=415
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=415
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 6"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=825
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=825
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 7"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=1235
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=1235
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 8"
+			align="horiz. centered"
+		}
 	}
 }
