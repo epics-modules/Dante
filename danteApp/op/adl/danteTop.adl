@@ -113,7 +113,7 @@ display {
 	display[0] {
 		label="Dante"
 		name="dante8.adl"
-		args="P=Dante:,M=mca,R=dante"
+		args="P=Dante:,M=mca1,R=dante:"
 	}
 	clr=14
 	bclr=51
