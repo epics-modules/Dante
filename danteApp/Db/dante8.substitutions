@@ -2,7 +2,7 @@ file "$(DANTE)/db/dante.template"
 {
 pattern
 {  R,      PORT}
-{dante1:, DANTE1}
+{dante:, DANTE1}
 }
 
 file "$(DANTE)/db/danteN.template"
@@ -36,6 +36,6 @@ pattern
 file "$(ASYN)/db/asynRecord.db"
 {
 pattern
-{       R,        PORT,   ADDR,  IMAX,  OMAX}
-{Dante1:AsynIO, DANTE1,      0,    80,    80}
+{      R,        PORT,   ADDR,  IMAX,  OMAX}
+{dante:AsynIO, DANTE1,      0,    80,    80}
 }
