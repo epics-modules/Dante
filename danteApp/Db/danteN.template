@@ -500,4 +500,5 @@ record(waveform, "$(P)$(R)TraceData") {
     field(INP, "@asyn($(PORT),$(ADDR))DanteTraceData")
     field(NELM, "$(TRACE_LEN)")
     field(FTVL, "LONG")
+    field(SCAN, "I/O Intr")
 }
