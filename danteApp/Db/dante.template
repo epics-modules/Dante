@@ -192,29 +192,17 @@ record(bo,"$(P)$(R)DoReadAll") {
     field(ONAM, "Read")
 }
 
-record(bo,"$(P)$(R)ReadTraces") {
-    field(SCAN,"Passive")
-    field(VAL, "1")
-    field(OUT, "$(P)$(R)DoReadTraces PP MS")
-    field(ZNAM,"Done")
-    field(ONAM,"Read")
-}
-
-record(bo,"$(P)$(R)DoReadTraces") {
+record(bo,"$(P)$(R)ReadTrace") {
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteReadTrace")
     field(ZNAM, "Done")
     field(ONAM, "Read")
-}
-
-record(ai,"$(P)$(R)TraceTimes") {
-    field(VAL,"0.1")
-    field(PREC,"2")
 }
 
 #record(bo,"$(P)$(R)CopyTriggerPeakingTime") {
 #    field(ZNAM, "Done")
 #    field(ONAM, "Copy")
 #}
-
 
 record(mbbo,"$(P)$(R)GatingMode") {
     field(DESC,"Gating mode")
