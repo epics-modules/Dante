@@ -494,7 +494,8 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
         traceBuffer_ = (uint16_t *)malloc(traceLength_ * sizeof(epicsInt32));
         /* Allocate a buffer for the trace time array */
         if (traceTimeBuffer_) free(traceTimeBuffer_);
-        traceTimeBuffer_ = (epicsFloat64 *)malloc(traceLength_ * sizeof(epicsFloat64));    
+        traceTimeBuffer_ = (epicsFloat64 *)malloc(traceLength_ * sizeof(epicsFloat64));
+        newTraceTime_ = true;
     }
 
     /* Call the callback */
@@ -765,7 +766,7 @@ asynStatus Dante::getAcquisitionStatus(int addr)
     int board=addr;
     asynStatus status=asynSuccess;
     int i;
-    //static const char *functionName = "getAcquisitionStatus";
+    static const char *functionName = "getAcquisitionStatus";
     
     /* Note: we use the internal parameter DanteAcquiring rather than mcaAcquiring here
      * because we need to do callbacks in acquisitionTask() on all other parameters before
@@ -786,10 +787,13 @@ asynStatus Dante::getAcquisitionStatus(int addr)
         callId_ = isRunning_system(danteIdentifier_, addr);
         waitReply(callId_, danteReply_);
         setIntegerParam(addr, DanteAcquiring, danteReply_[0]);
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
+            "%s::%s addr=%d board=%d: danteReply_[0]=%d\n",
+            driverName, functionName, addr, board, danteReply_[0]);
     }
-    //asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-    //    "%s::%s addr=%d board=%d: acquiring=%d\n",
-    //    driverName, functionName, addr, board, acquiring);
+    asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
+        "%s::%s addr=%d board=%d: acquiring=%d\n",
+        driverName, functionName, addr, board, acquiring);
     return(status);
 }
 
@@ -1005,78 +1009,70 @@ asynStatus Dante::getMcaData(int addr)
 asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen)
 {
     int board=addr;
-    const char *functionName = "getTrace";
+    int iValue;
+    uint16_t mode=0;
+    double traceTime;    const char *functionName = "getTrace";
 
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
         "%s:%s: enter addr=%d\n",
         driverName, functionName, addr);
-    if (addr == numBoards_) board = ALL_BOARDS;
-    if (board == ALL_BOARDS) {  // All boards
-        for (int i=0; i<numBoards_; i++) {
-            // Call ourselves recursively but with a specific board
-            this->getTrace(i, data, maxLen, actualLen);
+
+    getDoubleParam(DanteTraceTime, &traceTime);
+    // Convert from microseconds to decimation of 16 ns.
+    uint16_t decRatio = traceTime/MIN_TRACE_TIME;
+    if (decRatio < 1) decRatio = 1;
+    if (decRatio > 32) decRatio = 32;
+    setDoubleParam(DanteTraceTime, decRatio * MIN_TRACE_TIME);
+    uint32_t triggerMask = 0;
+    getIntegerParam(DanteTraceTriggerInstant, &iValue);
+    if (iValue) triggerMask |= 1;
+    getIntegerParam(DanteTraceTriggerRising, &iValue);
+    if (iValue) triggerMask |= 2;
+    getIntegerParam(DanteTraceTriggerFalling, &iValue);
+    if (iValue) triggerMask |= 4;
+    getIntegerParam(DanteTraceTriggerLevel, &iValue);
+    uint32_t triggerLevel = iValue;
+    double triggerWaitTime;
+    getDoubleParam(DanteTraceTriggerWait, &triggerWaitTime);
+    getIntegerParam(DanteTraceLength, &iValue);
+    uint16_t length = iValue / TRACE_LEN_INC;
+    if (length < 1) length = 1;
+    setIntegerParam(DanteTraceLength, length * TRACE_LEN_INC);
+    callParamCallbacks();
+    callId_ = start_waveform(danteIdentifier_, mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
+    waitReply(callId_, danteReply_);
+    while(1) {
+        getAcquisitionStatus(ALL_BOARDS);
+        int danteAcquiring;
+        getIntegerParam(DanteAcquiring, &danteAcquiring);
+        if (danteAcquiring) {
+            epicsThreadSleep(0.001);
+        } else {
+            break;
         }
-    } else {
-        int iValue;
-        uint16_t mode=0;
+    }
+    if (!getWaveData(danteIdentifier_, board, traceBuffer_, traceLength_)) {
+        asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
+                  "%s::%s error calling getWaveData\n", driverName, functionName);
+        return asynError;
+    }
+    // There is a bug in their firmware, the last waveform entry is always 0.
+    // This messes up auto-scaling displays.  Replace it with the next to last value for now
+    traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
+    *actualLen = traceLength_;
+    if (maxLen < *actualLen) *actualLen = maxLen;
+    unsigned int i;
+    for (i=0; i<*actualLen; i++) {
+        data[i] = traceBuffer_[i];
+    }
+    if (newTraceTime_) {
         double traceTime;
-        getDoubleParam(DanteTraceTime, &traceTime);
-        // Convert from microseconds to decimation of 16 ns.
-        uint16_t decRatio = traceTime/MIN_TRACE_TIME;
-        if (decRatio < 1) decRatio = 1;
-        if (decRatio > 32) decRatio = 32;
-        setDoubleParam(DanteTraceTime, decRatio * MIN_TRACE_TIME);
-        uint32_t triggerMask = 0;
-        getIntegerParam(DanteTraceTriggerInstant, &iValue);
-        if (iValue) triggerMask |= 1;
-        getIntegerParam(DanteTraceTriggerRising, &iValue);
-        if (iValue) triggerMask |= 2;
-        getIntegerParam(DanteTraceTriggerFalling, &iValue);
-        if (iValue) triggerMask |= 4;
-        getIntegerParam(DanteTraceTriggerLevel, &iValue);
-        uint32_t triggerLevel = iValue;
-        double triggerWaitTime;
-        getDoubleParam(DanteTraceTriggerWait, &triggerWaitTime);
-        getIntegerParam(DanteTraceLength, &iValue);
-        uint16_t length = iValue / TRACE_LEN_INC;
-        if (length < 1) length = 1;
-        setIntegerParam(DanteTraceLength, length * TRACE_LEN_INC);
-        callParamCallbacks();
-        callId_ = start_waveform(danteIdentifier_, mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
-        waitReply(callId_, danteReply_);
-        while(1) {
-            getAcquisitionStatus(ALL_BOARDS);
-            int danteAcquiring;
-            getIntegerParam(DanteAcquiring, &danteAcquiring);
-            if (danteAcquiring) {
-                epicsThreadSleep(0.001);
-            } else {
-                break;
-            }
+        getDoubleParam(0, DanteTraceTime, &traceTime);
+        newTraceTime_ = false;
+        for (i=0; i<traceLength_; i++) {
+            traceTimeBuffer_[i] = i * traceTime;
         }
-        if (!getWaveData(danteIdentifier_, board, traceBuffer_, traceLength_)) {
-            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-                      "%s::%s error calling getWaveData\n", driverName, functionName);
-            return asynError;
-        }
-        // There is a bug in their firmware, the last waveform entry is always 0.
-        // This messes up auto-scaling displays.  Replace it with the next to last value for now
-        traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
-        *actualLen = traceLength_;
-        if (maxLen < *actualLen) *actualLen = maxLen;
-        unsigned int i;
-        for (i=0; i<*actualLen; i++) {
-            data[i] = traceBuffer_[i];
-        }
-        if (newTraceTime_) {
-            double traceTime;
-            getDoubleParam(board, DanteTraceTime, &traceTime);
-            newTraceTime_ = false;
-            for (i=0; i<traceLength_; i++) {
-                traceTimeBuffer_[i] = i * traceTime;
-            }
-            doCallbacksFloat64Array(traceTimeBuffer_, traceLength_, DanteTraceTimeArray, board);
-        }
+        doCallbacksFloat64Array(traceTimeBuffer_, traceLength_, DanteTraceTimeArray, 0);
     }
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
         "%s:%s: exit\n",
