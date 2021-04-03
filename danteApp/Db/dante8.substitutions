@@ -5,18 +5,25 @@ pattern
 {dante:, DANTE1}
 }
 
+file "$(DANTE)/db/danteMultiChannel.template"
+{
+pattern
+{  R,      PORT}
+{dante:, DANTE1}
+}
+
 file "$(DANTE)/db/danteN.template"
 {
 pattern
 {  R,      PORT,  ADDR}
-{dante1:, DANTE1,  0}
-{dante2:, DANTE1,  1}
-{dante3:, DANTE1,  2}
-{dante4:, DANTE1,  3}
-{dante5:, DANTE1,  4}
-{dante6:, DANTE1,  5}
-{dante7:, DANTE1,  6}
-{dante8:, DANTE1,  7}
+{dante1:, DANTE1,    0}
+{dante2:, DANTE1,    1}
+{dante3:, DANTE1,    2}
+{dante4:, DANTE1,    3}
+{dante5:, DANTE1,    4}
+{dante6:, DANTE1,    5}
+{dante7:, DANTE1,    6}
+{dante8:, DANTE1,    7}
 }
 
 file "$(MCA)/db/mca.db"
