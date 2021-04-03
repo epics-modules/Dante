@@ -43,8 +43,13 @@ dbLoadTemplate($(DANTE)/db/"dante8.substitutions", "P=$(PREFIX), NCHAN=$(MCA_CHA
 set_requestfile_path("$(DANTE)/danteApp/Db")
 set_requestfile_path("$(MCA)/mcaApp/Db")
 
+asynSetTraceIOMask($(PORT),0,ESCAPE)
+#asynSetTraceMask($(PORT),0,ERROR|DRIVER)
+
 iocInit
+
+seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=8")
 
 ### Start up the autosave task and tell it what to do.
 # Save settings every thirty seconds
-create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante1:, M=mca1")
+create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante:, M=mca1")
