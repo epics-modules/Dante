@@ -197,4 +197,13 @@ record(bo,"$(P)$(R)CopyBaseOffset") {
     field(ZNAM, "Done")
     field(ONAM, "Copy")
 }
+record(bo,"$(P)$(R)CopyROIChannel") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
+record(bo,"$(P)$(R)CopyROIEnergy") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
 
