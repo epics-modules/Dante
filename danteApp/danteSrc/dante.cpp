@@ -44,7 +44,7 @@
 #define ALL_BOARDS              -1
 #define MAX_MESSAGE_DATA          20
 #define MSG_QUEUE_SIZE            50
-#define MESSAGE_TIMEOUT           10.
+#define MESSAGE_TIMEOUT           20.
 #define MIN_TRACE_TIME         0.016
 #define TRACE_LEN_INC          16384
 #define NUM_MAPPING_STATS          4
@@ -95,13 +95,13 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask | asynDrvUserMask,
             asynInt32Mask | asynFloat64Mask | asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask | asynOctetMask,
             ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0),
-    numBoards_(nChannels), uniqueId_(0), traceLength_(0), newTraceTime_(true), traceBuffer_(0), traceTimeBuffer_(0)
+    numBoards_(nChannels), uniqueId_(0), traceLength_(0), newTraceTime_(true), traceBuffer_(0), traceBufferInt32_(0), traceTimeBuffer_(0)
 
 {
     int status = asynSuccess;
     int i, ch;
-    struct configuration config;
-    struct statistics stats;
+    configuration config = configuration();
+    statistics stats = statistics();
     const char *functionName = "Dante";
 
     pDanteGlobal = this;
@@ -200,6 +200,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     createParam(DanteTraceTriggerLevelString,      asynParamInt32,        &DanteTraceTriggerLevel);
     createParam(DanteTraceTriggerWaitString,       asynParamFloat64,      &DanteTraceTriggerWait);
     createParam(DanteTraceLengthString,            asynParamInt32,        &DanteTraceLength);
+    createParam(DanteReadTraceString,              asynParamInt32,        &DanteReadTrace);
 
     /* Runtime statistics */
     createParam(DanteInputCountRateString,         asynParamFloat64, &DanteInputCountRate);
@@ -238,6 +239,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     createParam(DanteTailCoefficientString,         asynParamFloat64, &DanteTailCoefficient);
     
     /* Other parameters */
+    createParam(DanteInputModeString,               asynParamInt32,   &DanteInputMode);
     createParam(DanteAnalogOffsetString,            asynParamInt32,   &DanteAnalogOffset);
     createParam(DanteGatingModeString,              asynParamInt32,   &DanteGatingMode);
     createParam(DanteMappingPointsString,           asynParamInt32,   &DanteMappingPoints);
@@ -328,7 +330,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     for (i=0; i<=numBoards_; i++) {
         char firmwareVersion[20];
         callId_ = getFirmware(danteIdentifier_, i);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "getFirmware");
         snprintf(firmwareVersion, sizeof(firmwareVersion)-1, "%d.%d.%d",
                  danteReply_[0], danteReply_[1], danteReply_[2]);
         setStringParam (i, ADFirmwareVersion, firmwareVersion);
@@ -369,7 +371,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
 
 }
 
-asynStatus Dante::waitReply(uint32_t callId, char *reply) {
+asynStatus Dante::waitReply(uint32_t callId, char *reply, const char *caller) {
     struct danteMessage message;
     int numRecv;
     static const char *functionName = "waitReply";
@@ -377,7 +379,8 @@ asynStatus Dante::waitReply(uint32_t callId, char *reply) {
     numRecv = msgQ_->receive(&message, sizeof(message), MESSAGE_TIMEOUT);
     if (numRecv != sizeof(message)) {
         asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-            "%s::%s error receiving message numRecv=%d\n", driverName, functionName, numRecv);
+            "%s::%s error receiving message in %f seconds, caller=%s numRecv=%d\n", 
+            driverName, functionName, MESSAGE_TIMEOUT, caller, numRecv);
         return asynError;
     }
     if (message.call_id != callId) {
@@ -434,7 +437,7 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     else if (function == mcaStopAcquire)
     {
         callId_ = stop(danteIdentifier_);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "stop");
         /* Wait for the acquisition task to realize the run has stopped and do the callbacks */
         while (1) {
             getIntegerParam(addr, mcaAcquiring, &acquiring);
@@ -466,13 +469,17 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     {
         this->setDanteConfiguration(addr);
     }
-    else if (function == DanteAnalogOffset) {
+    else if (function == DanteInputMode) {
         struct configuration_offset cfgOffset;
         cfgOffset.offset_val1 = value;
         cfgOffset.offset_val2 = value;
         cfgOffset.offset_val2 = value;
         callId_ = configure_offset(danteIdentifier_, addr, cfgOffset);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "configure_offset");
+    }
+    else if (function == DanteAnalogOffset) {
+        callId_ = configure_input(danteIdentifier_, addr, (InputMode)value);
+        waitReply(callId_, danteReply_, "configure_input");
     }
     else if (function == DanteGatingMode) {
         GatingMode gatingMode = (GatingMode)value;
@@ -480,7 +487,7 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
             "%s::%s calling configure_gating, gatingMode=%d, addr=%d\n",
             driverName, functionName, gatingMode, addr);
         callId_ = configure_gating(danteIdentifier_, gatingMode, addr);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "configure_gating");
     }  
     else if (function == DanteTraceLength) {
         // For length to be a multiple of 16K.
@@ -491,11 +498,16 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
         traceLength_ = value;
         /* Allocate a buffer for the trace data */
         if (traceBuffer_) free(traceBuffer_);
-        traceBuffer_ = (uint16_t *)malloc(traceLength_ * sizeof(epicsInt32));
+        traceBuffer_ = (uint16_t *)malloc(traceLength_ * sizeof(uint16_t));
+        if (traceBufferInt32_) free(traceBufferInt32_);
+        traceBufferInt32_ = (int32_t *)malloc(traceLength_ * sizeof(int32_t));
         /* Allocate a buffer for the trace time array */
         if (traceTimeBuffer_) free(traceTimeBuffer_);
         traceTimeBuffer_ = (epicsFloat64 *)malloc(traceLength_ * sizeof(epicsFloat64));
         newTraceTime_ = true;
+    }
+    else if (function == DanteReadTrace) {
+        status = this->getTraces();
     }
 
     /* Call the callback */
@@ -590,11 +602,7 @@ asynStatus Dante::readInt32Array(asynUser *pasynUser, epicsInt32 *value, size_t 
     asynPrint(pasynUser, ASYN_TRACE_FLOW, 
         "%s::%s addr=%d board=%d function=%d\n",
         driverName, functionName, addr, board, function);
-    if (function == DanteTraceData) 
-    {
-        status = this->getTrace(board, value, nElements, nIn);
-    } 
-    else if (function == mcaData) 
+    if (function == mcaData) 
     {
         if (board == ALL_BOARDS)
         {
@@ -755,7 +763,7 @@ asynStatus Dante::setDanteConfiguration(int addr)
             driverName, functionName, callId_);
             return asynError;
     }
-    waitReply(callId_, danteReply_);
+    waitReply(callId_, danteReply_, "configure");
     return asynSuccess;
 }
 
@@ -785,7 +793,7 @@ asynStatus Dante::getAcquisitionStatus(int addr)
     } else {
         /* Get the run time status from the Dante library */
         callId_ = isRunning_system(danteIdentifier_, addr);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "isRunning_system");
         setIntegerParam(addr, DanteAcquiring, danteReply_[0]);
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
             "%s::%s addr=%d board=%d: danteReply_[0]=%d\n",
@@ -1006,16 +1014,17 @@ asynStatus Dante::getMcaData(int addr)
 
 
 /* Get trace data */
-asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen)
+asynStatus Dante::getTraces()
 {
-    int board=addr;
     int iValue;
     uint16_t mode=0;
-    double traceTime;    const char *functionName = "getTrace";
+    uint32_t i;
+    double traceTime;
+    const char *functionName = "getTraces";
 
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW, 
-        "%s:%s: enter addr=%d\n",
-        driverName, functionName, addr);
+        "%s:%s: enter\n",
+        driverName, functionName);
 
     getDoubleParam(DanteTraceTime, &traceTime);
     // Convert from microseconds to decimation of 16 ns.
@@ -1040,7 +1049,7 @@ asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *ac
     setIntegerParam(DanteTraceLength, length * TRACE_LEN_INC);
     callParamCallbacks();
     callId_ = start_waveform(danteIdentifier_, mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
-    waitReply(callId_, danteReply_);
+    waitReply(callId_, danteReply_, "start_waveform");
     while(1) {
         getAcquisitionStatus(ALL_BOARDS);
         int danteAcquiring;
@@ -1051,19 +1060,19 @@ asynStatus Dante::getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *ac
             break;
         }
     }
-    if (!getWaveData(danteIdentifier_, board, traceBuffer_, traceLength_)) {
-        asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
-                  "%s::%s error calling getWaveData\n", driverName, functionName);
-        return asynError;
-    }
-    // There is a bug in their firmware, the last waveform entry is always 0.
-    // This messes up auto-scaling displays.  Replace it with the next to last value for now
-    traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
-    *actualLen = traceLength_;
-    if (maxLen < *actualLen) *actualLen = maxLen;
-    unsigned int i;
-    for (i=0; i<*actualLen; i++) {
-        data[i] = traceBuffer_[i];
+    for (int board=0; board<numBoards_; board++) {
+        if (!getWaveData(danteIdentifier_, board, traceBuffer_, traceLength_)) {
+            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR,
+                      "%s::%s error calling getWaveData\n", driverName, functionName);
+            return asynError;
+        }
+        // There is a bug in their firmware, the last waveform entry is always 0.
+        // This messes up auto-scaling displays.  Replace it with the next to last value for now
+        traceBuffer_[traceLength_-1] = traceBuffer_[traceLength_-2];
+        for (i=0; i<traceLength_; i++) {
+            traceBufferInt32_[i] = traceBuffer_[i];
+        }
+        doCallbacksInt32Array(traceBufferInt32_, traceLength_, DanteTraceData, board);
     }
     if (newTraceTime_) {
         double traceTime;
@@ -1109,7 +1118,7 @@ asynStatus Dante::startAcquiring()
     switch (collectMode){
       case DanteModeMCA:
         callId_ = start(danteIdentifier_, presetReal, numChannels);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "start");
         break;
       case DanteModeMCAMapping:
         setIntegerParam(DanteCurrentPixel, 0);
@@ -1117,12 +1126,12 @@ asynStatus Dante::startAcquiring()
         //  Work around bug, it only collects N-1 points
         mapPts = mappingPoints + 1;
         callId_ = start_map(danteIdentifier_, msTime, mapPts, numChannels);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "start_map");
         break;
       case DanteModeList:
         setIntegerParam(DanteCurrentPixel, 0);
         callId_ = start_list(danteIdentifier_, presetReal);
-        waitReply(callId_, danteReply_);
+        waitReply(callId_, danteReply_, "start_list");
         break;
     }
 

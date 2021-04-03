@@ -70,6 +70,7 @@ struct mappingAdvStats {
 #define DanteTraceTriggerLevelString        "DanteTraceTriggerLevel"
 #define DanteTraceTriggerWaitString         "DanteTraceTriggerWait"
 #define DanteTraceLengthString              "DanteTraceLength"
+#define DanteReadTraceString                "DanteReadTrace"
 
 /* Runtime statistics */
 #define DanteInputCountRateString           "DanteInputCountRate"
@@ -108,6 +109,7 @@ struct mappingAdvStats {
 #define DanteTailCoefficientString          "DanteTailCoefficient"
 
 /* Other parameters */
+#define DanteInputModeString                "DanteInputMode"
 #define DanteAnalogOffsetString             "DanteAnalogOffset"
 #define DanteGatingModeString               "DanteGatingMode"
 #define DanteMappingPointsString            "DanteMappingPoints"
@@ -155,6 +157,7 @@ protected:
     int DanteTraceTriggerLevel;    /** < Trigger level (0 - 65535) int32 */
     int DanteTraceTriggerWait;     /** < Time to wait for trigger float64 */
     int DanteTraceLength;          /** < Length of trace, multiples of 16K int32 */
+    int DanteReadTrace;            /** < Command to read the trace data */
 
     /* Runtime statistics */
     int DanteInputCountRate;      /* float64 */
@@ -193,6 +196,7 @@ protected:
     int DanteTailCoefficient;             /* float64, units? */
     
     /* Other parameters */
+    int DanteInputMode;                   /* int32 */
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
     int DanteGatingMode;                  /* int32 */
     int DanteMappingPoints;               /* int32 */
@@ -230,9 +234,9 @@ private:
     asynStatus getMcaData(int addr);
     asynStatus pollMCAMappingMode();
     asynStatus pollListMode();
-    asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
+    asynStatus getTraces();
     asynStatus startAcquiring();
-    asynStatus waitReply(uint32_t callId, char *reply);
+    asynStatus waitReply(uint32_t callId, char *reply, const char *caller);
 
     /* Data */
     std::vector<configuration> configurations_;
@@ -259,6 +263,7 @@ private:
     uint32_t traceLength_;
     bool newTraceTime_;
     uint16_t *traceBuffer_;
+    int32_t *traceBufferInt32_;
     epicsFloat64 *traceTimeBuffer_;
     epicsFloat64 *spectrumXAxisBuffer_;
     
