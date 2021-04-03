@@ -5,7 +5,7 @@ pattern
 {dante:, DANTE1}
 }
 
-file "$(DANTE)/db/danteMultiChannel.template"
+file "$(DANTE)/db/danteMED.template"
 {
 pattern
 {  R,      PORT}
