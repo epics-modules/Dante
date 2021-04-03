@@ -1,6 +1,6 @@
 
 file {
-	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/dante1.adl"
 	version=030109
 }
 display {
@@ -2497,7 +2497,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(R)TraceData.SCAN"
+		chan="$(P)$(R)ReadTrace.SCAN"
 		clr=14
 		bclr=51
 	}
@@ -2510,7 +2510,7 @@ menu {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)TraceData.PROC"
+		chan="$(P)$(R)ReadTrace.PROC"
 		clr=14
 		bclr=51
 	}

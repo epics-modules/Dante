@@ -162,7 +162,7 @@ menu {
 		height=18
 	}
 	control {
-		chan="$(P)$(R)TraceData.SCAN"
+		chan="$(P)$(R)ReadTrace.SCAN"
 		clr=14
 		bclr=51
 	}
@@ -175,7 +175,7 @@ menu {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)TraceData.PROC"
+		chan="$(P)$(R)ReadTrace"
 		clr=14
 		bclr=51
 	}
