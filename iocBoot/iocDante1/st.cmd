@@ -40,6 +40,9 @@ dbLoadTemplate($(DANTE)/db/"dante1.substitutions", "P=$(PREFIX), NCHAN=$(MCA_CHA
 set_requestfile_path("$(DANTE)/danteApp/Db")
 set_requestfile_path("$(MCA)/mcaApp/Db")
 
+asynSetTraceIOMask($(PORT),0,ESCAPE)
+#asynSetTraceMask($(PORT),0,ERROR|DRIVER)
+
 iocInit
 
 ### Start up the autosave task and tell it what to do.
