@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=294
-		y=367
+		x=145
+		y=104
 		width=1795
 		height=610
 	}
@@ -5784,6 +5784,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5798,6 +5799,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5812,6 +5814,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5826,6 +5829,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5840,6 +5844,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5854,6 +5859,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5868,6 +5874,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5882,6 +5889,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5896,6 +5904,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5910,6 +5919,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5924,6 +5934,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5938,6 +5949,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5952,6 +5964,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5966,6 +5979,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5980,6 +5994,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -5994,6 +6009,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -6008,6 +6024,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -6022,6 +6039,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -6036,6 +6054,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -6050,6 +6069,7 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
 "message button" {
 	object {
@@ -6064,4 +6084,5 @@ composite {
 		bclr=51
 	}
 	label="Copy 1 -> All"
+	press_msg="1"
 }
