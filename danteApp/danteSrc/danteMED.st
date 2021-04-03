@@ -45,145 +45,144 @@ char *mca;
 
 double  FastPeakingTime[MAX_DETECTORS];
 assign  FastPeakingTime to {};
-int     CopyFastPeakingTime; assign CopyFastPeakingTime to "{P}CopyFastPeakingTime";
+int     CopyFastPeakingTime; assign CopyFastPeakingTime to "{P}{DANTE}:CopyFastPeakingTime";
 monitor CopyFastPeakingTime; evflag CopyFastPeakingTimeMon; sync CopyFastPeakingTime CopyFastPeakingTimeMon;
 
 double  FastThreshold[MAX_DETECTORS]; 
 assign  FastThreshold to {};
-int     CopyFastThreshold; assign CopyFastThreshold to "{P}CopyFastThreshold";
+int     CopyFastThreshold; assign CopyFastThreshold to "{P}{DANTE}:CopyFastThreshold";
 monitor CopyFastThreshold; evflag CopyFastThresholdMon; sync CopyFastThreshold CopyFastThresholdMon;
 
 double  FastFlatTopTime[MAX_DETECTORS];
 assign  FastFlatTopTime to {};
-int     CopyFastFlatTopTime; assign CopyFastFlatTopTime to "{P}CopyFastFlatTopTime";
+int     CopyFastFlatTopTime; assign CopyFastFlatTopTime to "{P}{DANTE}:CopyFastFlatTopTime";
 monitor CopyFastFlatTopTime; evflag CopyFastFlatTopTimeMon; sync CopyFastFlatTopTime CopyFastFlatTopTimeMon;
 
 double  PeakingTime[MAX_DETECTORS]; 
 assign  PeakingTime to {};
-int     CopyPeakingTime; assign CopyPeakingTime to "{P}CopyPeakingTime";
+int     CopyPeakingTime; assign CopyPeakingTime to "{P}{DANTE}:CopyPeakingTime";
 monitor CopyPeakingTime; evflag CopyPeakingTimeMon; sync CopyPeakingTime CopyPeakingTimeMon;
 
 double  MaxPeakingTime[MAX_DETECTORS]; 
 assign  MaxPeakingTime to {};
-int     CopyMaxPeakingTime; assign CopyMaxPeakingTime to "{P}CopyMaxPeakingTime";
+int     CopyMaxPeakingTime; assign CopyMaxPeakingTime to "{P}{DANTE}:CopyMaxPeakingTime";
 monitor CopyMaxPeakingTime; evflag CopyMaxPeakingTimeMon; sync CopyMaxPeakingTime CopyPeakingTimeMon;
 
 double  FlatTopTime[MAX_DETECTORS]; 
 assign  FlatTopTime to {};
-int     CopyFlatTopTime; assign CopyFlatTopTime to "{P}CopyFlatTopTime";
+int     CopyFlatTopTime; assign CopyFlatTopTime to "{P}{DANTE}:CopyFlatTopTime";
 monitor CopyFlatTopTime; evflag CopyFlatTopTimeMon; sync CopyFlatTopTime CopyFlatTopTimeMon;
 
 double  EnergyThreshold[MAX_DETECTORS]; 
 assign  EnergyThreshold to {};
-int     CopyEnergyThreshold; assign CopyEnergyThreshold to "{P}CopyEnergyThreshold";
+int     CopyEnergyThreshold; assign CopyEnergyThreshold to "{P}{DANTE}:CopyEnergyThreshold";
 monitor CopyEnergyThreshold; evflag CopyEnergyThresholdMon; sync CopyEnergyThreshold CopyEnergyThresholdMon;
 
 double  BaselineThreshold[MAX_DETECTORS]; 
 assign  BaselineThreshold to {};
-int     CopyBaselineThreshold; assign CopyBaselineThreshold to "{P}CopyBaselineThreshold";
+int     CopyBaselineThreshold; assign CopyBaselineThreshold to "{P}{DANTE}:CopyBaselineThreshold";
 monitor CopyBaselineThreshold; evflag CopyBaselineThresholdMon; sync CopyBaselineThreshold CopyBaselineThresholdMon;
 
 double  MaxRiseTime[MAX_DETECTORS]; 
 assign  MaxRiseTime to {};
-int     CopyMaxRiseTime; assign CopyMaxRiseTime to "{P}CopyMaxRiseTime";
+int     CopyMaxRiseTime; assign CopyMaxRiseTime to "{P}{DANTE}:CopyMaxRiseTime";
 monitor CopyMaxRiseTime; evflag CopyMaxRiseTimeMon; sync CopyMaxRiseTime CopyMaxRiseTimeMon;
 
 double  ResetRecoveryTime[MAX_DETECTORS]; 
 assign  ResetRecoveryTime to {};
-int     CopyResetRecoveryTime; assign CopyResetRecoveryTime to "{P}CopyResetRecoveryTime";
+int     CopyResetRecoveryTime; assign CopyResetRecoveryTime to "{P}{DANTE}:CopyResetRecoveryTime";
 monitor CopyResetRecoveryTime; evflag CopyResetRecoveryTimeMon; sync CopyResetRecoveryTime CopyResetRecoveryTimeMon;
 
 double  ZeroPeakFreq[MAX_DETECTORS]; 
 assign  ZeroPeakFreq to {};
-int     CopyZeroPeakFreq; assign CopyZeroPeakFreq to "{P}CopyZeroPeakFreq";
+int     CopyZeroPeakFreq; assign CopyZeroPeakFreq to "{P}{DANTE}:CopyZeroPeakFreq";
 monitor CopyZeroPeakFreq; evflag CopyZeroPeakFreqMon; sync CopyZeroPeakFreq CopyZeroPeakFreqMon;
 
 double  BaselineSamples[MAX_DETECTORS]; 
 assign  BaselineSamples to {};
-int     CopyBaselineSamples; assign CopyBaselineSamples to "{P}CopyBaselineSamples";
+int     CopyBaselineSamples; assign CopyBaselineSamples to "{P}{DANTE}:CopyBaselineSamples";
 monitor CopyBaselineSamples; evflag CopyBaselineSamplesMon; sync CopyBaselineSamples CopyZeroPeakFreqMon;
 
 double  Gain[MAX_DETECTORS]; 
 assign  Gain to {};
-int     CopyGain; assign CopyGain to "{P}CopyGain";
+int     CopyGain; assign CopyGain to "{P}{DANTE}:CopyGain";
 monitor CopyGain; evflag CopyGainMon; sync CopyGain CopyGainMon;
 
 double  InputPolarity[MAX_DETECTORS]; 
 assign  InputPolarity to {};
-int     CopyInputPolarity; assign CopyInputPolarity to "{P}CopyInputPolarity";
+int     CopyInputPolarity; assign CopyInputPolarity to "{P}{DANTE}:CopyInputPolarity";
 monitor CopyInputPolarity; evflag CopyInputPolarityMon; sync CopyInputPolarity CopyInputPolarityMon;
 
 double  AnalogOffset[MAX_DETECTORS]; 
 assign  AnalogOffset to {};
-int     CopyAnalogOffset; assign CopyAnalogOffset to "{P}CopyAnalogOffset";
+int     CopyAnalogOffset; assign CopyAnalogOffset to "{P}{DANTE}:CopyAnalogOffset";
 monitor CopyAnalogOffset; evflag CopyAnalogOffsetMon; sync CopyAnalogOffset CopyAnalogOffsetMon;
 
 double  OverflowRecoveryTime[MAX_DETECTORS]; 
 assign  OverflowRecoveryTime to {};
-int     CopyOverflowRecoveryTime; assign CopyOverflowRecoveryTime to "{P}CopyOverflowRecoveryTime";
+int     CopyOverflowRecoveryTime; assign CopyOverflowRecoveryTime to "{P}{DANTE}:CopyOverflowRecoveryTime";
 monitor CopyOverflowRecoveryTime; evflag CopyOverflowRecoveryTimeMon; sync CopyOverflowRecoveryTime CopyOverflowRecoveryTimeMon;
 
+/*
 double  MaxEnergy[MAX_DETECTORS]; 
 assign  MaxEnergy to {};
-int     CopyMaxEnergy; assign CopyMaxEnergy to "{P}CopyMaxEnergy";
+int     CopyMaxEnergy; assign CopyMaxEnergy to "{P}{DANTE}:CopyMaxEnergy";
 monitor CopyMaxEnergy; evflag CopyMaxEnergyMon; sync CopyMaxEnergy CopyMaxEnergyMon;
+*/
 
 double  ResetThreshold[MAX_DETECTORS]; 
 assign  ResetThreshold to {};
-int     CopyResetThreshold; assign CopyResetThreshold to "{P}CopyResetThreshold";
+int     CopyResetThreshold; assign CopyResetThreshold to "{P}{DANTE}:CopyResetThreshold";
 monitor CopyResetThreshold; evflag CopyResetThresholdMon; sync CopyResetThreshold CopyResetThresholdMon;
 
 double  TailCoefficient[MAX_DETECTORS]; 
 assign  TailCoefficient to {};
-int     CopyTailCoefficient; assign CopyTailCoefficient to "{P}CopyTailCoefficient";
+int     CopyTailCoefficient; assign CopyTailCoefficient to "{P}{DANTE}:CopyTailCoefficient";
 monitor CopyTailCoefficient; evflag CopyTailCoefficientMon; sync CopyTailCoefficient CopyTailCoefficientMon;
 
 double  InputMode[MAX_DETECTORS]; 
 assign  InputMode to {};
-int     CopyInputMode; assign CopyInputMode to "{P}CopyInputMode";
+int     CopyInputMode; assign CopyInputMode to "{P}{DANTE}:CopyInputMode";
 monitor CopyInputMode; evflag CopyInputModeMon; sync CopyInputMode CopyInputModeMon;
 
 double  TimeConstant[MAX_DETECTORS]; 
 assign  TimeConstant to {};
-int     CopyTimeConstant; assign CopyTimeConstant to "{P}CopyTimeConstant";
+int     CopyTimeConstant; assign CopyTimeConstant to "{P}{DANTE}:CopyTimeConstant";
 monitor CopyTimeConstant; evflag CopyTimeConstantMon; sync CopyTimeConstant CopyTimeConstantMon;
 
 double  BaseOffset[MAX_DETECTORS]; 
 assign  BaseOffset to {};
-int     CopyBaseOffset; assign CopyBaseOffset to "{P}CopyBaseOffset";
+int     CopyBaseOffset; assign CopyBaseOffset to "{P}{DANTE}:CopyBaseOffset";
 monitor CopyBaseOffset; evflag CopyBaseOffsetMon; sync CopyBaseOffset CopyBaseOffsetMon;
 
 int     ReadMCA[MAX_DETECTORS]; 
 assign  ReadMCA to {};
-int     ReadMCAs; assign ReadMCAs to "{P}DoReadAll";
+int     ReadMCAs; assign ReadMCAs to "{P}{DANTE}:DoReadAll";
 monitor ReadMCAs; evflag ReadMCAsMon; sync ReadMCAs ReadMCAsMon;
 
 int     statusMCA[MAX_DETECTORS];
 assign  statusMCA to {};
-int     StatusMCAs; assign StatusMCAs to "{P}DoStatusAll";
+/*
+int     StatusMCAs; assign StatusMCAs to "{P}{DANTE}:DoStatusAll";
 monitor StatusMCAs; evflag StatusMCAsMon; sync StatusMCAs StatusMCAsMon;
+*/
 
-int     Acquiring; assign Acquiring to "{P}Acquiring";
-monitor Acquiring; evflag AcquiringMon; sync Acquiring AcquiringMon;
+int     MCAAcquiring; assign MCAAcquiring to "{P}{DANTE}:MCAAcquiring";
+monitor MCAAcquiring; evflag MCAAcquiringMon; sync MCAAcquiring MCAAcquiringMon;
 
 double  mcaPresetReal[MAX_DETECTORS]; 
 assign  mcaPresetReal to {};
-double  PresetReal; assign PresetReal to "{P}PresetReal";
+double  PresetReal; assign PresetReal to "{P}{DANTE}:PresetReal";
 monitor PresetReal; evflag PresetRealMon; sync PresetReal PresetRealMon;
-
-double  mcaPresetLive[MAX_DETECTORS]; 
-assign  mcaPresetLive to {};
-double  PresetLive; assign PresetLive to "{P}PresetLive";
-monitor PresetLive; evflag PresetLiveMon; sync PresetLive PresetLiveMon;
 
 double  mcaDeadTime[MAX_DETECTORS]; 
 assign  mcaDeadTime to {};
-double  DeadTime; assign DeadTime to "{P}DeadTime";
+double  DeadTime; assign DeadTime to "{P}{DANTE}:DeadTime";
 evflag  DeadTimeMon; sync mcaDeadTime DeadTimeMon;
 
 double  mcaIDeadTime[MAX_DETECTORS]; 
 assign  mcaIDeadTime to {};
-double  IDeadTime; assign IDeadTime to "{P}IDeadTime";
+double  IDeadTime; assign IDeadTime to "{P}{DANTE}:IDeadTime";
 evflag  IDeadTimeMon; sync mcaIDeadTime IDeadTimeMon;
 
 int     mcaNumChans[MAX_DETECTORS]; 
@@ -204,17 +203,15 @@ assign mcaROIHigh to {};
 string mcaROIName[TOTAL_ROIS]; 
 assign mcaROIName to {};
 
-int     CopyROIChannel; assign CopyROIChannel     to "{P}CopyROIChannel";
+int     CopyROIChannel; assign CopyROIChannel     to "{P}{DANTE}:CopyROIChannel";
 monitor CopyROIChannel; evflag CopyROIChannelMon; sync CopyROIChannel CopyROIChannelMon;
-int     CopyROIEnergy;  assign CopyROIEnergy      to "{P}CopyROIEnergy";
+int     CopyROIEnergy;  assign CopyROIEnergy      to "{P}{DANTE}:CopyROIEnergy";
 monitor CopyROIEnergy;  evflag CopyROIEnergyMon;  sync CopyROIEnergy CopyROIEnergyMon;
-int     CopyROI_SCA;    assign CopyROI_SCA        to "{P}CopyROI_SCA";
-monitor CopyROI_SCA;    evflag CopyROI_SCAMon;    sync CopyROI_SCA CopyROI_SCAMon;
-int     SNL_Connected;  assign SNL_Connected      to "{P}SNL_Connected";
-int     AsynDebug;      assign AsynDebug          to "{P}Asyn.TB1";
+int     SNL_Connected;  assign SNL_Connected      to "{P}{DANTE}:SNL_Connected";
+int     AsynDebug;      assign AsynDebug          to "{P}{DANTE}:AsynIO.TB1";
 monitor AsynDebug;
 
-int AcquireBusy; assign AcquireBusy to "{P}AcquireBusy";
+int MCAAcquireBusy; assign MCAAcquireBusy to "{P}{DANTE}:MCAAcquireBusy";
 
 ss dante_control {
     state init {
@@ -279,10 +276,10 @@ ss dante_control {
 
                 sprintf(temp, "%s%s%d:OverflowRecoveryTime", prefix, dante, det);
                 pvAssign(OverflowRecoveryTime[i], temp);
-
+/*
                 sprintf(temp, "%s%s%d:MaxEnergy", prefix, dante, det);
                 pvAssign(MaxEnergy[i], temp);
-
+*/
                 sprintf(temp, "%s%s%d:ResetThreshold", prefix, dante, det);
                 pvAssign(ResetThreshold[i], temp);
 
@@ -306,9 +303,6 @@ ss dante_control {
 
                 sprintf(temp, "%s%s%d.PRTM", prefix, mca, det);
                 pvAssign(mcaPresetReal[i], temp);
-
-                sprintf(temp, "%s%s%d.PLTM", prefix, mca, det);
-                pvAssign(mcaPresetLive[i], temp);
 
                 sprintf(temp, "%s%s%d.DTIM", prefix, mca, det);
                 pvAssign(mcaDeadTime[i], temp);
@@ -519,6 +513,7 @@ ss dante_control {
             pvPut(CopyOverflowRecoveryTime);
         } state monitor_changes
 
+/*
         when(efTestAndClear(CopyMaxEnergyMon) && (CopyMaxEnergy == 1)) {
             pvGet(MaxEnergy[0]);
             for (i=0; i<nDetectors; i++) {
@@ -528,7 +523,7 @@ ss dante_control {
             CopyMaxEnergy = 0;
             pvPut(CopyMaxEnergy);
         } state monitor_changes
-
+*/
         when(efTestAndClear(CopyResetThresholdMon) && (CopyResetThreshold == 1)) {
             pvGet(ResetThreshold[0]);
             for (i=0; i<nDetectors; i++) {
@@ -589,10 +584,10 @@ ss dante_control {
             pvPut(ReadMCAs);
         } state monitor_changes
 
-        when(efTestAndClear(AcquiringMon)) {
-            if (AsynDebug) printf("danteMED.st: AcquiringMon, Acquiring=%d\n", Acquiring);
+        when(efTestAndClear(MCAAcquiringMon)) {
+            if (AsynDebug) printf("danteMED.st: MCAAcquiringMon, MCAAcquiring=%d\n", MCAAcquiring);
             /* If the detector is acquiring then force each MCA record to read status */
-            if (Acquiring) {
+            if (MCAAcquiring) {
                 for (i=0; i<nDetectors; i++) {
                     statusMCA[i] = 1;
                     /* pvPut(statusMCA[i]); */
@@ -603,9 +598,9 @@ ss dante_control {
                     ReadMCA[i] = 1;
                     pvPut(ReadMCA[i], SYNC);
                 }
-                /* Clear the AcquireBusy record */
-                AcquireBusy = 0;
-                pvPut(AcquireBusy);
+                /* Clear the MCAAcquireBusy record */
+                MCAAcquireBusy = 0;
+                pvPut(MCAAcquireBusy);
             }
         } state monitor_changes
 
