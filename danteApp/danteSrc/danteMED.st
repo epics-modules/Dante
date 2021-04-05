@@ -66,7 +66,7 @@ monitor CopyPeakingTime; evflag CopyPeakingTimeMon; sync CopyPeakingTime CopyPea
 double  MaxPeakingTime[MAX_DETECTORS]; 
 assign  MaxPeakingTime to {};
 int     CopyMaxPeakingTime; assign CopyMaxPeakingTime to "{P}{DANTE}:CopyMaxPeakingTime";
-monitor CopyMaxPeakingTime; evflag CopyMaxPeakingTimeMon; sync CopyMaxPeakingTime CopyPeakingTimeMon;
+monitor CopyMaxPeakingTime; evflag CopyMaxPeakingTimeMon; sync CopyMaxPeakingTime CopyMaxPeakingTimeMon;
 
 double  FlatTopTime[MAX_DETECTORS]; 
 assign  FlatTopTime to {};
@@ -101,7 +101,7 @@ monitor CopyZeroPeakFreq; evflag CopyZeroPeakFreqMon; sync CopyZeroPeakFreq Copy
 double  BaselineSamples[MAX_DETECTORS]; 
 assign  BaselineSamples to {};
 int     CopyBaselineSamples; assign CopyBaselineSamples to "{P}{DANTE}:CopyBaselineSamples";
-monitor CopyBaselineSamples; evflag CopyBaselineSamplesMon; sync CopyBaselineSamples CopyZeroPeakFreqMon;
+monitor CopyBaselineSamples; evflag CopyBaselineSamplesMon; sync CopyBaselineSamples CopyBaselineSamplesMon;
 
 double  Gain[MAX_DETECTORS]; 
 assign  Gain to {};
@@ -243,6 +243,9 @@ ss dante_control {
 
                 sprintf(temp, "%s%s%d:PeakingTime", prefix, dante, det);
                 pvAssign(PeakingTime[i], temp);
+
+                sprintf(temp, "%s%s%d:MaxPeakingTime", prefix, dante, det);
+                pvAssign(MaxPeakingTime[i], temp);
 
                 sprintf(temp, "%s%s%d:FlatTopTime", prefix, dante, det);
                 pvAssign(FlatTopTime[i], temp);
@@ -401,6 +404,16 @@ ss dante_control {
             }
             CopyPeakingTime = 0;
             pvPut(CopyPeakingTime);
+        } state monitor_changes
+
+        when(efTestAndClear(CopyMaxPeakingTimeMon) && (CopyMaxPeakingTime == 1)) {
+            pvGet(MaxPeakingTime[0]);
+            for (i=0; i<nDetectors; i++) {
+                MaxPeakingTime[i] = MaxPeakingTime[0];
+                pvPut(MaxPeakingTime[i]);
+            }
+            CopyMaxPeakingTime = 0;
+            pvPut(CopyMaxPeakingTime);
         } state monitor_changes
 
         when(efTestAndClear(CopyFlatTopTimeMon) && (CopyFlatTopTime == 1)) {
