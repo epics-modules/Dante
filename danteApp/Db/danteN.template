@@ -352,7 +352,7 @@ record(bo,"$(P)$(R)InputPolarity") {
     field(ZNAM,"Pos.")
     field(ONAM,"Neg.")
     field(DTYP, "asynInt32")
-    field(OUT,"@asyn($(PORT),0)DanteInvertedInput")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteInvertedInput")
 }
 
 record(bi,"$(P)$(R)InputPolarity_RBV") {
@@ -360,7 +360,7 @@ record(bi,"$(P)$(R)InputPolarity_RBV") {
     field(ZNAM,"Pos.")
     field(ONAM,"Neg.")
     field(DTYP, "asynInt32")
-    field(INP,"@asyn($(PORT),0)DanteInvertedInput")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteInvertedInput")
     field(SCAN, "I/O Intr")
 }
 
@@ -453,7 +453,7 @@ record(mbbo,"$(P)$(R)InputMode") {
     field(THST,"AC_Fast")
     field(THVL,"3")
     field(DTYP, "asynInt32")
-    field(OUT,"@asyn($(PORT),0)DanteInputMode")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteInputMode")
 }
 
 record(mbbi,"$(P)$(R)InputMode_RBV") {
@@ -467,7 +467,7 @@ record(mbbi,"$(P)$(R)InputMode_RBV") {
     field(THST,"AC_Fast")
     field(THVL,"3")
     field(DTYP, "asynInt32")
-    field(INP,"@asyn($(PORT),0)DanteInputMode")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteInputMode")
     field(SCAN, "I/O Intr")
 }
 
