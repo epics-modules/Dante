@@ -362,12 +362,12 @@ int32_t main(int argc, char* argv[])
 	// Test isRunning_system() Start.
 	std::cout << "Test isRunning_system().\n";
 	bool running = false;
-	//for (uint16_t i = 0; i < chain; i++)
-	while (1)
+	for (uint16_t i = 0; i < chain; i++)
+	//while (1)
 	{
-		uint16_t i = 0;
-		isRunning_system(identifier, i);
-		//overall_result = overall_result && check_func_result("isRunning_system()", isRunning_system(identifier, i), i);
+		//uint16_t i = 0;
+		//isRunning_system(identifier, i);
+		overall_result = overall_result && check_func_result("isRunning_system()", isRunning_system(identifier, i), i);
 	}
 	// Test isRunning_system() End.
 
