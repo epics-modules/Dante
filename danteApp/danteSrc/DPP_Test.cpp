@@ -89,13 +89,13 @@ uint32_t answer_data[10];
 	
 	void callback_func(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data)
 	{
-		std::cout << "Answer received. Type: " << type << ". Call id: " << call_id << ". Length: " << length << ". Data: ";
+		//std::cout << "Answer received. Type: " << type << ". Call id: " << call_id << ". Length: " << length << ". Data: ";
 		for (uint32_t i = 0; i < length; i++)
 		{
-			std::cout << data[i] << " ";
+			//std::cout << data[i] << " ";
 			answer_data[i] = data[i];
 		}
-		std::cout << ".\n";
+		//std::cout << ".\n";
 		promise_map_t::iterator promise_it(promise_map.find(call_id));
 		if (promise_it != promise_map.end())
 		{
@@ -336,10 +336,9 @@ int32_t main(int argc, char* argv[])
 	cfg.reset_recovery_time = 200;
 	cfg.inverted_input = false;
 	cfg.zero_peak_freq = 1;
-	//for (uint16_t i = 0; i < chain; i++)
+	for (uint16_t i = 0; i < chain; i++)
 	{
-		overall_result = overall_result && check_func_result("configure()", configure("SN01916", 0, cfg), 0);
-		overall_result = overall_result && check_func_result("configure()", configure("SN02712", 0, cfg), 0);
+		overall_result = overall_result && check_func_result("configure()", configure(identifier, i, cfg), i);
 	}	
 	// Test configure() End.
 
