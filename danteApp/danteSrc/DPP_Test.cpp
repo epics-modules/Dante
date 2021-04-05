@@ -215,9 +215,9 @@ int32_t main(int argc, char* argv[])
 	bool result = true;
 	uint16_t err_code = error_code::DLL_NO_ERROR;	
 	
-	char ip[] = "10.96.0.113";
+	char ip[] = "164.54.160.186";
 	char mask[] = "255.255.255.0";
-	char gw[] = "10.96.0.1";
+	char gw[] = "164.54.160.1";
 
 	char identifier[16];
 
