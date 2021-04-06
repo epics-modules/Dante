@@ -1415,8 +1415,8 @@ asynStatus Dante::pollListMode()
             maxAvailable = itemp;
         }
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
-            "%s::%s board=%d maxAvailable=%d\n", 
-            driverName, functionName, board, maxAvailable);
+            "%s::%s board=%d numEventsAvailable=%d\n", 
+            driverName, functionName, board, numEventsAvailable_[board]);
     }
 
     // If we are acquiring and have not yet filled a buffer return.
@@ -1426,7 +1426,7 @@ asynStatus Dante::pollListMode()
 
     epicsTimeGetCurrent(&now);
 
-    // Now read the same number of events from each board
+    // Now read the events from each board
     for (board=0; board<numBoards_; board++) {
         pListData_[board] = (uint64_t *) calloc(listBufferSize, sizeof(uint64_t));
         if (numEventsAvailable_[board] > 0) {
@@ -1484,6 +1484,7 @@ asynStatus Dante::pollListMode()
     for (board=0; board<numBoards_; board++) {
         uint64_t *pIn = pListData_[board];
         uint64_t *pOut = pMcaRaw_[board];
+        memset(pOut, 0, numMCAChannels*sizeof(*pOut));
         for (int chan=0; ((chan<numMCAChannels) && (chan<(int)numEventsAvailable_[board])); chan++) {
             pOut[chan] = pIn[chan] & 0xffff;
         }
