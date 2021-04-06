@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 158
-y 176
-w 317
-h 63
+x 423
+y 108
+w 300
+h 80
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-bold-r-10.0"
 btnFont "helvetica-medium-r-18.0"
@@ -24,33 +24,86 @@ snapToGrid
 gridSize 4
 endScreenProperties
 
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 12
+y 9
+w 276
+h 22
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "DANTE Top Level Control"
+}
+endObjectProperties
+
 # (Related Display)
 object relatedDisplayClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 115
-y 14
-w 94
-h 26
+x 20
+y 40
+w 120
+h 25
 fgColor rgb 0 0 0
-bgColor rgb 47872 47872 47872
+bgColor rgb 29440 57088 65280
 topShadowColor rgb 55808 55808 55808
 botShadowColor rgb 17920 17920 17920
 font "helvetica-medium-r-14.0"
 icon
-buttonLabel "Dante1"
+buttonLabel "Dante-1CH"
 numPvs 2
 numDsps 1
 displayFileName {
-  0 dante.edl
+  0 "dante1.edl"
 }
 menuLabel {
-  0 Dante
+  0 "Dante 1 channel"
 }
 symbols {
   0 "P=Dante:,M=mca1,R=dante1:"
+}
+replaceSymbols {
+  0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 160
+y 40
+w 120
+h 25
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+font "helvetica-medium-r-14.0"
+icon
+buttonLabel "Dante-8CH"
+numPvs 2
+numDsps 1
+displayFileName {
+  0 "dante8.edl"
+}
+menuLabel {
+  0 "Dante"
+}
+symbols {
+  0 "P=Dante:,M=mca,R=dante:,D1=dante1:,D2=dante2:,D3=dante3:,D4=dante4:,D5=dante5:,D6=dante6:,D7=dante7:,D8=dante8:"
 }
 replaceSymbols {
   0 1

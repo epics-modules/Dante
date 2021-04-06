@@ -295,7 +295,7 @@ border-radius: 2px;
                 </rect>
             </property>
             <property name="channel">
-                <string>$(P)$(R)TraceData.SCAN</string>
+                <string>$(P)$(R)ReadTrace.SCAN</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -328,7 +328,7 @@ border-radius: 2px;
                 <enum>EPushButton::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(R)TraceData.PROC</string>
+                <string>$(P)$(R)ReadTrace</string>
             </property>
             <property name="foreground">
                 <color alpha="255">

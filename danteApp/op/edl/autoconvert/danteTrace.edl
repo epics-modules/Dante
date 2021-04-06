@@ -236,8 +236,8 @@ bgColor rgb 29440 57088 65280
 inconsistentColor rgb 17920 17920 17920
 topShadowColor rgb 55808 55808 55808
 botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(R)TraceData.SCAN"
-indicatorPv "$(P)$(R)TraceData.SCAN"
+controlPv "$(P)$(R)ReadTrace.SCAN"
+indicatorPv "$(P)$(R)ReadTrace.SCAN"
 font "helvetica-medium-r-10.0"
 endObjectProperties
 
@@ -256,7 +256,7 @@ onColor rgb 29440 57088 65280
 offColor rgb 29440 57088 65280
 topShadowColor rgb 65280 65280 65280
 botShadowColor rgb 0 0 0
-controlPv "$(P)$(R)TraceData.PROC"
+controlPv "$(P)$(R)ReadTrace"
 pressValue "1"
 releaseValue 
 onLabel "Read Once"

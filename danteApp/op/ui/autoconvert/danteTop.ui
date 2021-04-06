@@ -4,10 +4,10 @@
 <widget class="QMainWindow" name="MainWindow">
     <property name="geometry">
         <rect>
-            <x>158</x>
-            <y>176</y>
-            <width>317</width>
-            <height>63</height>
+            <x>423</x>
+            <y>108</y>
+            <width>300</width>
+            <height>80</height>
         </rect>
     </property>
     <property name="styleSheet">
@@ -109,10 +109,10 @@ border-radius: 2px;
         <widget class="caRelatedDisplay" name="caRelatedDisplay_0">
             <property name="geometry">
                 <rect>
-                    <x>115</x>
-                    <y>14</y>
-                    <width>94</width>
-                    <height>26</height>
+                    <x>20</x>
+                    <y>40</y>
+                    <width>120</width>
+                    <height>25</height>
                 </rect>
             </property>
             <property name="foreground">
@@ -124,22 +124,22 @@ border-radius: 2px;
             </property>
             <property name="background">
                 <color alpha="255">
-                    <red>187</red>
-                    <green>187</green>
-                    <blue>187</blue>
+                    <red>115</red>
+                    <green>223</green>
+                    <blue>255</blue>
                 </color>
             </property>
             <property name="label">
-                <string>Dante1</string>
+                <string>Dante-1CH</string>
             </property>
             <property name="stackingMode">
                 <enum>Menu</enum>
             </property>
             <property name="labels">
-                <string>Dante</string>
+                <string>Dante 1 channel</string>
             </property>
             <property name="files">
-                <string>dante.adl</string>
+                <string>dante1.adl</string>
             </property>
             <property name="args">
                 <string>P=Dante:,M=mca1,R=dante1:</string>
@@ -148,7 +148,87 @@ border-radius: 2px;
                 <string>false</string>
             </property>
         </widget>
+        <widget class="caRelatedDisplay" name="caRelatedDisplay_1">
+            <property name="geometry">
+                <rect>
+                    <x>160</x>
+                    <y>40</y>
+                    <width>120</width>
+                    <height>25</height>
+                </rect>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="255">
+                    <red>115</red>
+                    <green>223</green>
+                    <blue>255</blue>
+                </color>
+            </property>
+            <property name="label">
+                <string>Dante-8CH</string>
+            </property>
+            <property name="stackingMode">
+                <enum>Menu</enum>
+            </property>
+            <property name="labels">
+                <string>Dante</string>
+            </property>
+            <property name="files">
+                <string>dante8.adl</string>
+            </property>
+            <property name="args">
+                <string>P=Dante:,M=mca,R=dante:,D1=dante1:,D2=dante2:,D3=dante3:,D4=dante4:,D5=dante5:,D6=dante6:,D7=dante7:,D8=dante8:</string>
+            </property>
+            <property name="removeParent">
+                <string>false</string>
+            </property>
+        </widget>
+        <widget class="caLabel" name="caLabel_0">
+            <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="text">
+                <string>DANTE Top Level Control</string>
+            </property>
+            <property name="fontScaleMode">
+                <enum>ESimpleLabel::WidthAndHeight</enum>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignAbsolute|Qt::AlignHCenter|Qt::AlignVCenter</set>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>12</x>
+                    <y>9</y>
+                    <width>276</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+        <zorder>caLabel_0</zorder>
         <zorder>caRelatedDisplay_0</zorder>
+        <zorder>caRelatedDisplay_1</zorder>
     </widget>
 </widget>
 </ui>

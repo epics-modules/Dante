@@ -1,0 +1,716 @@
+4 0 1
+beginScreenProperties
+major 4
+minor 0
+release 1
+x 385
+y 117
+w 1545
+h 510
+font "helvetica-medium-r-18.0"
+ctlFont "helvetica-bold-r-10.0"
+btnFont "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor rgb 51200 51200 51200
+textColor rgb 0 0 0
+ctlFgColor1 rgb 64256 62208 18944
+ctlFgColor2 rgb 60928 46592 11008
+ctlBgColor1 rgb 52480 24832 0
+ctlBgColor2 rgb 65280 45056 65280
+topShadowColor rgb 44544 19968 48128
+botShadowColor rgb 13312 13056 34304
+showGrid
+snapToGrid
+gridSize 4
+endScreenProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 0
+y 0
+w 1544
+h 24
+lineColor rgb 2560 0 47104
+fill
+fillColor rgb 2560 0 47104
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 1545
+h 25
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 65280 65280 65280
+bgColor index 3
+useDisplayBg
+value {
+  "Dante MCA Spectra ($(P)$(R))"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 190
+y 40
+w 1165
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 184
+y 40
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "1"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 569
+y 40
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "2"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 954
+y 40
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "3"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1339
+y 40
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "4"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 65
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M1)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M1).VAL"
+  1 "$(P)$(M1).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 390
+y 65
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M2)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M2).VAL"
+  1 "$(P)$(M2).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 775
+y 65
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M3)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M3).VAL"
+  1 "$(P)$(M3).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1160
+y 65
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M4)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M4).VAL"
+  1 "$(P)$(M4).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 190
+y 280
+w 1165
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 184
+y 280
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "5"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 569
+y 280
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "6"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 954
+y 280
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "7"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1339
+y 280
+w 22
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "center"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "8"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 305
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M5)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M5).VAL"
+  1 "$(P)$(M5).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 390
+y 305
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(6)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M6).VAL"
+  1 "$(P)$(M6).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 775
+y 305
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M7)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M7).VAL"
+  1 "$(P)$(M7).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1160
+y 305
+w 380
+h 200
+# Appearance
+border
+graphTitle "$(P)$(M8)"
+xLabel "channel"
+yLabel "counts"
+fgColor rgb 0 0 0
+bgColor rgb 55808 55808 55808
+gridColor rgb 0 0 0
+font "helvetica-medium-r-10.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 2
+yPv {
+  0 "$(P)$(M8).VAL"
+  1 "$(P)$(M8).BG"
+}
+plotStyle {
+  0 "line"
+  1 "line"
+}
+plotUpdateMode {
+  0 "x"
+  1 "x"
+}
+plotSymbolType {
+  0 "circle"
+  1 "circle"
+}
+plotColor {
+  0 rgb 0 0 0
+  1 rgb 64768 0 0
+}
+endObjectProperties
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 190
+y 40
+w 1165
+h 20
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 190
+y 280
+w 1165
+h 20
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+
