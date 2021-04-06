@@ -298,10 +298,11 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
         pMcaRaw_[ch] = (uint64_t *)calloc(MAX_MCA_BINS, sizeof(uint64_t));
     }
     
-    // Allocate configuration and statistics buffers
+    // Allocate per-board memory
     for (i=0; i<numBoards_; i++) {
         configurations_.push_back(config);
         statistics_.push_back(stats);
+        numEventsAvailable_.push_back(0);
     }
 
     /* Allocate an internal buffer long enough to hold all the energy values in a spectrum */
@@ -1130,6 +1131,7 @@ asynStatus Dante::startAcquiring()
         break;
       case DanteModeList:
         setIntegerParam(DanteCurrentPixel, 0);
+asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Calling start_list with time=%f\n", presetReal);
         callId_ = start_list(danteIdentifier_, presetReal);
         waitReply(callId_, danteReply_, "start_list");
         break;
@@ -1193,6 +1195,12 @@ void Dante::acquisitionTask()
          * If a transition from acquiring to done is detected then we read the statistics
          * and the data. */
         getAcquisitionStatus(ALL_BOARDS);
+        if (mode == DanteModeMCAMapping) {
+            pollMCAMappingMode();
+        }
+        else if (mode == DanteModeList) {
+            pollListMode();
+        }
         getIntegerParam(numBoards_, DanteAcquiring, &acquiring);
         if (!acquiring)
         {
@@ -1208,13 +1216,13 @@ void Dante::acquisitionTask()
                     "%s::%s Detected acquisition stop! Now reading data\n",
                     driverName, functionName);
             }
+            else if (mode == DanteModeList) {
+                /* In List mode we need to call stop() */
+printf("Calling stop()\n");
+                callId_ = stop(danteIdentifier_);
+                waitReply(callId_, danteReply_, "stop");
+            }
         } 
-        if (mode == DanteModeMCAMapping) {
-            pollMCAMappingMode();
-        }
-        else if (mode == DanteModeList) {
-            pollListMode();
-        }
 
         /* Do callbacks for all boards for everything except mcaAcquiring*/
         for (i=0; i<=numBoards_; i++) callParamCallbacks(i);
@@ -1372,12 +1380,13 @@ asynStatus Dante::pollListMode()
 {
     int collectMode;
     asynStatus status = asynSuccess;
-    uint32_t numAvailable=0;
-    uint32_t numEventsToRead;
+    uint32_t maxAvailable = 0;
+    uint64_t totalEvents = 0;
     int listBufferSize;
     int arrayCallbacks;
     int acquiring;
     int numMCAChannels;
+    int currentPixel;
     uint16_t board;
     uint32_t spectrumId;
     epicsTimeStamp now;
@@ -1388,29 +1397,31 @@ asynStatus Dante::pollListMode()
     getIntegerParam(NDArrayCallbacks, &arrayCallbacks);
     getIntegerParam(DanteListBufferSize, &listBufferSize);
     getIntegerParam(mcaNumChannels, &numMCAChannels);
-    
-    // First see which board has fewest events available
+    getIntegerParam(DanteCurrentPixel, &currentPixel);
+
+    // First see which board has most events available
     for (board=0; board<numBoards_; board++) {
         uint32_t itemp;
         if (!getAvailableData(danteIdentifier_, board, itemp)) {
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAvailableData\n", driverName, functionName);
             return asynError;
         }
+        itemp = std::min((int)itemp, listBufferSize);
+        totalEvents += itemp;
+        numEventsAvailable_[board] = itemp;
         if (board == 0) {
-            numAvailable = itemp;
-        } else if (itemp < numAvailable) {
-            numAvailable = itemp;
+            maxAvailable = itemp;
+        } else if (itemp > maxAvailable) {
+            maxAvailable = itemp;
         }
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
+            "%s::%s board=%d maxAvailable=%d\n", 
+            driverName, functionName, board, maxAvailable);
     }
- 
-    numEventsToRead = listBufferSize;
-    if ((int)numAvailable < listBufferSize) {
-        if (acquiring) {
-            return asynSuccess;
-        } else {
-            // Read partial buffer when acquisition is done
-            numEventsToRead = numAvailable;
-        }
+
+    // If we are acquiring and have not yet filled a buffer return.
+    if (((int)maxAvailable < listBufferSize)  && acquiring) {
+        return asynSuccess;
     }
 
     epicsTimeGetCurrent(&now);
@@ -1418,13 +1429,17 @@ asynStatus Dante::pollListMode()
     // Now read the same number of events from each board
     for (board=0; board<numBoards_; board++) {
         pListData_[board] = (uint64_t *) calloc(listBufferSize, sizeof(uint64_t));
-        if (!getData(danteIdentifier_, board, pListData_[board], spectrumId, statistics_[board], numEventsToRead)) {
-            asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getData\n", driverName, functionName);
-            status = asynError;
-            goto done;
+        if (numEventsAvailable_[board] > 0) {
+            if (!getData(danteIdentifier_, board, pListData_[board], spectrumId, statistics_[board], numEventsAvailable_[board])) {
+                asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getData\n", driverName, functionName);
+                status = asynError;
+                goto done;
+            }
         }
     }
+
     if (arrayCallbacks) {
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "%s::%s doing array callbacks\n", driverName, functionName);
         size_t dims[2]; 
         dims[0] = listBufferSize;
         dims[1] = numBoards_;
@@ -1465,10 +1480,11 @@ asynStatus Dante::pollListMode()
     // Copy the spectral data for the first pixel in this buffer to the mcaRaw buffers.
     // This provides an update of the spectra and statistics while mapping is in progress
     // if the user sets the MCA spectra to periodically read.
+    asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "%s::%s copying spectrum data\n", driverName, functionName);
     for (board=0; board<numBoards_; board++) {
         uint64_t *pIn = pListData_[board];
         uint64_t *pOut = pMcaRaw_[board];
-        for (int chan=0; ((chan<numMCAChannels) && (chan<(int)numEventsToRead)); chan++) {
+        for (int chan=0; ((chan<numMCAChannels) && (chan<(int)numEventsAvailable_[board])); chan++) {
             pOut[chan] = pIn[chan] & 0xffff;
         }
         statistics *pStats = &statistics_[board];
@@ -1490,11 +1506,9 @@ asynStatus Dante::pollListMode()
         callParamCallbacks(board);
     }
 
-    done:
-    int currentPixel;
-    getIntegerParam(DanteCurrentPixel, &currentPixel);
-    currentPixel += numAvailable;
+    currentPixel += totalEvents;
     setIntegerParam(DanteCurrentPixel, currentPixel);
+    done:
     for (board=0; board<numBoards_; board++) {
         free(pListData_[board]);
     }
