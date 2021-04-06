@@ -1,5 +1,5 @@
-#ifndef NDDXP_H
-#define NDDXP_H
+#ifndef DANTE_H
+#define DANTE_H
 
 #include <vector>
 #include <epicsEvent.h>
@@ -241,6 +241,7 @@ private:
     /* Data */
     std::vector<configuration> configurations_;
     std::vector<statistics> statistics_;
+    std::vector<uint32_t> numEventsAvailable_;
     uint64_t **pMcaRaw_;
     uint16_t **pMappingMCAData_;
     uint64_t **pListData_;
@@ -281,4 +282,4 @@ int danteConfig(const char *portName, const char *ipAddress, int nChannels, int 
 }
 #endif
 
-#endif
+#endif /* DANTE_H */
