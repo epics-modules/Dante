@@ -216,9 +216,9 @@ int32_t main(int argc, char* argv[])
 	bool stopped = false;
 	uint16_t err_code = error_code::DLL_NO_ERROR;
 
-	char ip[] = "10.96.0.112";
+	char ip[] = "164.54.160.186";
 	char mask[] = "255.255.255.0";
-	char gw[] = "10.96.0.1";
+	char gw[] = "164.54.160.1";
 
 	char identifier[16];
 
@@ -782,6 +782,95 @@ int32_t main(int argc, char* argv[])
 		overall_result = false;
 	}
 	// Test Map Acquisition - Timed - 4096 bins. End.
+
+	// Test Map Acquisition - Timed - 2048 bins. Start.
+	std::cout << "Test Map Acquisition - Timed - 2048 bins.\n";
+	sptime = 50; // milliseconds.
+	points = 50;
+	bins = 2048;
+	result = true; running = true; LastDataReceived = false;
+	data_number = 0;
+	call_id = start_map(identifier, sptime, points, bins);
+	if (call_id > 0)
+	{
+		if (wait_answer(call_id))
+		{
+			std::cout << "Acquisition started.\n";
+			while (running && result)
+			{
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
+				{
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
+				}
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+			}
+			std::cout << "Acquisition finished.\n";
+		}
+		else
+			result = false;
+	}
+	else
+		result = false;
+	std::cout << "Launching stop acquisition...\n";
+	call_id = stop(identifier);
+	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	if (call_id > 0)
+	{
+		if (!wait_answer(call_id))
+			result = false;
+		else
+			std::cout << "Acquisition Stopped.\n";
+	}
+	else
+		result = false;
+		
+	spectra_size = 2048;
+	for (int32_t i = 0; i < chain; i++)
+	{
+		if (!getAvailableData(identifier, i, data_number))
+			result = false;
+		else
+		{
+			values_map = new uint16_t[data_number * 2048];
+			id_map = new uint32_t[data_number];
+			stats_map = new double[data_number * 4];
+			advstats_map = new uint64_t[data_number * 22];
+
+			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
+				result = false;
+				
+			if (values_map[95] == 0 || values_map[95 + 2048] == 0) // bin 96 of first two spectra.
+			{
+				// There should be some counts here due to the zero peak.
+				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+				//result = false;
+			}
+			delete[] values_map;
+			delete[] id_map;
+			delete[] stats_map;
+			delete[] advstats_map;
+		}
+	}
+	clear_chain(identifier);
+	if (result)
+		std::cout << "Test Map Acquisition - Timed - 2048 bins: Ok.\n\n";
+	else
+	{
+		getLastError(err_code);
+		std::cout << "Error code is: " << err_code << ".\n";
+		std::cout << "Test Map Acquisition - Timed - 2048 bins: Failed.\n\n";
+		overall_result = false;
+	}
+	// Test Map Acquisition - Timed - 2048 bins. End.
 
 	// Test Map Acquisition - Free running - 4096 bins. Start.
 	std::cout << "Test Map Acquisition - Free running - 4096 bins.\n";
