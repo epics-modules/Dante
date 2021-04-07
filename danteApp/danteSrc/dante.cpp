@@ -777,7 +777,6 @@ bool Dante::waveformAcquiring()
     bool acquiring=false;
     int boardAcquiring;
     int board;
-    asynStatus status=asynSuccess;
     static const char *functionName = "waveformAcquiring";
     
     /* Note: we use the internal parameter DanteAcquiring rather than mcaAcquiring here
@@ -803,7 +802,6 @@ bool Dante::dataAcquiring()
     bool lastDataReceived;
     int boardAcquiring;
     int board;
-    asynStatus status=asynSuccess;
     static const char *functionName = "dataAcquiring";
     
     /* Note: we use the internal parameter DanteAcquiring rather than mcaAcquiring here
@@ -1123,7 +1121,6 @@ asynStatus Dante::startAcquiring()
     int collectMode;
     int mappingPoints;
     uint32_t msTime;
-    uint32_t mapPts;
 
     getDoubleParam(mcaPresetRealTime, &presetReal);
     getIntegerParam(mcaNumChannels, &numChannels);
@@ -1137,14 +1134,11 @@ asynStatus Dante::startAcquiring()
       case DanteModeMCAMapping:
         setIntegerParam(DanteCurrentPixel, 0);
         msTime = presetReal * 1000;
-        //  Work around bug, it only collects N-1 points
-        mapPts = mappingPoints + 1;
-        callId_ = start_map(danteIdentifier_, msTime, mapPts, numChannels);
+        callId_ = start_map(danteIdentifier_, msTime, (uint32_t)mappingPoints, numChannels);
         waitReply(callId_, danteReply_, "start_map");
         break;
       case DanteModeList:
         setIntegerParam(DanteCurrentPixel, 0);
-asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Calling start_list with time=%f\n", presetReal);
         callId_ = start_list(danteIdentifier_, presetReal);
         waitReply(callId_, danteReply_, "start_list");
         break;
@@ -1278,6 +1272,7 @@ asynStatus Dante::pollMCAMappingMode()
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAvailableData\n", driverName, functionName);
             return asynError;
         }
+asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d, numSpectra=%d\n", driverName, functionName, board, itemp);
         if (board == 0) {
             numAvailable = itemp;
         } else if (itemp < numAvailable) {
@@ -1292,7 +1287,9 @@ asynStatus Dante::pollMCAMappingMode()
 
     // Now read the same number of spectra from each board
     for (board=0; board<numBoards_; board++) {
-        pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
+        // There is a bug in their library, need to allocate 4096 channels
+        //pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
+        pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * 4096 * sizeof(uint16_t));
         pMappingSpectrumId_[board] = (uint32_t *)       malloc(numAvailable * sizeof(uint32_t));
         pMappingStats_     [board] = (mappingStats *)   malloc(numAvailable * sizeof(mappingStats));
         pMappingAdvStats_  [board] = (mappingAdvStats *)malloc(numAvailable * sizeof(mappingAdvStats));
