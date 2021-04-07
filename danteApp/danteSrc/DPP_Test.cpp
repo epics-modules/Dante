@@ -3,9 +3,9 @@
 
 #include "inttypes.h"
 #ifdef POLLINGLIB
-	#include "DLL_DPP_Polling.h"
+#include "DLL_DPP_Polling.h"
 #else
-	#include "DLL_DPP_Callback.h"
+#include "DLL_DPP_Callback.h"
 #endif
 #include <assert.h>
 #include <ctime>
@@ -20,7 +20,7 @@
 #include <stdio.h>
 
 #ifdef WIN32
-	#include <direct.h>
+#include <direct.h>
 char* GetCurrentWorkingDir(void) {
 	char buff[FILENAME_MAX];
 	_getcwd(buff, FILENAME_MAX);
@@ -31,156 +31,115 @@ char* GetCurrentWorkingDir(void) {
 uint32_t answer_data[10];
 
 #ifdef POLLINGLIB
-	#define WAIT_ANS_RETRIES 100
-	uint32_t answer_full[10];
-	bool wait_answer(uint32_t id)
+#define WAIT_ANS_RETRIES 100
+uint32_t answer_full[10];
+bool wait_answer(uint32_t id)
+{
+	uint32_t retries = 0, result = 0, length = 0;
+	while (retries < WAIT_ANS_RETRIES)
 	{
-		uint32_t retries = 0, result = 0, length = 0;
-		while (retries < WAIT_ANS_RETRIES)
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		result = GetAnswersDataLength(length);
+		if (result && length >= 4)
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-			result = GetAnswersDataLength(length);
-			if (result && length >= 4)
+			// Answer received.
+			result = GetAnswersData(length, answer_full);
+			uint32_t call_id = answer_full[0];
+			uint32_t type = answer_full[1];
+			uint32_t data_length = answer_full[2];
+			for (int32_t i = 0; i < data_length; i++)
+				answer_data[i] = answer_full[i + 3];
+			if (result)
 			{
-				// Answer received.
-				result = GetAnswersData(length, answer_full);
-				uint32_t call_id = answer_full[0];
-				uint32_t type = answer_full[1];
-				uint32_t data_length = answer_full[2];
-				for (int32_t i = 0; i < data_length; i++)
-					answer_data[i] = answer_full[i + 3];
-				if (result)
+				if (call_id != id)
 				{
-					if (call_id != id)
-					{
-						// Wrong call id.
-						return false;
-					}
-					else if (type == 0)
-					{
-						// Error answer.
-						return false;
-					}
-					else if (type == 2)
-					{
-						// Answer of a write command.
-						return answer_data[0] == 1;
-					}
-					else if ((type == 1) && (length == data_length + 3))
-					{
-						// Answer of a read command. Let the user read the data from the global var answer_data[].
-						return true;
-					}
-				}
-				else
+					// Wrong call id.
 					return false;
+				}
+				else if (type == 0)
+				{
+					// Error answer.
+					return false;
+				}
+				else if (type == 2)
+				{
+					// Answer of a write command.
+					return answer_data[0] == 1;
+				}
+				else if ((type == 1) && (length == data_length + 3))
+				{
+					// Answer of a read command. Let the user read the data from the global var answer_data[].
+					return true;
+				}
 			}
 			else
-				result = false;
-			retries++;
-		}
-		return false;
-	}
-#else
-	#define MS_WAIT_ANS 6000 // Milliseconds to wait the answer. 
-	
-	typedef std::map<uint32_t, std::promise<bool>> promise_map_t;
-	promise_map_t promise_map;
-	
-	void callback_func(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data)
-	{
-		//std::cout << "Answer received. Type: " << type << ". Call id: " << call_id << ". Length: " << length << ". Data: ";
-		for (uint32_t i = 0; i < length; i++)
-		{
-			//std::cout << data[i] << " ";
-			answer_data[i] = data[i];
-		}
-		//std::cout << ".\n";
-		promise_map_t::iterator promise_it(promise_map.find(call_id));
-		if (promise_it != promise_map.end())
-		{
-			if (type == 0)
-				promise_it->second.set_value(false);
-			else if ((type == 2 && data[0] == 1) || (type == 1))
-				promise_it->second.set_value(true);
-			else
-				promise_it->second.set_value(false);
-		}
-	}
-
-	bool wait_answer(uint32_t id)
-	{
-		promise_map.insert(std::make_pair(id, std::promise<bool>()));
-		std::future<bool> current_future(promise_map.at(id).get_future());
-		switch (current_future.wait_for(std::chrono::milliseconds(MS_WAIT_ANS)))
-		{
-			case std::future_status::deferred:
-				// This should not happen.
-				promise_map.erase(id);
 				return false;
-			case std::future_status::timeout:
-				// No answer received, remove promise.
-				promise_map.erase(id);
-				return false;
-			case std::future_status::ready:
-				// Data ready, read it.
-				break;
-		}
-		bool answer = current_future.get();
-		promise_map.erase(id);
-		return answer;
-	}
-	
-#endif
-
-	bool check_func_result(char* func_to_test_str, uint32_t call_id, int16_t board = -1)
-	{
-		std::cout << "Test " << func_to_test_str << "\n";
-		
-		if (call_id > 0)
-		{
-			if (wait_answer(call_id))
-			{
-				if(board == -1)
-					std::cout << "Test " << func_to_test_str << ": Ok.\n";
-				else
-					std::cout << "Test " << func_to_test_str << " on board " << board << ": Ok.\n";
-
-				std::cout << "\n";
-				return true;
-			}
-			else
-			{
-				uint16_t err_code;
-				getLastError(err_code);
-				if(board == -1)
-					std::cout << "Test " << func_to_test_str << ": Failed. Error code is : " << err_code << ".\n";
-				else
-					std::cout << "Test " << func_to_test_str << " on board " << board << ": Failed. Error code is : " << err_code << ".\n";
-
-				std::cout << "\n";
-				return false;
-			}
 		}
 		else
-		{
-			uint16_t err_code;
-			getLastError(err_code);
-			if (board == -1)
-				std::cout << "Test " << func_to_test_str << ": Failed. Error code is : " << err_code << ".\n";
-			else
-				std::cout << "Test " << func_to_test_str << " on board " << board << ": Failed. Error code is: " << err_code << ".\n";
-
-			std::cout << "\n";
-			return false;
-		}
+			result = false;
+		retries++;
 	}
+	return false;
+}
+#else
+#define MS_WAIT_ANS 6000 // Milliseconds to wait the answer. 
 
-	bool check_func_result(char* func_to_test_str, bool func_to_test_res, int16_t board = -1)
+typedef std::map<uint32_t, std::promise<bool>> promise_map_t;
+promise_map_t promise_map;
+
+void callback_func(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data)
+{
+	//std::cout << "Answer received. Type: " << type << ". Call id: " << call_id << ". Length: " << length << ". Data: ";
+	for (uint32_t i = 0; i < length; i++)
 	{
-		std::cout << "Test " << func_to_test_str << "\n";
+		//std::cout << data[i] << " ";
+		answer_data[i] = data[i];
+	}
+	//std::cout << ".\n";
+	promise_map_t::iterator promise_it(promise_map.find(call_id));
+	if (promise_it != promise_map.end())
+	{
+		if (type == 0)
+			promise_it->second.set_value(false);
+		else if ((type == 2 && data[0] == 1) || (type == 1))
+			promise_it->second.set_value(true);
+		else
+			promise_it->second.set_value(false);
+	}
+}
 
-		if (func_to_test_res)
+bool wait_answer(uint32_t id)
+{
+	promise_map.insert(std::make_pair(id, std::promise<bool>()));
+	std::future<bool> current_future(promise_map.at(id).get_future());
+	switch (current_future.wait_for(std::chrono::milliseconds(MS_WAIT_ANS)))
+	{
+	case std::future_status::deferred:
+		// This should not happen.
+		promise_map.erase(id);
+		return false;
+	case std::future_status::timeout:
+		// No answer received, remove promise.
+		promise_map.erase(id);
+		return false;
+	case std::future_status::ready:
+		// Data ready, read it.
+		break;
+	}
+	bool answer = current_future.get();
+	promise_map.erase(id);
+	return answer;
+}
+
+#endif
+
+bool check_func_result(char* func_to_test_str, uint32_t call_id, int16_t board = -1)
+{
+	std::cout << "Test " << func_to_test_str << "\n";
+
+	if (call_id > 0)
+	{
+		if (wait_answer(call_id))
 		{
 			if (board == -1)
 				std::cout << "Test " << func_to_test_str << ": Ok.\n";
@@ -203,6 +162,47 @@ uint32_t answer_data[10];
 			return false;
 		}
 	}
+	else
+	{
+		uint16_t err_code;
+		getLastError(err_code);
+		if (board == -1)
+			std::cout << "Test " << func_to_test_str << ": Failed. Error code is : " << err_code << ".\n";
+		else
+			std::cout << "Test " << func_to_test_str << " on board " << board << ": Failed. Error code is: " << err_code << ".\n";
+
+		std::cout << "\n";
+		return false;
+	}
+}
+
+bool check_func_result(char* func_to_test_str, bool func_to_test_res, int16_t board = -1)
+{
+	std::cout << "Test " << func_to_test_str << "\n";
+
+	if (func_to_test_res)
+	{
+		if (board == -1)
+			std::cout << "Test " << func_to_test_str << ": Ok.\n";
+		else
+			std::cout << "Test " << func_to_test_str << " on board " << board << ": Ok.\n";
+
+		std::cout << "\n";
+		return true;
+	}
+	else
+	{
+		uint16_t err_code;
+		getLastError(err_code);
+		if (board == -1)
+			std::cout << "Test " << func_to_test_str << ": Failed. Error code is : " << err_code << ".\n";
+		else
+			std::cout << "Test " << func_to_test_str << " on board " << board << ": Failed. Error code is : " << err_code << ".\n";
+
+		std::cout << "\n";
+		return false;
+	}
+}
 
 int32_t main(int argc, char* argv[])
 {
@@ -213,11 +213,12 @@ int32_t main(int argc, char* argv[])
 #endif
 	bool overall_result = true;
 	bool result = true;
-	uint16_t err_code = error_code::DLL_NO_ERROR;	
-	
-	char ip[] = "164.54.160.186";
+	bool stopped = false;
+	uint16_t err_code = error_code::DLL_NO_ERROR;
+
+	char ip[] = "10.96.0.112";
 	char mask[] = "255.255.255.0";
-	char gw[] = "164.54.160.1";
+	char gw[] = "10.96.0.1";
 
 	char identifier[16];
 
@@ -271,13 +272,13 @@ int32_t main(int argc, char* argv[])
 	if (add_to_query(ip))
 	{
 		std::cout << "Added IP: " << std::string(ip) << " to the query.\n\n";
-		
+
 	}
 	else
 	{
 		std::cout << "Error adding the IP to thew query.\n\n";
 		overall_result = overall_result && false;;
-	}	
+	}
 
 	std::this_thread::sleep_for(std::chrono::seconds(4)); // Wait for the boards to be found by the DLL.
 
@@ -290,7 +291,7 @@ int32_t main(int argc, char* argv[])
 	// Test get_dev_number() End.
 
 	// Test get_ids() Start.
-	uint16_t nb = 0; 
+	uint16_t nb = 0;
 	uint16_t id_size = 16;
 	result = check_func_result("get_ids()", get_ids(identifier, nb, id_size));
 	if (result)
@@ -299,7 +300,7 @@ int32_t main(int argc, char* argv[])
 	}
 	overall_result = overall_result && result;
 	// Test get_ids() End.
-	
+
 	// Test get_boards_in_chain() Start.
 	uint16_t chain = 1;
 	result = check_func_result("get_boards_in_chain()", get_boards_in_chain(identifier, chain));
@@ -320,8 +321,11 @@ int32_t main(int argc, char* argv[])
 	// Test write_IP_configuration() Start.
 	overall_result = overall_result && check_func_result("write_IP_configuration()", write_IP_configuration(identifier, ip, mask, gw));
 	// Test write_IP_configuration() End.
-	
+
 	// Test configure() Start.
+	autoScanSlaves(false);	// it is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));	// wait 50ms
+
 	configuration cfg;
 	cfg.fast_filter_thr = 100;
 	cfg.energy_filter_thr = 5;
@@ -339,7 +343,7 @@ int32_t main(int argc, char* argv[])
 	for (uint16_t i = 0; i < chain; i++)
 	{
 		overall_result = overall_result && check_func_result("configure()", configure(identifier, i, cfg), i);
-	}	
+	}
 	// Test configure() End.
 
 	// Test configure_gating() Start.
@@ -348,7 +352,7 @@ int32_t main(int argc, char* argv[])
 		overall_result = overall_result && check_func_result("configure_gating()", configure_gating(identifier, FreeRunning, i), i);
 	}
 	// Test configure_gating() End.
-	
+
 	// Test configure_offset() Start.
 	configuration_offset cfg_offset;
 	cfg_offset.offset_val1 = 128;
@@ -357,19 +361,27 @@ int32_t main(int argc, char* argv[])
 	{
 		overall_result = overall_result && check_func_result("configure_offset()", configure_offset(identifier, i, cfg_offset), i);
 	}
+
 	// Test configure_offset() End.
 
 	// Test isRunning_system() Start.
 	std::cout << "Test isRunning_system().\n";
 	bool running = false;
 	for (uint16_t i = 0; i < chain; i++)
-	//while (1)
+		//while (1)
 	{
 		//uint16_t i = 0;
-		//isRunning_system(identifier, i);
 		overall_result = overall_result && check_func_result("isRunning_system()", isRunning_system(identifier, i), i);
 	}
 	// Test isRunning_system() End.
+
+	// Test isLastDataReceived() Start.
+	std::cout << "Test isLastDataReceived().\n";
+	bool LastDataReceived = false;
+	for (uint16_t i = 0; i < chain; i++)
+		overall_result = overall_result && check_func_result("isLastDataReceived()", isLastDataReceived(identifier, i, LastDataReceived), i);
+
+	// Test isLastDataReceived() End.
 
 	// Test clear_chain() Start.
 	overall_result = overall_result && check_func_result("clear_chain()", clear_chain(identifier));
@@ -391,7 +403,7 @@ int32_t main(int argc, char* argv[])
 	std::cout << "Test Spectrum Acquisition - Timed - 4096 bins.\n";
 	time = 2; // seconds.
 	bins = 4096;
-	result = true; running = true;
+	result = true; running = true; LastDataReceived = false;
 	call_id = start(identifier, time, bins);
 	if (call_id > 0)
 	{
@@ -400,14 +412,19 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -417,11 +434,14 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
+	std::cout << "Launching stop acquisition...\n";
 	call_id = stop(identifier);
 	if (call_id > 0)
 	{
 		if (!wait_answer(call_id))
 			result = false;
+		else
+			std::cout << "Acquisition Stopped.\n";
 	}
 	else
 		result = false;
@@ -436,7 +456,8 @@ int32_t main(int argc, char* argv[])
 		if (values4k[95] == 0)
 		{
 			// There should be some counts here due to the zero peak.
-			result = false;
+			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+			//result = false;
 		}
 	}
 	clear_chain(identifier);
@@ -449,13 +470,16 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test Spectrum Acquisition - Timed - 4096 bins: Failed.\n\n";
 		overall_result = false;
 	}
+
 	// Test Spectrum Acquisition - Timed - 4096 bins. End.
+
+
 
 	// Test Spectrum Acquisition - Timed - 2048 bins. Start.
 	std::cout << "Test Spectrum Acquisition - Timed - 2048 bins.\n";
 	time = 2; // seconds.
 	bins = 2048;
-	result = true; running = true;
+	result = true; running = true; LastDataReceived = false;
 	call_id = start(identifier, time, bins);
 	if (call_id > 0)
 	{
@@ -464,14 +488,19 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -481,11 +510,14 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
+	std::cout << "Launching stop acquisition...\n";
 	call_id = stop(identifier);
 	if (call_id > 0)
 	{
 		if (!wait_answer(call_id))
 			result = false;
+		else
+			std::cout << "Acquisition Stopped.\n";
 	}
 	else
 		result = false;
@@ -498,7 +530,8 @@ int32_t main(int argc, char* argv[])
 		if (values2k[47] == 0)
 		{
 			// There should be some counts here due to the zero peak.
-			result = false;
+			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+			//result = false;
 		}
 	}
 	clear_chain(identifier);
@@ -517,7 +550,7 @@ int32_t main(int argc, char* argv[])
 	std::cout << "Test Spectrum Acquisition - Timed - 1024 bins.\n";
 	time = 2; // seconds.
 	bins = 1024;
-	result = true; running = true;
+	result = true; running = true; LastDataReceived = false;
 	call_id = start(identifier, time, bins);
 	if (call_id > 0)
 	{
@@ -526,14 +559,19 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -543,11 +581,14 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
+	std::cout << "Launching stop acquisition...\n";
 	call_id = stop(identifier);
 	if (call_id > 0)
 	{
 		if (!wait_answer(call_id))
 			result = false;
+		else
+			std::cout << "Acquisition Stopped.\n";
 	}
 	else
 		result = false;
@@ -560,7 +601,8 @@ int32_t main(int argc, char* argv[])
 		if (values1k[23] == 0)
 		{
 			// There should be some counts here due to the zero peak.
-			result = false;
+			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+			//result = false;
 		}
 	}
 	clear_chain(identifier);
@@ -579,40 +621,49 @@ int32_t main(int argc, char* argv[])
 	std::cout << "Test Spectrum Acquisition - Free running - 4096 bins.\n";
 	time = 0; // Free running.
 	bins = 4096;
-	result = true; running = true;
-	call_id = start("SN01916|SN02712", time, bins);
+	result = true; running = true; stopped = false; LastDataReceived = false;
+	call_id = start(identifier, time, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
 		{
 			std::cout << "Acquisition started.\n";
-			while (running && result)
+			do
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
+
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				if (!stopped)
+					std::cout << "Launching stop acquisition...\n";
 				call_id = stop(identifier);
+				stopped = true;
 				if (call_id > 0)
 				{
 					if (!wait_answer(call_id))
-						result = false;
+						result = false;	
 				}
 				else
 					result = false;
-			}
+			} while (running && result);
 			std::cout << "Acquisition finished.\n";
 		}
 		else
 			result = false;
 	}
 	else
-		result = false;	
+		result = false;
 	spectra_size = 4096;
 	for (int32_t i = 0; i < chain; i++)
 	{
@@ -622,24 +673,11 @@ int32_t main(int argc, char* argv[])
 		if (values4k[95] == 0)
 		{
 			// There should be some counts here due to the zero peak.
-			result = false;
+			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+			//result = false;
 		}
 	}
 
-	for (int32_t i = 0; i < 1; i++)
-	{
-		if (!getData("SN02712", i, values4k, id, stats, spectra_size))
-			result = false;
-		printf("Spectrum received. Zero peaks: %d\t- %d\n", values4k[95], values4k[93] + values4k[94] + values4k[95] + values4k[96] + values4k[97]);
-	}
-
-
-
-
-
-
-
-	
 	clear_chain(identifier);
 	if (result)
 		std::cout << "Test Spectrum Acquisition - Free running - 4096 bins: Ok.\n\n";
@@ -657,9 +695,9 @@ int32_t main(int argc, char* argv[])
 	uint32_t sptime = 50; // milliseconds.
 	uint32_t points = 50;
 	bins = 4096;
-	result = true; running = true;
+	result = true; running = true; LastDataReceived = false;
 	uint32_t data_number = 0;
-	call_id = start_map("SN01916|SN02712", sptime, points, bins);
+	call_id = start_map(identifier, sptime, points, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -667,14 +705,19 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -684,15 +727,19 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
-	call_id = stop("SN01916|SN02712");
-  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	std::cout << "Launching stop acquisition...\n";
+	call_id = stop(identifier);
+	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	if (call_id > 0)
 	{
 		if (!wait_answer(call_id))
 			result = false;
+		else
+			std::cout << "Acquisition Stopped.\n";
 	}
 	else
 		result = false;
+		
 	uint16_t* values_map;
 	uint32_t* id_map;
 	double* stats_map;
@@ -711,10 +758,12 @@ int32_t main(int argc, char* argv[])
 
 			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
 				result = false;
+				
 			if (values_map[95] == 0 || values_map[95 + 4096] == 0) // bin 96 of first two spectra.
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+				//result = false;
 			}
 			delete[] values_map;
 			delete[] id_map;
@@ -733,185 +782,40 @@ int32_t main(int argc, char* argv[])
 		overall_result = false;
 	}
 	// Test Map Acquisition - Timed - 4096 bins. End.
-	
-	// Test Map Acquisition - Timed - 2048 bins. Start.
-	std::cout << "Test Map Acquisition - Timed - 2048 bins.\n";
-	sptime = 100; // milliseconds.
-	points = 20;
-	bins = 2048;
-	result = true; running = true;
-	call_id = start_map(identifier, sptime, points, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			while (running && result)
-			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
-				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
-				}
-				else
-					result = false;
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			}
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	call_id = stop(identifier);
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-	}
-	else
-		result = false;
-	spectra_size = 2048;
-	data_number = 0;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getAvailableData(identifier, i, data_number))
-			result = false;
-		else
-		{
-			values_map = new uint16_t[data_number * 2048];
-			id_map = new uint32_t[data_number];
-			stats_map = new double[data_number * 4];
-			advstats_map = new uint64_t[data_number * 22];
-
-			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
-				result = false;
-			if (values_map[47] == 0 || values_map[47 + 2048] == 0) // bin 96 of first two spectra.
-			{
-				// There should be some counts here due to the zero peak.
-				result = false;
-			}
-			delete[] values_map;
-			delete[] id_map;
-			delete[] stats_map;
-			delete[] advstats_map;
-		}
-	}
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Map Acquisition - Timed - 2048 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Map Acquisition - Timed - 2048 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Map Acquisition - Timed - 2048 bins. End.
-
-	// Test Map Acquisition - Timed - 1024 bins. Start.
-	std::cout << "Test Map Acquisition - Timed - 1024 bins.\n";
-	sptime = 100; // milliseconds.
-	points = 20;
-	bins = 1024;
-	result = true; running = true;
-	call_id = start_map(identifier, sptime, points, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			while (running && result)
-			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
-				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
-				}
-				else
-					result = false;
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			}
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	call_id = stop(identifier);
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-	}
-	else
-		result = false;
-	spectra_size = 1024;
-	data_number = 0;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getAvailableData(identifier, i, data_number))
-			result = false;
-		else
-		{
-			values_map = new uint16_t[data_number * 1024];
-			id_map = new uint32_t[data_number];
-			stats_map = new double[data_number * 4];
-			advstats_map = new uint64_t[data_number * 22];
-
-			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
-				result = false;
-			if (values_map[23] == 0 || values_map[23 + 1024] == 0) // bin 96 of first two spectra.
-			{
-				// There should be some counts here due to the zero peak.
-				result = false;
-			}
-			delete[] values_map;
-			delete[] id_map;
-			delete[] stats_map;
-			delete[] advstats_map;
-		}
-	}
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Map Acquisition - Timed - 1024 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Map Acquisition - Timed - 1024 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Map Acquisition - Timed - 1024 bins. End.
 
 	// Test Map Acquisition - Free running - 4096 bins. Start.
 	std::cout << "Test Map Acquisition - Free running - 4096 bins.\n";
 	sptime = 100; // milliseconds.
 	points = 0; // Free running.
 	bins = 4096;
-	result = true; running = true;
+	result = true; running = true; stopped = false; LastDataReceived = false;
 	call_id = start_map(identifier, sptime, points, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
 		{
 			std::cout << "Acquisition started.\n";
-			while (running && result)
+			do
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
+
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				if (!stopped)
+					std::cout << "Launching stop acquisition...\n";
 				call_id = stop(identifier);
+				stopped = true;
 				if (call_id > 0)
 				{
 					if (!wait_answer(call_id))
@@ -919,7 +823,7 @@ int32_t main(int argc, char* argv[])
 				}
 				else
 					result = false;
-			}
+			} while (running && result);
 			std::cout << "Acquisition finished.\n";
 		}
 		else
@@ -945,7 +849,8 @@ int32_t main(int argc, char* argv[])
 			if (values_map[95] == 0 || values_map[95 + 4096] == 0) // bin 96 of first two spectra.
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+				//result = false;
 			}
 			delete[] values_map;
 			delete[] id_map;
@@ -964,7 +869,7 @@ int32_t main(int argc, char* argv[])
 		overall_result = false;
 	}
 	// Test Map Acquisition - Free running - 4096 bins. End.
-	
+
 	// Test Waveform Acquisition. Start.
 	std::cout << "Test Waveform Acquisition.\n";
 	time = 1; // seconds.
@@ -972,8 +877,9 @@ int32_t main(int argc, char* argv[])
 	uint16_t dec_ratio = 1;
 	unsigned int trig_mask = 1;
 	unsigned int trig_level = 0;
+	LastDataReceived = false;
 	uint16_t length = 1;
-	call_id = start_waveform("SN01916|SN02712",0,dec_ratio,trig_mask,trig_level,time,length);
+	call_id = start_waveform(identifier, 0, dec_ratio, trig_mask, trig_level, time, length);
 	printf("Call id START WAVE: %d\n", call_id);
 	if (call_id > 0)
 	{
@@ -1013,21 +919,14 @@ int32_t main(int argc, char* argv[])
 	{
 		if (!getWaveData(identifier, i, wave, data_size))
 			result = false;
-		printf("SN01916 board %d: %d-%d-%d-%d\n", i, wave[0], wave[1], wave[2], wave[3]);
-		if (!(wave[0]>30000 && wave[0]<34000))
+		printf("%s board %d: %d-%d-%d-%d\n", identifier, i, wave[0], wave[1], wave[2], wave[3]);
+		if (!(wave[0] > 30000 && wave[0] < 34000))
 		{
 			// With grounded input the signal should be at 32000 ADC bins more or less.
-			result = false;
+			std::cout << "Problem board " << i << ": Waveform acquisition out of range [30000 - 34000].\n";
+			//result = false;
 		}
 	}
-
-	for (int32_t i = 0; i < 1; i++)
-	{
-		if (!getWaveData("SN02712", i, wave, data_size))
-			result = false;
-		printf("SN02712 board %d: %d-%d-%d-%d\n", i, wave[0], wave[1], wave[2], wave[3]);
-	}
-
 
 	clear_chain(identifier);
 	if (result)
@@ -1040,12 +939,12 @@ int32_t main(int argc, char* argv[])
 		overall_result = false;
 	}
 	// Test Waveform Acquisition. End.
-	
+
 	// Test List Mode Acquisition - Timed. Start.
 	std::cout << "Test List Mode Acquisition - Timed.\n";
 	time = 2; // seconds.
-	result = true; running = true;
-	call_id = start_list(identifier,time);
+	result = true; running = true; LastDataReceived = false;
+	call_id = start_list(identifier, time);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -1053,14 +952,19 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -1097,7 +1001,8 @@ int32_t main(int argc, char* argv[])
 			if (!(((list_data[0] & 0x000000000000FFFF) < 98 * 4) && ((list_data[0] & 0x000000000000FFFF) > 94 * 4)))
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": List acquisition out of range of zero peak.\n";
+				//result = false;
 			}
 			delete[] list_data;
 		}
@@ -1117,25 +1022,34 @@ int32_t main(int argc, char* argv[])
 	// Test List Mode Acquisition - Free running. Start.
 	std::cout << "Test List Mode Acquisition - Free running.\n";
 	time = 0; // Free running.
-	result = true; running = true;
+	result = true; running = true; stopped = false; LastDataReceived = false;
 	call_id = start_list(identifier, time);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
 		{
 			std::cout << "Acquisition started.\n";
-			while (running && result)
+			do
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{ running = true; break; }
+					}
+					else
+					{ result = false; break; }
 				}
-				else
-					result = false;
+
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				if (!stopped)
+					std::cout << "Launching stop acquisition...\n";
 				call_id = stop(identifier);
+				stopped = true;
 				if (call_id > 0)
 				{
 					if (!wait_answer(call_id))
@@ -1143,11 +1057,12 @@ int32_t main(int argc, char* argv[])
 				}
 				else
 					result = false;
-			}
+			} while (running && result);
 			std::cout << "Acquisition finished.\n";
 		}
 		else
 			result = false;
+			
 	}
 	else
 		result = false;
@@ -1165,7 +1080,8 @@ int32_t main(int argc, char* argv[])
 			if (!(((list_data[0] & 0x000000000000FFFF) < 98 * 4) && ((list_data[0] & 0x000000000000FFFF) > 94 * 4)))
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": List acquisition out of range of zero peak.\n";
+				//result = false;
 			}
 			delete[] list_data;
 		}
@@ -1188,7 +1104,7 @@ int32_t main(int argc, char* argv[])
 	dec_ratio = 1;
 	uint16_t list_wave_length = 400;
 	uint16_t list_wave_offset = 0;
-	result = true; running = true;
+	result = true; running = true; LastDataReceived = false;
 	call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
 	if (call_id > 0)
 	{
@@ -1197,14 +1113,23 @@ int32_t main(int argc, char* argv[])
 			std::cout << "Acquisition started.\n";
 			while (running && result)
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{
+							running = true; break;
+						}
+					}
+					else
+					{
+						result = false; break;
+					}
 				}
-				else
-					result = false;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			std::cout << "Acquisition finished.\n";
@@ -1238,7 +1163,8 @@ int32_t main(int argc, char* argv[])
 			if (!(((listw_values[0] & 0x000000000000FFFF) < 98 * 4) && ((listw_values[0] & 0x000000000000FFFF) > 94 * 4)) && (((listw_values[1] & 0x000000000000FFFF) < 36000) && ((listw_values[1] & 0x000000000000FFFF) > 30000)))
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": ListWave acquisition out of range of zero peak.\n";
+				//result = false;
 			}
 			delete[] listw_values;
 		}
@@ -1261,25 +1187,38 @@ int32_t main(int argc, char* argv[])
 	dec_ratio = 1;
 	list_wave_length = 400;
 	list_wave_offset = 0;
-	result = true; running = true;
+	result = true; running = true; stopped = false; LastDataReceived = false;
 	call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
 		{
 			std::cout << "Acquisition started.\n";
-			while (running && result)
+			do
 			{
-				call_id = isRunning_system(identifier, 0);
-				if (wait_answer(call_id))
+				std::cout << "Acquisition in progress.\n";
+				for (int32_t i = 0; i < chain; i++)
 				{
-					std::cout << "Acquisition in progress.\n";
-					running = answer_data[0];
+					running = false;
+					call_id = isLastDataReceived(identifier, i, LastDataReceived);
+					if (call_id)
+					{
+						if (!LastDataReceived)
+						{
+							running = true; break;
+						}
+					}
+					else
+					{
+						result = false; break;
+					}
 				}
-				else
-					result = false;
+
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				if (!stopped)
+					std::cout << "Launching stop acquisition...\n";
 				call_id = stop(identifier);
+				stopped = true;
 				if (call_id > 0)
 				{
 					if (!wait_answer(call_id))
@@ -1287,7 +1226,7 @@ int32_t main(int argc, char* argv[])
 				}
 				else
 					result = false;
-			}
+			} while (running && result);
 			std::cout << "Acquisition finished.\n";
 		}
 		else
@@ -1309,7 +1248,8 @@ int32_t main(int argc, char* argv[])
 			if (!(((listw_values[0] & 0x000000000000FFFF) < 98 * 4) && ((listw_values[0] & 0x000000000000FFFF) > 94 * 4)) && (((listw_values[1] & 0x000000000000FFFF) < 36000) && ((listw_values[1] & 0x000000000000FFFF) > 30000)))
 			{
 				// There should be some counts here due to the zero peak.
-				result = false;
+				std::cout << "Problem board " << i << ": ListWave acquisition out of range of zero peak.\n";
+				//result = false;
 			}
 			delete[] listw_values;
 		}
@@ -1325,9 +1265,9 @@ int32_t main(int argc, char* argv[])
 		overall_result = false;
 	}
 	// Test List Mode Acquisition - Timed. End.
-	
-	
-	
+
+
+
 	// Test CloseLibrary() Start.
 	overall_result = overall_result && check_func_result("CloseLibrary()", CloseLibrary());
 	// Test CloseLibrary() End.
@@ -1336,6 +1276,12 @@ int32_t main(int argc, char* argv[])
 		std::cout << "All Tests Completed.\n\n";
 	else
 		std::cout << "At least one test failed.\n\n";
-	
+
+	system("PAUSE");
 	return 0;
+}
+
+void TestSingleSpectrum4096(void)
+{
+
 }
