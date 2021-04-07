@@ -191,6 +191,8 @@ EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, co
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_input(const char* identifier, uint16_t Board, const InputMode InputMode);
 
+EXTERN DECLSPEC uint32_t   CALL_CONV reset_daisy_chain(const char* identifier, uint16_t Board);
+
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_emulator(const char * identifier, uint16_t Board, bool enable);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_offset(const char* identifier, uint16_t Board, const configuration_offset cfg_offset);
@@ -387,3 +389,11 @@ EXTERN DECLSPEC uint32_t  CALL_CONV global_reset(const char* identifier);
 // Get the progress of the load firmware operation (floating number from 0 to 1);
 EXTERN DECLSPEC bool  CALL_CONV get_load_fw_progress(double& progress);
 
+/**
+*   Sets position limit in mapping mode and enables gating during the map.
+*/
+EXTERN DECLSPEC uint32_t   CALL_CONV set_position_limit(const char* serial, const uint32_t position, const bool high);
+/**
+*   Disable position limit and gating in mapping mode.
+*/
+EXTERN DECLSPEC uint32_t   CALL_CONV disable_position_limit(const char* serial);
