@@ -178,6 +178,10 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
 	      printf("%s::%s register callback OK\n", driverName, functionName);
 	  }
 
+    // It is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
+	  autoScanSlaves(false);
+	  epicsThreadSleep(0.050); 	// wait 50ms
+
     /* General parameters */
     createParam(DanteCollectModeString,            asynParamInt32,   &DanteCollectMode);
     createParam(DanteCurrentPixelString,           asynParamInt32,   &DanteCurrentPixel);
@@ -364,7 +368,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     }
 
     /* Read the MCA and DXP parameters once */
-    this->getAcquisitionStatus(ALL_BOARDS);
+    dataAcquiring();
     this->getAcquisitionStatistics(ALL_BOARDS);
     
     // Enable array callbacks by default
@@ -768,42 +772,54 @@ asynStatus Dante::setDanteConfiguration(int addr)
     return asynSuccess;
 }
 
-asynStatus Dante::getAcquisitionStatus(int addr)
+bool Dante::waveformAcquiring()
 {
-    int acquiring=0;
-    int ivalue;
-    int board=addr;
+    bool acquiring=false;
+    int boardAcquiring;
+    int board;
     asynStatus status=asynSuccess;
-    int i;
-    static const char *functionName = "getAcquisitionStatus";
+    static const char *functionName = "waveformAcquiring";
     
     /* Note: we use the internal parameter DanteAcquiring rather than mcaAcquiring here
      * because we need to do callbacks in acquisitionTask() on all other parameters before
      * we do callbacks on mcaAcquiring, and callParamCallbacks does not allow control over the order. */
-
-    if (addr == numBoards_) board = ALL_BOARDS;
-    else if (addr == ALL_BOARDS) addr = numBoards_;
-    if (board == ALL_BOARDS) { /* All boards */
-        for (i=0; i<numBoards_; i++) {
-            /* Call ourselves recursively but with a specific board */
-            this->getAcquisitionStatus(i);
-            getIntegerParam(i, DanteAcquiring, &ivalue);
-            acquiring = std::max(acquiring, ivalue);
-        }
-        setIntegerParam(addr, DanteAcquiring, acquiring);
-    } else {
-        /* Get the run time status from the Dante library */
-        callId_ = isRunning_system(danteIdentifier_, addr);
+    for (board=0; board<numBoards_; board++) {
+        callId_ = isRunning_system(danteIdentifier_, board);
         waitReply(callId_, danteReply_, "isRunning_system");
-        setIntegerParam(addr, DanteAcquiring, danteReply_[0]);
+        boardAcquiring = danteReply_[0];
+        setIntegerParam(board, DanteAcquiring, boardAcquiring);
+        if (boardAcquiring) acquiring = true;
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-            "%s::%s addr=%d board=%d: danteReply_[0]=%d\n",
-            driverName, functionName, addr, board, danteReply_[0]);
+            "%s::%s board=%d: boardAcquiring=%d\n",
+            driverName, functionName, board, boardAcquiring);
     }
-    asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
-        "%s::%s addr=%d board=%d: acquiring=%d\n",
-        driverName, functionName, addr, board, acquiring);
-    return(status);
+    setIntegerParam(numBoards_, DanteAcquiring, acquiring?1:0);
+    return acquiring;
+}
+
+bool Dante::dataAcquiring()
+{
+    bool acquiring=false;
+    bool lastDataReceived;
+    int boardAcquiring;
+    int board;
+    asynStatus status=asynSuccess;
+    static const char *functionName = "dataAcquiring";
+    
+    /* Note: we use the internal parameter DanteAcquiring rather than mcaAcquiring here
+     * because we need to do callbacks in acquisitionTask() on all other parameters before
+     * we do callbacks on mcaAcquiring, and callParamCallbacks does not allow control over the order. */
+    for (board=0; board<numBoards_; board++) {
+        isLastDataReceived(danteIdentifier_, board, lastDataReceived);
+        boardAcquiring = !lastDataReceived;
+        setIntegerParam(board, DanteAcquiring, boardAcquiring);
+        if (boardAcquiring) acquiring = true;
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER,
+            "%s::%s board=%d: boardAcquiring=%d\n",
+            driverName, functionName, board, boardAcquiring);
+    }
+    setIntegerParam(numBoards_, DanteAcquiring, acquiring?1:0);
+    return acquiring;
 }
 
 asynStatus Dante::getAcquisitionStatistics(int addr)
@@ -1052,10 +1068,7 @@ asynStatus Dante::getTraces()
     callId_ = start_waveform(danteIdentifier_, mode, decRatio, triggerMask, triggerLevel, triggerWaitTime, length);
     waitReply(callId_, danteReply_, "start_waveform");
     while(1) {
-        getAcquisitionStatus(ALL_BOARDS);
-        int danteAcquiring;
-        getIntegerParam(DanteAcquiring, &danteAcquiring);
-        if (danteAcquiring) {
+        if (waveformAcquiring()) {
             epicsThreadSleep(0.001);
         } else {
             break;
@@ -1194,14 +1207,13 @@ void Dante::acquisitionTask()
         /* In this loop we only read the acquisition status to minimise overhead.
          * If a transition from acquiring to done is detected then we read the statistics
          * and the data. */
-        getAcquisitionStatus(ALL_BOARDS);
+        acquiring = dataAcquiring();
         if (mode == DanteModeMCAMapping) {
             pollMCAMappingMode();
         }
         else if (mode == DanteModeList) {
             pollListMode();
         }
-        getIntegerParam(numBoards_, DanteAcquiring, &acquiring);
         if (!acquiring)
         {
             /* There must have just been a transition from acquiring to not acquiring */
@@ -1218,7 +1230,6 @@ void Dante::acquisitionTask()
             }
             else if (mode == DanteModeList) {
                 /* In List mode we need to call stop() */
-printf("Calling stop()\n");
                 callId_ = stop(danteIdentifier_);
                 waitReply(callId_, danteReply_, "stop");
             }
