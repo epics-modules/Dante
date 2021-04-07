@@ -229,7 +229,8 @@ protected:
 private:
     int getBoard(asynUser *pasynUser, int *addr);
     asynStatus setDanteConfiguration(int addr);
-    asynStatus getAcquisitionStatus(int addr);
+    bool dataAcquiring();
+    bool waveformAcquiring();
     asynStatus getAcquisitionStatistics(int addr);
     asynStatus getMcaData(int addr);
     asynStatus pollMCAMappingMode();
