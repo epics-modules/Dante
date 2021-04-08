@@ -516,7 +516,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(M).IDTIM</string>
+                <string>$(P)$(R)IDeadTime</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -570,7 +570,7 @@ border-radius: 2px;
                 <enum>caLineEdit::WidthAndHeight</enum>
             </property>
             <property name="channel">
-                <string>$(P)$(M).DTIM</string>
+                <string>$(P)$(R)DeadTime</string>
             </property>
             <property name="foreground">
                 <color alpha="255">
@@ -2833,7 +2833,7 @@ border-radius: 2px;
                     <x>715</x>
                     <y>210</y>
                     <width>410</width>
-                    <height>135</height>
+                    <height>160</height>
                 </rect>
             </property>
             <property name="lineSize">
@@ -2972,16 +2972,16 @@ border-radius: 2px;
                 <enum>Menu</enum>
             </property>
             <property name="labels">
-                <string>DPP Parameters</string>
+                <string>MCA #1;MCA #2;MCA #3;MCA #4;MCA #5;MCA #6;MCA #7;MCA #8;Combined</string>
             </property>
             <property name="files">
-                <string>dante8MCA.adl</string>
+                <string>mca.adl;mca.adl;mca.adl;mca.adl;mca.adl;mca.adl;mca.adl;mca.adl;dante8MCA.adl</string>
             </property>
             <property name="args">
-                <string>P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8</string>
+                <string>P=$(P),M=$(M)1;P=$(P),M=$(M)2;P=$(P),M=$(M)3;P=$(P),M=$(M)4;P=$(P),M=$(M)5;P=$(P),M=$(M)6;P=$(P),M=$(M)7;P=$(P),M=$(M)8;P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8</string>
             </property>
             <property name="removeParent">
-                <string>false</string>
+                <string>false;false;false;false;false;false;false;false;false</string>
             </property>
         </widget>
         <widget class="caRelatedDisplay" name="caRelatedDisplay_3">
@@ -3014,16 +3014,16 @@ border-radius: 2px;
                 <enum>Menu</enum>
             </property>
             <property name="labels">
-                <string>DPP Parameters</string>
+                <string>Trace #1;Trace #2;Trace #3;Trace #4;Trace #5;Trace #6;Trace #7;Trace #8;Combined</string>
             </property>
             <property name="files">
-                <string>dante8Trace.adl</string>
+                <string>danteTrace.adl;danteTrace.adl;danteTrace.adl;danteTrace.adl;danteTrace.adl;danteTrace.adl;danteTrace.adl;danteTrace.adl;dante8Trace.adl</string>
             </property>
             <property name="args">
-                <string>P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)</string>
+                <string>P=$(P),R=$(R),D=$(D1);P=$(P),R=$(R),D=$(D2);P=$(P),R=$(R),D=$(D3);P=$(P),R=$(R),D=$(D4);P=$(P),R=$(R),D=$(D5);P=$(P),R=$(R),D=$(D6);P=$(P),R=$(R),D=$(D7);P=$(P),R=$(R),D=$(D8);P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)</string>
             </property>
             <property name="removeParent">
-                <string>false</string>
+                <string>false;false;false;false;false;false;false;false;false</string>
             </property>
         </widget>
         <widget class="caLabel" name="caLabel_28">
@@ -3081,7 +3081,7 @@ border-radius: 2px;
                 </color>
             </property>
             <property name="text">
-                <string>Combined MCA Plots</string>
+                <string>MCA Plots</string>
             </property>
             <property name="fontScaleMode">
                 <enum>ESimpleLabel::WidthAndHeight</enum>
@@ -3091,9 +3091,9 @@ border-radius: 2px;
             </property>
             <property name="geometry">
                 <rect>
-                    <x>777</x>
+                    <x>867</x>
                     <y>270</y>
-                    <width>180</width>
+                    <width>90</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -3117,7 +3117,7 @@ border-radius: 2px;
                 </color>
             </property>
             <property name="text">
-                <string>Combined ADC Traces</string>
+                <string>ADC Traces</string>
             </property>
             <property name="fontScaleMode">
                 <enum>ESimpleLabel::WidthAndHeight</enum>
@@ -3127,9 +3127,9 @@ border-radius: 2px;
             </property>
             <property name="geometry">
                 <rect>
-                    <x>767</x>
+                    <x>857</x>
                     <y>295</y>
-                    <width>190</width>
+                    <width>100</width>
                     <height>20</height>
                 </rect>
             </property>
@@ -3212,6 +3212,96 @@ border-radius: 2px;
                 <string>false</string>
             </property>
         </widget>
+        <widget class="caLabel" name="caLabel_32">
+            <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="text">
+                <string>SNL Connected</string>
+            </property>
+            <property name="fontScaleMode">
+                <enum>ESimpleLabel::WidthAndHeight</enum>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignAbsolute|Qt::AlignRight|Qt::AlignVCenter</set>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>827</x>
+                    <y>345</y>
+                    <width>130</width>
+                    <height>20</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="caLineEdit" name="caLineEdit_16">
+            <property name="geometry">
+                <rect>
+                    <x>962</x>
+                    <y>345</y>
+                    <width>150</width>
+                    <height>20</height>
+                </rect>
+            </property>
+            <property name="fontScaleMode">
+                <enum>caLineEdit::WidthAndHeight</enum>
+            </property>
+            <property name="channel">
+                <string>$(P)$(R)SNL_Connected</string>
+            </property>
+            <property name="foreground">
+                <color alpha="255">
+                    <red>10</red>
+                    <green>0</green>
+                    <blue>184</blue>
+                </color>
+            </property>
+            <property name="background">
+                <color alpha="255">
+                    <red>218</red>
+                    <green>218</green>
+                    <blue>218</blue>
+                </color>
+            </property>
+            <property name="limitsMode">
+                <enum>caLineEdit::Channel</enum>
+            </property>
+            <property name="limitsMode">
+                <enum>caLineEdit::Channel</enum>
+            </property>
+            <property name="precisionMode">
+                <enum>caLineEdit::Channel</enum>
+            </property>
+            <property name="minValue">
+                <double>0.0</double>
+            </property>
+            <property name="maxValue">
+                <double>1.0</double>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignAbsolute|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <property name="formatType">
+                <enum>string</enum>
+            </property>
+            <property name="colorMode">
+                <enum>caLineEdit::Alarm_Static</enum>
+            </property>
+        </widget>
         <zorder>caRectangle_0</zorder>
         <zorder>caLabel_0</zorder>
         <zorder>caInclude_0</zorder>
@@ -3254,6 +3344,7 @@ border-radius: 2px;
         <zorder>caLabel_29</zorder>
         <zorder>caLabel_30</zorder>
         <zorder>caLabel_31</zorder>
+        <zorder>caLabel_32</zorder>
         <zorder>caLineEdit_0</zorder>
         <zorder>caLineEdit_1</zorder>
         <zorder>caLineEdit_2</zorder>
@@ -3289,6 +3380,7 @@ border-radius: 2px;
         <zorder>caRelatedDisplay_2</zorder>
         <zorder>caRelatedDisplay_3</zorder>
         <zorder>caRelatedDisplay_4</zorder>
+        <zorder>caLineEdit_16</zorder>
     </widget>
 </widget>
 </ui>

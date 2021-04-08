@@ -6,10 +6,10 @@ release 1
 x 320
 y 50
 w 1640
-h 735
-font "helvetica-medium-r-18.0"
-ctlFont "helvetica-bold-r-10.0"
-btnFont "helvetica-medium-r-18.0"
+h 710
+font "utopia-medium-r-24.0"
+ctlFont "helvetica-medium-r-8.0"
+btnFont "utopia-medium-r-24.0"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 textColor rgb 0 0 0
@@ -50,7 +50,7 @@ x 0
 y 0
 w 1640
 h 25
-font "helvetica-medium-r-18.0"
+font "utopia-medium-r-24.0"
 fontAlign "center"
 fgColor rgb 65280 65280 65280
 bgColor index 3
@@ -91,7 +91,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -142,7 +142,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -193,7 +193,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -244,7 +244,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -303,7 +303,7 @@ x 5
 y 42
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -339,7 +339,7 @@ x 415
 y 42
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -375,7 +375,7 @@ x 825
 y 42
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -411,7 +411,7 @@ x 1235
 y 42
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -439,7 +439,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -490,7 +490,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -541,7 +541,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -592,7 +592,7 @@ yLabel "ADC units"
 fgColor rgb 0 0 0
 bgColor rgb 47872 47872 47872
 gridColor rgb 0 0 0
-font "helvetica-medium-r-10.0"
+font "helvetica-medium-r-12.0"
 # Operating Modes
 plotMode "plotLastNPts"
 nPts 1
@@ -651,7 +651,7 @@ x 5
 y 322
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -687,7 +687,7 @@ x 415
 y 322
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -723,7 +723,7 @@ x 825
 y 322
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -759,7 +759,7 @@ x 1235
 y 322
 w 400
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -774,16 +774,29 @@ endGroup
 endObjectProperties
 
 
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 380
+y 595
+w 880
+h 110
+
+beginGroup
+
 # (Rectangle)
 object activeRectangleClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 480
+x 380
 y 595
-w 679
-h 134
+w 879
+h 109
 lineColor rgb 0 0 0
 fillColor rgb 0 0 0
 endObjectProperties
@@ -827,7 +840,7 @@ x 765
 y 600
 w 110
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "center"
 fgColor rgb 2560 0 47104
 bgColor index 3
@@ -848,60 +861,12 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 490
-y 676
-w 318
-h 21
+x 390
+y 625
+w 860
+h 70
 
 beginGroup
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 490
-y 677
-w 150
-h 20
-font "helvetica-medium-r-14.0"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "Trigger instant"
-}
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 728
-y 676
-w 80
-h 20
-controlPv "$(P)$(R)TraceTriggerInstant_RBV"
-format "decimal"
-font "helvetica-medium-r-14.0"
-fontAlign "left"
-fgColor rgb 2560 0 47104
-bgColor rgb 51200 51200 51200
-limitsFromDb
-nullColor rgb 60928 46592 11008
-smartRefresh
-fastUpdate
-newPos
-objType "controls"
-endObjectProperties
-
-endGroup
-
-endObjectProperties
-
 
 # (Group)
 object activeGroupClass
@@ -909,68 +874,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 500
-y 650
-w 308
-h 21
-
-beginGroup
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 500
-y 650
-w 140
-h 20
-font "helvetica-medium-r-14.0"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "Trigger rising"
-}
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 728
-y 651
-w 80
-h 20
-controlPv "$(P)$(R)TraceTriggerRising_RBV"
-format "decimal"
-font "helvetica-medium-r-14.0"
-fontAlign "left"
-fgColor rgb 2560 0 47104
-bgColor rgb 51200 51200 51200
-limitsFromDb
-nullColor rgb 60928 46592 11008
-smartRefresh
-fastUpdate
-newPos
-objType "controls"
-endObjectProperties
-
-endGroup
-
-endObjectProperties
-
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 580
+x 480
 y 625
 w 228
 h 20
@@ -983,11 +887,11 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 580
+x 480
 y 625
-w 60
+w 66
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
@@ -1002,13 +906,13 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 728
+x 628
 y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceLength_RBV"
 format "decimal"
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 51200 51200 51200
@@ -1026,7 +930,7 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 643
+x 543
 y 625
 w 80
 h 20
@@ -1051,46 +955,13 @@ endGroup
 endObjectProperties
 
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 550
-y 702
-w 90
-h 20
-font "helvetica-medium-r-14.0"
-fontAlign "right"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "Read Rate"
-}
-endObjectProperties
-
 # (Group)
 object activeGroupClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 813
-y 625
-w 338
-h 95
-
-beginGroup
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 813
+x 730
 y 625
 w 338
 h 20
@@ -1103,11 +974,11 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 813
+x 730
 y 625
 w 170
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
@@ -1122,13 +993,13 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 1071
+x 988
 y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceTime_RBV"
 format "decimal"
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 51200 51200 51200
@@ -1146,7 +1017,7 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 986
+x 903
 y 625
 w 80
 h 20
@@ -1177,9 +1048,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 833
-y 650
-w 318
+x 990
+y 675
+w 258
 h 20
 
 beginGroup
@@ -1190,16 +1061,73 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 833
-y 650
-w 150
+x 987
+y 675
+w 93
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
+fontAlign "right"
 fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
 value {
-  "Trigger falling"
+  "Read Rate"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 390
+y 650
+w 80
+h 20
+font "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Trigger:"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 480
+y 650
+w 230
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 480
+y 650
+w 62
+h 20
+font "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Rising"
 }
 endObjectProperties
 
@@ -1209,13 +1137,13 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 1071
+x 630
 y 650
 w 80
 h 20
-controlPv "$(P)$(R)TraceTriggerFalling_RBV"
+controlPv "$(P)$(R)TraceTriggerRising_RBV"
 format "decimal"
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 51200 51200 51200
@@ -1238,9 +1166,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 853
-y 675
-w 298
+x 730
+y 650
+w 240
 h 20
 
 beginGroup
@@ -1251,16 +1179,16 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 853
-y 675
-w 130
+x 730
+y 650
+w 70
 h 20
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
 value {
-  "Trigger Level"
+  "Falling"
 }
 endObjectProperties
 
@@ -1270,13 +1198,13 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 1071
-y 675
+x 890
+y 650
 w 80
 h 20
-controlPv "$(P)$(R)TraceTriggerLevel_RBV"
+controlPv "$(P)$(R)TraceTriggerFalling_RBV"
 format "decimal"
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 51200 51200 51200
@@ -1288,13 +1216,111 @@ newPos
 objType "controls"
 endObjectProperties
 
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1010
+y 650
+w 240
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1010
+y 650
+w 70
+h 20
+font "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Instant"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 1170
+y 650
+w 80
+h 20
+controlPv "$(P)$(R)TraceTriggerInstant_RBV"
+format "decimal"
+font "helvetica-medium-r-18.0"
+fontAlign "left"
+fgColor rgb 2560 0 47104
+bgColor rgb 51200 51200 51200
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 750
+y 675
+w 220
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 750
+y 675
+w 54
+h 20
+font "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Level"
+}
+endObjectProperties
+
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 986
+x 805
 y 675
 w 80
 h 20
@@ -1314,56 +1340,19 @@ newPos
 objType "controls"
 endObjectProperties
 
-endGroup
-
-endObjectProperties
-
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 863
-y 700
-w 288
-h 20
-
-beginGroup
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 863
-y 700
-w 120
-h 20
-font "helvetica-medium-r-14.0"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "Trigger wait"
-}
-endObjectProperties
-
 # (Text Monitor)
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 1071
-y 700
+x 890
+y 675
 w 80
 h 20
-controlPv "$(P)$(R)TraceTriggerWait_RBV"
+controlPv "$(P)$(R)TraceTriggerLevel_RBV"
 format "decimal"
-font "helvetica-medium-r-14.0"
+font "helvetica-medium-r-18.0"
 fontAlign "left"
 fgColor rgb 2560 0 47104
 bgColor rgb 51200 51200 51200
@@ -1375,14 +1364,51 @@ newPos
 objType "controls"
 endObjectProperties
 
+endGroup
+
+endObjectProperties
+
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 500
+y 675
+w 210
+h 20
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 500
+y 675
+w 51
+h 20
+font "helvetica-medium-r-18.0"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Wait"
+}
+endObjectProperties
+
 # (Text Control)
 object activeXTextDspClass
 beginObjectProperties
 major 4
 minor 7
 release 0
-x 986
-y 700
+x 545
+y 675
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerWait"
@@ -1400,6 +1426,35 @@ fastUpdate
 newPos
 objType "controls"
 endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 630
+y 675
+w 80
+h 20
+controlPv "$(P)$(R)TraceTriggerWait_RBV"
+format "decimal"
+font "helvetica-medium-r-18.0"
+fontAlign "left"
+fgColor rgb 2560 0 47104
+bgColor rgb 51200 51200 51200
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
 
 endGroup
 
@@ -1433,6 +1488,18 @@ beginObjectProperties
 major 4
 minor 0
 release 0
+x 380
+y 595
+w 880
+h 110
+
+beginGroup
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
 x 760
 y 600
 w 120
@@ -1450,10 +1517,56 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 490
-y 676
-w 318
-h 21
+x 390
+y 625
+w 860
+h 70
+
+beginGroup
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 480
+y 625
+w 228
+h 20
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 730
+y 625
+w 338
+h 20
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 990
+y 675
+w 258
+h 20
 
 beginGroup
 
@@ -1463,17 +1576,42 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 643
+x 1083
 y 676
 w 80
-h 20
+h 18
 fgColor rgb 0 0 0
 bgColor rgb 29440 57088 65280
 inconsistentColor rgb 17920 17920 17920
 topShadowColor rgb 55808 55808 55808
 botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(R)TraceTriggerInstant"
-indicatorPv "$(P)$(R)TraceTriggerInstant"
+controlPv "$(P)$(R)ReadTrace.SCAN"
+indicatorPv "$(P)$(R)ReadTrace.SCAN"
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Message Button)
+object activeMessageButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1168
+y 675
+w 80
+h 20
+fgColor rgb 0 0 0
+onColor rgb 29440 57088 65280
+offColor rgb 29440 57088 65280
+topShadowColor rgb 65280 65280 65280
+botShadowColor rgb 0 0 0
+controlPv "$(P)$(R)ReadTrace"
+pressValue "1"
+releaseValue 
+onLabel "Read Once"
+offLabel "Read Once"
+3d
+useEnumNumeric
 font "helvetica-medium-r-12.0"
 endObjectProperties
 
@@ -1487,10 +1625,10 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 500
+x 480
 y 650
-w 308
-h 21
+w 230
+h 20
 
 beginGroup
 
@@ -1500,8 +1638,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 643
-y 651
+x 545
+y 650
 w 80
 h 20
 fgColor rgb 0 0 0
@@ -1524,100 +1662,9 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 580
-y 625
-w 228
-h 20
-
-beginGroup
-
-endGroup
-
-endObjectProperties
-
-
-# (Menu Button)
-object activeMenuButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 643
-y 703
-w 80
-h 18
-fgColor rgb 0 0 0
-bgColor rgb 29440 57088 65280
-inconsistentColor rgb 17920 17920 17920
-topShadowColor rgb 55808 55808 55808
-botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(R)ReadTrace.SCAN"
-indicatorPv "$(P)$(R)ReadTrace.SCAN"
-font "helvetica-medium-r-10.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 728
-y 702
-w 80
-h 20
-fgColor rgb 0 0 0
-onColor rgb 29440 57088 65280
-offColor rgb 29440 57088 65280
-topShadowColor rgb 65280 65280 65280
-botShadowColor rgb 0 0 0
-controlPv "$(P)$(R)ReadTrace"
-pressValue "1"
-releaseValue 
-onLabel "Read Once"
-offLabel "Read Once"
-3d
-useEnumNumeric
-font "helvetica-medium-r-12.0"
-endObjectProperties
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 813
-y 625
-w 338
-h 95
-
-beginGroup
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 813
-y 625
-w 338
-h 20
-
-beginGroup
-
-endGroup
-
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 833
+x 730
 y 650
-w 318
+w 240
 h 20
 
 beginGroup
@@ -1628,7 +1675,7 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 986
+x 805
 y 650
 w 80
 h 20
@@ -1652,9 +1699,46 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 853
+x 1010
+y 650
+w 240
+h 20
+
+beginGroup
+
+# (Menu Button)
+object activeMenuButtonClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1085
+y 650
+w 80
+h 20
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+inconsistentColor rgb 17920 17920 17920
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+controlPv "$(P)$(R)TraceTriggerInstant"
+indicatorPv "$(P)$(R)TraceTriggerInstant"
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 750
 y 675
-w 298
+w 220
 h 20
 
 beginGroup
@@ -1669,12 +1753,17 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 863
-y 700
-w 288
+x 500
+y 675
+w 210
 h 20
 
 beginGroup
+
+endGroup
+
+endObjectProperties
+
 
 endGroup
 

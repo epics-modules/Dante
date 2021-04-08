@@ -232,7 +232,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(M).IDTIM"
+		chan="$(P)$(R)IDeadTime"
 		clr=15
 		bclr=14
 	}
@@ -248,7 +248,7 @@ text {
 		height=20
 	}
 	monitor {
-		chan="$(P)$(M).DTIM"
+		chan="$(P)$(R)DeadTime"
 		clr=15
 		bclr=14
 	}
@@ -1011,7 +1011,7 @@ rectangle {
 		x=715
 		y=210
 		width=410
-		height=135
+		height=160
 	}
 	"basic attribute" {
 		clr=14
@@ -1056,7 +1056,47 @@ text {
 		height=20
 	}
 	display[0] {
-		label="DPP Parameters"
+		label="MCA #1"
+		name="mca.adl"
+		args="P=$(P),M=$(M)1"
+	}
+	display[1] {
+		label="MCA #2"
+		name="mca.adl"
+		args="P=$(P),M=$(M)2"
+	}
+	display[2] {
+		label="MCA #3"
+		name="mca.adl"
+		args="P=$(P),M=$(M)3"
+	}
+	display[3] {
+		label="MCA #4"
+		name="mca.adl"
+		args="P=$(P),M=$(M)4"
+	}
+	display[4] {
+		label="MCA #5"
+		name="mca.adl"
+		args="P=$(P),M=$(M)5"
+	}
+	display[5] {
+		label="MCA #6"
+		name="mca.adl"
+		args="P=$(P),M=$(M)6"
+	}
+	display[6] {
+		label="MCA #7"
+		name="mca.adl"
+		args="P=$(P),M=$(M)7"
+	}
+	display[7] {
+		label="MCA #8"
+		name="mca.adl"
+		args="P=$(P),M=$(M)8"
+	}
+	display[8] {
+		label="Combined"
 		name="dante8MCA.adl"
 		args="P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8"
 	}
@@ -1072,7 +1112,47 @@ text {
 		height=20
 	}
 	display[0] {
-		label="DPP Parameters"
+		label="Trace #1"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D1)"
+	}
+	display[1] {
+		label="Trace #2"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D2)"
+	}
+	display[2] {
+		label="Trace #3"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D3)"
+	}
+	display[3] {
+		label="Trace #4"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D4)"
+	}
+	display[4] {
+		label="Trace #5"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D5)"
+	}
+	display[5] {
+		label="Trace #6"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D6)"
+	}
+	display[6] {
+		label="Trace #7"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D7)"
+	}
+	display[7] {
+		label="Trace #8"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D8)"
+	}
+	display[8] {
+		label="Combined"
 		name="dante8Trace.adl"
 		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
 	}
@@ -1095,28 +1175,28 @@ text {
 }
 text {
 	object {
-		x=777
+		x=867
 		y=270
-		width=180
+		width=90
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Combined MCA Plots"
+	textix="MCA Plots"
 	align="horiz. right"
 }
 text {
 	object {
-		x=767
+		x=857
 		y=295
-		width=190
+		width=100
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Combined ADC Traces"
+	textix="ADC Traces"
 	align="horiz. right"
 }
 text {
@@ -1147,4 +1227,34 @@ text {
 	clr=14
 	bclr=51
 	label="Statistics"
+}
+text {
+	object {
+		x=827
+		y=345
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="SNL Connected"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=962
+		y=345
+		width=150
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)SNL_Connected"
+		clr=54
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
 }

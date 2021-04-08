@@ -176,7 +176,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #39</name>
-    <pv_name>$(P)$(M).IDTIM</pv_name>
+    <pv_name>$(P)$(R)IDeadTime</pv_name>
     <x>590</x>
     <y>200</y>
     <width>76</width>
@@ -197,7 +197,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>text update #43</name>
-    <pv_name>$(P)$(M).DTIM</pv_name>
+    <pv_name>$(P)$(R)DeadTime</pv_name>
     <x>590</x>
     <y>225</y>
     <width>76</width>
@@ -1087,7 +1087,7 @@
     <x>715</x>
     <y>210</y>
     <width>410</width>
-    <height>135</height>
+    <height>160</height>
     <line_width>1</line_width>
     <line_color>
       <color red="0" green="0" blue="0">
@@ -1138,6 +1138,70 @@
     <name>related display #238</name>
     <actions>
       <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)1</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #1</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)2</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #2</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)3</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #3</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)4</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #4</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)5</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #5</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)6</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #6</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)7</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #7</description>
+      </action>
+      <action type="open_display">
+        <file>mca.opi</file>
+        <macros>
+          <M>$(M)8</M>
+        </macros>
+        <target>tab</target>
+        <description>MCA #8</description>
+      </action>
+      <action type="open_display">
         <file>dante8MCA.opi</file>
         <macros>
           <M1>$(M)1</M1>
@@ -1150,7 +1214,7 @@
           <M8>$(M)8</M8>
         </macros>
         <target>tab</target>
-        <description>DPP Parameters</description>
+        <description>Combined</description>
       </action>
     </actions>
     <text>MCA Plots</text>
@@ -1164,12 +1228,76 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #241</name>
+    <name>related display #249</name>
     <actions>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D1)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #1</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D2)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #2</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D3)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #3</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D4)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #4</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D5)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #5</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D6)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #6</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D7)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #7</description>
+      </action>
+      <action type="open_display">
+        <file>danteTrace.opi</file>
+        <macros>
+          <D>$(D8)</D>
+        </macros>
+        <target>tab</target>
+        <description>Trace #8</description>
+      </action>
       <action type="open_display">
         <file>dante8Trace.opi</file>
         <target>tab</target>
-        <description>DPP Parameters</description>
+        <description>Combined</description>
       </action>
     </actions>
     <text>ADC Traces</text>
@@ -1183,7 +1311,7 @@
     </background_color>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #244</name>
+    <name>text #260</name>
     <text>DPP Parameters</text>
     <x>817</x>
     <y>245</y>
@@ -1195,11 +1323,11 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #247</name>
-    <text>Combined MCA Plots</text>
-    <x>777</x>
+    <name>text #263</name>
+    <text>MCA Plots</text>
+    <x>867</x>
     <y>270</y>
-    <width>180</width>
+    <width>90</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -1207,11 +1335,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #250</name>
-    <text>Combined ADC Traces</text>
-    <x>767</x>
+    <name>text #266</name>
+    <text>ADC Traces</text>
+    <x>857</x>
     <y>295</y>
-    <width>190</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -1219,7 +1346,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #253</name>
+    <name>text #269</name>
     <text>Statistics</text>
     <x>857</x>
     <y>320</y>
@@ -1230,7 +1357,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #256</name>
+    <name>related display #272</name>
     <actions>
       <action type="open_display">
         <file>dante8Statistics.opi</file>
@@ -1247,5 +1374,38 @@
       <color red="115" green="223" blue="255">
       </color>
     </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #275</name>
+    <text>SNL Connected</text>
+    <x>827</x>
+    <y>345</y>
+    <width>130</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <horizontal_alignment>2</horizontal_alignment>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>text update #278</name>
+    <pv_name>$(P)$(R)SNL_Connected</pv_name>
+    <x>962</x>
+    <y>345</y>
+    <width>150</width>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="10" green="0" blue="184">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color red="218" green="218" blue="218">
+      </color>
+    </background_color>
+    <format>6</format>
+    <show_units>false</show_units>
   </widget>
 </display>

@@ -8,7 +8,7 @@ display {
 		x=294
 		y=314
 		width=1085
-		height=375
+		height=425
 	}
 	clr=14
 	bclr=4
@@ -111,1544 +111,213 @@ text {
 	textix="Dante Statistics ($(P)$(R))"
 	align="horiz. centered"
 }
-composite {
-	object {
-		x=10
-		y=70
-		width=150
-		height=295
-	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=100
-				y=270
-				width=60
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Pileup"
-		}
-		text {
-			object {
-				x=70
-				y=295
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="F1 Pileup"
-		}
-		text {
-			object {
-				x=30
-				y=320
-				width=130
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Not-F1 Pileup"
-		}
-		text {
-			object {
-				x=40
-				y=345
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Reset Counts"
-		}
-		text {
-			object {
-				x=70
-				y=70
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="ICR (kHz)"
-		}
-		text {
-			object {
-				x=70
-				y=95
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="OCR (kHz)"
-		}
-		text {
-			object {
-				x=80
-				y=120
-				width=80
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Triggers"
-		}
-		text {
-			object {
-				x=100
-				y=145
-				width=60
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Events"
-		}
-		text {
-			object {
-				x=30
-				y=170
-				width=130
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Fast DeadTime"
-		}
-		text {
-			object {
-				x=50
-				y=195
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="F1 DeadTime"
-		}
-		text {
-			object {
-				x=50
-				y=220
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Zero Counts"
-		}
-		text {
-			object {
-				x=10
-				y=245
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Baseline Counts"
-		}
-	}
-}
-composite {
+rectangle {
 	object {
 		x=280
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=280
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=286
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D2)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=280
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=280
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 2"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=280
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 2"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=395
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=395
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=401
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D3)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=395
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=395
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 3"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=395
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 3"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=510
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=510
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=516
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D4)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=510
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=510
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 4"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=510
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 4"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=625
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=625
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=631
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D5)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=625
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=625
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 5"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=625
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 5"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=740
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=740
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=746
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D6)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=740
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=740
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 6"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=740
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 6"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=855
 		y=40
 		width=110
-		height=331
+		height=21
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=855
-				y=61
-				width=110
-				height=310
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=270
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=295
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)F1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=320
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)NotF1PileUp"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=345
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)ResetCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=70
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)InputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=95
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)OutputCountRate"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=861
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D7)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=855
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=855
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 7"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=2
 	}
 }
-composite {
+text {
+	object {
+		x=855
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 7"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=970
 		y=40
 		width=110
-		height=331
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=970
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 8"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=165
+		y=40
+		width=110
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=165
+		y=40
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Channel 1"
+	align="horiz. centered"
+}
+composite {
+	object {
+		x=165
+		y=61
+		width=915
+		height=360
 	}
 	"composite name"=""
 	children {
 		rectangle {
 			object {
-				x=970
+				x=165
 				y=61
 				width=110
-				height=310
+				height=360
 			}
 			"basic attribute" {
 				clr=14
@@ -1656,15 +325,1713 @@ composite {
 				width=1
 			}
 		}
+		rectangle {
+			object {
+				x=280
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=395
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=510
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=625
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=740
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=855
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=970
+				y=61
+				width=110
+				height=360
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+	}
+}
+text {
+	object {
+		x=100
+		y=320
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Pileup"
+}
+text {
+	object {
+		x=70
+		y=345
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="F1 Pileup"
+}
+text {
+	object {
+		x=30
+		y=370
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Not-F1 Pileup"
+}
+text {
+	object {
+		x=40
+		y=395
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset Counts"
+}
+text {
+	object {
+		x=80
+		y=170
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Triggers"
+}
+text {
+	object {
+		x=100
+		y=195
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Events"
+}
+text {
+	object {
+		x=30
+		y=220
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast DeadTime"
+}
+text {
+	object {
+		x=50
+		y=245
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="F1 DeadTime"
+}
+text {
+	object {
+		x=50
+		y=270
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Zero Counts"
+}
+text {
+	object {
+		x=10
+		y=295
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline Counts"
+}
+"text update" {
+	object {
+		x=286
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=320
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=345
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)F1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=370
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)NotF1PileUp"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=395
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)ResetCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=170
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)Triggers"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=195
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)Events"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=220
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)FastDeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=245
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)F1DeadTime"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=270
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)ZeroCounts"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=295
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)BaselineCount"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=70
+		y=120
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ICR (kHz)"
+}
+text {
+	object {
+		x=70
+		y=145
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="OCR (kHz)"
+}
+"text update" {
+	object {
+		x=286
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=286
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=401
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=516
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=631
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=746
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=861
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=976
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=120
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)InputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=171
+		y=145
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)OutputCountRate"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+composite {
+	object {
+		x=70
+		y=70
+		width=1006
+		height=20
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=70
+				y=70
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Real time"
+		}
 		"text update" {
 			object {
-				x=976
-				y=270
+				x=286
+				y=70
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)PileUp"
+				chan="$(P)$(D2)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
@@ -1673,13 +2040,13 @@ composite {
 		}
 		"text update" {
 			object {
-				x=976
-				y=295
+				x=401
+				y=70
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)F1PileUp"
+				chan="$(P)$(D3)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
@@ -1688,13 +2055,13 @@ composite {
 		}
 		"text update" {
 			object {
-				x=976
-				y=320
+				x=516
+				y=70
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)NotF1PileUp"
+				chan="$(P)$(D4)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
@@ -1703,13 +2070,43 @@ composite {
 		}
 		"text update" {
 			object {
-				x=976
-				y=345
+				x=631
+				y=70
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)ResetCounts"
+				chan="$(P)$(D5)ElapsedRealTime"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=746
+				y=70
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D6)ElapsedRealTime"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=861
+				y=70
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D7)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
@@ -1724,7 +2121,7 @@ composite {
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)InputCountRate"
+				chan="$(P)$(D8)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
@@ -1733,166 +2130,51 @@ composite {
 		}
 		"text update" {
 			object {
-				x=976
-				y=95
+				x=171
+				y=70
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D8)OutputCountRate"
+				chan="$(P)$(D1)ElapsedRealTime"
 				clr=54
 				bclr=3
 			}
 			limits {
 			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=976
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D8)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=970
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=970
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 8"
-			align="horiz. centered"
 		}
 	}
 }
 composite {
 	object {
-		x=165
-		y=40
-		width=110
-		height=331
+		x=70
+		y=95
+		width=1006
+		height=20
 	}
 	"composite name"=""
 	children {
-		rectangle {
+		text {
 			object {
-				x=165
-				y=61
-				width=110
-				height=310
+				x=70
+				y=95
+				width=90
+				height=20
 			}
 			"basic attribute" {
 				clr=14
-				fill="outline"
-				width=1
 			}
+			textix="Live time"
 		}
 		"text update" {
 			object {
-				x=171
-				y=270
+				x=286
+				y=95
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)PileUp"
+				chan="$(P)$(D2)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
@@ -1901,13 +2183,13 @@ composite {
 		}
 		"text update" {
 			object {
-				x=171
-				y=295
+				x=401
+				y=95
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)F1PileUp"
+				chan="$(P)$(D3)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
@@ -1916,13 +2198,13 @@ composite {
 		}
 		"text update" {
 			object {
-				x=171
-				y=320
+				x=516
+				y=95
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)NotF1PileUp"
+				chan="$(P)$(D4)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
@@ -1931,13 +2213,13 @@ composite {
 		}
 		"text update" {
 			object {
-				x=171
-				y=345
+				x=631
+				y=95
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)ResetCounts"
+				chan="$(P)$(D5)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
@@ -1946,13 +2228,43 @@ composite {
 		}
 		"text update" {
 			object {
-				x=171
-				y=70
+				x=746
+				y=95
 				width=100
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)InputCountRate"
+				chan="$(P)$(D6)ElapsedLiveTime"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=861
+				y=95
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D7)ElapsedLiveTime"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=976
+				y=95
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D8)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
@@ -1967,126 +2279,12 @@ composite {
 				height=20
 			}
 			monitor {
-				chan="$(P)$(D1)OutputCountRate"
+				chan="$(P)$(D1)ElapsedLiveTime"
 				clr=54
 				bclr=3
 			}
 			limits {
 			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=120
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)Triggers"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=145
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)Events"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=170
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)FastDeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=195
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)F1DeadTime"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=220
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)ZeroCounts"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=171
-				y=245
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(D1)BaselineCount"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=165
-				y=40
-				width=110
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=165
-				y=40
-				width=110
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Channel 1"
-			align="horiz. centered"
 		}
 	}
 }

@@ -1,41 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <display version="2.0.0">
   <name>dante1</name>
-  <x>274</x>
-  <y>148</y>
+  <x>295</x>
+  <y>225</y>
   <width>1140</width>
-  <height>930</height>
+  <height>845</height>
   <background_color>
     <color red="187" green="187" blue="187">
     </color>
   </background_color>
   <grid_visible>false</grid_visible>
   <grid_step_x>5</grid_step_x>
-  <widget type="label" version="2.0.0">
-    <name>text #6</name>
-    <text>Collecting</text>
-    <x>159</x>
-    <y>500</y>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="251" green="243" blue="74">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-    <rules>
-      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
-        <exp bool_exp="!(pv0!=0)">
-          <value>false</value>
-        </exp>
-        <pv_name>$(P)$(R)MCAAcquiring</pv_name>
-      </rule>
-    </rules>
-  </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #10</name>
+    <name>rectangle #6</name>
     <y>2</y>
     <width>1140</width>
     <height>25</height>
@@ -49,7 +26,7 @@
     </background_color>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #13</name>
+    <name>text #9</name>
     <text>Dante MCA Control ($(P)$(R))</text>
     <y>3</y>
     <width>1140</width>
@@ -65,7 +42,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="embedded" version="2.0.0">
-    <name>composite #16</name>
+    <name>composite #12</name>
     <file>ADSetup.bob</file>
     <x>5</x>
     <y>35</y>
@@ -73,7 +50,7 @@
     <height>340</height>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #18</name>
+    <name>rectangle #14</name>
     <x>490</x>
     <y>39</y>
     <width>160</width>
@@ -88,11 +65,11 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #21</name>
+    <name>rectangle #17</name>
     <x>360</x>
     <y>35</y>
     <width>420</width>
-    <height>515</height>
+    <height>590</height>
     <line_width>1</line_width>
     <line_color>
       <color red="0" green="0" blue="0">
@@ -105,7 +82,7 @@
     <transparent>true</transparent>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #24</name>
+    <name>text #20</name>
     <text>Configuration</text>
     <x>505</x>
     <y>39</y>
@@ -120,684 +97,8 @@
     </foreground_color>
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #27</name>
-    <text>Gain</text>
-    <x>569</x>
-    <y>370</y>
-    <width>40</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #30</name>
-    <pv_name>$(P)$(R)Gain_RBV</pv_name>
-    <x>694</x>
-    <y>370</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #34</name>
-    <pv_name>$(P)$(R)Gain</pv_name>
-    <x>614</x>
-    <y>370</y>
-    <width>75</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #38</name>
-    <text>Energy threshold (keV)</text>
-    <x>390</x>
-    <y>170</y>
-    <width>220</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #41</name>
-    <pv_name>$(P)$(R)EnergyThreshold</pv_name>
-    <x>615</x>
-    <y>170</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #45</name>
-    <pv_name>$(P)$(R)EnergyThreshold_RBV</pv_name>
-    <x>694</x>
-    <y>170</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #49</name>
-    <text>Baseline threshold (keV)</text>
-    <x>370</x>
-    <y>195</y>
-    <width>240</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #52</name>
-    <pv_name>$(P)$(R)BaselineThreshold</pv_name>
-    <x>615</x>
-    <y>195</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #56</name>
-    <pv_name>$(P)$(R)BaselineThreshold_RBV</pv_name>
-    <x>694</x>
-    <y>195</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #60</name>
-    <text>Max. rise time (us)</text>
-    <x>420</x>
-    <y>270</y>
-    <width>190</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #63</name>
-    <pv_name>$(P)$(R)MaxRiseTime</pv_name>
-    <x>615</x>
-    <y>270</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #67</name>
-    <pv_name>$(P)$(R)MaxRiseTime_RBV</pv_name>
-    <x>694</x>
-    <y>270</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #71</name>
-    <text>Peaking time (us)</text>
-    <x>440</x>
-    <y>95</y>
-    <width>170</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #74</name>
-    <pv_name>$(P)$(R)PeakingTime</pv_name>
-    <x>615</x>
-    <y>95</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #78</name>
-    <pv_name>$(P)$(R)PeakingTime_RBV</pv_name>
-    <x>694</x>
-    <y>95</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #82</name>
-    <text>Max. peaking time (us)</text>
-    <x>390</x>
-    <y>120</y>
-    <width>220</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #85</name>
-    <pv_name>$(P)$(R)MaxPeakingTime</pv_name>
-    <x>615</x>
-    <y>120</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #89</name>
-    <pv_name>$(P)$(R)MaxPeakingTime_RBV</pv_name>
-    <x>694</x>
-    <y>120</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #93</name>
-    <text>Flat top time (us)</text>
-    <x>430</x>
-    <y>245</y>
-    <width>180</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #96</name>
-    <pv_name>$(P)$(R)FlatTopTime</pv_name>
-    <x>615</x>
-    <y>245</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #100</name>
-    <pv_name>$(P)$(R)FlatTopTime_RBV</pv_name>
-    <x>694</x>
-    <y>245</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #104</name>
-    <text>Reset recovery time (us)</text>
-    <x>370</x>
-    <y>295</y>
-    <width>240</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #107</name>
-    <pv_name>$(P)$(R)ResetRecoveryTime</pv_name>
-    <x>615</x>
-    <y>295</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #111</name>
-    <pv_name>$(P)$(R)ResetRecoveryTime_RBV</pv_name>
-    <x>694</x>
-    <y>295</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #115</name>
-    <text>Zero peak freq. (Hz)</text>
-    <x>410</x>
-    <y>320</y>
-    <width>200</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #118</name>
-    <pv_name>$(P)$(R)ZeroPeakFreq</pv_name>
-    <x>615</x>
-    <y>320</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #122</name>
-    <pv_name>$(P)$(R)ZeroPeakFreq_RBV</pv_name>
-    <x>694</x>
-    <y>320</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #126</name>
-    <text>Baseline samples</text>
-    <x>450</x>
-    <y>345</y>
-    <width>160</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #129</name>
-    <pv_name>$(P)$(R)BaselineSamples</pv_name>
-    <x>615</x>
-    <y>345</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #133</name>
-    <pv_name>$(P)$(R)BaselineSamples_RBV</pv_name>
-    <x>694</x>
-    <y>345</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #137</name>
-    <text>Fast flat top time (us)</text>
-    <x>380</x>
-    <y>220</y>
-    <width>230</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #140</name>
-    <pv_name>$(P)$(R)FastFlatTopTime</pv_name>
-    <x>615</x>
-    <y>220</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #144</name>
-    <pv_name>$(P)$(R)FastFlatTopTime_RBV</pv_name>
-    <x>694</x>
-    <y>220</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #148</name>
-    <text>Fast threshold (keV)</text>
-    <x>410</x>
-    <y>145</y>
-    <width>200</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #151</name>
-    <pv_name>$(P)$(R)FastThreshold</pv_name>
-    <x>615</x>
-    <y>145</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #155</name>
-    <pv_name>$(P)$(R)FastThreshold_RBV</pv_name>
-    <x>694</x>
-    <y>145</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #159</name>
-    <text>Fast peaking time (us)</text>
-    <x>390</x>
-    <y>70</y>
-    <width>220</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #162</name>
-    <pv_name>$(P)$(R)FastPeakingTime</pv_name>
-    <x>615</x>
-    <y>70</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #166</name>
-    <pv_name>$(P)$(R)FastPeakingTime_RBV</pv_name>
-    <x>694</x>
-    <y>70</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #170</name>
+    <name>rectangle #23</name>
     <x>900</x>
     <y>38</y>
     <width>120</width>
@@ -812,7 +113,7 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #173</name>
+    <name>rectangle #26</name>
     <x>785</x>
     <y>35</y>
     <width>350</width>
@@ -829,7 +130,7 @@
     <transparent>true</transparent>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #176</name>
+    <name>text #29</name>
     <text>Statistics</text>
     <x>910</x>
     <y>38</y>
@@ -844,7 +145,7 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #179</name>
+    <name>text #32</name>
     <text>ICR (kHz)</text>
     <x>880</x>
     <y>65</y>
@@ -856,7 +157,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #182</name>
+    <name>text #35</name>
     <text>OCR (kHz)</text>
     <x>880</x>
     <y>90</y>
@@ -868,7 +169,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #185</name>
+    <name>text #38</name>
     <text>Triggers</text>
     <x>890</x>
     <y>115</y>
@@ -880,7 +181,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #188</name>
+    <name>text #41</name>
     <text>Events</text>
     <x>910</x>
     <y>140</y>
@@ -892,7 +193,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #191</name>
+    <name>text #44</name>
     <text>Fast dead time</text>
     <x>830</x>
     <y>165</y>
@@ -904,7 +205,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #194</name>
+    <name>text #47</name>
     <text>F1 Dead time</text>
     <x>850</x>
     <y>190</y>
@@ -916,7 +217,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #197</name>
+    <name>text #50</name>
     <text>Zero counts</text>
     <x>860</x>
     <y>215</y>
@@ -928,7 +229,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #200</name>
+    <name>text #53</name>
     <text>Baseline count</text>
     <x>830</x>
     <y>240</y>
@@ -940,7 +241,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #203</name>
+    <name>text #56</name>
     <text>Pileup</text>
     <x>910</x>
     <y>265</y>
@@ -952,7 +253,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #206</name>
+    <name>text #59</name>
     <text>F1 Pileup</text>
     <x>880</x>
     <y>290</y>
@@ -964,7 +265,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #209</name>
+    <name>text update #62</name>
     <pv_name>$(P)$(R)InputCountRate</pv_name>
     <x>975</x>
     <y>65</y>
@@ -985,7 +286,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #213</name>
+    <name>text update #66</name>
     <pv_name>$(P)$(R)OutputCountRate</pv_name>
     <x>975</x>
     <y>90</y>
@@ -1006,7 +307,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #217</name>
+    <name>text update #70</name>
     <pv_name>$(P)$(R)Triggers</pv_name>
     <x>975</x>
     <y>115</y>
@@ -1027,7 +328,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #221</name>
+    <name>text update #74</name>
     <pv_name>$(P)$(R)Events</pv_name>
     <x>975</x>
     <y>140</y>
@@ -1048,7 +349,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #225</name>
+    <name>text update #78</name>
     <pv_name>$(P)$(R)FastDeadTime</pv_name>
     <x>975</x>
     <y>165</y>
@@ -1069,7 +370,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #229</name>
+    <name>text update #82</name>
     <pv_name>$(P)$(R)F1DeadTime</pv_name>
     <x>975</x>
     <y>190</y>
@@ -1090,7 +391,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #233</name>
+    <name>text update #86</name>
     <pv_name>$(P)$(R)ZeroCounts</pv_name>
     <x>975</x>
     <y>215</y>
@@ -1111,7 +412,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #237</name>
+    <name>text update #90</name>
     <pv_name>$(P)$(R)BaselineCount</pv_name>
     <x>975</x>
     <y>240</y>
@@ -1132,7 +433,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #241</name>
+    <name>text update #94</name>
     <pv_name>$(P)$(R)PileUp</pv_name>
     <x>975</x>
     <y>265</y>
@@ -1153,7 +454,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #245</name>
+    <name>text update #98</name>
     <pv_name>$(P)$(R)F1PileUp</pv_name>
     <x>975</x>
     <y>290</y>
@@ -1173,405 +474,8 @@
     <show_units>false</show_units>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
-  <widget type="rectangle" version="2.0.0">
-    <name>rectangle #249</name>
-    <x>917</x>
-    <y>374</y>
-    <width>120</width>
-    <height>21</height>
-    <line_color>
-      <color red="218" green="218" blue="218">
-      </color>
-    </line_color>
-    <background_color>
-      <color red="218" green="218" blue="218">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="rectangle" version="2.0.0">
-    <name>rectangle #252</name>
-    <x>785</x>
-    <y>370</y>
-    <width>350</width>
-    <height>260</height>
-    <line_width>1</line_width>
-    <line_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </line_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
-    <transparent>true</transparent>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #255</name>
-    <text>Trace Setup</text>
-    <x>922</x>
-    <y>374</y>
-    <width>110</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #258</name>
-    <text>Length</text>
-    <x>900</x>
-    <y>400</y>
-    <width>60</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #261</name>
-    <text>Time/point (usec)</text>
-    <x>790</x>
-    <y>425</y>
-    <width>170</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #264</name>
-    <text>Trigger instant</text>
-    <x>810</x>
-    <y>451</y>
-    <width>150</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #267</name>
-    <text>Trigger rising</text>
-    <x>820</x>
-    <y>474</y>
-    <width>140</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #270</name>
-    <text>Trigger falling</text>
-    <x>810</x>
-    <y>497</y>
-    <width>150</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #273</name>
-    <text>Trigger Level</text>
-    <x>830</x>
-    <y>521</y>
-    <width>130</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #276</name>
-    <text>Trigger wait</text>
-    <x>840</x>
-    <y>546</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #279</name>
-    <pv_name>$(P)$(R)TraceLength_RBV</pv_name>
-    <x>1048</x>
-    <y>400</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #283</name>
-    <pv_name>$(P)$(R)TraceTime_RBV</pv_name>
-    <x>1048</x>
-    <y>425</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #287</name>
-    <pv_name>$(P)$(R)TraceTriggerInstant_RBV</pv_name>
-    <x>1048</x>
-    <y>450</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #291</name>
-    <pv_name>$(P)$(R)TraceTriggerRising_RBV</pv_name>
-    <x>1048</x>
-    <y>475</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #295</name>
-    <pv_name>$(P)$(R)TraceTriggerFalling_RBV</pv_name>
-    <x>1048</x>
-    <y>500</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #299</name>
-    <pv_name>$(P)$(R)TraceTriggerLevel_RBV</pv_name>
-    <x>1048</x>
-    <y>525</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #303</name>
-    <pv_name>$(P)$(R)TraceTriggerWait_RBV</pv_name>
-    <x>1048</x>
-    <y>550</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #307</name>
-    <pv_name>$(P)$(R)TraceLength</pv_name>
-    <x>963</x>
-    <y>400</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #311</name>
-    <pv_name>$(P)$(R)TraceTime</pv_name>
-    <x>963</x>
-    <y>425</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #315</name>
-    <pv_name>$(P)$(R)TraceTriggerInstant</pv_name>
-    <x>963</x>
-    <y>450</y>
-    <width>80</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #318</name>
-    <pv_name>$(P)$(R)TraceTriggerRising</pv_name>
-    <x>963</x>
-    <y>475</y>
-    <width>80</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #321</name>
-    <pv_name>$(P)$(R)TraceTriggerFalling</pv_name>
-    <x>963</x>
-    <y>500</y>
-    <width>80</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #324</name>
-    <pv_name>$(P)$(R)TraceTriggerLevel</pv_name>
-    <x>963</x>
-    <y>525</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #328</name>
-    <pv_name>$(P)$(R)TraceTriggerWait</pv_name>
-    <x>963</x>
-    <y>550</y>
-    <width>80</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #332</name>
+    <name>text update #102</name>
     <pv_name>$(P)$(R)NotF1PileUp</pv_name>
     <x>975</x>
     <y>315</y>
@@ -1592,7 +496,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #336</name>
+    <name>text #106</name>
     <text>Not F1 Pileup</text>
     <x>840</x>
     <y>315</y>
@@ -1604,7 +508,7 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #339</name>
+    <name>text update #109</name>
     <pv_name>$(P)$(R)ResetCounts</pv_name>
     <x>975</x>
     <y>340</y>
@@ -1625,7 +529,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #343</name>
+    <name>text #113</name>
     <text>Reset counts</text>
     <x>850</x>
     <y>340</y>
@@ -1636,492 +540,1399 @@
     </font>
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #346</name>
-    <text>Input polarity</text>
-    <x>469</x>
-    <y>395</y>
-    <width>140</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
+  <widget type="embedded" version="2.0.0">
+    <name>composite #116</name>
+    <file>ADPlugins.bob</file>
+    <x>785</x>
+    <y>635</y>
+    <width>350</width>
+    <height>80</height>
   </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #349</name>
-    <pv_name>$(P)$(R)InputPolarity</pv_name>
-    <x>614</x>
-    <y>395</y>
-    <width>75</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #352</name>
-    <pv_name>$(P)$(R)InputPolarity_RBV</pv_name>
-    <x>694</x>
-    <y>395</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>6</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #356</name>
-    <text>Analog offset</text>
-    <x>480</x>
-    <y>420</y>
-    <width>130</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #359</name>
-    <pv_name>$(P)$(R)AnalogOffset</pv_name>
-    <x>615</x>
-    <y>420</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #363</name>
-    <pv_name>$(P)$(R)AnalogOffset_RBV</pv_name>
-    <x>694</x>
-    <y>420</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #367</name>
-    <text>Base offset</text>
-    <x>500</x>
-    <y>445</y>
-    <width>110</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #370</name>
-    <pv_name>$(P)$(R)BaseOffset</pv_name>
-    <x>615</x>
-    <y>445</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #374</name>
-    <pv_name>$(P)$(R)BaseOffset_RBV</pv_name>
-    <x>694</x>
-    <y>445</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #378</name>
-    <text>Overflow recovery time</text>
-    <x>390</x>
-    <y>470</y>
-    <width>220</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #381</name>
-    <pv_name>$(P)$(R)OverflowRecoveryTime</pv_name>
-    <x>615</x>
-    <y>470</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #385</name>
-    <pv_name>$(P)$(R)OverflowRecoveryTime_RBV</pv_name>
-    <x>694</x>
-    <y>470</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #389</name>
-    <text>Reset threshold</text>
-    <x>460</x>
-    <y>495</y>
-    <width>150</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #392</name>
-    <pv_name>$(P)$(R)ResetThreshold</pv_name>
-    <x>615</x>
-    <y>495</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #396</name>
-    <pv_name>$(P)$(R)ResetThreshold_RBV</pv_name>
-    <x>694</x>
-    <y>495</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #400</name>
-    <text>Tail coefficient</text>
-    <x>450</x>
-    <y>520</y>
-    <width>160</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #403</name>
-    <pv_name>$(P)$(R)TailCoefficient</pv_name>
-    <x>615</x>
-    <y>520</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #407</name>
-    <pv_name>$(P)$(R)TailCoefficient_RBV</pv_name>
-    <x>694</x>
-    <y>520</y>
-    <width>74</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="rectangle" version="2.0.0">
-    <name>rectangle #411</name>
-    <x>510</x>
-    <y>559</y>
-    <width>120</width>
-    <height>21</height>
-    <line_color>
-      <color red="218" green="218" blue="218">
-      </color>
-    </line_color>
-    <background_color>
-      <color red="218" green="218" blue="218">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="rectangle" version="2.0.0">
-    <name>rectangle #414</name>
-    <x>360</x>
-    <y>555</y>
-    <width>420</width>
-    <height>190</height>
-    <line_width>1</line_width>
-    <line_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </line_color>
-    <background_color>
-      <color red="0" green="0" blue="0">
-      </color>
-    </background_color>
+  <widget type="group" version="2.0.0">
+    <name>composite #118</name>
+    <x>370</x>
+    <y>70</y>
+    <width>240</width>
+    <height>520</height>
+    <style>3</style>
     <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>text #121</name>
+      <text>Fast peaking time (us)</text>
+      <x>20</x>
+      <width>220</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #124</name>
+      <text>Peaking time (us)</text>
+      <x>70</x>
+      <y>75</y>
+      <width>170</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #127</name>
+      <text>Max. peaking time (us)</text>
+      <x>20</x>
+      <y>100</y>
+      <width>220</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #130</name>
+      <text>Fast threshold (keV)</text>
+      <x>40</x>
+      <y>25</y>
+      <width>200</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #133</name>
+      <text>Energy threshold (keV)</text>
+      <x>20</x>
+      <y>150</y>
+      <width>220</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #136</name>
+      <text>Baseline threshold (keV)</text>
+      <y>175</y>
+      <width>240</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #139</name>
+      <text>Fast flat top time (us)</text>
+      <x>10</x>
+      <y>50</y>
+      <width>230</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #142</name>
+      <text>Flat top time (us)</text>
+      <x>60</x>
+      <y>125</y>
+      <width>180</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #145</name>
+      <text>Max. rise time (us)</text>
+      <x>50</x>
+      <y>200</y>
+      <width>190</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #148</name>
+      <text>Reset recovery time (us)</text>
+      <y>225</y>
+      <width>240</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #151</name>
+      <text>Zero peak freq. (Hz)</text>
+      <x>40</x>
+      <y>250</y>
+      <width>200</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #154</name>
+      <text>Baseline samples</text>
+      <x>80</x>
+      <y>275</y>
+      <width>160</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #157</name>
+      <text>Gain</text>
+      <x>200</x>
+      <y>300</y>
+      <width>40</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #160</name>
+      <text>Input polarity</text>
+      <x>100</x>
+      <y>350</y>
+      <width>140</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #163</name>
+      <text>Analog offset</text>
+      <x>110</x>
+      <y>375</y>
+      <width>130</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #166</name>
+      <text>Base offset</text>
+      <x>130</x>
+      <y>400</y>
+      <width>110</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #169</name>
+      <text>Overflow recovery time</text>
+      <x>20</x>
+      <y>425</y>
+      <width>220</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #172</name>
+      <text>Reset threshold</text>
+      <x>90</x>
+      <y>450</y>
+      <width>150</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #175</name>
+      <text>Tail coefficient</text>
+      <x>80</x>
+      <y>475</y>
+      <width>160</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #178</name>
+      <text>Deconvolution time (us)</text>
+      <x>10</x>
+      <y>500</y>
+      <width>230</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #181</name>
+      <text>Input mode</text>
+      <x>140</x>
+      <y>325</y>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <auto_size>true</auto_size>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #184</name>
+    <x>615</x>
+    <y>70</y>
+    <width>75</width>
+    <height>520</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="combo" version="2.0.0">
+      <name>menu #187</name>
+      <pv_name>$(P)$(R)InputPolarity</pv_name>
+      <y>350</y>
+      <width>75</width>
+      <height>20</height>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #190</name>
+      <pv_name>$(P)$(R)TimeConstant</pv_name>
+      <y>500</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="combo" version="2.0.0">
+      <name>menu #194</name>
+      <pv_name>$(P)$(R)InputMode</pv_name>
+      <y>325</y>
+      <width>75</width>
+      <height>20</height>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #197</name>
+      <pv_name>$(P)$(R)FastPeakingTime</pv_name>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #201</name>
+      <pv_name>$(P)$(R)PeakingTime</pv_name>
+      <y>75</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #205</name>
+      <pv_name>$(P)$(R)MaxPeakingTime</pv_name>
+      <y>100</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #209</name>
+      <pv_name>$(P)$(R)FastThreshold</pv_name>
+      <y>25</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #213</name>
+      <pv_name>$(P)$(R)EnergyThreshold</pv_name>
+      <y>150</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #217</name>
+      <pv_name>$(P)$(R)BaselineThreshold</pv_name>
+      <y>175</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #221</name>
+      <pv_name>$(P)$(R)FastFlatTopTime</pv_name>
+      <y>50</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #225</name>
+      <pv_name>$(P)$(R)FlatTopTime</pv_name>
+      <y>125</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #229</name>
+      <pv_name>$(P)$(R)MaxRiseTime</pv_name>
+      <y>200</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #233</name>
+      <pv_name>$(P)$(R)ResetRecoveryTime</pv_name>
+      <y>225</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #237</name>
+      <pv_name>$(P)$(R)ZeroPeakFreq</pv_name>
+      <y>250</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #241</name>
+      <pv_name>$(P)$(R)BaselineSamples</pv_name>
+      <y>275</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>text entry #245</name>
+      <pv_name>$(P)$(R)Gain</pv_name>
+      <y>300</y>
+      <width>75</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="115" green="223" blue="255">
+        </color>
+      </background_color>
+      <format>1</format>
+      <show_units>false</show_units>
+      <border_alarm_sensitive>false</border_alarm_sensitive>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>composite #249</name>
+      <y>375</y>
+      <width>75</width>
+      <height>120</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #252</name>
+        <pv_name>$(P)$(R)AnalogOffset</pv_name>
+        <width>75</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #256</name>
+        <pv_name>$(P)$(R)BaseOffset</pv_name>
+        <y>25</y>
+        <width>75</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #260</name>
+        <pv_name>$(P)$(R)OverflowRecoveryTime</pv_name>
+        <y>50</y>
+        <width>75</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #264</name>
+        <pv_name>$(P)$(R)ResetThreshold</pv_name>
+        <y>75</y>
+        <width>75</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #268</name>
+        <pv_name>$(P)$(R)TailCoefficient</pv_name>
+        <y>100</y>
+        <width>75</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #272</name>
+    <x>695</x>
+    <y>70</y>
+    <width>80</width>
+    <height>520</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="group" version="2.0.0">
+      <name>composite #275</name>
+      <width>80</width>
+      <height>520</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #278</name>
+        <pv_name>$(P)$(R)TimeConstant_RBV</pv_name>
+        <y>500</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #282</name>
+        <pv_name>$(P)$(R)FastPeakingTime_RBV</pv_name>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #286</name>
+        <pv_name>$(P)$(R)PeakingTime_RBV</pv_name>
+        <y>75</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #290</name>
+        <pv_name>$(P)$(R)MaxPeakingTime_RBV</pv_name>
+        <y>100</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #294</name>
+        <pv_name>$(P)$(R)FastThreshold_RBV</pv_name>
+        <y>25</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #298</name>
+        <pv_name>$(P)$(R)EnergyThreshold_RBV</pv_name>
+        <y>150</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #302</name>
+        <pv_name>$(P)$(R)BaselineThreshold_RBV</pv_name>
+        <y>175</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #306</name>
+        <pv_name>$(P)$(R)FastFlatTopTime_RBV</pv_name>
+        <y>50</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #310</name>
+        <pv_name>$(P)$(R)FlatTopTime_RBV</pv_name>
+        <y>125</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #314</name>
+        <pv_name>$(P)$(R)MaxRiseTime_RBV</pv_name>
+        <y>200</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #318</name>
+        <pv_name>$(P)$(R)ResetRecoveryTime_RBV</pv_name>
+        <y>225</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #322</name>
+        <pv_name>$(P)$(R)ZeroPeakFreq_RBV</pv_name>
+        <y>250</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #326</name>
+        <pv_name>$(P)$(R)BaselineSamples_RBV</pv_name>
+        <y>275</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #330</name>
+        <pv_name>$(P)$(R)Gain_RBV</pv_name>
+        <y>300</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #334</name>
+        <pv_name>$(P)$(R)InputPolarity_RBV</pv_name>
+        <y>350</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>6</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #338</name>
+        <pv_name>$(P)$(R)AnalogOffset_RBV</pv_name>
+        <y>375</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #342</name>
+        <pv_name>$(P)$(R)BaseOffset_RBV</pv_name>
+        <y>400</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #346</name>
+        <pv_name>$(P)$(R)OverflowRecoveryTime_RBV</pv_name>
+        <y>425</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #350</name>
+        <pv_name>$(P)$(R)ResetThreshold_RBV</pv_name>
+        <y>450</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #354</name>
+        <pv_name>$(P)$(R)TailCoefficient_RBV</pv_name>
+        <y>475</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #358</name>
+        <pv_name>$(P)$(R)InputMode_RBV</pv_name>
+        <y>325</y>
+        <width>80</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>6</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>composite #362</name>
+    <x>360</x>
+    <y>630</y>
+    <width>420</width>
+    <height>165</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #365</name>
+      <x>115</x>
+      <y>4</y>
+      <width>190</width>
+      <height>21</height>
+      <line_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="218" green="218" blue="218">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>rectangle #368</name>
+      <width>420</width>
+      <height>165</height>
+      <line_width>1</line_width>
+      <line_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </line_color>
+      <background_color>
+        <color red="0" green="0" blue="0">
+        </color>
+      </background_color>
+      <transparent>true</transparent>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>text #371</name>
+      <text>Acquisition Setup</text>
+      <x>125</x>
+      <y>4</y>
+      <width>170</width>
+      <font>
+        <font family="Liberation Sans" style="REGULAR" size="16.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color red="10" green="0" blue="184">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>composite #374</name>
+      <x>5</x>
+      <y>110</y>
+      <width>390</width>
+      <height>45</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="label" version="2.0.0">
+        <name>text #377</name>
+        <text>Gating mode</text>
+        <x>50</x>
+        <width>110</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <horizontal_alignment>1</horizontal_alignment>
+      </widget>
+      <widget type="combo" version="2.0.0">
+        <name>menu #380</name>
+        <pv_name>$(P)$(R)GatingMode</pv_name>
+        <x>165</x>
+        <height>20</height>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #383</name>
+        <pv_name>$(P)$(R)GatingMode_RBV</pv_name>
+        <x>270</x>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>6</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>text #387</name>
+        <text>List buffer size</text>
+        <y>25</y>
+        <width>160</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <auto_size>true</auto_size>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #390</name>
+        <pv_name>$(P)$(R)ListBufferSize</pv_name>
+        <x>165</x>
+        <y>25</y>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #394</name>
+        <pv_name>$(P)$(R)ListBufferSize_RBV</pv_name>
+        <x>270</x>
+        <y>25</y>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>composite #398</name>
+      <x>25</x>
+      <y>35</y>
+      <width>370</width>
+      <height>70</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="label" version="2.0.0">
+        <name>text #401</name>
+        <text>Collect mode</text>
+        <x>20</x>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <auto_size>true</auto_size>
+      </widget>
+      <widget type="combo" version="2.0.0">
+        <name>menu #404</name>
+        <pv_name>$(P)$(R)CollectMode</pv_name>
+        <x>145</x>
+        <height>20</height>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #407</name>
+        <pv_name>$(P)$(R)CollectMode_RBV</pv_name>
+        <x>250</x>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>text #411</name>
+        <text>MCA channels</text>
+        <x>20</x>
+        <y>25</y>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <auto_size>true</auto_size>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #414</name>
+        <pv_name>$(P)$(R)NumMCAChannels_RBV</pv_name>
+        <x>250</x>
+        <y>25</y>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>text #418</name>
+        <text>Mapping points</text>
+        <y>50</y>
+        <width>140</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <auto_size>true</auto_size>
+      </widget>
+      <widget type="textentry" version="3.0.0">
+        <name>text entry #421</name>
+        <pv_name>$(P)$(R)MappingPoints</pv_name>
+        <x>145</x>
+        <y>50</y>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>text update #425</name>
+        <pv_name>$(P)$(R)MappingPoints_RBV</pv_name>
+        <x>250</x>
+        <y>50</y>
+        <width>120</width>
+        <font>
+          <font family="Liberation Sans" style="REGULAR" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color red="10" green="0" blue="184">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color red="200" green="200" blue="200">
+          </color>
+        </background_color>
+        <format>1</format>
+        <show_units>false</show_units>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+      <widget type="combo" version="2.0.0">
+        <name>menu #429</name>
+        <pv_name>$(P)$(R)NumMCAChannels</pv_name>
+        <x>145</x>
+        <y>25</y>
+        <height>20</height>
+        <background_color>
+          <color red="115" green="223" blue="255">
+          </color>
+        </background_color>
+        <border_alarm_sensitive>false</border_alarm_sensitive>
+      </widget>
+    </widget>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #417</name>
-    <text>MCA Setup</text>
-    <x>525</x>
-    <y>559</y>
-    <width>90</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #420</name>
-    <text>Collect mode</text>
-    <x>405</x>
-    <y>588</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #423</name>
-    <pv_name>$(P)$(R)CollectMode</pv_name>
-    <x>530</x>
-    <y>588</y>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #426</name>
-    <pv_name>$(P)$(R)CollectMode_RBV</pv_name>
-    <x>635</x>
-    <y>588</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #430</name>
-    <text>Gating mode</text>
-    <x>415</x>
-    <y>688</y>
-    <width>110</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #433</name>
-    <pv_name>$(P)$(R)GatingMode</pv_name>
-    <x>530</x>
-    <y>688</y>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #436</name>
-    <pv_name>$(P)$(R)GatingMode_RBV</pv_name>
-    <x>635</x>
-    <y>688</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>6</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #440</name>
-    <text>MCA channels</text>
-    <x>405</x>
-    <y>613</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #443</name>
-    <pv_name>$(P)$(R)NumMCAChannels_RBV</pv_name>
-    <x>635</x>
-    <y>613</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #447</name>
-    <text>Mapping points</text>
-    <x>385</x>
-    <y>638</y>
+    <name>text #432</name>
+    <text>Maximum energy</text>
+    <x>470</x>
+    <y>595</y>
     <width>140</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2130,10 +1941,11 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="textentry" version="3.0.0">
-    <name>text entry #450</name>
-    <pv_name>$(P)$(R)MappingPoints</pv_name>
-    <x>530</x>
-    <y>638</y>
+    <name>text entry #435</name>
+    <pv_name>$(P)$(R)MaxEnergy</pv_name>
+    <x>615</x>
+    <y>595</y>
+    <width>75</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -2147,11 +1959,11 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #454</name>
-    <pv_name>$(P)$(R)MappingPoints_RBV</pv_name>
-    <x>635</x>
-    <y>638</y>
-    <width>120</width>
+    <name>text update #439</name>
+    <pv_name>$(P)$(R)MaxEnergy_RBV</pv_name>
+    <x>695</x>
+    <y>595</y>
+    <width>80</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -2168,10 +1980,33 @@
     <show_units>false</show_units>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
+  <widget type="label" version="2.0.0">
+    <name>text #443</name>
+    <text>Collecting</text>
+    <x>159</x>
+    <y>415</y>
+    <font>
+      <font family="Liberation Sans" style="REGULAR" size="16.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color red="251" green="243" blue="74">
+      </color>
+    </foreground_color>
+    <horizontal_alignment>1</horizontal_alignment>
+    <rules>
+      <rule name="vis_if_not_zero" prop_id="visible" out_exp="false">
+        <exp bool_exp="!(pv0!=0)">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(R)MCAAcquiring</pv_name>
+      </rule>
+    </rules>
+  </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #458</name>
+    <name>rectangle #447</name>
     <x>120</x>
-    <y>469</y>
+    <y>384</y>
     <width>120</width>
     <height>21</height>
     <line_color>
@@ -2184,9 +2019,9 @@
     </background_color>
   </widget>
   <widget type="rectangle" version="2.0.0">
-    <name>rectangle #461</name>
+    <name>rectangle #450</name>
     <x>5</x>
-    <y>465</y>
+    <y>380</y>
     <width>350</width>
     <height>460</height>
     <line_width>1</line_width>
@@ -2201,10 +2036,10 @@
     <transparent>true</transparent>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #464</name>
+    <name>text #453</name>
     <text>Acquire</text>
     <x>142</x>
-    <y>469</y>
+    <y>384</y>
     <width>70</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2217,10 +2052,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #467</name>
+    <name>text #456</name>
     <text>Elapsed</text>
     <x>122</x>
-    <y>550</y>
+    <y>465</y>
     <width>70</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2229,10 +2064,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #470</name>
+    <name>text update #459</name>
     <pv_name>$(P)$(R)ElapsedLive</pv_name>
     <x>125</x>
-    <y>600</y>
+    <y>515</y>
     <width>75</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2251,10 +2086,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #474</name>
+    <name>text #463</name>
     <text>Preset</text>
     <x>254</x>
-    <y>550</y>
+    <y>465</y>
     <width>60</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2263,10 +2098,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #477</name>
-    <pv_name>$(P)$(M).IDTIM</pv_name>
+    <name>text update #466</name>
+    <pv_name>$(P)$(R)IDeadTime</pv_name>
     <x>235</x>
-    <y>625</y>
+    <y>540</y>
     <width>76</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2284,10 +2119,10 @@
     <show_units>false</show_units>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #481</name>
-    <pv_name>$(P)$(M).DTIM</pv_name>
+    <name>text update #470</name>
+    <pv_name>$(P)$(R)DeadTime</pv_name>
     <x>235</x>
-    <y>650</y>
+    <y>565</y>
     <width>76</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2304,19 +2139,11 @@
     <format>1</format>
     <show_units>false</show_units>
   </widget>
-  <widget type="embedded" version="2.0.0">
-    <name>composite #485</name>
-    <file>ADPlugins.bob</file>
-    <x>5</x>
-    <y>380</y>
-    <width>350</width>
-    <height>80</height>
-  </widget>
   <widget type="label" version="2.0.0">
-    <name>text #487</name>
+    <name>text #474</name>
     <text>Done</text>
     <x>188</x>
-    <y>500</y>
+    <y>415</y>
     <width>40</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2337,7 +2164,7 @@
     </rules>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #491</name>
+    <name>message button #478</name>
     <actions>
       <action type="write_pv">
         <pv_name>$(P)$(R)EraseStart</pv_name>
@@ -2348,7 +2175,7 @@
     <pv_name>$(P)$(R)EraseStart</pv_name>
     <text>Start</text>
     <x>145</x>
-    <y>520</y>
+    <y>435</y>
     <width>59</width>
     <height>20</height>
     <background_color>
@@ -2357,7 +2184,7 @@
     </background_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #494</name>
+    <name>message button #481</name>
     <actions>
       <action type="write_pv">
         <pv_name>$(P)$(R)StopAll</pv_name>
@@ -2368,7 +2195,7 @@
     <pv_name>$(P)$(R)StopAll</pv_name>
     <text>Stop</text>
     <x>212</x>
-    <y>520</y>
+    <y>435</y>
     <width>59</width>
     <height>20</height>
     <background_color>
@@ -2377,10 +2204,10 @@
     </background_color>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #497</name>
+    <name>text #484</name>
     <text>Acquire</text>
     <x>70</x>
-    <y>520</y>
+    <y>435</y>
     <width>70</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2389,10 +2216,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #500</name>
+    <name>text #487</name>
     <text>Live time</text>
     <x>30</x>
-    <y>600</y>
+    <y>515</y>
     <width>90</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2401,10 +2228,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #503</name>
+    <name>text #490</name>
     <text>Instant dead time (%)</text>
     <x>20</x>
-    <y>625</y>
+    <y>540</y>
     <width>210</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2413,10 +2240,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #506</name>
+    <name>text #493</name>
     <text>Average dead time (%)</text>
     <x>20</x>
-    <y>650</y>
+    <y>565</y>
     <width>210</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2425,10 +2252,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #509</name>
+    <name>text update #496</name>
     <pv_name>$(P)$(R)CurrentPixel</pv_name>
     <x>175</x>
-    <y>674</y>
+    <y>589</y>
     <width>60</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2448,10 +2275,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textentry" version="3.0.0">
-    <name>text entry #513</name>
+    <name>text entry #500</name>
     <pv_name>$(P)$(R)PollTime</pv_name>
     <x>175</x>
-    <y>699</y>
+    <y>614</y>
     <width>87</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2466,10 +2293,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #517</name>
+    <name>text update #504</name>
     <pv_name>$(P)$(R)PollTime_RBV</pv_name>
     <x>267</x>
-    <y>699</y>
+    <y>614</y>
     <width>70</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2488,10 +2315,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #521</name>
+    <name>menu #508</name>
     <pv_name>$(P)$(R)ReadAll.SCAN</pv_name>
     <x>175</x>
-    <y>724</y>
+    <y>639</y>
     <width>87</width>
     <height>20</height>
     <background_color>
@@ -2501,7 +2328,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>message button #524</name>
+    <name>message button #511</name>
     <actions>
       <action type="write_pv">
         <pv_name>$(P)$(R)ReadAllOnce.PROC</pv_name>
@@ -2512,7 +2339,7 @@
     <pv_name>$(P)$(R)ReadAllOnce.PROC</pv_name>
     <text>Read</text>
     <x>267</x>
-    <y>724</y>
+    <y>639</y>
     <width>54</width>
     <height>20</height>
     <background_color>
@@ -2521,10 +2348,10 @@
     </background_color>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #527</name>
+    <name>text update #514</name>
     <pv_name>$(P)$(R)NumQueuedArrays</pv_name>
     <x>175</x>
-    <y>749</y>
+    <y>664</y>
     <width>60</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2543,10 +2370,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #531</name>
+    <name>menu #518</name>
     <pv_name>$(P)$(R)WaitForPlugins</pv_name>
     <x>175</x>
-    <y>774</y>
+    <y>689</y>
     <width>80</width>
     <height>20</height>
     <background_color>
@@ -2556,10 +2383,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #534</name>
+    <name>text update #521</name>
     <pv_name>$(P)$(R)AcquireBusy</pv_name>
     <x>175</x>
-    <y>799</y>
+    <y>714</y>
     <width>160</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2577,10 +2404,10 @@
     <show_units>false</show_units>
   </widget>
   <widget type="textentry" version="3.0.0">
-    <name>text entry #538</name>
+    <name>text entry #525</name>
     <pv_name>$(P)$(R)ArrayCounter</pv_name>
     <x>175</x>
-    <y>824</y>
+    <y>739</y>
     <width>60</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2595,10 +2422,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #542</name>
+    <name>text update #529</name>
     <pv_name>$(P)$(R)ArrayCounter_RBV</pv_name>
     <x>240</x>
-    <y>824</y>
+    <y>739</y>
     <width>80</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2617,10 +2444,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #546</name>
+    <name>text update #533</name>
     <pv_name>$(P)$(R)ArrayRate_RBV</pv_name>
     <x>175</x>
-    <y>849</y>
+    <y>764</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -2638,10 +2465,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="combo" version="2.0.0">
-    <name>menu #550</name>
+    <name>menu #537</name>
     <pv_name>$(P)$(R)ArrayCallbacks</pv_name>
     <x>175</x>
-    <y>874</y>
+    <y>789</y>
     <width>90</width>
     <height>20</height>
     <background_color>
@@ -2651,10 +2478,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #553</name>
+    <name>text update #540</name>
     <pv_name>$(P)$(R)ArrayCallbacks_RBV</pv_name>
     <x>270</x>
-    <y>874</y>
+    <y>789</y>
     <width>80</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2673,7 +2500,7 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>related display #557</name>
+    <name>related display #544</name>
     <actions>
       <action type="open_display">
         <file>mca.opi</file>
@@ -2682,13 +2509,16 @@
       </action>
       <action type="open_display">
         <file>danteTrace.opi</file>
+        <macros>
+          <D>$(R)</D>
+        </macros>
         <target>tab</target>
         <description>Trace display</description>
       </action>
     </actions>
     <text>Plots</text>
     <x>175</x>
-    <y>899</y>
+    <y>814</y>
     <width>86</width>
     <height>20</height>
     <background_color>
@@ -2697,10 +2527,10 @@
     </background_color>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #561</name>
+    <name>text #548</name>
     <text>CurrentPixel</text>
     <x>50</x>
-    <y>674</y>
+    <y>589</y>
     <width>120</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2709,10 +2539,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #564</name>
+    <name>text #551</name>
     <text>Poll time</text>
     <x>80</x>
-    <y>699</y>
+    <y>614</y>
     <width>90</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2721,10 +2551,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #567</name>
+    <name>text #554</name>
     <text>Read rate</text>
     <x>80</x>
-    <y>724</y>
+    <y>639</y>
     <width>90</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2733,10 +2563,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #570</name>
+    <name>text #557</name>
     <text># Queued arrays</text>
     <x>20</x>
-    <y>749</y>
+    <y>664</y>
     <width>150</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2745,10 +2575,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #573</name>
+    <name>text #560</name>
     <text>Acquire busy</text>
     <x>50</x>
-    <y>799</y>
+    <y>714</y>
     <width>120</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2757,10 +2587,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #576</name>
-    <text>Image counter</text>
+    <name>text #563</name>
+    <text>Array counter</text>
     <x>40</x>
-    <y>824</y>
+    <y>739</y>
     <width>130</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2769,10 +2599,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #579</name>
-    <text>Image rate</text>
+    <name>text #566</name>
+    <text>Array rate</text>
     <x>70</x>
-    <y>849</y>
+    <y>764</y>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
       </font>
@@ -2780,10 +2610,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #582</name>
+    <name>text #569</name>
     <text>Array callbacks</text>
     <x>20</x>
-    <y>874</y>
+    <y>789</y>
     <width>150</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2792,10 +2622,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #585</name>
+    <name>text #572</name>
     <text>Plots</text>
     <x>120</x>
-    <y>899</y>
+    <y>814</y>
     <width>50</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2804,10 +2634,10 @@
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #588</name>
+    <name>text #575</name>
     <text>Wait for plugins</text>
     <x>10</x>
-    <y>772</y>
+    <y>687</y>
     <width>160</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2816,10 +2646,10 @@
     <horizontal_alignment>2</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
-    <name>text #591</name>
+    <name>text #578</name>
     <text>Real time</text>
     <x>30</x>
-    <y>575</y>
+    <y>490</y>
     <width>90</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2828,10 +2658,10 @@
     <auto_size>true</auto_size>
   </widget>
   <widget type="textupdate" version="2.0.0">
-    <name>text update #594</name>
+    <name>text update #581</name>
     <pv_name>$(P)$(R)ElapsedReal</pv_name>
     <x>125</x>
-    <y>575</y>
+    <y>490</y>
     <width>75</width>
     <font>
       <font family="Liberation Sans" style="REGULAR" size="16.0">
@@ -2850,10 +2680,10 @@
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
   <widget type="textentry" version="3.0.0">
-    <name>text entry #598</name>
+    <name>text entry #585</name>
     <pv_name>$(P)$(R)PresetReal</pv_name>
     <x>205</x>
-    <y>575</y>
+    <y>490</y>
     <width>103</width>
     <height>22</height>
     <font>
@@ -2866,196 +2696,6 @@
     </background_color>
     <format>1</format>
     <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #602</name>
-    <text>Read Rate</text>
-    <x>870</x>
-    <y>575</y>
-    <width>90</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>2</horizontal_alignment>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #605</name>
-    <pv_name>$(P)$(R)ReadTrace.SCAN</pv_name>
-    <x>963</x>
-    <y>576</y>
-    <width>80</width>
-    <height>18</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>message button #608</name>
-    <actions>
-      <action type="write_pv">
-        <pv_name>$(P)$(R)ReadTrace.PROC</pv_name>
-        <value>1</value>
-        <description>Write</description>
-      </action>
-    </actions>
-    <pv_name>$(P)$(R)ReadTrace.PROC</pv_name>
-    <text>Read Once</text>
-    <x>1048</x>
-    <y>575</y>
-    <width>80</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>related display #611</name>
-    <actions>
-      <action type="open_display">
-        <file>danteTrace.opi</file>
-        <target>tab</target>
-        <description>Trace display</description>
-      </action>
-    </actions>
-    <text>Plot</text>
-    <x>963</x>
-    <y>600</y>
-    <width>86</width>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #614</name>
-    <text>Plot</text>
-    <x>910</x>
-    <y>600</y>
-    <width>50</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <horizontal_alignment>1</horizontal_alignment>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #617</name>
-    <text>Maximum energy</text>
-    <x>385</x>
-    <y>663</y>
-    <width>140</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #620</name>
-    <pv_name>$(P)$(R)MaxEnergy</pv_name>
-    <x>530</x>
-    <y>663</y>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #624</name>
-    <pv_name>$(P)$(R)MaxEnergy_RBV</pv_name>
-    <x>635</x>
-    <y>663</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>text #628</name>
-    <text>List buffer size</text>
-    <x>365</x>
-    <y>713</y>
-    <width>160</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>text entry #631</name>
-    <pv_name>$(P)$(R)ListBufferSize</pv_name>
-    <x>530</x>
-    <y>713</y>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textupdate" version="2.0.0">
-    <name>text update #635</name>
-    <pv_name>$(P)$(R)ListBufferSize_RBV</pv_name>
-    <x>635</x>
-    <y>713</y>
-    <width>120</width>
-    <font>
-      <font family="Liberation Sans" style="REGULAR" size="16.0">
-      </font>
-    </font>
-    <foreground_color>
-      <color red="10" green="0" blue="184">
-      </color>
-    </foreground_color>
-    <background_color>
-      <color red="200" green="200" blue="200">
-      </color>
-    </background_color>
-    <format>1</format>
-    <show_units>false</show_units>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="combo" version="2.0.0">
-    <name>menu #639</name>
-    <pv_name>$(P)$(R)NumMCAChannels</pv_name>
-    <x>530</x>
-    <y>613</y>
-    <height>20</height>
-    <background_color>
-      <color red="115" green="223" blue="255">
-      </color>
-    </background_color>
     <border_alarm_sensitive>false</border_alarm_sensitive>
   </widget>
 </display>
