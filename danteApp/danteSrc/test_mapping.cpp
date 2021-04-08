@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
     callId = stop(danteIdentifier);
     waitReply(callId, danteReply);
     clear_chain(danteIdentifier);
-    printf("Spectra collect on each board\n");
+    printf("Spectra collected on each board\n");
     for (int board=0; board<numBoards; board++) {
         printf("  Board %d, number collected=%d\n", board, currentPixel[board]);
     }
