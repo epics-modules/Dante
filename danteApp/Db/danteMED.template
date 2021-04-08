@@ -55,14 +55,6 @@ record(bo,"$(P)$(R)StopAll") {
     field(ONAM,"Stop")
 }
 
-record(ai,"$(P)$(R)DeadTime") {
-    field(PREC, "2")
-}
-
-record(ai,"$(P)$(R)IDeadTime") {
-    field(PREC, "2")
-}
-
 record(bo,"$(P)$(R)ReadAll") {
     field(SCAN,"1 second")
     field(DISV,"0")
@@ -92,6 +84,15 @@ record(bo,"$(P)$(R)DoReadAll") {
     field(ZNAM, "Done")
     field(ONAM, "Read")
 }
+
+record(ai,"$(P)$(R)DeadTime") {
+    field(PREC, "2")
+}
+
+record(ai,"$(P)$(R)IDeadTime") {
+    field(PREC, "2")
+}
+
 
 record(bo,"$(P)$(R)CopyFastPeakingTime") {
     field(ZNAM, "Done")
@@ -193,6 +194,11 @@ record(bo,"$(P)$(R)CopyTimeConstant") {
     field(ONAM, "Copy")
 }
 
+record(bo,"$(P)$(R)CopyMaxEnergy") {
+    field(ZNAM, "Done")
+    field(ONAM, "Copy")
+}
+
 record(bo,"$(P)$(R)CopyBaseOffset") {
     field(ZNAM, "Done")
     field(ONAM, "Copy")
@@ -206,4 +212,3 @@ record(bo,"$(P)$(R)CopyROIEnergy") {
     field(ZNAM, "Done")
     field(ONAM, "Copy")
 }
-
