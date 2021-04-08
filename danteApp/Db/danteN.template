@@ -27,6 +27,22 @@ record(ai,"$(P)$(R)MaxEnergy_RBV") {
 # Runtime statistics #
 ######################
 
+record(ai,"$(P)$(R)ElapsedRealTime") {
+    field(DESC,"Elapsed real time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT),$(ADDR))MCA_ELAPSED_REAL")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai,"$(P)$(R)ElapsedLiveTime") {
+    field(DESC,"Elapsed live time")
+    field(PREC,"3")
+    field(DTYP, "asynFloat64")
+    field(INP,"@asyn($(PORT),$(ADDR))MCA_ELAPSED_LIVE")
+    field(SCAN, "I/O Intr")
+}
+
 record(ai,"$(P)$(R)InputCountRate") {
     field(DESC,"ICR")
     field(PREC,"2")
@@ -444,9 +460,9 @@ record(ai,"$(P)$(R)TailCoefficient_RBV") {
 record(mbbo,"$(P)$(R)InputMode") {
     field(DESC,"Input mode")
     field(PINI,"YES")
-    field(ZRST,"DC_HighImp")
+    field(ZRST,"DC_HiImp")
     field(ZRVL,"0")
-    field(ONST,"DC_LowImp")
+    field(ONST,"DC_LoImp")
     field(ONVL,"1")
     field(TWST,"AC_Slow")
     field(TWVL,"2")
@@ -458,9 +474,9 @@ record(mbbo,"$(P)$(R)InputMode") {
 
 record(mbbi,"$(P)$(R)InputMode_RBV") {
     field(DESC,"Input mode")
-    field(ZRST,"DC_HighImp")
+    field(ZRST,"DC_HiImp")
     field(ZRVL,"0")
-    field(ONST,"DC_LowImp")
+    field(ONST,"DC_LoImp")
     field(ONVL,"1")
     field(TWST,"AC_Slow")
     field(TWVL,"2")
