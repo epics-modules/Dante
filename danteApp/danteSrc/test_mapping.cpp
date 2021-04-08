@@ -232,14 +232,18 @@ int main(int argc, char *argv[])
     waitReply(callId, danteReply);
     printf("start_map complete\n");
 
-    while (currentPixel[0] < mappingPoints) {
+    bool anyBoardBusy = true;
+    while (anyBoardBusy) {
         mySleep(pollTimeMs/1000.);
-        bool lastDataReceived;
-        isLastDataReceived(danteIdentifier, 0, lastDataReceived);
-        if (lastDataReceived) {
-            printf("Acquisition complete\n");
-        }
+        anyBoardBusy = false;
         for (int board=0; board<numBoards; board++) {
+            bool lastDataReceived;
+            isLastDataReceived(danteIdentifier, board, lastDataReceived);
+            if (lastDataReceived) {
+                printf("Acquisition complete on board %d\n", board);
+            } else {
+                anyBoardBusy = true;
+            }
             uint32_t numAvailable;
             if (!getAvailableData(danteIdentifier, board, numAvailable)) {
                 printf("%s::%s error calling getAvailableData\n", driverName, functionName);
