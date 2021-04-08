@@ -123,12 +123,10 @@ assign  OverflowRecoveryTime to {};
 int     CopyOverflowRecoveryTime; assign CopyOverflowRecoveryTime to "{P}{DANTE}:CopyOverflowRecoveryTime";
 monitor CopyOverflowRecoveryTime; evflag CopyOverflowRecoveryTimeMon; sync CopyOverflowRecoveryTime CopyOverflowRecoveryTimeMon;
 
-/*
 double  MaxEnergy[MAX_DETECTORS]; 
 assign  MaxEnergy to {};
 int     CopyMaxEnergy; assign CopyMaxEnergy to "{P}{DANTE}:CopyMaxEnergy";
 monitor CopyMaxEnergy; evflag CopyMaxEnergyMon; sync CopyMaxEnergy CopyMaxEnergyMon;
-*/
 
 double  ResetThreshold[MAX_DETECTORS]; 
 assign  ResetThreshold to {};
@@ -279,10 +277,10 @@ ss dante_control {
 
                 sprintf(temp, "%s%s%d:OverflowRecoveryTime", prefix, dante, det);
                 pvAssign(OverflowRecoveryTime[i], temp);
-/*
+
                 sprintf(temp, "%s%s%d:MaxEnergy", prefix, dante, det);
                 pvAssign(MaxEnergy[i], temp);
-*/
+
                 sprintf(temp, "%s%s%d:ResetThreshold", prefix, dante, det);
                 pvAssign(ResetThreshold[i], temp);
 
@@ -526,7 +524,6 @@ ss dante_control {
             pvPut(CopyOverflowRecoveryTime);
         } state monitor_changes
 
-/*
         when(efTestAndClear(CopyMaxEnergyMon) && (CopyMaxEnergy == 1)) {
             pvGet(MaxEnergy[0]);
             for (i=0; i<nDetectors; i++) {
@@ -536,7 +533,7 @@ ss dante_control {
             CopyMaxEnergy = 0;
             pvPut(CopyMaxEnergy);
         } state monitor_changes
-*/
+
         when(efTestAndClear(CopyResetThresholdMon) && (CopyResetThreshold == 1)) {
             pvGet(ResetThreshold[0]);
             for (i=0; i<nDetectors; i++) {
