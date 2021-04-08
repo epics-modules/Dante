@@ -474,15 +474,14 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     {
         this->setDanteConfiguration(addr);
     }
-    else if (function == DanteInputMode) {
+    else if (function == DanteAnalogOffset) {
         struct configuration_offset cfgOffset;
         cfgOffset.offset_val1 = value;
-        cfgOffset.offset_val2 = value;
         cfgOffset.offset_val2 = value;
         callId_ = configure_offset(danteIdentifier_, addr, cfgOffset);
         waitReply(callId_, danteReply_, "configure_offset");
     }
-    else if (function == DanteAnalogOffset) {
+    else if (function == DanteInputMode) {
         callId_ = configure_input(danteIdentifier_, addr, (InputMode)value);
         waitReply(callId_, danteReply_, "configure_input");
     }
