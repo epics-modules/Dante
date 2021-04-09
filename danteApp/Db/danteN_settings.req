@@ -16,4 +16,5 @@ $(P)$(R)InputPolarity
 $(P)$(R)TimeConstant
 $(P)$(R)BaseOffset
 $(P)$(R)ResetThreshold
+$(P)$(R)InputMode
 $(P)$(R)AnalogOffset
