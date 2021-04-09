@@ -1,14 +1,14 @@
 
 file {
-	name="/home/epics/devel/dante/danteApp/op/adl/danteTop.adl"
+	name="C:\Users\Luca.Grittini\Desktop\dante1CH_adl\danteTop.adl"
 	version=030109
 }
 display {
 	object {
-		x=158
-		y=176
-		width=317
-		height=63
+		x=3027
+		y=151
+		width=200
+		height=100
 	}
 	clr=14
 	bclr=4
@@ -89,10 +89,10 @@ display {
 }
 "related display" {
 	object {
-		x=115
-		y=14
-		width=94
-		height=26
+		x=40
+		y=40
+		width=120
+		height=50
 	}
 	display[0] {
 		label="Dante"
@@ -101,5 +101,18 @@ display {
 	}
 	clr=14
 	bclr=4
-	label="Dante1"
+	label="Dante-1CH"
+}
+text {
+	object {
+		x=10
+		y=9
+		width=180
+		height=22
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="DANTE Top Level Control"
+	align="horiz. centered"
 }

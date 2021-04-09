@@ -11,7 +11,7 @@ LIB_INSTALLS  += ../os/WIN32/x64/XGL_DPP.lib
 BIN_INSTALLS  += ../os/WIN32/x64/XGL_DPP.dll
 
 else ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
-LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so.3.2
+LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so.3_7_13
 LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so.1
 LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so
 endif

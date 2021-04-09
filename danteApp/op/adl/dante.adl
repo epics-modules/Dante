@@ -1,12 +1,12 @@
 
 file {
-	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante.adl"
+	name="C:\Users\Luca.Grittini\Desktop\dante_adl_updates\dante1.adl"
 	version=030109
 }
 display {
 	object {
-		x=274
-		y=148
+		x=4211
+		y=66
 		width=1140
 		height=930
 	}
@@ -155,7 +155,7 @@ rectangle {
 		x=360
 		y=35
 		width=420
-		height=515
+		height=540
 	}
 	"basic attribute" {
 		clr=14
@@ -187,7 +187,7 @@ text {
 		clr=14
 	}
 	textix="Gain"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text update" {
 	object {
@@ -230,7 +230,7 @@ text {
 		clr=14
 	}
 	textix="Energy threshold (keV)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -273,7 +273,7 @@ text {
 		clr=14
 	}
 	textix="Baseline threshold (keV)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -316,7 +316,7 @@ text {
 		clr=14
 	}
 	textix="Max. rise time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -359,7 +359,7 @@ text {
 		clr=14
 	}
 	textix="Peaking time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -402,7 +402,7 @@ text {
 		clr=14
 	}
 	textix="Max. peaking time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -445,7 +445,7 @@ text {
 		clr=14
 	}
 	textix="Flat top time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -488,7 +488,7 @@ text {
 		clr=14
 	}
 	textix="Reset recovery time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -531,7 +531,7 @@ text {
 		clr=14
 	}
 	textix="Zero peak freq. (Hz)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -574,7 +574,7 @@ text {
 		clr=14
 	}
 	textix="Baseline samples"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -617,7 +617,7 @@ text {
 		clr=14
 	}
 	textix="Fast flat top time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -660,7 +660,7 @@ text {
 		clr=14
 	}
 	textix="Fast threshold (keV)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -703,7 +703,7 @@ text {
 		clr=14
 	}
 	textix="Fast peaking time (us)"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1444,7 +1444,7 @@ text {
 		clr=14
 	}
 	textix="Input polarity"
-	align="horiz. centered"
+	align="horiz. right"
 }
 menu {
 	object {
@@ -1486,7 +1486,7 @@ text {
 		clr=14
 	}
 	textix="Analog offset"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1529,7 +1529,7 @@ text {
 		clr=14
 	}
 	textix="Base offset"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1563,6 +1563,49 @@ text {
 }
 text {
 	object {
+		x=410
+		y=545
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Deconv. Time Const. (us)"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=615
+		y=545
+		width=74
+		height=20
+	}
+	control {
+		chan="$(P)$(R)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=694
+		y=545
+		width=74
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+text {
+	object {
 		x=390
 		y=470
 		width=220
@@ -1572,7 +1615,7 @@ text {
 		clr=14
 	}
 	textix="Overflow recovery time"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1615,7 +1658,7 @@ text {
 		clr=14
 	}
 	textix="Reset threshold"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1658,7 +1701,7 @@ text {
 		clr=14
 	}
 	textix="Tail coefficient"
-	align="horiz. centered"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -1693,7 +1736,7 @@ text {
 rectangle {
 	object {
 		x=510
-		y=559
+		y=600
 		width=120
 		height=21
 	}
@@ -1704,9 +1747,9 @@ rectangle {
 rectangle {
 	object {
 		x=360
-		y=555
+		y=595
 		width=420
-		height=190
+		height=220
 	}
 	"basic attribute" {
 		clr=14
@@ -1717,7 +1760,7 @@ rectangle {
 text {
 	object {
 		x=525
-		y=559
+		y=600
 		width=90
 		height=20
 	}
@@ -1730,7 +1773,7 @@ text {
 text {
 	object {
 		x=405
-		y=588
+		y=635
 		width=120
 		height=20
 	}
@@ -1738,11 +1781,12 @@ text {
 		clr=14
 	}
 	textix="Collect mode"
+	align="horiz. right"
 }
 menu {
 	object {
 		x=530
-		y=588
+		y=635
 		width=100
 		height=20
 	}
@@ -1755,7 +1799,7 @@ menu {
 "text update" {
 	object {
 		x=635
-		y=588
+		y=635
 		width=120
 		height=20
 	}
@@ -1770,7 +1814,7 @@ menu {
 text {
 	object {
 		x=415
-		y=688
+		y=735
 		width=110
 		height=20
 	}
@@ -1778,12 +1822,12 @@ text {
 		clr=14
 	}
 	textix="Gating mode"
-	align="horiz. centered"
+	align="horiz. right"
 }
 menu {
 	object {
 		x=530
-		y=688
+		y=735
 		width=100
 		height=20
 	}
@@ -1796,7 +1840,7 @@ menu {
 "text update" {
 	object {
 		x=635
-		y=688
+		y=735
 		width=120
 		height=20
 	}
@@ -1811,8 +1855,50 @@ menu {
 }
 text {
 	object {
+		x=415
+		y=785
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input mode"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=530
+		y=785
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=635
+		y=785
+		width=120
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
 		x=405
-		y=613
+		y=660
 		width=120
 		height=20
 	}
@@ -1820,11 +1906,12 @@ text {
 		clr=14
 	}
 	textix="MCA channels"
+	align="horiz. right"
 }
 "text update" {
 	object {
 		x=635
-		y=613
+		y=660
 		width=120
 		height=20
 	}
@@ -1839,7 +1926,7 @@ text {
 text {
 	object {
 		x=385
-		y=638
+		y=685
 		width=140
 		height=20
 	}
@@ -1847,11 +1934,12 @@ text {
 		clr=14
 	}
 	textix="Mapping points"
+	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=530
-		y=638
+		y=685
 		width=100
 		height=20
 	}
@@ -1866,7 +1954,7 @@ text {
 "text update" {
 	object {
 		x=635
-		y=638
+		y=685
 		width=120
 		height=20
 	}
@@ -2549,7 +2637,7 @@ text {
 text {
 	object {
 		x=385
-		y=663
+		y=710
 		width=140
 		height=20
 	}
@@ -2557,11 +2645,12 @@ text {
 		clr=14
 	}
 	textix="Maximum energy"
+	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=530
-		y=663
+		y=710
 		width=100
 		height=20
 	}
@@ -2576,7 +2665,7 @@ text {
 "text update" {
 	object {
 		x=635
-		y=663
+		y=710
 		width=120
 		height=20
 	}
@@ -2591,7 +2680,7 @@ text {
 text {
 	object {
 		x=365
-		y=713
+		y=760
 		width=160
 		height=20
 	}
@@ -2599,11 +2688,12 @@ text {
 		clr=14
 	}
 	textix="List buffer size"
+	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=530
-		y=713
+		y=760
 		width=100
 		height=20
 	}
@@ -2618,7 +2708,7 @@ text {
 "text update" {
 	object {
 		x=635
-		y=713
+		y=760
 		width=120
 		height=20
 	}
@@ -2633,7 +2723,7 @@ text {
 menu {
 	object {
 		x=530
-		y=613
+		y=660
 		width=100
 		height=20
 	}
