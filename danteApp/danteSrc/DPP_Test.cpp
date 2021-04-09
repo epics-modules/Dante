@@ -751,6 +751,7 @@ int32_t main(int argc, char* argv[])
 			result = false;
 		else
 		{
+		  std::cout << "Number of spectra available on board " << i << ": " << data_number << "\n";
 			values_map = new uint16_t[data_number * 4096];
 			id_map = new uint32_t[data_number];
 			stats_map = new double[data_number * 4];
@@ -840,7 +841,9 @@ int32_t main(int argc, char* argv[])
 			result = false;
 		else
 		{
-			values_map = new uint16_t[data_number * 2048];
+		  // Program will crash if we only allocate 2048 channels, must allocate 4096
+			//values_map = new uint16_t[data_number * 2048];
+			values_map = new uint16_t[data_number * 4096];
 			id_map = new uint32_t[data_number];
 			stats_map = new double[data_number * 4];
 			advstats_map = new uint64_t[data_number * 22];
