@@ -15,7 +15,5 @@ $(P)$(R)BaselineSamples
 $(P)$(R)InputPolarity
 $(P)$(R)TimeConstant
 $(P)$(R)BaseOffset
-$(P)$(R)OverflowRecoveryTime
 $(P)$(R)ResetThreshold
-$(P)$(R)TailCoefficient
 $(P)$(R)AnalogOffset

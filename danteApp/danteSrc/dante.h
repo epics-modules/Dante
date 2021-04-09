@@ -104,9 +104,7 @@ struct mappingAdvStats {
 #define DanteInvertedInputString            "DanteInvertedInput"
 #define DanteTimeConstantString             "DanteTimeConstant"
 #define DanteBaseOffsetString               "DanteBaseOffset"
-#define DanteOverflowRecoveryTimeString     "DanteOverflowRecoveryTime"
 #define DanteResetThresholdString           "DanteResetThreshold"
-#define DanteTailCoefficientString          "DanteTailCoefficient"
 
 /* Other parameters */
 #define DanteInputModeString                "DanteInputMode"
@@ -191,9 +189,7 @@ protected:
     int DanteInvertedInput;               /* uint32 */
     int DanteTimeConstant;                /* float64, units? */
     int DanteBaseOffset;                  /* uint32, bits */
-    int DanteOverflowRecoveryTime;        /* float64, usec */
     int DanteResetThreshold;              /* uint32, bits */
-    int DanteTailCoefficient;             /* float64, units? */
     
     /* Other parameters */
     int DanteInputMode;                   /* int32 */

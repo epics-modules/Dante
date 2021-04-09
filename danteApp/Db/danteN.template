@@ -411,22 +411,6 @@ record(longin,"$(P)$(R)BaseOffset_RBV") {
     field(SCAN, "I/O Intr")
 }
 
-record(ao,"$(P)$(R)OverflowRecoveryTime") {
-    field(DESC,"Overflow recovery time")
-    field(PINI,"YES")
-    field(PREC,"3")
-    field(DTYP, "asynFloat64")
-    field(OUT,"@asyn($(PORT),$(ADDR))DanteOverflowRecoveryTime")
-}
-
-record(ai,"$(P)$(R)OverflowRecoveryTime_RBV") {
-    field(DESC,"Overflow recovery time")
-    field(PREC,"3")
-    field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteOverflowRecoveryTime")
-    field(SCAN, "I/O Intr")
-}
-
 record(longout,"$(P)$(R)ResetThreshold") {
     field(DESC,"Reset threshold")
     field(PINI,"YES")
@@ -438,22 +422,6 @@ record(longin,"$(P)$(R)ResetThreshold_RBV") {
     field(DESC,"Reset threshold")
     field(DTYP, "asynInt32")
     field(INP,"@asyn($(PORT),$(ADDR))DanteResetThreshold")
-    field(SCAN, "I/O Intr")
-}
-
-record(ao,"$(P)$(R)TailCoefficient") {
-    field(DESC,"Tail coefficient")
-    field(PINI,"YES")
-    field(PREC,"3")
-    field(DTYP, "asynFloat64")
-    field(OUT,"@asyn($(PORT),$(ADDR))DanteTailCoefficient")
-}
-
-record(ai,"$(P)$(R)TailCoefficient_RBV") {
-    field(DESC,"Tail coefficient")
-    field(PREC,"3")
-    field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteTailCoefficient")
     field(SCAN, "I/O Intr")
 }
 

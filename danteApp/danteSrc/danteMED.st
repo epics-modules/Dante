@@ -118,11 +118,6 @@ assign  AnalogOffset to {};
 int     CopyAnalogOffset; assign CopyAnalogOffset to "{P}{DANTE}:CopyAnalogOffset";
 monitor CopyAnalogOffset; evflag CopyAnalogOffsetMon; sync CopyAnalogOffset CopyAnalogOffsetMon;
 
-double  OverflowRecoveryTime[MAX_DETECTORS]; 
-assign  OverflowRecoveryTime to {};
-int     CopyOverflowRecoveryTime; assign CopyOverflowRecoveryTime to "{P}{DANTE}:CopyOverflowRecoveryTime";
-monitor CopyOverflowRecoveryTime; evflag CopyOverflowRecoveryTimeMon; sync CopyOverflowRecoveryTime CopyOverflowRecoveryTimeMon;
-
 double  MaxEnergy[MAX_DETECTORS]; 
 assign  MaxEnergy to {};
 int     CopyMaxEnergy; assign CopyMaxEnergy to "{P}{DANTE}:CopyMaxEnergy";
@@ -132,11 +127,6 @@ double  ResetThreshold[MAX_DETECTORS];
 assign  ResetThreshold to {};
 int     CopyResetThreshold; assign CopyResetThreshold to "{P}{DANTE}:CopyResetThreshold";
 monitor CopyResetThreshold; evflag CopyResetThresholdMon; sync CopyResetThreshold CopyResetThresholdMon;
-
-double  TailCoefficient[MAX_DETECTORS]; 
-assign  TailCoefficient to {};
-int     CopyTailCoefficient; assign CopyTailCoefficient to "{P}{DANTE}:CopyTailCoefficient";
-monitor CopyTailCoefficient; evflag CopyTailCoefficientMon; sync CopyTailCoefficient CopyTailCoefficientMon;
 
 double  InputMode[MAX_DETECTORS]; 
 assign  InputMode to {};
@@ -275,17 +265,11 @@ ss dante_control {
                 sprintf(temp, "%s%s%d:AnalogOffset", prefix, dante, det);
                 pvAssign(AnalogOffset[i], temp);
 
-                sprintf(temp, "%s%s%d:OverflowRecoveryTime", prefix, dante, det);
-                pvAssign(OverflowRecoveryTime[i], temp);
-
                 sprintf(temp, "%s%s%d:MaxEnergy", prefix, dante, det);
                 pvAssign(MaxEnergy[i], temp);
 
                 sprintf(temp, "%s%s%d:ResetThreshold", prefix, dante, det);
                 pvAssign(ResetThreshold[i], temp);
-
-                sprintf(temp, "%s%s%d:TailCoefficient", prefix, dante, det);
-                pvAssign(TailCoefficient[i], temp);
 
                 sprintf(temp, "%s%s%d:InputMode", prefix, dante, det);
                 pvAssign(InputMode[i], temp);
@@ -514,16 +498,6 @@ ss dante_control {
             pvPut(CopyAnalogOffset);
         } state monitor_changes
 
-        when(efTestAndClear(CopyOverflowRecoveryTimeMon) && (CopyOverflowRecoveryTime == 1)) {
-            pvGet(OverflowRecoveryTime[0]);
-            for (i=0; i<nDetectors; i++) {
-                OverflowRecoveryTime[i] = OverflowRecoveryTime[0];
-                pvPut(OverflowRecoveryTime[i]);
-            }
-            CopyOverflowRecoveryTime = 0;
-            pvPut(CopyOverflowRecoveryTime);
-        } state monitor_changes
-
         when(efTestAndClear(CopyMaxEnergyMon) && (CopyMaxEnergy == 1)) {
             pvGet(MaxEnergy[0]);
             for (i=0; i<nDetectors; i++) {
@@ -542,16 +516,6 @@ ss dante_control {
             }
             CopyResetThreshold = 0;
             pvPut(CopyResetThreshold);
-        } state monitor_changes
-
-        when(efTestAndClear(CopyTailCoefficientMon) && (CopyTailCoefficient == 1)) {
-            pvGet(TailCoefficient[0]);
-            for (i=0; i<nDetectors; i++) {
-                TailCoefficient[i] = TailCoefficient[0];
-                pvPut(TailCoefficient[i]);
-            }
-            CopyTailCoefficient = 0;
-            pvPut(CopyTailCoefficient);
         } state monitor_changes
 
         when(efTestAndClear(CopyInputModeMon) && (CopyInputMode == 1)) {

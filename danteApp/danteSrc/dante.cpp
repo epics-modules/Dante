@@ -238,9 +238,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
     createParam(DanteInvertedInputString,           asynParamInt32,   &DanteInvertedInput);
     createParam(DanteTimeConstantString,            asynParamFloat64, &DanteTimeConstant);
     createParam(DanteBaseOffsetString,              asynParamInt32,   &DanteBaseOffset);
-    createParam(DanteOverflowRecoveryTimeString,    asynParamFloat64, &DanteOverflowRecoveryTime);
     createParam(DanteResetThresholdString,          asynParamInt32,   &DanteResetThreshold);
-    createParam(DanteTailCoefficientString,         asynParamFloat64, &DanteTailCoefficient);
     
     /* Other parameters */
     createParam(DanteInputModeString,               asynParamInt32,   &DanteInputMode);
@@ -362,9 +360,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int nChannels, size_t 
         setIntegerParam(i, DanteInvertedInput,            0);
         setDoubleParam (i, DanteTimeConstant,             0.0);
         setIntegerParam(i, DanteBaseOffset,               0);
-        setDoubleParam (i, DanteOverflowRecoveryTime,     0.0);
         setIntegerParam(i, DanteResetThreshold,           0);
-        setDoubleParam (i, DanteTailCoefficient,          0.0);
     }
 
     /* Read the MCA and DXP parameters once */
@@ -565,9 +561,7 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
         (function == DanteEdgeFlatTop) ||
         (function == DanteResetRecoveryTime) ||
         (function == DanteZeroPeakFreq) ||
-        (function == DanteTimeConstant) ||
-        (function == DanteOverflowRecoveryTime) ||
-        (function == DanteTailCoefficient))
+        (function == DanteTimeConstant))
     {
         this->setDanteConfiguration(addr);
     }
@@ -749,16 +743,12 @@ asynStatus Dante::setDanteConfiguration(int addr)
     getIntegerParam(addr, DanteBaseOffset, &iValue);
     pConfig->base_offset = iValue;
 
-    getDoubleParam(addr, DanteOverflowRecoveryTime, &dValue);
-    pConfig->overflow_recovery = uint32_t(round(dValue * usecToFastSample));
-    setDoubleParam(addr, DanteOverflowRecoveryTime, pConfig->overflow_recovery / usecToFastSample);
+    pConfig->overflow_recovery = 0;
 
     getIntegerParam(addr, DanteResetThreshold, &iValue);
     pConfig->reset_threshold = iValue;
 
-    getDoubleParam(addr, DanteTailCoefficient, &dValue);
-    // NEED TO CHECK UNITS HERE, not documented in DLL_SPP_Callback.h
-    pConfig->tail_coefficient = dValue;
+    pConfig->tail_coefficient = 0.;
 
     callId_ = configure(danteIdentifier_, addr, *pConfig);
     if (callId_ < 0) {
@@ -1546,9 +1536,7 @@ void Dante::report(FILE *fp, int details)
             fprintf(fp, "       inverted_input: %d\n", pConfig->inverted_input ? 1 : 0);
             fprintf(fp, "        time_constant: %f\n", pConfig->time_constant);
             fprintf(fp, "          base_offset: %d\n", pConfig->base_offset);
-            fprintf(fp, "    overflow_recovery: %d\n", pConfig->overflow_recovery);
             fprintf(fp, "      reset_threshold: %d\n", pConfig->reset_threshold);
-            fprintf(fp, "     tail_coefficient: %f\n", pConfig->tail_coefficient);
             fprintf(fp, "Statistics %d:\n", i);
             statistics *pStats = &statistics_[i];
             fprintf(fp, "            real_time: %f\n", (double)pStats->real_time);

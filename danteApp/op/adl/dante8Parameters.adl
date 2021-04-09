@@ -8,7 +8,7 @@ display {
 		x=100
 		y=289
 		width=1795
-		height=630
+		height=580
 	}
 	clr=14
 	bclr=4
@@ -4826,1080 +4826,12 @@ menu {
 	label="Copy 1 -> All"
 	press_msg="1"
 }
-text {
-	object {
-		x=5
-		y=575
-		width=240
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Deconv. Time Const. (us)"
-}
-"text entry" {
-	object {
-		x=255
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D1)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=340
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D1)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=435
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D2)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=520
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D2)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=615
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D3)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=700
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D3)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=795
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D4)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=880
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D4)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=975
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D5)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1060
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D5)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1155
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D6)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1240
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D6)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1335
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D7)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1420
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D7)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1515
-		y=575
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D8)TimeConstant"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1600
-		y=575
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D8)TimeConstant_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"message button" {
-	object {
-		x=1690
-		y=575
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CopyTimeConstant"
-		clr=14
-		bclr=51
-	}
-	label="Copy 1 -> All"
-	press_msg="1"
-}
-text {
-	object {
-		x=25
-		y=500
-		width=220
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Overflow recovery time"
-}
-text {
-	object {
-		x=95
-		y=525
-		width=150
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Reset threshold"
-}
-text {
-	object {
-		x=85
-		y=550
-		width=160
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Tail coefficient"
-}
-"text entry" {
-	object {
-		x=255
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D1)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=255
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D1)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=255
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D1)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=340
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D1)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=340
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D1)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=340
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D1)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=435
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D2)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=435
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D2)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=435
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D2)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=520
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D2)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=520
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D2)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=520
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D2)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=615
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D3)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=615
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D3)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=615
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D3)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=700
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D3)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=700
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D3)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=700
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D3)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=795
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D4)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=795
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D4)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=795
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D4)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=880
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D4)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=880
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D4)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=880
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D4)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=975
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D5)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=975
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D5)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=975
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D5)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1060
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D5)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1060
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D5)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1060
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D5)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1155
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D6)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1155
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D6)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1155
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D6)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1240
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D6)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1240
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D6)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1240
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D6)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1335
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D7)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1335
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D7)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1335
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D7)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1420
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D7)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1420
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D7)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1420
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D7)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1515
-		y=500
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D8)OverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1515
-		y=525
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D8)ResetThreshold"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1515
-		y=550
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D8)TailCoefficient"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1600
-		y=500
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D8)OverflowRecoveryTime_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1600
-		y=525
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D8)ResetThreshold_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1600
-		y=550
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D8)TailCoefficient_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"message button" {
-	object {
-		x=1690
-		y=500
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CopyOverflowRecoveryTime"
-		clr=14
-		bclr=51
-	}
-	label="Copy 1 -> All"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=1690
-		y=525
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CopyResetThreshold"
-		clr=14
-		bclr=51
-	}
-	label="Copy 1 -> All"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=1690
-		y=550
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CopyTailCoefficient"
-		clr=14
-		bclr=51
-	}
-	label="Copy 1 -> All"
-	press_msg="1"
-}
 composite {
 	object {
 		x=250
 		y=66
 		width=1435
-		height=560
+		height=510
 	}
 	"composite name"=""
 	children {
@@ -5908,7 +4840,7 @@ composite {
 				x=250
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5921,7 +4853,7 @@ composite {
 				x=430
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5934,7 +4866,7 @@ composite {
 				x=610
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5947,7 +4879,7 @@ composite {
 				x=790
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5960,7 +4892,7 @@ composite {
 				x=970
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5973,7 +4905,7 @@ composite {
 				x=1150
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5986,7 +4918,7 @@ composite {
 				x=1330
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -5999,7 +4931,7 @@ composite {
 				x=1510
 				y=66
 				width=175
-				height=560
+				height=510
 			}
 			"basic attribute" {
 				clr=14
@@ -6009,271 +4941,827 @@ composite {
 		}
 	}
 }
-text {
+composite {
 	object {
-		x=105
-		y=600
-		width=140
+		x=95
+		y=500
+		width=1695
 		height=20
 	}
-	"basic attribute" {
-		clr=14
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=95
+				y=500
+				width=150
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Reset threshold"
+		}
+		"text entry" {
+			object {
+				x=255
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D1)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=340
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D1)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=435
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D2)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=520
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D2)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=615
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D3)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=700
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D3)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=795
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D4)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=880
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D4)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=975
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D5)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1060
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D5)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1155
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D6)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1240
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D6)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1335
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D7)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1420
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D7)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1515
+				y=500
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D8)ResetThreshold"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1600
+				y=500
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D8)ResetThreshold_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=1690
+				y=500
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CopyResetThreshold"
+				clr=14
+				bclr=51
+			}
+			label="Copy 1 -> All"
+			press_msg="1"
+		}
 	}
-	textix="Maximum energy"
-	align="horiz. right"
 }
-"text entry" {
+composite {
 	object {
-		x=255
-		y=600
-		width=80
-		height=20
+		x=5
+		y=525
+		width=1785
+		height=45
 	}
-	control {
-		chan="$(P)$(D1)MaxEnergy"
-		clr=14
-		bclr=51
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=5
+				y=525
+				width=240
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Deconv. Time Const. (us)"
+		}
+		"text entry" {
+			object {
+				x=255
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D1)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=340
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D1)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=435
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D2)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=520
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D2)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=615
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D3)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=700
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D3)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=795
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D4)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=880
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D4)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=975
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D5)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1060
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D5)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1155
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D6)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1240
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D6)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1335
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D7)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1420
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D7)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1515
+				y=525
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D8)TimeConstant"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1600
+				y=525
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D8)TimeConstant_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=1690
+				y=525
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CopyTimeConstant"
+				clr=14
+				bclr=51
+			}
+			label="Copy 1 -> All"
+			press_msg="1"
+		}
+		text {
+			object {
+				x=105
+				y=550
+				width=140
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Maximum energy"
+			align="horiz. right"
+		}
+		"text entry" {
+			object {
+				x=255
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D1)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=340
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D1)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=435
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D2)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=520
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D2)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=615
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D3)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=700
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D3)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=795
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D4)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=880
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D4)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=975
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D5)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1060
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D5)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1155
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D6)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1240
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D6)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1335
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D7)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1420
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D7)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text entry" {
+			object {
+				x=1515
+				y=550
+				width=80
+				height=20
+			}
+			control {
+				chan="$(P)$(D8)MaxEnergy"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=1600
+				y=550
+				width=80
+				height=20
+			}
+			monitor {
+				chan="$(P)$(D8)MaxEnergy_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=1690
+				y=550
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CopyMaxEnergy"
+				clr=14
+				bclr=51
+			}
+			label="Copy 1 -> All"
+			press_msg="1"
+		}
 	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=340
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D1)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=435
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D2)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=520
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D2)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=615
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D3)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=700
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D3)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=795
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D4)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=880
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D4)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=975
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D5)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1060
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D5)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1155
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D6)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1240
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D6)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1335
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D7)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1420
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D7)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=1515
-		y=600
-		width=80
-		height=20
-	}
-	control {
-		chan="$(P)$(D8)MaxEnergy"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=1600
-		y=600
-		width=80
-		height=20
-	}
-	monitor {
-		chan="$(P)$(D8)MaxEnergy_RBV"
-		clr=54
-		bclr=3
-	}
-	limits {
-	}
-}
-"message button" {
-	object {
-		x=1690
-		y=600
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CopyMaxEnergy"
-		clr=14
-		bclr=51
-	}
-	label="Copy 1 -> All"
-	press_msg="1"
 }

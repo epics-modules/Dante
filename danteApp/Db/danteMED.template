@@ -169,17 +169,7 @@ record(bo,"$(P)$(R)CopyAnalogOffset") {
     field(ONAM, "Copy")
 }
 
-record(bo,"$(P)$(R)CopyOverflowRecoveryTime") {
-    field(ZNAM, "Done")
-    field(ONAM, "Copy")
-}
-
 record(bo,"$(P)$(R)CopyResetThreshold") {
-    field(ZNAM, "Done")
-    field(ONAM, "Copy")
-}
-
-record(bo,"$(P)$(R)CopyTailCoefficient") {
     field(ZNAM, "Done")
     field(ONAM, "Copy")
 }
