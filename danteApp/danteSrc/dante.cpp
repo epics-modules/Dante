@@ -914,20 +914,20 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
         } else {
             statistics *pStats = &statistics_[addr];
             // real_time and live_time are returned in microseconds, though this is not documented
-            setDoubleParam(addr, mcaElapsedRealTime,    pStats->real_time/1e6);
-            setDoubleParam(addr, mcaElapsedLiveTime,    pStats->live_time/1e6);
-            setDoubleParam(addr, DanteInputCountRate,   pStats->ICR);
-            setDoubleParam(addr, DanteOutputCountRate,  pStats->OCR);
-            setDoubleParam(addr, DanteLastTimeStamp,    pStats->last_timestamp);
-            setIntegerParam(addr, DanteTriggers,        pStats->detected);
-            setIntegerParam(addr, DanteEvents,          pStats->measured);
-            setIntegerParam(addr, DanteEdgeDT,          pStats->edge_dt);
-            setIntegerParam(addr, DanteFilt1DT,         pStats->filt1_dt);
-            setIntegerParam(addr, DanteZeroCounts,      pStats->zerocounts);
-            setIntegerParam(addr, DanteBaselinesValue,  pStats->baselines_value);
-            setIntegerParam(addr, DantePupValue,        pStats->pup_value);
-            setIntegerParam(addr, DantePupF1Value,      pStats->pup_f1_value);
-            setIntegerParam(addr, DantePupNotF1Value,   pStats->pup_notf1_value);
+            setDoubleParam(addr,  mcaElapsedRealTime,     pStats->real_time/1e6);
+            setDoubleParam(addr,  mcaElapsedLiveTime,     pStats->live_time/1e6);
+            setDoubleParam(addr,  DanteInputCountRate,    pStats->ICR);
+            setDoubleParam(addr,  DanteOutputCountRate,   pStats->OCR);
+            setDoubleParam(addr,  DanteLastTimeStamp,     pStats->last_timestamp);
+            setIntegerParam(addr, DanteTriggers,          pStats->detected);
+            setIntegerParam(addr, DanteEvents,            pStats->measured);
+            setIntegerParam(addr, DanteEdgeDT,            pStats->edge_dt);
+            setIntegerParam(addr, DanteFilt1DT,           pStats->filt1_dt);
+            setIntegerParam(addr, DanteZeroCounts,        pStats->zerocounts);
+            setIntegerParam(addr, DanteBaselinesValue,    pStats->baselines_value);
+            setIntegerParam(addr, DantePupValue,          pStats->pup_value);
+            setIntegerParam(addr, DantePupF1Value,        pStats->pup_f1_value);
+            setIntegerParam(addr, DantePupNotF1Value,     pStats->pup_notf1_value);
             setIntegerParam(addr, DanteResetCounterValue, pStats->reset_counter_value);
   
             asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, 
