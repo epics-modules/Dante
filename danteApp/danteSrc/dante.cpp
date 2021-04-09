@@ -74,7 +74,7 @@ static void c_shutdown(void* arg)
 {
     Dante *pDante = (Dante*)arg;
     pDante->shutdown();
-    free(pDante);
+    //delete pDante;
 }
 
 static void acquisitionTaskC(void *drvPvt)
