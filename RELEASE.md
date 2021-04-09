@@ -10,5 +10,5 @@ the configure/RELEASE file in each release of Dante.
 
 ## R1-0 (April 9, 2021)
 - Initial release.  This has only been tested with a 1-channel Dante, and needs work for the 8-channel Dante.
-- Based on version 3.3 of the XGL_DPP library.
-- Requires firmware version 3.3.5.
+- Based on version 3.3.2 of the XGL_DPP library.
+- Requires firmware version 3.3.2 (standard) or 3.3.5 (fast).
