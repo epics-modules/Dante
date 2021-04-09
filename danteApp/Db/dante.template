@@ -191,11 +191,6 @@ record(bo,"$(P)$(R)ReadTrace") {
     field(ONAM, "Read")
 }
 
-#record(bo,"$(P)$(R)CopyTriggerPeakingTime") {
-#    field(ZNAM, "Done")
-#    field(ONAM, "Copy")
-#}
-
 record(mbbo,"$(P)$(R)GatingMode") {
     field(DESC,"Gating mode")
     field(PINI,"YES")
