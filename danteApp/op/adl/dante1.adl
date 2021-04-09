@@ -1,6 +1,6 @@
 
 file {
-	name="/home/epics/devel/dante-1-0/danteApp/op/adl/dante1.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/dante1.adl"
 	version=030109
 }
 display {
