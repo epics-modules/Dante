@@ -520,8 +520,6 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
                 activeBoards_.push_back(i);
             }
         }
-printf("totalBoards_=%d, numActiveBoards=%d, activeBoards_=", totalBoards_, (int)activeBoards_.size());
-for (const auto& board: activeBoards_) printf("%d ", board); printf("\n");
     }
 
     /* Call the callback */
