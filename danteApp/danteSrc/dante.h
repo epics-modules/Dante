@@ -59,6 +59,7 @@ struct mappingAdvStats {
 #define DanteAcquiringString                "DanteAcquiring"  /* Internal use only !!! */
 #define DantePollTimeString                 "DantePollTime"
 #define DanteForceReadString                "DanteForceRead"
+#define DanteEnableBoardString              "DanteEnableBoard"
 
 /* Diagnostic trace parameters */
 #define DanteTraceDataString                "DanteTraceData"
@@ -117,7 +118,7 @@ struct mappingAdvStats {
 class Dante : public asynNDArrayDriver
 {
 public:
-    Dante(const char *portName, const char *ipAddress, int nChannels, size_t maxMemory);
+    Dante(const char *portName, const char *ipAddress, int totalBoards, size_t maxMemory);
 
     /* virtual methods to override from asynNDArrayDriver */
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
@@ -144,6 +145,7 @@ protected:
     int DanteAcquiring;            /** < Internal acquiring flag, not exposed via drvUser */
     int DantePollTime;             /** < Status/data polling time in seconds */
     int DanteForceRead;            /** < Force reading MCA spectra - used for mcaData when addr=ALL */
+    int DanteEnableBoard;          /** < Enable/disable specific board */
 
     /* Diagnostic trace parameters */
     int DanteTraceData;            /** < The trace array data (read) int32 array */
@@ -246,7 +248,8 @@ private:
     struct mappingStats **pMappingStats_;
     struct mappingAdvStats **pMappingAdvStats_;
 
-    int numBoards_;
+    int totalBoards_;
+    std::vector<int> activeBoards_;
     int uniqueId_;
 
     epicsEvent *cmdStartEvent_;
