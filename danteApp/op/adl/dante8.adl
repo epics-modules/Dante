@@ -1,0 +1,1260 @@
+
+file {
+	name="/home/epics/devel/dante/danteApp/op/adl/dante8.adl"
+	version=030109
+}
+display {
+	object {
+		x=142
+		y=270
+		width=1130
+		height=510
+	}
+	clr=14
+	bclr=4
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=0
+		y=2
+		width=1140
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+}
+text {
+	object {
+		x=0
+		y=3
+		width=1140
+		height=25
+	}
+	"basic attribute" {
+		clr=0
+	}
+	textix="Dante MCA Control ($(P)$(R))"
+	align="horiz. centered"
+}
+composite {
+	object {
+		x=5
+		y=40
+		width=350
+		height=340
+	}
+	"composite name"=""
+	"composite file"="ADSetup.adl"
+}
+composite {
+	object {
+		x=5
+		y=385
+		width=350
+		height=80
+	}
+	"composite name"=""
+	"composite file"="ADPlugins.adl"
+}
+text {
+	object {
+		x=514
+		y=75
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		calc="A"
+		chan="$(P)$(R)MCAAcquiring"
+	}
+	textix="Collecting"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=475
+		y=44
+		width=120
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=360
+		y=40
+		width=350
+		height=460
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=497
+		y=44
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Acquire"
+}
+text {
+	object {
+		x=477
+		y=125
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Elapsed"
+}
+"text update" {
+	object {
+		x=480
+		y=175
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ElapsedLive"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=609
+		y=125
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Preset"
+}
+"text update" {
+	object {
+		x=590
+		y=200
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)IDeadTime"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=590
+		y=225
+		width=76
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)DeadTime"
+		clr=15
+		bclr=14
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+text {
+	object {
+		x=543
+		y=75
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=63
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		calc="A"
+		chan="$(P)$(R)MCAAcquiring"
+	}
+	textix="Done"
+	align="horiz. centered"
+}
+"message button" {
+	object {
+		x=500
+		y=95
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EraseStart"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=567
+		y=95
+		width=59
+		height=20
+	}
+	control {
+		chan="$(P)$(R)StopAll"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="1"
+}
+text {
+	object {
+		x=425
+		y=95
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire"
+	align="horiz. right"
+}
+text {
+	object {
+		x=385
+		y=175
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Live time"
+}
+text {
+	object {
+		x=375
+		y=200
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Instant dead time (%)"
+}
+text {
+	object {
+		x=375
+		y=225
+		width=210
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Average dead time (%)"
+}
+"text update" {
+	object {
+		x=530
+		y=249
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)CurrentPixel"
+		clr=54
+		bclr=4
+	}
+	align="horiz. right"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=530
+		y=274
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)PollTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=622
+		y=274
+		width=70
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)PollTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=530
+		y=299
+		width=87
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadAll.SCAN"
+		clr=14
+		bclr=51
+	}
+}
+"message button" {
+	object {
+		x=622
+		y=299
+		width=54
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ReadAllOnce.PROC"
+		clr=14
+		bclr=51
+	}
+	label="Read"
+	press_msg="1"
+}
+"text update" {
+	object {
+		x=530
+		y=324
+		width=60
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)NumQueuedArrays"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=530
+		y=349
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(R)WaitForPlugins"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=530
+		y=374
+		width=160
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)AcquireBusy"
+		clr=54
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=530
+		y=399
+		width=60
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ArrayCounter"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=595
+		y=399
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCounter_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=530
+		y=424
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayRate_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=530
+		y=449
+		width=90
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ArrayCallbacks"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=625
+		y=449
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ArrayCallbacks_RBV"
+		clr=54
+		bclr=4
+	}
+	format="string"
+	limits {
+	}
+}
+"related display" {
+	object {
+		x=530
+		y=474
+		width=86
+		height=20
+	}
+	display[0] {
+		label="MCA Display"
+		name="mca.adl"
+		args="P=$(P),M=$(M)"
+	}
+	display[1] {
+		label="Trace display"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R)"
+	}
+	clr=14
+	bclr=51
+	label="Plots"
+}
+text {
+	object {
+		x=405
+		y=249
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="CurrentPixel"
+	align="horiz. right"
+}
+text {
+	object {
+		x=435
+		y=274
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Poll time"
+}
+text {
+	object {
+		x=435
+		y=299
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Read rate"
+}
+text {
+	object {
+		x=375
+		y=324
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="# Queued arrays"
+	align="horiz. right"
+}
+text {
+	object {
+		x=405
+		y=374
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire busy"
+	align="horiz. right"
+}
+text {
+	object {
+		x=395
+		y=399
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image counter"
+	align="horiz. right"
+}
+text {
+	object {
+		x=425
+		y=424
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image rate"
+	align="horiz. right"
+}
+text {
+	object {
+		x=375
+		y=449
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Array callbacks"
+	align="horiz. right"
+}
+text {
+	object {
+		x=475
+		y=474
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Plots"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=365
+		y=347
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Wait for plugins"
+	align="horiz. right"
+}
+text {
+	object {
+		x=385
+		y=150
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Real time"
+}
+"text update" {
+	object {
+		x=480
+		y=150
+		width=75
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ElapsedReal"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=560
+		y=150
+		width=103
+		height=22
+	}
+	control {
+		chan="$(P)$(R)PresetReal"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+composite {
+	object {
+		x=715
+		y=40
+		width=410
+		height=165
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=861
+				y=45
+				width=117
+				height=21
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		rectangle {
+			object {
+				x=715
+				y=40
+				width=410
+				height=165
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		text {
+			object {
+				x=876
+				y=45
+				width=88
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="MCA Setup"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=765
+				y=80
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Collect mode"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=765
+				y=105
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="MCA channels"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=745
+				y=130
+				width=140
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Mapping points"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=775
+				y=155
+				width=110
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Gating mode"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=725
+				y=180
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="List buffer size"
+			align="horiz. right"
+		}
+		menu {
+			object {
+				x=890
+				y=80
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CollectMode"
+				clr=14
+				bclr=51
+			}
+		}
+		"text entry" {
+			object {
+				x=890
+				y=130
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)MappingPoints"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		menu {
+			object {
+				x=890
+				y=105
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)NumMCAChannels"
+				clr=14
+				bclr=51
+			}
+		}
+		menu {
+			object {
+				x=890
+				y=155
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)GatingMode"
+				clr=14
+				bclr=51
+			}
+		}
+		"text entry" {
+			object {
+				x=890
+				y=180
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)ListBufferSize"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=80
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)CollectMode_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=105
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)NumMCAChannels_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=130
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)MappingPoints_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=155
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)GatingMode_RBV"
+				clr=54
+				bclr=3
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=995
+				y=180
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)ListBufferSize_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+	}
+}
+rectangle {
+	object {
+		x=845
+		y=215
+		width=150
+		height=22
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+rectangle {
+	object {
+		x=715
+		y=210
+		width=410
+		height=160
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=1
+	}
+}
+text {
+	object {
+		x=855
+		y=215
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Multi-channel"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=962
+		y=245
+		width=111
+		height=20
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Parameters.adl"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
+	}
+	clr=14
+	bclr=51
+	label="DPP Params"
+}
+"related display" {
+	object {
+		x=962
+		y=270
+		width=111
+		height=20
+	}
+	display[0] {
+		label="MCA #1"
+		name="mca.adl"
+		args="P=$(P),M=$(M)1"
+	}
+	display[1] {
+		label="MCA #2"
+		name="mca.adl"
+		args="P=$(P),M=$(M)2"
+	}
+	display[2] {
+		label="MCA #3"
+		name="mca.adl"
+		args="P=$(P),M=$(M)3"
+	}
+	display[3] {
+		label="MCA #4"
+		name="mca.adl"
+		args="P=$(P),M=$(M)4"
+	}
+	display[4] {
+		label="MCA #5"
+		name="mca.adl"
+		args="P=$(P),M=$(M)5"
+	}
+	display[5] {
+		label="MCA #6"
+		name="mca.adl"
+		args="P=$(P),M=$(M)6"
+	}
+	display[6] {
+		label="MCA #7"
+		name="mca.adl"
+		args="P=$(P),M=$(M)7"
+	}
+	display[7] {
+		label="MCA #8"
+		name="mca.adl"
+		args="P=$(P),M=$(M)8"
+	}
+	display[8] {
+		label="Combined"
+		name="dante8MCA.adl"
+		args="P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8"
+	}
+	clr=14
+	bclr=51
+	label="MCA Plots"
+}
+"related display" {
+	object {
+		x=962
+		y=295
+		width=111
+		height=20
+	}
+	display[0] {
+		label="Trace #1"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D1)"
+	}
+	display[1] {
+		label="Trace #2"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D2)"
+	}
+	display[2] {
+		label="Trace #3"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D3)"
+	}
+	display[3] {
+		label="Trace #4"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D4)"
+	}
+	display[4] {
+		label="Trace #5"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D5)"
+	}
+	display[5] {
+		label="Trace #6"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D6)"
+	}
+	display[6] {
+		label="Trace #7"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D7)"
+	}
+	display[7] {
+		label="Trace #8"
+		name="danteTrace.adl"
+		args="P=$(P),R=$(R),D=$(D8)"
+	}
+	display[8] {
+		label="Combined"
+		name="dante8Trace.adl"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
+	}
+	clr=14
+	bclr=51
+	label="ADC Traces"
+}
+text {
+	object {
+		x=817
+		y=245
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="DPP Parameters"
+	align="horiz. right"
+}
+text {
+	object {
+		x=867
+		y=270
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="MCA Plots"
+	align="horiz. right"
+}
+text {
+	object {
+		x=857
+		y=295
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ADC Traces"
+	align="horiz. right"
+}
+text {
+	object {
+		x=857
+		y=320
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Statistics"
+	align="horiz. right"
+}
+"related display" {
+	object {
+		x=962
+		y=320
+		width=111
+		height=20
+	}
+	display[0] {
+		label="DPP Parameters"
+		name="dante8Statistics.adl"
+		args="P=$(P),R=$(R),D1=$(D1),D2=$(D2),D3=$(D3),D4=$(D4),D5=$(D5),D6=$(D6),D7=$(D7),D8=$(D8)"
+	}
+	clr=14
+	bclr=51
+	label="Statistics"
+}
+text {
+	object {
+		x=827
+		y=345
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="SNL Connected"
+	align="horiz. right"
+}
+"text update" {
+	object {
+		x=962
+		y=345
+		width=150
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)SNL_Connected"
+		clr=54
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}

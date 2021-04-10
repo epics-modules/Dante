@@ -1,4 +1,5 @@
 $(P)$(R)MaxEnergy
+$(P)$(R)EnableBoard
 $(P)$(R)FastThreshold
 $(P)$(R)EnergyThreshold
 $(P)$(R)BaselineThreshold
@@ -15,7 +16,6 @@ $(P)$(R)BaselineSamples
 $(P)$(R)InputPolarity
 $(P)$(R)TimeConstant
 $(P)$(R)BaseOffset
-$(P)$(R)OverflowRecoveryTime
 $(P)$(R)ResetThreshold
-$(P)$(R)TailCoefficient
+$(P)$(R)InputMode
 $(P)$(R)AnalogOffset

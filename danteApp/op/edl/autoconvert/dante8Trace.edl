@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 444
-y 196
-w 900
-h 470
+x 320
+y 50
+w 1640
+h 710
 font "utopia-medium-r-24.0"
 ctlFont "helvetica-medium-r-8.0"
 btnFont "utopia-medium-r-24.0"
@@ -24,19 +24,68 @@ snapToGrid
 gridSize 4
 endScreenProperties
 
-# (X-Y Graph)
-object xyGraphClass
+# (Rectangle)
+object activeRectangleClass
 beginObjectProperties
 major 4
 minor 0
 release 0
 x 0
 y 0
-w 900
-h 350
+w 1639
+h 24
+lineColor rgb 2560 0 47104
+fill
+fillColor rgb 2560 0 47104
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 0
+y 0
+w 1640
+h 25
+font "utopia-medium-r-24.0"
+fontAlign "center"
+fgColor rgb 65280 65280 65280
+bgColor index 3
+useDisplayBg
+value {
+  "Dante ADC Trace ($(P)$(R))"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 40
+w 1630
+h 550
+
+beginGroup
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 60
+w 400
+h 250
 # Appearance
 border
-graphTitle "$(P)$(R) ADC Trace"
+graphTitle "$(P)$(D1) ADC Trace"
 xLabel "Time (usec)"
 yLabel "ADC units"
 fgColor rgb 0 0 0
@@ -59,7 +108,7 @@ xPv {
   0 "$(P)$(R)TraceTimeArray"
 }
 yPv {
-  0 "$(P)$(D)TraceData"
+  0 "$(P)$(D1)TraceData"
 }
 plotStyle {
   0 "line"
@@ -75,24 +124,655 @@ plotColor {
 }
 endObjectProperties
 
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 415
+y 60
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D2) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D2)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 825
+y 60
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D3) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D3)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1235
+y 60
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D4) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D4)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 40
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
 release 1
-x 490
-y 698
-w 161
-h 40
-font "utopia-medium-r-34.0"
-fgColor rgb 0 0 0
+x 5
+y 42
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
 bgColor index 3
 useDisplayBg
 value {
-  "Read rate:"
+  "Channel 1"
 }
 endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 415
+y 40
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 415
+y 42
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 2"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 825
+y 40
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 825
+y 42
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 3"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1235
+y 40
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1235
+y 42
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 4"
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 340
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D5) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D5)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 415
+y 340
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D6) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D6)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 825
+y 340
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D7) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D7)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (X-Y Graph)
+object xyGraphClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1235
+y 340
+w 400
+h 250
+# Appearance
+border
+graphTitle "$(P)$(D8) ADC Trace"
+xLabel "Time (usec)"
+yLabel "ADC units"
+fgColor rgb 0 0 0
+bgColor rgb 47872 47872 47872
+gridColor rgb 0 0 0
+font "helvetica-medium-r-12.0"
+# Operating Modes
+plotMode "plotLastNPts"
+nPts 1
+#  X axis properties
+showXAxis
+xAxisSrc "AutoScale"
+xLablePrecision 1
+#  Y axis properties
+showYAxis
+yAxisSrc "AutoScale"
+#  Trace Properties
+numTraces 1
+xPv {
+  0 "$(P)$(R)TraceTimeArray"
+}
+yPv {
+  0 "$(P)$(D8)TraceData"
+}
+plotStyle {
+  0 "line"
+}
+plotUpdateMode {
+  0 "x"
+}
+plotSymbolType {
+  0 "circle"
+}
+plotColor {
+  0 rgb 2560 0 47104
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 320
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 5
+y 322
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 5"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 415
+y 320
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 415
+y 322
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 6"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 825
+y 320
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 825
+y 322
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 7"
+}
+endObjectProperties
+
+# (Rectangle)
+object activeRectangleClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 1235
+y 320
+w 399
+h 19
+lineColor rgb 55808 55808 55808
+fill
+fillColor rgb 55808 55808 55808
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 1235
+y 322
+w 400
+h 20
+font "helvetica-medium-r-18.0"
+fontAlign "center"
+fgColor rgb 2560 0 47104
+bgColor index 3
+useDisplayBg
+value {
+  "Channel 8"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
 
 # (Group)
 object activeGroupClass
@@ -100,8 +780,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 10
-y 355
+x 380
+y 595
 w 880
 h 110
 
@@ -113,8 +793,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 10
-y 355
+x 380
+y 595
 w 879
 h 109
 lineColor rgb 0 0 0
@@ -127,8 +807,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 390
-y 360
+x 760
+y 600
 w 120
 h 21
 
@@ -140,8 +820,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 390
-y 360
+x 760
+y 600
 w 119
 h 20
 lineColor rgb 55808 55808 55808
@@ -156,8 +836,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 395
-y 360
+x 765
+y 600
 w 110
 h 20
 font "helvetica-medium-r-18.0"
@@ -181,8 +861,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 20
-y 385
+x 390
+y 625
 w 860
 h 70
 
@@ -194,8 +874,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 110
-y 385
+x 480
+y 625
 w 228
 h 20
 
@@ -207,8 +887,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 110
-y 385
+x 480
+y 625
 w 66
 h 20
 font "helvetica-medium-r-18.0"
@@ -226,8 +906,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 258
-y 385
+x 628
+y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceLength_RBV"
@@ -250,8 +930,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 173
-y 385
+x 543
+y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceLength"
@@ -281,8 +961,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 360
-y 385
+x 730
+y 625
 w 338
 h 20
 
@@ -294,8 +974,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 360
-y 385
+x 730
+y 625
 w 170
 h 20
 font "helvetica-medium-r-18.0"
@@ -313,8 +993,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 618
-y 385
+x 988
+y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceTime_RBV"
@@ -337,8 +1017,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 533
-y 385
+x 903
+y 625
 w 80
 h 20
 controlPv "$(P)$(R)TraceTime"
@@ -368,8 +1048,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 620
-y 435
+x 990
+y 675
 w 258
 h 20
 
@@ -381,8 +1061,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 617
-y 435
+x 987
+y 675
 w 93
 h 20
 font "helvetica-medium-r-18.0"
@@ -406,8 +1086,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 20
-y 410
+x 390
+y 650
 w 80
 h 20
 font "helvetica-medium-r-18.0"
@@ -425,8 +1105,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 110
-y 410
+x 480
+y 650
 w 230
 h 20
 
@@ -438,8 +1118,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 110
-y 410
+x 480
+y 650
 w 62
 h 20
 font "helvetica-medium-r-18.0"
@@ -457,8 +1137,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 260
-y 410
+x 630
+y 650
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerRising_RBV"
@@ -486,8 +1166,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 360
-y 410
+x 730
+y 650
 w 240
 h 20
 
@@ -499,8 +1179,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 360
-y 410
+x 730
+y 650
 w 70
 h 20
 font "helvetica-medium-r-18.0"
@@ -518,8 +1198,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 520
-y 410
+x 890
+y 650
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerFalling_RBV"
@@ -547,8 +1227,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 640
-y 410
+x 1010
+y 650
 w 240
 h 20
 
@@ -560,8 +1240,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 640
-y 410
+x 1010
+y 650
 w 70
 h 20
 font "helvetica-medium-r-18.0"
@@ -579,8 +1259,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 800
-y 410
+x 1170
+y 650
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerInstant_RBV"
@@ -608,8 +1288,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 380
-y 435
+x 750
+y 675
 w 220
 h 20
 
@@ -621,8 +1301,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 380
-y 435
+x 750
+y 675
 w 54
 h 20
 font "helvetica-medium-r-18.0"
@@ -640,8 +1320,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 435
-y 435
+x 805
+y 675
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerLevel"
@@ -666,8 +1346,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 520
-y 435
+x 890
+y 675
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerLevel_RBV"
@@ -695,8 +1375,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 130
-y 435
+x 500
+y 675
 w 210
 h 20
 
@@ -708,8 +1388,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 130
-y 435
+x 500
+y 675
 w 51
 h 20
 font "helvetica-medium-r-18.0"
@@ -727,8 +1407,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 175
-y 435
+x 545
+y 675
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerWait"
@@ -753,8 +1433,8 @@ beginObjectProperties
 major 4
 minor 7
 release 0
-x 260
-y 435
+x 630
+y 675
 w 80
 h 20
 controlPv "$(P)$(R)TraceTriggerWait_RBV"
@@ -785,34 +1465,31 @@ endGroup
 
 endObjectProperties
 
-
-# (Menu Button)
-object activeMenuButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 652
-y 696
-w 126
-h 40
-fgColor rgb 0 0 0
-bgColor rgb 29440 57088 65280
-inconsistentColor rgb 17920 17920 17920
-topShadowColor rgb 55808 55808 55808
-botShadowColor rgb 17920 17920 17920
-controlPv "$(P)$(R):ReadTrace.SCAN"
-indicatorPv "$(P)$(R):ReadTrace.SCAN"
-font "utopia-medium-r-24.0"
-endObjectProperties
 # (Group)
 object activeGroupClass
 beginObjectProperties
 major 4
 minor 0
 release 0
-x 10
-y 355
+x 5
+y 40
+w 1630
+h 550
+
+beginGroup
+
+endGroup
+
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 380
+y 595
 w 880
 h 110
 
@@ -823,8 +1500,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 390
-y 360
+x 760
+y 600
 w 120
 h 21
 
@@ -840,8 +1517,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 20
-y 385
+x 390
+y 625
 w 860
 h 70
 
@@ -852,8 +1529,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 110
-y 385
+x 480
+y 625
 w 228
 h 20
 
@@ -869,8 +1546,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 360
-y 385
+x 730
+y 625
 w 338
 h 20
 
@@ -886,8 +1563,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 620
-y 435
+x 990
+y 675
 w 258
 h 20
 
@@ -899,8 +1576,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 713
-y 436
+x 1083
+y 676
 w 80
 h 18
 fgColor rgb 0 0 0
@@ -919,8 +1596,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 798
-y 435
+x 1168
+y 675
 w 80
 h 20
 fgColor rgb 0 0 0
@@ -948,8 +1625,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 110
-y 410
+x 480
+y 650
 w 230
 h 20
 
@@ -961,8 +1638,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 175
-y 410
+x 545
+y 650
 w 80
 h 20
 fgColor rgb 0 0 0
@@ -985,8 +1662,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 360
-y 410
+x 730
+y 650
 w 240
 h 20
 
@@ -998,8 +1675,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 435
-y 410
+x 805
+y 650
 w 80
 h 20
 fgColor rgb 0 0 0
@@ -1022,8 +1699,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 640
-y 410
+x 1010
+y 650
 w 240
 h 20
 
@@ -1035,8 +1712,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 715
-y 410
+x 1085
+y 650
 w 80
 h 20
 fgColor rgb 0 0 0
@@ -1059,8 +1736,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 380
-y 435
+x 750
+y 675
 w 220
 h 20
 
@@ -1076,8 +1753,8 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 130
-y 435
+x 500
+y 675
 w 210
 h 20
 

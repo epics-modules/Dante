@@ -8,6 +8,8 @@ include $(TOP)/configure/CONFIG
 #DB_OPT = YES
 
 DB += $(patsubst ../%, %, $(wildcard ../*.template))
+DB += $(patsubst ../%, %, $(wildcard ../*.req))
+DB += $(patsubst ../%, %, $(wildcard ../*.substitutions))
 
 include $(TOP)/configure/RULES
 #----------------------------------------

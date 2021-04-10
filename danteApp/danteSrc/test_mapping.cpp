@@ -1,16 +1,17 @@
 #include <time.h>
+#include <string.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <algorithm>
+#include <thread>
 #ifdef _WIN32
   #include <Windows.h>
 #endif
 #include "DLL_DPP_Callback.h"
 
 static const char *driverName = "Dante";
-static const char *ipAddress = "164.54.160.181";
 #define MAX_MESSAGE_DATA          20
 
 struct message {
@@ -30,18 +31,18 @@ struct mappingStats {
 static struct message message;
 
 struct mappingAdvStats {
-      uint64_t last_timestamp;
-      uint64_t detected;
-      uint64_t measured;
-      uint64_t edge_dt;
-      uint64_t filt1_dt;
-      uint64_t zerocounts;
-      uint64_t baselines_value;
-      uint64_t pup_value;
-      uint64_t pup_f1_value;
-      uint64_t pup_notf1_value;
-      uint64_t reset_counter_value;
-      uint64_t spectra_in_FIFO;
+    int64_t last_timestamp;
+    uint64_t detected;
+    uint64_t measured;
+    uint64_t edge_dt;
+    uint64_t filt1_dt;
+    uint64_t zerocounts;
+    uint64_t baselines_value;
+    uint64_t pup_value;
+    uint64_t pup_f1_value;
+    uint64_t pup_notf1_value;
+    uint64_t reset_counter_value;
+    uint64_t spectra_in_FIFO;
     uint64_t x_position;
     uint64_t x_timestamp;
     uint64_t gateRising;
@@ -60,18 +61,7 @@ static bool callbackComplete;
 
 static void mySleep(double seconds)
 {
-#ifdef _WIN32
-    return Sleep(seconds * 1000);
-#else
-    time_t sec = (int)seconds;
-    long nsec = (int)((seconds - sec) * 1e9);
-    struct timespec ts;
-    ts.tv_sec = sec;
-    ts.tv_nsec = nsec;
-    struct timespec tr;
-    int result = nanosleep(&ts, &tr);
-    if (result != 0) printf("Error return from nanosleep\n");
-#endif
+    std::this_thread::sleep_for(std::chrono::milliseconds((int)(seconds*1000)));
 }
 
 void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data) {
@@ -103,7 +93,7 @@ static int waitReply(uint32_t callId, char *reply) {
 int main(int argc, char *argv[])
 {
     int callId;
-    uint32_t currentPixel = 0;
+    uint32_t currentPixel[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     uint32_t acqTimeMs;
     uint32_t pollTimeMs;
     uint32_t mappingPoints;
@@ -116,85 +106,94 @@ int main(int argc, char *argv[])
     configuration *pConfig = &config;
     char danteIdentifier[16];
     char danteReply[MAX_MESSAGE_DATA];
+    char ipAddress[100];
     const char *functionName = "Dante";
 
-    acqTimeMs = atoi(argv[1]);
-    pollTimeMs = atoi(argv[2]);
-    mappingPoints = atoi(argv[3]);
-    printf("Acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d\n", acqTimeMs, pollTimeMs, mappingPoints);
+    if (argc != 5) {
+        printf("Usage: test_mapping ipAddress acquireTime pollTimeMs mappingPoints\n");
+        exit(-1);
+    }
+    strcpy(ipAddress, argv[1]);
+    acqTimeMs = atoi(argv[2]);
+    pollTimeMs = atoi(argv[3]);
+    mappingPoints = atoi(argv[4]);
+    printf("IP address=%s, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d\n", ipAddress, acqTimeMs, pollTimeMs, mappingPoints);
 
     if (!InitLibrary()) {
-          printf("%s::%s error calling InitLibrary\n", driverName, functionName);
-          return -1;
+        printf("%s::%s error calling InitLibrary\n", driverName, functionName);
+        return -1;
     }
 
     char libraryVersion[20];
     uint32_t libSize = sizeof(libraryVersion);
-      if (!libVersion(libraryVersion, libSize)) {
-          printf("%s::%s error calling libVersion\n", driverName, functionName);
-          return -1;
-      }    else {
-          printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
-      }
+    if (!libVersion(libraryVersion, libSize)) {
+        printf("%s::%s error calling libVersion\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
+    }
 
     if (!add_to_query((char *)ipAddress)) {
-          printf("%s::%s error calling add_to_query\n", driverName, functionName);
-          return -1;
-      }    else {
-          printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
-      }
+        printf("%s::%s error calling add_to_query\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
+    }
 
     // Wait 5 seconds for devices to be found
     mySleep(5.);
 
-      uint16_t numDevices;
-      if (!get_dev_number(numDevices)) {
-          printf("%s::%s error calling get_dev_number\n", driverName, functionName);
-          return -1;
-      } else {
-          printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
-      }
+    uint16_t numDevices;
+    if (!get_dev_number(numDevices)) {
+        printf("%s::%s error calling get_dev_number\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
+    }
 
     uint16_t idSize = sizeof(danteIdentifier);
     uint16_t deviceId = 0;
-      if (!get_ids(danteIdentifier, deviceId, idSize)) {
-          printf("%s::%s error calling get_ids\n", driverName, functionName);
-          return -1;
-      } else {
-          printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
-      }
+    if (!get_ids(danteIdentifier, deviceId, idSize)) {
+        printf("%s::%s error calling get_ids\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
+    }
 
-      uint16_t chain = 1;
-      if (!get_boards_in_chain(danteIdentifier, chain)) {
-          printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-          return -1;
-      } else {
-          printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-      }
+    uint16_t numBoards = 1;
+    if (!get_boards_in_chain(danteIdentifier, numBoards)) {
+        printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s boards in chain=%d\n", driverName, functionName, numBoards);
+    }
 
     // Wait a little bit for daisy chain synchronization and ask again for connected systems.
     mySleep(1.0);
-      if (!get_ids(danteIdentifier, deviceId, idSize)) {
-          printf("%s::%s error calling get_ids\n", driverName, functionName);
-          return -1;
-      } else {
-          printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
-      }
+    if (!get_ids(danteIdentifier, deviceId, idSize)) {
+        printf("%s::%s error calling get_ids\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s danteIdentifier=%s\n", driverName, functionName, danteIdentifier);
+    }
 
-      if (!get_boards_in_chain(danteIdentifier, chain)) {
-          printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-          return -1;
-      } else {
-          printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-      }
+    if (!get_boards_in_chain(danteIdentifier, numBoards)) {
+        printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+        return -1;
+    } else {
+        printf("%s::%s boards in chain=%d\n", driverName, functionName, numBoards);
+    }
 
-      if (!register_callback(danteCallback)) {
-         printf("%s::%s error calling register_callback\n", driverName, functionName);
-         return -1;
-      } else {
-          printf("%s::%s register callback OK\n", driverName, functionName);
-      }
+    if (!register_callback(danteCallback)) {
+       printf("%s::%s error calling register_callback\n", driverName, functionName);
+       return -1;
+    } else {
+        printf("%s::%s register callback OK\n", driverName, functionName);
+    }
 
+    // It is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
+    autoScanSlaves(false);
+    mySleep(0.050);  // wait 50ms
 
     mcaBinWidth = maxEnergy/numMCAChannels;
 
@@ -233,39 +232,55 @@ int main(int argc, char *argv[])
     waitReply(callId, danteReply);
     printf("start_map complete\n");
 
-    while (currentPixel < mappingPoints-1) {
+    bool anyBoardBusy = true;
+    while (anyBoardBusy) {
         mySleep(pollTimeMs/1000.);
-        callId = isRunning_system(danteIdentifier, 0);
-        waitReply(callId, danteReply);
-        //bool acquiring = (danteReply[0]!=0) ? true : false;
-        uint32_t numAvailable;
-        if (!getAvailableData(danteIdentifier, 0, numAvailable)) {
-            printf("%s::%s error calling getAvailableData\n", driverName, functionName);
+        anyBoardBusy = false;
+        for (int board=0; board<numBoards; board++) {
+            bool lastDataReceived;
+            isLastDataReceived(danteIdentifier, board, lastDataReceived);
+            if (lastDataReceived) {
+                printf("Acquisition complete on board %d\n", board);
+            } else {
+                anyBoardBusy = true;
+            }
+            uint32_t numAvailable;
+            if (!getAvailableData(danteIdentifier, board, numAvailable)) {
+                printf("%s::%s error calling getAvailableData\n", driverName, functionName);
+            }
+            printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable);
+            if (numAvailable == 0) continue;
+    
+            uint32_t spectraSize = numMCAChannels;
+    
+            // There is a bug in their library, need to allocate 4096 channels
+            //uint16_t *pMappingMCAData                = (uint16_t *) malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
+            uint16_t *pMappingMCAData                = (uint16_t *) malloc(numAvailable * 4096 * sizeof(uint16_t));
+            uint32_t *pSpectraId                     = (uint32_t *) malloc(numAvailable * sizeof(uint32_t));
+            struct mappingStats *pMappingStats       = (mappingStats *) malloc(numAvailable * sizeof(struct mappingStats));
+            struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(numAvailable * sizeof(struct mappingAdvStats));
+    
+            if (!getAllData(danteIdentifier, board, pMappingMCAData, pSpectraId,
+                            (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, numAvailable)) {
+                printf("%s::%s error calling getAllData\n", driverName, functionName);
+            }
+    
+            currentPixel[board] += numAvailable;
+            printf("getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n", 
+                board, numAvailable, pSpectraId[0], currentPixel[board]);
+            free(pMappingMCAData);
+            free(pSpectraId);
+            free(pMappingStats);
+            free(pMappingAdvStats);
         }
-        if (numAvailable == 0) continue;
-
-        uint32_t spectraSize = numMCAChannels;
-
-        uint16_t *pMappingMCAData  = (uint16_t *) malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
-        uint32_t *pSpectraId = (uint32_t *) malloc(numAvailable * sizeof(uint32_t));
-        struct mappingStats *pMappingStats = (mappingStats *) malloc(numAvailable * sizeof(struct mappingStats));
-        struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(numAvailable * sizeof(struct mappingAdvStats));
-
-        if (!getAllData(danteIdentifier, 0, pMappingMCAData, pSpectraId,
-                        (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, numAvailable)) {
-            printf("%s::%s error calling getAllData\n", driverName, functionName);
-        }
-
-        currentPixel += numAvailable;
-        printf("getAllData read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d \n", numAvailable, pSpectraId[0], currentPixel);
-        free(pMappingMCAData);
-        free(pSpectraId);
-        free(pMappingStats);
-        free(pMappingAdvStats);
     }
     callId = stop(danteIdentifier);
     waitReply(callId, danteReply);
     clear_chain(danteIdentifier);
+    printf("Spectra collected on each board\n");
+    for (int board=0; board<numBoards; board++) {
+        printf("  Board %d, number collected=%d\n", board, currentPixel[board]);
+    }
     printf("%s::%s calling CloseLibrary()\n", driverName, functionName);
     if (CloseLibrary()) {
         printf("%s::%s called CloseLibrary successfully\n", driverName, functionName);

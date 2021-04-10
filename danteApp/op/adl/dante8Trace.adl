@@ -1,14 +1,14 @@
 
 file {
-	name="/home/epics/devel/dante/danteApp/op/adl/danteTrace.adl"
+	name="/home/epics/devel/dante/danteApp/op/adl/dante8Trace.adl"
 	version=030109
 }
 display {
 	object {
-		x=444
-		y=196
-		width=900
-		height=470
+		x=320
+		y=50
+		width=1640
+		height=710
 	}
 	clr=14
 	bclr=4
@@ -87,63 +87,461 @@ display {
 		1a7309,
 	}
 }
-"cartesian plot" {
+rectangle {
 	object {
 		x=0
 		y=0
-		width=900
-		height=350
+		width=1640
+		height=25
 	}
-	plotcom {
-		title="$(P)$(R) ADC Trace"
-		xlabel="Time (usec)"
-		ylabel="ADC units"
-		clr=14
-		bclr=4
-	}
-	style="line"
-	trace[0] {
-		xdata="$(P)$(R)TraceTimeArray"
-		ydata="$(P)$(D)TraceData"
-		data_clr=54
-		yaxis=0
-	}
-	x_axis {
-		rangeStyle="auto-scale"
-	}
-	y1_axis {
-		rangeStyle="auto-scale"
-	}
-}
-menu {
-	object {
-		x=652
-		y=696
-		width=126
-		height=40
-	}
-	control {
-		chan="$(P)$(R):ReadTrace.SCAN"
-		clr=14
-		bclr=51
+	"basic attribute" {
+		clr=54
 	}
 }
 text {
 	object {
-		x=490
-		y=698
-		width=160
-		height=40
+		x=0
+		y=0
+		width=1640
+		height=25
 	}
 	"basic attribute" {
-		clr=14
+		clr=0
 	}
-	textix="Read rate:"
+	textix="Dante ADC Trace ($(P)$(R))"
+	align="horiz. centered"
 }
 composite {
 	object {
-		x=10
-		y=355
+		x=5
+		y=40
+		width=1630
+		height=550
+	}
+	"composite name"=""
+	children {
+		"cartesian plot" {
+			object {
+				x=5
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D1) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D1)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=415
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D2) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D2)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=825
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D3) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D3)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=1235
+				y=60
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D4) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D4)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		rectangle {
+			object {
+				x=5
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=5
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 1"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=415
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=415
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 2"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=825
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=825
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 3"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=1235
+				y=40
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=1235
+				y=42
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 4"
+			align="horiz. centered"
+		}
+		"cartesian plot" {
+			object {
+				x=5
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D5) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D5)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=415
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D6) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D6)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=825
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D7) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D7)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		"cartesian plot" {
+			object {
+				x=1235
+				y=340
+				width=400
+				height=250
+			}
+			plotcom {
+				title="$(P)$(D8) ADC Trace"
+				xlabel="Time (usec)"
+				ylabel="ADC units"
+				clr=14
+				bclr=4
+			}
+			style="line"
+			trace[0] {
+				xdata="$(P)$(R)TraceTimeArray"
+				ydata="$(P)$(D8)TraceData"
+				data_clr=54
+				yaxis=0
+			}
+			x_axis {
+				rangeStyle="auto-scale"
+			}
+			y1_axis {
+				rangeStyle="auto-scale"
+			}
+		}
+		rectangle {
+			object {
+				x=5
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=5
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 5"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=415
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=415
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 6"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=825
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=825
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 7"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=1235
+				y=320
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=1235
+				y=322
+				width=400
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Channel 8"
+			align="horiz. centered"
+		}
+	}
+}
+composite {
+	object {
+		x=380
+		y=595
 		width=880
 		height=110
 	}
@@ -151,8 +549,8 @@ composite {
 	children {
 		rectangle {
 			object {
-				x=10
-				y=355
+				x=380
+				y=595
 				width=880
 				height=110
 			}
@@ -164,8 +562,8 @@ composite {
 		}
 		composite {
 			object {
-				x=390
-				y=360
+				x=760
+				y=600
 				width=120
 				height=21
 			}
@@ -173,8 +571,8 @@ composite {
 			children {
 				rectangle {
 					object {
-						x=390
-						y=360
+						x=760
+						y=600
 						width=120
 						height=21
 					}
@@ -184,8 +582,8 @@ composite {
 				}
 				text {
 					object {
-						x=395
-						y=360
+						x=765
+						y=600
 						width=110
 						height=20
 					}
@@ -199,8 +597,8 @@ composite {
 		}
 		composite {
 			object {
-				x=20
-				y=385
+				x=390
+				y=625
 				width=860
 				height=70
 			}
@@ -208,8 +606,8 @@ composite {
 			children {
 				composite {
 					object {
-						x=110
-						y=385
+						x=480
+						y=625
 						width=228
 						height=20
 					}
@@ -217,8 +615,8 @@ composite {
 					children {
 						text {
 							object {
-								x=110
-								y=385
+								x=480
+								y=625
 								width=60
 								height=20
 							}
@@ -229,8 +627,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=258
-								y=385
+								x=628
+								y=625
 								width=80
 								height=20
 							}
@@ -244,8 +642,8 @@ composite {
 						}
 						"text entry" {
 							object {
-								x=173
-								y=385
+								x=543
+								y=625
 								width=80
 								height=20
 							}
@@ -261,8 +659,8 @@ composite {
 				}
 				composite {
 					object {
-						x=360
-						y=385
+						x=730
+						y=625
 						width=338
 						height=20
 					}
@@ -270,8 +668,8 @@ composite {
 					children {
 						text {
 							object {
-								x=360
-								y=385
+								x=730
+								y=625
 								width=170
 								height=20
 							}
@@ -282,8 +680,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=618
-								y=385
+								x=988
+								y=625
 								width=80
 								height=20
 							}
@@ -297,8 +695,8 @@ composite {
 						}
 						"text entry" {
 							object {
-								x=533
-								y=385
+								x=903
+								y=625
 								width=80
 								height=20
 							}
@@ -314,8 +712,8 @@ composite {
 				}
 				composite {
 					object {
-						x=620
-						y=435
+						x=990
+						y=675
 						width=258
 						height=20
 					}
@@ -323,8 +721,8 @@ composite {
 					children {
 						text {
 							object {
-								x=620
-								y=435
+								x=990
+								y=675
 								width=90
 								height=20
 							}
@@ -336,8 +734,8 @@ composite {
 						}
 						menu {
 							object {
-								x=713
-								y=436
+								x=1083
+								y=676
 								width=80
 								height=18
 							}
@@ -349,8 +747,8 @@ composite {
 						}
 						"message button" {
 							object {
-								x=798
-								y=435
+								x=1168
+								y=675
 								width=80
 								height=20
 							}
@@ -366,8 +764,8 @@ composite {
 				}
 				text {
 					object {
-						x=20
-						y=410
+						x=390
+						y=650
 						width=80
 						height=20
 					}
@@ -378,8 +776,8 @@ composite {
 				}
 				composite {
 					object {
-						x=110
-						y=410
+						x=480
+						y=650
 						width=230
 						height=20
 					}
@@ -387,8 +785,8 @@ composite {
 					children {
 						text {
 							object {
-								x=110
-								y=410
+								x=480
+								y=650
 								width=60
 								height=20
 							}
@@ -399,8 +797,8 @@ composite {
 						}
 						menu {
 							object {
-								x=175
-								y=410
+								x=545
+								y=650
 								width=80
 								height=20
 							}
@@ -412,8 +810,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=260
-								y=410
+								x=630
+								y=650
 								width=80
 								height=20
 							}
@@ -429,8 +827,8 @@ composite {
 				}
 				composite {
 					object {
-						x=360
-						y=410
+						x=730
+						y=650
 						width=240
 						height=20
 					}
@@ -438,8 +836,8 @@ composite {
 					children {
 						text {
 							object {
-								x=360
-								y=410
+								x=730
+								y=650
 								width=70
 								height=20
 							}
@@ -450,8 +848,8 @@ composite {
 						}
 						menu {
 							object {
-								x=435
-								y=410
+								x=805
+								y=650
 								width=80
 								height=20
 							}
@@ -463,8 +861,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=520
-								y=410
+								x=890
+								y=650
 								width=80
 								height=20
 							}
@@ -480,8 +878,8 @@ composite {
 				}
 				composite {
 					object {
-						x=640
-						y=410
+						x=1010
+						y=650
 						width=240
 						height=20
 					}
@@ -489,8 +887,8 @@ composite {
 					children {
 						text {
 							object {
-								x=640
-								y=410
+								x=1010
+								y=650
 								width=70
 								height=20
 							}
@@ -501,8 +899,8 @@ composite {
 						}
 						menu {
 							object {
-								x=715
-								y=410
+								x=1085
+								y=650
 								width=80
 								height=20
 							}
@@ -514,8 +912,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=800
-								y=410
+								x=1170
+								y=650
 								width=80
 								height=20
 							}
@@ -531,8 +929,8 @@ composite {
 				}
 				composite {
 					object {
-						x=380
-						y=435
+						x=750
+						y=675
 						width=220
 						height=20
 					}
@@ -540,8 +938,8 @@ composite {
 					children {
 						text {
 							object {
-								x=380
-								y=435
+								x=750
+								y=675
 								width=50
 								height=20
 							}
@@ -552,8 +950,8 @@ composite {
 						}
 						"text entry" {
 							object {
-								x=435
-								y=435
+								x=805
+								y=675
 								width=80
 								height=20
 							}
@@ -567,8 +965,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=520
-								y=435
+								x=890
+								y=675
 								width=80
 								height=20
 							}
@@ -584,8 +982,8 @@ composite {
 				}
 				composite {
 					object {
-						x=130
-						y=435
+						x=500
+						y=675
 						width=210
 						height=20
 					}
@@ -593,8 +991,8 @@ composite {
 					children {
 						text {
 							object {
-								x=130
-								y=435
+								x=500
+								y=675
 								width=40
 								height=20
 							}
@@ -605,8 +1003,8 @@ composite {
 						}
 						"text entry" {
 							object {
-								x=175
-								y=435
+								x=545
+								y=675
 								width=80
 								height=20
 							}
@@ -620,8 +1018,8 @@ composite {
 						}
 						"text update" {
 							object {
-								x=260
-								y=435
+								x=630
+								y=675
 								width=80
 								height=20
 							}

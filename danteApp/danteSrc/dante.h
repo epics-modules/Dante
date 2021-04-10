@@ -1,5 +1,5 @@
-#ifndef NDDXP_H
-#define NDDXP_H
+#ifndef DANTE_H
+#define DANTE_H
 
 #include <vector>
 #include <epicsEvent.h>
@@ -59,6 +59,7 @@ struct mappingAdvStats {
 #define DanteAcquiringString                "DanteAcquiring"  /* Internal use only !!! */
 #define DantePollTimeString                 "DantePollTime"
 #define DanteForceReadString                "DanteForceRead"
+#define DanteEnableBoardString              "DanteEnableBoard"
 
 /* Diagnostic trace parameters */
 #define DanteTraceDataString                "DanteTraceData"
@@ -70,6 +71,7 @@ struct mappingAdvStats {
 #define DanteTraceTriggerLevelString        "DanteTraceTriggerLevel"
 #define DanteTraceTriggerWaitString         "DanteTraceTriggerWait"
 #define DanteTraceLengthString              "DanteTraceLength"
+#define DanteReadTraceString                "DanteReadTrace"
 
 /* Runtime statistics */
 #define DanteInputCountRateString           "DanteInputCountRate"
@@ -103,11 +105,10 @@ struct mappingAdvStats {
 #define DanteInvertedInputString            "DanteInvertedInput"
 #define DanteTimeConstantString             "DanteTimeConstant"
 #define DanteBaseOffsetString               "DanteBaseOffset"
-#define DanteOverflowRecoveryTimeString     "DanteOverflowRecoveryTime"
 #define DanteResetThresholdString           "DanteResetThreshold"
-#define DanteTailCoefficientString          "DanteTailCoefficient"
 
 /* Other parameters */
+#define DanteInputModeString                "DanteInputMode"
 #define DanteAnalogOffsetString             "DanteAnalogOffset"
 #define DanteGatingModeString               "DanteGatingMode"
 #define DanteMappingPointsString            "DanteMappingPoints"
@@ -117,7 +118,7 @@ struct mappingAdvStats {
 class Dante : public asynNDArrayDriver
 {
 public:
-    Dante(const char *portName, const char *ipAddress, int nChannels, size_t maxMemory);
+    Dante(const char *portName, const char *ipAddress, int totalBoards, size_t maxMemory);
 
     /* virtual methods to override from asynNDArrayDriver */
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
@@ -144,6 +145,7 @@ protected:
     int DanteAcquiring;            /** < Internal acquiring flag, not exposed via drvUser */
     int DantePollTime;             /** < Status/data polling time in seconds */
     int DanteForceRead;            /** < Force reading MCA spectra - used for mcaData when addr=ALL */
+    int DanteEnableBoard;          /** < Enable/disable specific board */
 
     /* Diagnostic trace parameters */
     int DanteTraceData;            /** < The trace array data (read) int32 array */
@@ -155,6 +157,7 @@ protected:
     int DanteTraceTriggerLevel;    /** < Trigger level (0 - 65535) int32 */
     int DanteTraceTriggerWait;     /** < Time to wait for trigger float64 */
     int DanteTraceLength;          /** < Length of trace, multiples of 16K int32 */
+    int DanteReadTrace;            /** < Command to read the trace data */
 
     /* Runtime statistics */
     int DanteInputCountRate;      /* float64 */
@@ -188,11 +191,10 @@ protected:
     int DanteInvertedInput;               /* uint32 */
     int DanteTimeConstant;                /* float64, units? */
     int DanteBaseOffset;                  /* uint32, bits */
-    int DanteOverflowRecoveryTime;        /* float64, usec */
     int DanteResetThreshold;              /* uint32, bits */
-    int DanteTailCoefficient;             /* float64, units? */
     
     /* Other parameters */
+    int DanteInputMode;                   /* int32 */
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
     int DanteGatingMode;                  /* int32 */
     int DanteMappingPoints;               /* int32 */
@@ -225,18 +227,20 @@ protected:
 private:
     int getBoard(asynUser *pasynUser, int *addr);
     asynStatus setDanteConfiguration(int addr);
-    asynStatus getAcquisitionStatus(int addr);
+    bool dataAcquiring();
+    bool waveformAcquiring();
     asynStatus getAcquisitionStatistics(int addr);
     asynStatus getMcaData(int addr);
     asynStatus pollMCAMappingMode();
     asynStatus pollListMode();
-    asynStatus getTrace(int addr, epicsInt32* data, size_t maxLen, size_t *actualLen);
+    asynStatus getTraces();
     asynStatus startAcquiring();
-    asynStatus waitReply(uint32_t callId, char *reply);
+    asynStatus waitReply(uint32_t callId, char *reply, const char *caller);
 
     /* Data */
     std::vector<configuration> configurations_;
     std::vector<statistics> statistics_;
+    std::vector<uint32_t> numEventsAvailable_;
     uint64_t **pMcaRaw_;
     uint16_t **pMappingMCAData_;
     uint64_t **pListData_;
@@ -244,7 +248,8 @@ private:
     struct mappingStats **pMappingStats_;
     struct mappingAdvStats **pMappingAdvStats_;
 
-    int numBoards_;
+    int totalBoards_;
+    std::vector<int> activeBoards_;
     int uniqueId_;
 
     epicsEvent *cmdStartEvent_;
@@ -259,6 +264,7 @@ private:
     uint32_t traceLength_;
     bool newTraceTime_;
     uint16_t *traceBuffer_;
+    int32_t *traceBufferInt32_;
     epicsFloat64 *traceTimeBuffer_;
     epicsFloat64 *spectrumXAxisBuffer_;
     
@@ -276,4 +282,4 @@ int danteConfig(const char *portName, const char *ipAddress, int nChannels, int 
 }
 #endif
 
-#endif
+#endif /* DANTE_H */

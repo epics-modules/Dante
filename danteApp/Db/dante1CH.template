@@ -25,6 +25,14 @@ record(bo,"$(P)$(R)1CHDoReadAll") {
     field(VAL, "1")
 }
 
+record(ai,"$(P)$(R)DeadTime") {
+    field(INP, "$(P)$(M).DTIM CP")
+}
+
+record(ai,"$(P)$(R)IDeadTime") {
+    field(INP, "$(P)$(M).IDTIM CP")
+}
+
 record(mbbo,"$(P)$(R)NumMCAChannels") {
     field(FLNK, "$(P)$(R)1CHDoNumMCAChannels")
 }

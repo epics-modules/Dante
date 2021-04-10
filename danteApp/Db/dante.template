@@ -61,14 +61,6 @@ record(ai,"$(P)$(R)PollTime_RBV") {
     field(SCAN, "I/O Intr")
 }
 
-record(bi,"$(P)$(R)SNL_Connected") {
-    field(ZNAM,"Not connected")
-    field(ZSV, "MAJOR")
-    field(ONAM,"Connected")
-    field(OSV, "NO_ALARM")
-    field(VAL, "0")
-}
-
 record(mbbo,"$(P)$(R)NumMCAChannels") {
     field(DESC,"# of MCA channels")
     field(PINI,"YES")
@@ -156,10 +148,18 @@ record(ai,"$(P)$(R)ElapsedLive") {
 
 record(ai,"$(P)$(R)DeadTime") {
     field(PREC, "2")
+    field(HIGH, "50")
+    field(HSV, "MINOR")
+    field(HIHI, "80")
+    field(HHSV, "MAJOR")
 }
 
 record(ai,"$(P)$(R)IDeadTime") {
     field(PREC, "2")
+    field(HIGH, "50")
+    field(HSV, "MINOR")
+    field(HIHI, "80")
+    field(HHSV, "MAJOR")
 }
 
 record(bo,"$(P)$(R)ReadAll") {
@@ -192,29 +192,12 @@ record(bo,"$(P)$(R)DoReadAll") {
     field(ONAM, "Read")
 }
 
-record(bo,"$(P)$(R)ReadTraces") {
-    field(SCAN,"Passive")
-    field(VAL, "1")
-    field(OUT, "$(P)$(R)DoReadTraces PP MS")
-    field(ZNAM,"Done")
-    field(ONAM,"Read")
-}
-
-record(bo,"$(P)$(R)DoReadTraces") {
+record(bo,"$(P)$(R)ReadTrace") {
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteReadTrace")
     field(ZNAM, "Done")
     field(ONAM, "Read")
 }
-
-record(ai,"$(P)$(R)TraceTimes") {
-    field(VAL,"0.1")
-    field(PREC,"2")
-}
-
-#record(bo,"$(P)$(R)CopyTriggerPeakingTime") {
-#    field(ZNAM, "Done")
-#    field(ONAM, "Copy")
-#}
-
 
 record(mbbo,"$(P)$(R)GatingMode") {
     field(DESC,"Gating mode")

@@ -1,0 +1,11 @@
+file "dante_settings.req",        P=$(P), R=$(R)
+file "danteN_settings.req",       P=$(P), R=dante1:
+file "danteN_settings.req",       P=$(P), R=dante2:
+file "danteN_settings.req",       P=$(P), R=dante3:
+file "danteN_settings.req",       P=$(P), R=dante4:
+file "danteN_settings.req",       P=$(P), R=dante5:
+file "danteN_settings.req",       P=$(P), R=dante6:
+file "danteN_settings.req",       P=$(P), R=dante7:
+file "danteN_settings.req",       P=$(P), R=dante8:
+file "mca_settings.req",          P=$(P), M=$(M)
+file "commonPlugin_settings.req", P=$(P)

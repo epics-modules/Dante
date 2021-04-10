@@ -232,18 +232,10 @@ These parameters are specific to a single board, and are contained in DanteN.tem
      - ao, ai
      - DanteTimeConstant
      - The time constant. Used for digital deconvolution in the case of continuous reset signals.
-   * - TailCoefficient, TailCoefficient_RBV
-     - ao, ai
-     - DanteTailCoefficient
-     - The tail coefficient. Not currently used.
    * - BaseOffset, BaseOffset_RBV
      - longout, longin
      - DanteBaseOffset
      - The base offset. Used for digital deconvolution in the case of continuous reset signals.
-   * - OverflowRecoveryTime, OverflowRecoveryTime_RBV
-     - ao, ai
-     - DanteOverflowRecoveryTime
-     - The overflow recovery time. Not currently used.
 
 Run-time statistics
 -------------------

@@ -1,0 +1,5878 @@
+
+file {
+	name="/home/epics/devel/dante/danteApp/op/adl/dante8Parameters.adl"
+	version=030109
+}
+display {
+	object {
+		x=100
+		y=289
+		width=1795
+		height=605
+	}
+	clr=14
+	bclr=4
+	cmap=""
+	gridSpacing=5
+	gridOn=0
+	snapToGrid=0
+}
+"color map" {
+	ncolors=65
+	colors {
+		ffffff,
+		ececec,
+		dadada,
+		c8c8c8,
+		bbbbbb,
+		aeaeae,
+		9e9e9e,
+		919191,
+		858585,
+		787878,
+		696969,
+		5a5a5a,
+		464646,
+		2d2d2d,
+		000000,
+		00d800,
+		1ebb00,
+		339900,
+		2d7f00,
+		216c00,
+		fd0000,
+		de1309,
+		be190b,
+		a01207,
+		820400,
+		5893ff,
+		597ee1,
+		4b6ec7,
+		3a5eab,
+		27548d,
+		fbf34a,
+		f9da3c,
+		eeb62b,
+		e19015,
+		cd6100,
+		ffb0ff,
+		d67fe2,
+		ae4ebc,
+		8b1a96,
+		610a75,
+		a4aaff,
+		8793e2,
+		6a73c1,
+		4d52a4,
+		343386,
+		c7bb6d,
+		b79d5c,
+		a47e3c,
+		7d5627,
+		58340f,
+		99ffff,
+		73dfff,
+		4ea5f9,
+		2a63e4,
+		0a00b8,
+		ebf1b5,
+		d4db9d,
+		bbc187,
+		a6a462,
+		8b8239,
+		73ff6b,
+		52da3b,
+		3cb420,
+		289315,
+		1a7309,
+	}
+}
+rectangle {
+	object {
+		x=0
+		y=0
+		width=1795
+		height=25
+	}
+	"basic attribute" {
+		clr=54
+	}
+}
+text {
+	object {
+		x=0
+		y=0
+		width=1795
+		height=25
+	}
+	"basic attribute" {
+		clr=0
+	}
+	textix="Dante DPP Parameters ($(P)$(R))"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=5
+		y=325
+		width=240
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset recovery time (us)"
+}
+text {
+	object {
+		x=5
+		y=275
+		width=240
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline threshold (keV)"
+}
+rectangle {
+	object {
+		x=250
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=250
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 1"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=430
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=430
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 2"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=610
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=610
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 3"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=790
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=790
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 4"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=970
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=970
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 5"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=1150
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1150
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 6"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=1330
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1330
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 7"
+	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=1510
+		y=40
+		width=175
+		height=21
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1510
+		y=40
+		width=175
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Channel 8"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=5
+		y=550
+		width=240
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Deconv. Time Const. (us)"
+}
+"text entry" {
+	object {
+		x=255
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=550
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)TimeConstant"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=550
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)TimeConstant_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=550
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyTimeConstant"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=105
+		y=575
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Maximum energy"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=255
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=575
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)MaxEnergy"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=575
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)MaxEnergy_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=575
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyMaxEnergy"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=15
+		y=150
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast flat top time (us)"
+}
+text {
+	object {
+		x=205
+		y=400
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Gain"
+}
+text {
+	object {
+		x=55
+		y=300
+		width=190
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Max. rise time (us)"
+}
+text {
+	object {
+		x=45
+		y=350
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Zero peak freq. (Hz)"
+}
+text {
+	object {
+		x=85
+		y=375
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Baseline samples"
+}
+text {
+	object {
+		x=45
+		y=125
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast threshold (keV)"
+}
+text {
+	object {
+		x=75
+		y=175
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Peaking time (us)"
+}
+text {
+	object {
+		x=25
+		y=200
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Max. peaking time (us)"
+}
+text {
+	object {
+		x=65
+		y=225
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Flat top time (us)"
+}
+text {
+	object {
+		x=25
+		y=250
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy threshold (keV)"
+}
+"text entry" {
+	object {
+		x=255
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=400
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)Gain"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=300
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)MaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=325
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)ResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=350
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)ZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=375
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)BaselineSamples"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=125
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)FastThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=150
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)FastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=175
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)PeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=200
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)MaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=225
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)FlatTopTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=250
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)EnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=275
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)BaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=400
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)Gain_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=300
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)MaxRiseTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=325
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)ResetRecoveryTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=350
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)ZeroPeakFreq_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=375
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)BaselineSamples_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=125
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)FastThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=150
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)FastFlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=175
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)PeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=200
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)MaxPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=225
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)FlatTopTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=250
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)EnergyThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=275
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)BaselineThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=125
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyFastThreshold"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=150
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyFastFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=175
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyPeakingTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=200
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyMaxPeakingTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=225
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyFlatTopTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=250
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyEnergyThreshold"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=275
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyBaselineThreshold"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=300
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyMaxRiseTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=325
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyResetRecoveryTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=350
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyZeroPeakFreq"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=375
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyBaselineSamples"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=400
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyGain"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=25
+		y=100
+		width=220
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Fast peaking time (us)"
+}
+"text entry" {
+	object {
+		x=435
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=100
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyFastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=145
+		y=425
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input mode"
+}
+menu {
+	object {
+		x=255
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=435
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=615
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=795
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=975
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=1155
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=1335
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=1515
+		y=425
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)InputMode"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=425
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)InputMode_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=425
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyInputMode"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=135
+		y=500
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Base offset"
+}
+"text entry" {
+	object {
+		x=255
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=500
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)BaseOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=500
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)BaseOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=500
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyBaseOffset"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=105
+		y=450
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Input polarity"
+}
+text {
+	object {
+		x=115
+		y=475
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Analog offset"
+}
+menu {
+	object {
+		x=255
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=435
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=615
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=795
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=975
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=1155
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=1335
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+menu {
+	object {
+		x=1515
+		y=450
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)InputPolarity"
+		clr=14
+		bclr=51
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=475
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)AnalogOffset"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=450
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)InputPolarity_RBV"
+		clr=54
+		bclr=3
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=475
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)AnalogOffset_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=450
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyInputPolarity"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=1690
+		y=475
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyAnalogOffset"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+text {
+	object {
+		x=95
+		y=525
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset threshold"
+}
+"text entry" {
+	object {
+		x=255
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=435
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=520
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D2)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=700
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D3)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=795
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=880
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D4)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=975
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1060
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D5)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1155
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1240
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D6)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1335
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1420
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D7)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1515
+		y=525
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)ResetThreshold"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1600
+		y=525
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D8)ResetThreshold_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=1690
+		y=525
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CopyResetThreshold"
+		clr=14
+		bclr=51
+	}
+	label="Copy 1 -> All"
+	press_msg="1"
+}
+composite {
+	object {
+		x=250
+		y=66
+		width=1435
+		height=535
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=250
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=430
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=610
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=790
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=970
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=1150
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=1330
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		rectangle {
+			object {
+				x=1510
+				y=66
+				width=175
+				height=535
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+	}
+}
+"text entry" {
+	object {
+		x=255
+		y=100
+		width=80
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)FastPeakingTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=340
+		y=100
+		width=80
+		height=20
+	}
+	monitor {
+		chan="$(P)$(D1)FastPeakingTime_RBV"
+		clr=54
+		bclr=3
+	}
+	limits {
+	}
+}
+"choice button" {
+	object {
+		x=435
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D2)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=615
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D3)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=795
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D4)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=975
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D5)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=1155
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D6)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=1335
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D7)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=1515
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D8)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+"choice button" {
+	object {
+		x=255
+		y=75
+		width=165
+		height=20
+	}
+	control {
+		chan="$(P)$(D1)EnableBoard"
+		clr=14
+		bclr=10
+	}
+	clrmod="alarm"
+	stacking="column"
+}
+text {
+	object {
+		x=185
+		y=75
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Enable"
+	align="horiz. right"
+}
