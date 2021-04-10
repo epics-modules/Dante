@@ -9,21 +9,22 @@ include $(TOP)/configure/CONFIG
 DBD += mcaDanteSupport.dbd
 PROD_NAME = mcaDanteApp
 
-ifeq ($(T_A), linux-x86_64)
+ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
   USR_CXXFLAGS_Linux += -std=c++11
   LIBRARY_IOC_Linux += mcaDante
   PROD_IOC_Linux  += $(PROD_NAME)
   PROD_IOC_Linux += DPP_Test
-  #PROD_IOC_Linux += test_mapping
+  PROD_IOC_Linux += test_mapping
 endif
 ifeq (windows-x64, $(findstring windows-x64, $(T_A)))
   LIBRARY_IOC_WIN32   += mcaDante
   PROD_IOC_WIN32  += $(PROD_NAME)
   PROD_IOC_WIN32 += DPP_Test
-  #PROD_IOC_WIN32 += test_mapping
+  PROD_IOC_WIN32 += test_mapping
 endif
 
 LIB_SRCS += dante.cpp
+LIB_SRCS += danteMED.st
 
 LIB_LIBS           += asyn 
 LIB_LIBS           += ADBase
@@ -43,21 +44,17 @@ $(PROD_NAME)_LIBS   += mcaDante
 $(PROD_NAME)_SYS_LIBS_Linux += XGL_DPP
 $(PROD_NAME)_LIBS_WIN32     += XGL_DPP
 $(PROD_NAME)_LIBS   += seq pv
-$(PROD_NAME)_SYS_LIBS_Linux += python2.7
-USR_LDFLAGS_Linux = -L/usr/lib/python2.7/config-x86_64-linux-gnu/
 
 
 #=============================
 DPP_Test_SRCS  += DPP_Test.cpp
 DPP_Test_SYS_LIBS_Linux  += XGL_DPP
 DPP_Test_LIBS_WIN32      += XGL_DPP
-DPP_Test_SYS_LIBS_Linux += python2.7
 
 #=============================
-#test_mapping_SRCS  += test_mapping.cpp
-#test_mapping_SYS_LIBS_Linux  += XGL_DPP
-#test_mapping_LIBS_WIN32      += XGL_DPP
-#test_mapping_SYS_LIBS_Linux += python2.7
+test_mapping_SRCS  += test_mapping.cpp
+test_mapping_SYS_LIBS_Linux  += XGL_DPP
+test_mapping_LIBS_WIN32      += XGL_DPP
 
 include $(ADCORE)/ADApp/commonDriverMakefile
 
