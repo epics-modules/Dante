@@ -23,6 +23,25 @@ record(ai,"$(P)$(R)MaxEnergy_RBV") {
     field(SCAN, "I/O Intr")
 }
 
+record(bo,"$(P)$(R)EnableBoard") {
+    field(DESC,"Enable board")
+    field(PINI,"YES")
+    field(ZNAM,"Disable")
+    field(ONAM,"Enable")
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteEnableBoard")
+}
+
+record(bi,"$(P)$(R)EnableBoard_RBV") {
+    field(DESC,"Enable board")
+    field(ZNAM,"Disbled")
+    field(ONAM,"Enabled")
+    field(DTYP, "asynInt32")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteEnableBoard")
+    field(SCAN, "I/O Intr")
+}
+
+
 ######################
 # Runtime statistics #
 ######################
