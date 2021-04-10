@@ -16,75 +16,6 @@ record(bi,"$(P)$(R)SNL_Connected") {
     field(VAL, "0")
 }
 
-record(bo,"$(P)$(R)EraseStart") {
-    field(ZNAM,"Done")
-    field(ONAM,"Start")
-    field(FLNK,"$(P)$(R)EraseStartFanout")
-}
-
-record(dfanout, $(P)$(R)EraseStartFanout) {
-    field(DOL, "1")
-    field(OUTA, "$(P)$(R)StartAll PP")
-    field(OUTB, "$(P)$(R)MCAAcquireBusy PP")
-    field(OUTC, "$(P)$(R)Acquire PP")
-}
-
-record(bo,"$(P)$(R)StartAll") {
-    field(DTYP, "asynInt32")
-    field(OUT,"@asyn($(PORT))MCA_START_ACQUIRE")
-}
-
-record(busy,"$(P)$(R)MCAAcquireBusy") {
-    field(ZNAM,"Done")
-    field(ONAM,"Collecting")
-}
-
-record(bi,"$(P)$(R)MCAAcquiring") {
-    field(DTYP, "asynInt32")
-    field(INP, "@asyn($(PORT))MCA_ACQUIRING")
-    field(ZNAM,"Done")
-    field(ONAM,"Acquiring")
-    field(SCAN, "I/O Intr")
-}
-
-record(bo,"$(P)$(R)StopAll") {
-    field(VAL,"1")
-    field(DTYP, "asynInt32")
-    field(OUT, "@asyn($(PORT))MCA_STOP_ACQUIRE")
-    field(ZNAM,"Done")
-    field(ONAM,"Stop")
-}
-
-record(bo,"$(P)$(R)ReadAll") {
-    field(SCAN,"1 second")
-    field(DISV,"0")
-    field(SDIS,"$(P)$(R)MCAAcquireBusy NPP NMS")
-    field(ZNAM,"Done")
-    field(ONAM,"Read")
-    field(FLNK, "$(P)$(R)ReadAllOnce PP MS")
-}
-
-record(bo,"$(P)$(R)ReadAllOnce") {
-    field(VAL, "1")
-    field(OUT, "$(P)$(R)DoReadAll PP MS")
-    field(ZNAM,"Done")
-    field(ONAM,"Read")
-    field(FLNK, "$(P)$(R)DoReadAll1")
-}
-
-record(bo,"$(P)$(R)DoReadAll1") {
-    field(VAL, "1")
-    field(DTYP, "asynInt32")
-    field(OUT, "@asyn($(PORT))MCA_READ_STATUS")
-    field(ZNAM,"Done")
-    field(ONAM,"Read")
-}
-
-record(bo,"$(P)$(R)DoReadAll") {
-    field(ZNAM, "Done")
-    field(ONAM, "Read")
-}
-
 record(ai,"$(P)$(R)DeadTime") {
     field(PREC, "2")
 }
@@ -92,7 +23,6 @@ record(ai,"$(P)$(R)DeadTime") {
 record(ai,"$(P)$(R)IDeadTime") {
     field(PREC, "2")
 }
-
 
 record(bo,"$(P)$(R)CopyFastPeakingTime") {
     field(ZNAM, "Done")
