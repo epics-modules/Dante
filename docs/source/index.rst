@@ -19,10 +19,11 @@ Overview
 
 This is an EPICS driver for the XGLab_ Dante digital x-ray spectroscopy system.
 The source code is in the dante_ repository in the Github epics-modules project.
-The Dante is available in single channel and 8-channel versions
+The Dante is available in single channel (Dante1) and 8-channel (Dante8) versions.
 This module is intended to work with either, though it has currently only been tested on the single-channel version.
-In this document NumBoards refers to the number of input channels, e.g 1 for a single-channel Dante and 8 for an 
-8-channel Dante.
+In this document NumBoards refers to the number of enabled input channels, e.g. 1 for a Dante1, up to 8 for a 
+Dante8, and >8 for systems with more than one Dante8 daisy-chained together.  
+If a channel is disabled then it is not counted in NumBoards.
 
 The Dante can collect data in 3 different modes:
 
@@ -36,13 +37,13 @@ The allows the Dante driver to use all of the areaDetector plugins for file savi
 and for other purposes. It also implements the mca interface from the EPICS mca_ module.
 The EPICS mca record can be used to display the spectra and control the basic operation including Regions-of-Interest (ROIs).
 
-The Dante driver can be used on both Windows and Linux. A Windows machine with a USB interface is currently required
+The Dante driver can be used on both Windows and Linux. A Windows machine with a USB interface is required
 to load new firmware.  Otherwise the module can be used from either Linux or Windows over Ethernet. The Linux library
 provided can run on most Linux versions, including RHEL7/Centos7.
 
 This document does not attempt to give an explanation of the principles of operation of the Dante, or a detailed explanation
 of the many configuration parameters for the digital pulse processing.  The user should consult the
-:download:`DanteManual <DANTE-4552 Manual Rev 2.9.pdf>` for this information.
+:download:`DanteManual <DANTE-4553 Manual rev2.3.pdf>` for this information.
 
 System controls
 ---------------
@@ -122,7 +123,7 @@ control of the system-wide settings for the system.
    * - ElapsedReal
      - ai
      - MCA_ELAPSED_REAL
-     - The elapsed real time.
+     - The elapsed real time. 
    * - ElapsedLive
      - ai
      - MCA_ELAPSED_LIVE
@@ -153,15 +154,23 @@ These parameters are specific to a single board, and are contained in DanteN.tem
      - Record types
      - drvInfo string
      - Description
+   * - EnableBoard, EnableBoard_RBV
+     - bo, bi
+     - DanteEnableBoard
+     - Enables (1) or disables (0) a board in a Dante8.  This allows using fewer than 8 channels on a Dante8.
+   * - InputMode, InputMode_RBV
+     - mbbo, mbbi
+     - DanteInputMode
+     - The analog input mode. Choices are "DC_HiImp" (0), "DC_LoImp" (1). "AC_Slow" (2), and "AC_Fast" (3).
+   * - InputPolarity, InputPolarity_RBV
+     - bo, bi
+     - DanteInvertedInput
+     - The pre-amp output polarity. Choices are "Pos." (0) and "Neg." (1).
    * - MaxEnergy, MaxEnergy_RBV
      - ao, ai
      - DanteMaxEnergy
      - The actual energy of the last channel.  The user must provide this value based on the energy calibration.
        It is used to provide meaningful units for FastThreshold, EnergyThreshold, and BaselineThreshold.
-   * - InputPolarity, InputPolarity_RBV
-     - bo, bi
-     - DanteInvertedInput
-     - The pre-amp output polarity. Choices are "Pos." (0) and "Neg." (1).
    * - AnalogOffset, AnalogOffset_RBV
      - longout, longin
      - DanteAnalogOffset
@@ -182,7 +191,7 @@ These parameters are specific to a single board, and are contained in DanteN.tem
    * - Gain, Gain_RBV
      - ao, ai
      - DanteGain
-     - The gain which controls the number of ADC units per MCA bin.  Gains of 1.0-4.0 are typical.
+     - The gain which controls the number of ADC units per MCA bin.  Gains of 1.0-8.0 are typical.
    * - FastThreshold, FastThreshold_RBV
      - ao, ai
      - DanteFastFilterThreshold
@@ -252,6 +261,14 @@ These parameters are specific to a single board, and are contained in DanteN.tem
      - Record types
      - drvInfo string
      - Description
+   * - ElapsedRealTime
+     - ai
+     - MCA_ELAPSED_REAL
+     - The elapsed real time in seconds.
+   * - ElapsedLiveTime
+     - ai
+     - MCA_ELAPSED_LIVE
+     - The elapsed live time in seconds.
    * - InputCountRate
      - ai
      - DanteInputCountRate
@@ -305,10 +322,63 @@ These parameters are specific to a single board, and are contained in DanteN.tem
      - DanteLastTimeStamp
      - The last timestamp time in clock ticks.
 
-The following is the main MEDM screen dante.adl. This screen is used with the 1-channel Dante.  Multi-board Dante systems will
-use a different screen that has not yet been created.
+The following is the main MEDM screen dante1.adl. This screen is used with the single-channel Dante1.
 
-.. figure:: dante.png
+.. figure:: dante1.png
+    :align: center
+
+The following is the main MEDM screen dante8.adl. This screen is used with the 8-channel Dante8.
+
+.. figure:: dante8.png
+    :align: center
+
+Multi-element systems
+---------------------
+Multi-element detector (MED) systems use an EPICS State Notation Language (SNL) program to synchronize and copy PVs.
+
+These are the records for multi-element detector (MED) systems. They are contained in danteMED.template.
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+   :header-rows: 1
+   :widths: auto
+
+   * - EPICS record names
+     - Record types
+     - Description
+   * - SNLConnected
+     - bi
+     - Indicates whether or not the SNL program is running.
+   * - SNLConnected
+     - bi
+     - Indicates whether or not the SNL program is running.
+   * - DeadTime
+     - ai
+     - The average deadtime of all the enabled boards.
+   * - IDeadTime
+     - ai
+     - The average instantaneous deadtime of all the enabled boards.
+   * - Copy[XXX]
+     - bo
+     - Copies the setting XXX from board 0 to all other enabled boards.
+       XXX can be any of the configuration parameters described above.
+       XXX can also be the definition of the ROIs for the MCA records.  
+       In this case the copy can be either by MCA channel number, or by x-ray energy,
+       using the calibration coefficients in the MCA record.
+   
+The following is the MEDM screen dante8Parameters.adl. This screen is used with the Dante8.
+
+.. figure:: dante8Parameters.png
+    :align: center
+
+The following is the MEDM screen dante8MCA.adl. This screen is used with the Dante8.
+
+.. figure:: dante8MCA.png
+    :align: center
+
+The following is the MEDM screen dante8Statistics.adl. This screen is used with the Dante8.
+
+.. figure:: dante8Statistics.png
     :align: center
 
 MCA mode
@@ -332,7 +402,7 @@ graphically, fitting peaks and background, and many other features.
 
 MCA mapping mode
 ----------------
-These are the records for MCA Mapping mode.
+These are the records for MCA Mapping mode.  They are contained in dante.template.
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -354,7 +424,7 @@ These are the records for MCA Mapping mode.
      
 In MCA mapping mode the GatingMode can be "Free running", "Trig rising", "Trig falling", or "Trig both".
 In free-running mode the Dante will begin the next spectrum when the PresetReal time has elapsed.
-In triggered mode the Dante will begin the next spectrum when the when a trigger occurs 
+In triggered mode the Dante will begin the next spectrum when a trigger occurs 
 or when the PresetReal time has elapsed, whichever comes first.
 To advance only on trigger events set the PresetReal time to a value larger than the maximum time between triggers.
 
@@ -373,7 +443,7 @@ The following is the MEDM screen NDFileHDF5.adl when the Dante is saving MCA map
 
 List mode
 ---------
-These are the records for list mode.
+These are the records for list mode.  They are contained in dante.template.
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -469,6 +539,10 @@ TraceData is specific to each board and is in danteN.template.
      - Record types
      - drvInfo string
      - Description
+   * - ReadTrace
+     - bo
+     - DanteReadTrace
+     - Arms the system to capture trace data on the next trigger event.
    * - TraceTimeArray
      - waveform
      - DanteTraceTimeArray
@@ -520,16 +594,21 @@ can be seen in this trace.
 .. figure:: dante_trace2.png
     :align: center
 
+The following is the MEDM screen dante8Trace.adl. This screen is used with the Dante8.
+
+.. figure:: dante8Trace.png
+    :align: center
+
 IOC startup script
 ------------------
 The command to configure a Dante in the startup script is::
 
-  DanteConfig(portName, ipAddress, numDetectors, maxMemory)
+  DanteConfig(portName, ipAddress, totalBoards, maxMemory)
 
 ``portName`` is the name for the Dante port driver
 
 ``ipAddress`` is the IP address of the Dante 
 
-``numDetectors`` is the number of boards in the Dante system
+``totalBoards`` is the total number of boards in the Dante system, including those that may be disabled.
 
 ``maxMemory`` is the maximum amount of memory the NDArrayPool is allowed to allocate.  0 means unlimited.
