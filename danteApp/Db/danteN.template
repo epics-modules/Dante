@@ -27,15 +27,20 @@ record(bo,"$(P)$(R)EnableBoard") {
     field(DESC,"Enable board")
     field(PINI,"YES")
     field(ZNAM,"Disable")
+    field(ZSV, "MAJOR")
     field(ONAM,"Enable")
+    field(OSV, "NO_ALARM")
     field(DTYP, "asynInt32")
+    field(VAL, "1")
     field(OUT,"@asyn($(PORT),$(ADDR))DanteEnableBoard")
 }
 
 record(bi,"$(P)$(R)EnableBoard_RBV") {
     field(DESC,"Enable board")
     field(ZNAM,"Disbled")
+    field(ZSV, "MAJOR")
     field(ONAM,"Enabled")
+    field(OSV, "NO_ALARM")
     field(DTYP, "asynInt32")
     field(INP,"@asyn($(PORT),$(ADDR))DanteEnableBoard")
     field(SCAN, "I/O Intr")
