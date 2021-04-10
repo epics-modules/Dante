@@ -34,6 +34,7 @@ int m;
 int chan;
 int det;
 int nDetectors;
+int numEnabled;
 int allDone;
 char temp[100];
 double energy;
@@ -42,6 +43,9 @@ double slope;
 char *prefix;
 char *dante;
 char *mca;
+
+int     EnableBoard[MAX_DETECTORS];
+assign  EnableBoard to {};
 
 double  FastPeakingTime[MAX_DETECTORS];
 assign  FastPeakingTime to {};
@@ -220,6 +224,10 @@ ss dante_control {
             }
             for (i=0; i<nDetectors; i++) {
                 det = i+1;
+                sprintf(temp, "%s%s%d:EnableBoard", prefix, dante, det);
+                pvAssign(EnableBoard[i], temp);
+                pvMonitor(EnableBoard[i]);
+
                 sprintf(temp, "%s%s%d:FastPeakingTime", prefix, dante, det);
                 pvAssign(FastPeakingTime[i], temp);
 
@@ -351,6 +359,7 @@ ss dante_control {
         when(efTestAndClear(CopyFastPeakingTimeMon) && (CopyFastPeakingTime == 1)) {
             pvGet(FastPeakingTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 FastPeakingTime[i] = FastPeakingTime[0];
                 pvPut(FastPeakingTime[i]);
             }
@@ -361,6 +370,7 @@ ss dante_control {
         when(efTestAndClear(CopyFastThresholdMon) && (CopyFastThreshold == 1)) {
             pvGet(FastThreshold[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 FastThreshold[i] = FastThreshold[0];
                 pvPut(FastThreshold[i]);
             }
@@ -371,6 +381,7 @@ ss dante_control {
         when(efTestAndClear(CopyFastFlatTopTimeMon) && (CopyFastFlatTopTime == 1)) {
             pvGet(FastFlatTopTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 FastFlatTopTime[i] = FastFlatTopTime[0];
                 pvPut(FastFlatTopTime[i]);
             }
@@ -381,6 +392,7 @@ ss dante_control {
         when(efTestAndClear(CopyPeakingTimeMon) && (CopyPeakingTime == 1)) {
             pvGet(PeakingTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 PeakingTime[i] = PeakingTime[0];
                 pvPut(PeakingTime[i]);
             }
@@ -391,6 +403,7 @@ ss dante_control {
         when(efTestAndClear(CopyMaxPeakingTimeMon) && (CopyMaxPeakingTime == 1)) {
             pvGet(MaxPeakingTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 MaxPeakingTime[i] = MaxPeakingTime[0];
                 pvPut(MaxPeakingTime[i]);
             }
@@ -401,6 +414,7 @@ ss dante_control {
         when(efTestAndClear(CopyFlatTopTimeMon) && (CopyFlatTopTime == 1)) {
             pvGet(FlatTopTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 FlatTopTime[i] = FlatTopTime[0];
                 pvPut(FlatTopTime[i]);
             }
@@ -411,6 +425,7 @@ ss dante_control {
         when(efTestAndClear(CopyEnergyThresholdMon) && (CopyEnergyThreshold == 1)) {
             pvGet(EnergyThreshold[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 EnergyThreshold[i] = EnergyThreshold[0];
                 pvPut(EnergyThreshold[i]);
             }
@@ -421,6 +436,7 @@ ss dante_control {
         when(efTestAndClear(CopyBaselineThresholdMon) && (CopyBaselineThreshold == 1)) {
             pvGet(BaselineThreshold[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 BaselineThreshold[i] = BaselineThreshold[0];
                 pvPut(BaselineThreshold[i]);
             }
@@ -431,6 +447,7 @@ ss dante_control {
         when(efTestAndClear(CopyMaxRiseTimeMon) && (CopyMaxRiseTime == 1)) {
             pvGet(MaxRiseTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 MaxRiseTime[i] = MaxRiseTime[0];
                 pvPut(MaxRiseTime[i]);
             }
@@ -441,6 +458,7 @@ ss dante_control {
         when(efTestAndClear(CopyResetRecoveryTimeMon) && (CopyResetRecoveryTime == 1)) {
             pvGet(ResetRecoveryTime[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 ResetRecoveryTime[i] = ResetRecoveryTime[0];
                 pvPut(ResetRecoveryTime[i]);
             }
@@ -451,6 +469,7 @@ ss dante_control {
         when(efTestAndClear(CopyZeroPeakFreqMon) && (CopyZeroPeakFreq == 1)) {
             pvGet(ZeroPeakFreq[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 ZeroPeakFreq[i] = ZeroPeakFreq[0];
                 pvPut(ZeroPeakFreq[i]);
             }
@@ -461,6 +480,7 @@ ss dante_control {
         when(efTestAndClear(CopyBaselineSamplesMon) && (CopyBaselineSamples == 1)) {
             pvGet(BaselineSamples[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 BaselineSamples[i] = BaselineSamples[0];
                 pvPut(BaselineSamples[i]);
             }
@@ -471,6 +491,7 @@ ss dante_control {
         when(efTestAndClear(CopyGainMon) && (CopyGain == 1)) {
             pvGet(Gain[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 Gain[i] = Gain[0];
                 pvPut(Gain[i]);
             }
@@ -481,6 +502,7 @@ ss dante_control {
         when(efTestAndClear(CopyInputPolarityMon) && (CopyInputPolarity == 1)) {
             pvGet(InputPolarity[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 InputPolarity[i] = InputPolarity[0];
                 pvPut(InputPolarity[i]);
             }
@@ -491,6 +513,7 @@ ss dante_control {
         when(efTestAndClear(CopyAnalogOffsetMon) && (CopyAnalogOffset == 1)) {
             pvGet(AnalogOffset[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 AnalogOffset[i] = AnalogOffset[0];
                 pvPut(AnalogOffset[i]);
             }
@@ -501,6 +524,7 @@ ss dante_control {
         when(efTestAndClear(CopyMaxEnergyMon) && (CopyMaxEnergy == 1)) {
             pvGet(MaxEnergy[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 MaxEnergy[i] = MaxEnergy[0];
                 pvPut(MaxEnergy[i]);
             }
@@ -511,6 +535,7 @@ ss dante_control {
         when(efTestAndClear(CopyResetThresholdMon) && (CopyResetThreshold == 1)) {
             pvGet(ResetThreshold[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 ResetThreshold[i] = ResetThreshold[0];
                 pvPut(ResetThreshold[i]);
             }
@@ -521,6 +546,7 @@ ss dante_control {
         when(efTestAndClear(CopyInputModeMon) && (CopyInputMode == 1)) {
             pvGet(InputMode[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 InputMode[i] = InputMode[0];
                 pvPut(InputMode[i]);
             }
@@ -531,6 +557,7 @@ ss dante_control {
         when(efTestAndClear(CopyTimeConstantMon) && (CopyTimeConstant == 1)) {
             pvGet(TimeConstant[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 TimeConstant[i] = TimeConstant[0];
                 pvPut(TimeConstant[i]);
             }
@@ -541,6 +568,7 @@ ss dante_control {
         when(efTestAndClear(CopyBaseOffsetMon) && (CopyBaseOffset == 1)) {
             pvGet(BaseOffset[0]);
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 BaseOffset[i] = BaseOffset[0];
                 pvPut(BaseOffset[i]);
             }
@@ -551,6 +579,7 @@ ss dante_control {
         when(efTestAndClear(ReadMCAsMon) && (ReadMCAs == 1)) {
             if (AsynDebug) printf("danteMED.st: Read MCA data\n");
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 ReadMCA[i] = 1;
                 pvPut(ReadMCA[i]);
             }
@@ -563,12 +592,14 @@ ss dante_control {
             /* If the detector is acquiring then force each MCA record to read status */
             if (MCAAcquiring) {
                 for (i=0; i<nDetectors; i++) {
+                    if (!EnableBoard[i]) continue;
                     statusMCA[i] = 1;
                     /* pvPut(statusMCA[i]); */
                 }
             } else {
                 /* If the detector is done then force each MCA record to read data */
                 for (i=0; i<nDetectors; i++) {
+                    if (!EnableBoard[i]) continue;
                     ReadMCA[i] = 1;
                     pvPut(ReadMCA[i], SYNC);
                 }
@@ -580,6 +611,7 @@ ss dante_control {
 
         when(efTestAndClear(PresetRealMon)) {
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 mcaPresetReal[i] = PresetReal;
                 pvPut(mcaPresetReal[i]);
             }
@@ -587,25 +619,32 @@ ss dante_control {
 
         when(efTestAndClear(DeadTimeMon)) {
             DeadTime = 0.;
+            numEnabled=0;
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 DeadTime += mcaDeadTime[i];
+                numEnabled++;
             }
-            DeadTime /= nDetectors;
+            DeadTime /= numEnabled;
             pvPut(DeadTime);
         } state monitor_changes
  
         when(efTestAndClear(IDeadTimeMon)) {
             IDeadTime = 0.;
+            numEnabled=0;
             for (i=0; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 IDeadTime += mcaIDeadTime[i];
+                numEnabled++;
             }
-            IDeadTime /= nDetectors;
+            IDeadTime /= numEnabled;
             pvPut(IDeadTime);
         } state monitor_changes
  
         /* Copy all detector 1 ROIs to all detectors by channel */
         when(efTestAndClear(CopyROIChannelMon) && (CopyROIChannel == 1)) {
             for (i=1; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 for (j=0; j<MAX_ROIS; j++) {
                     pvGet(mcaROILow[j]);
                     pvGet(mcaROIHigh[j]);
@@ -630,6 +669,7 @@ ss dante_control {
         /* Copy all detector 1 ROIs to all detectors by energy */
         when(efTestAndClear(CopyROIEnergyMon) && (CopyROIEnergy == 1)) {
             for (i=1; i<nDetectors; i++) {
+                if (!EnableBoard[i]) continue;
                 for (j=0; j<MAX_ROIS; j++) {
                     pvGet(mcaROILow[j]);
                     pvGet(mcaROIHigh[j]);
