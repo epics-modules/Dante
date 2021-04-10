@@ -1443,271 +1443,6 @@ composite {
 composite {
 	object {
 		x=360
-		y=525
-		width=350
-		height=165
-	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=440
-				y=529
-				width=190
-				height=21
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		rectangle {
-			object {
-				x=360
-				y=525
-				width=350
-				height=165
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=1
-			}
-		}
-		text {
-			object {
-				x=450
-				y=529
-				width=170
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Acquisition Setup"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=400
-				y=660
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="List size"
-		}
-		"text entry" {
-			object {
-				x=495
-				y=660
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ListBufferSize"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=600
-				y=660
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)ListBufferSize_RBV"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		text {
-			object {
-				x=370
-				y=585
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="MCA channels"
-		}
-		"text update" {
-			object {
-				x=600
-				y=585
-				width=100
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)NumMCAChannels_RBV"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		menu {
-			object {
-				x=495
-				y=585
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)NumMCAChannels"
-				clr=14
-				bclr=51
-			}
-		}
-		composite {
-			object {
-				x=390
-				y=610
-				width=310
-				height=20
-			}
-			"composite name"=""
-			children {
-				text {
-					object {
-						x=390
-						y=610
-						width=140
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Mapping points"
-				}
-				"text entry" {
-					object {
-						x=535
-						y=610
-						width=80
-						height=20
-					}
-					control {
-						chan="$(P)$(R)MappingPoints"
-						clr=14
-						bclr=51
-					}
-					limits {
-					}
-				}
-				"text update" {
-					object {
-						x=620
-						y=610
-						width=80
-						height=20
-					}
-					monitor {
-						chan="$(P)$(R)MappingPoints_RBV"
-						clr=54
-						bclr=3
-					}
-					limits {
-					}
-				}
-			}
-		}
-		text {
-			object {
-				x=380
-				y=560
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Acq. mode"
-		}
-		menu {
-			object {
-				x=475
-				y=560
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CollectMode"
-				clr=14
-				bclr=51
-			}
-		}
-		"text update" {
-			object {
-				x=580
-				y=560
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)CollectMode_RBV"
-				clr=54
-				bclr=3
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=580
-				y=635
-				width=120
-				height=20
-			}
-			monitor {
-				chan="$(P)$(R)GatingMode_RBV"
-				clr=54
-				bclr=3
-			}
-			format="string"
-			limits {
-			}
-		}
-		menu {
-			object {
-				x=475
-				y=635
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)GatingMode"
-				clr=14
-				bclr=51
-			}
-		}
-		text {
-			object {
-				x=380
-				y=635
-				width=90
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Gate mode"
-			align="horiz. centered"
-		}
-	}
-}
-composite {
-	object {
-		x=360
 		y=35
 		width=350
 		height=485
@@ -2343,6 +2078,271 @@ composite {
 			clr=14
 			bclr=51
 			label="Trace plot"
+		}
+	}
+}
+composite {
+	object {
+		x=360
+		y=525
+		width=350
+		height=165
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=440
+				y=529
+				width=190
+				height=21
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		rectangle {
+			object {
+				x=360
+				y=525
+				width=350
+				height=165
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=1
+			}
+		}
+		text {
+			object {
+				x=450
+				y=529
+				width=170
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Acquisition Setup"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=400
+				y=660
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="List size"
+		}
+		"text entry" {
+			object {
+				x=495
+				y=660
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)ListBufferSize"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=600
+				y=660
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)ListBufferSize_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		text {
+			object {
+				x=370
+				y=585
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="MCA channels"
+		}
+		"text update" {
+			object {
+				x=600
+				y=585
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)NumMCAChannels_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		menu {
+			object {
+				x=495
+				y=585
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)NumMCAChannels"
+				clr=14
+				bclr=51
+			}
+		}
+		composite {
+			object {
+				x=390
+				y=610
+				width=310
+				height=20
+			}
+			"composite name"=""
+			children {
+				text {
+					object {
+						x=390
+						y=610
+						width=140
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Mapping points"
+				}
+				"text entry" {
+					object {
+						x=535
+						y=610
+						width=80
+						height=20
+					}
+					control {
+						chan="$(P)$(R)MappingPoints"
+						clr=14
+						bclr=51
+					}
+					limits {
+					}
+				}
+				"text update" {
+					object {
+						x=620
+						y=610
+						width=80
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)MappingPoints_RBV"
+						clr=54
+						bclr=3
+					}
+					limits {
+					}
+				}
+			}
+		}
+		text {
+			object {
+				x=380
+				y=560
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Acq. mode"
+		}
+		menu {
+			object {
+				x=475
+				y=560
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)CollectMode"
+				clr=14
+				bclr=51
+			}
+		}
+		"text update" {
+			object {
+				x=580
+				y=560
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)CollectMode_RBV"
+				clr=54
+				bclr=3
+			}
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=580
+				y=635
+				width=120
+				height=20
+			}
+			monitor {
+				chan="$(P)$(R)GatingMode_RBV"
+				clr=54
+				bclr=3
+			}
+			format="string"
+			limits {
+			}
+		}
+		menu {
+			object {
+				x=475
+				y=635
+				width=100
+				height=20
+			}
+			control {
+				chan="$(P)$(R)GatingMode"
+				clr=14
+				bclr=51
+			}
+		}
+		text {
+			object {
+				x=380
+				y=635
+				width=90
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Gate mode"
+			align="horiz. centered"
 		}
 	}
 }
