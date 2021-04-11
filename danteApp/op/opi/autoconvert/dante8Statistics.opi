@@ -28,8 +28,8 @@
   <snap_to_geometry>false</snap_to_geometry>
   <widget_type>Display</widget_type>
   <width>1085</width>
-  <x>294</x>
-  <y>314</y>
+  <x>933</x>
+  <y>373</y>
   <widget typeId="org.csstudio.opibuilder.widgets.Rectangle" version="1.0.0">
     <actions hook="false" hook_all="false" />
     <alarm_pulsing>false</alarm_pulsing>

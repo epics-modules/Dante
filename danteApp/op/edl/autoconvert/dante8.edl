@@ -60,11 +60,24 @@ value {
 }
 endObjectProperties
 
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 40
+w 350
+h 340
+
+beginGroup
+
 # (Embedded Window)
 object activePipClass
 beginObjectProperties
 major 4
-minor 0
+minor 1
 release 0
 x 5
 y 40
@@ -84,11 +97,30 @@ displayFileName {
 noScroll
 endObjectProperties
 
+endGroup
+
+visMin "A"
+visMax "1"
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 5
+y 385
+w 350
+h 80
+
+beginGroup
+
 # (Embedded Window)
 object activePipClass
 beginObjectProperties
 major 4
-minor 0
+minor 1
 release 0
 x 5
 y 385
@@ -106,6 +138,12 @@ displayFileName {
   0 "ADPlugins.edl"
 }
 noScroll
+endObjectProperties
+
+endGroup
+
+visMin "A"
+visMax "1"
 endObjectProperties
 
 # (Static Text)
@@ -1246,7 +1284,7 @@ release 0
 x 715
 y 210
 w 409
-h 159
+h 184
 lineColor rgb 0 0 0
 fillColor rgb 0 0 0
 endObjectProperties
@@ -1297,6 +1335,91 @@ beginObjectProperties
 major 4
 minor 1
 release 1
+x 857
+y 320
+w 100
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "ADC Traces"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 857
+y 345
+w 100
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "Statistics"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 827
+y 370
+w 130
+h 20
+font "helvetica-medium-r-14.0"
+fontAlign "right"
+fgColor rgb 0 0 0
+bgColor index 3
+useDisplayBg
+value {
+  "SNL Connected"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 7
+release 0
+x 962
+y 370
+w 150
+h 20
+controlPv "$(P)$(R)SNL_Connected"
+format "string"
+font "helvetica-medium-r-14.0"
+fontAlign "left"
+fgColor rgb 0 65535 0
+fgAlarm
+bgColor rgb 55808 55808 55808
+limitsFromDb
+nullColor rgb 60928 46592 11008
+smartRefresh
+fastUpdate
+newPos
+objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
 x 867
 y 270
 w 90
@@ -1317,9 +1440,9 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 857
+x 870
 y 295
-w 100
+w 85
 h 20
 font "helvetica-medium-r-14.0"
 fontAlign "right"
@@ -1327,73 +1450,8 @@ fgColor rgb 0 0 0
 bgColor index 3
 useDisplayBg
 value {
-  "ADC Traces"
+  "MCA ROIs"
 }
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 857
-y 320
-w 100
-h 20
-font "helvetica-medium-r-14.0"
-fontAlign "right"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "Statistics"
-}
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 827
-y 345
-w 130
-h 20
-font "helvetica-medium-r-14.0"
-fontAlign "right"
-fgColor rgb 0 0 0
-bgColor index 3
-useDisplayBg
-value {
-  "SNL Connected"
-}
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 7
-release 0
-x 962
-y 345
-w 150
-h 20
-controlPv "$(P)$(R)SNL_Connected"
-format "string"
-font "helvetica-medium-r-14.0"
-fontAlign "left"
-fgColor rgb 0 65535 0
-fgAlarm
-bgColor rgb 55808 55808 55808
-limitsFromDb
-nullColor rgb 60928 46592 11008
-smartRefresh
-fastUpdate
-newPos
-objType "controls"
 endObjectProperties
 
 # (Message Button)
@@ -1685,72 +1743,7 @@ major 4
 minor 0
 release 0
 x 962
-y 270
-w 111
-h 20
-fgColor rgb 0 0 0
-bgColor rgb 29440 57088 65280
-topShadowColor rgb 55808 55808 55808
-botShadowColor rgb 17920 17920 17920
-font "helvetica-medium-r-12.0"
-icon
-buttonLabel "MCA Plots"
-numPvs 18
-numDsps 9
-displayFileName {
-  0 "mca.edl"
-  1 "mca.edl"
-  2 "mca.edl"
-  3 "mca.edl"
-  4 "mca.edl"
-  5 "mca.edl"
-  6 "mca.edl"
-  7 "mca.edl"
-  8 "dante8MCA.edl"
-}
-menuLabel {
-  0 "MCA #1"
-  1 "MCA #2"
-  2 "MCA #3"
-  3 "MCA #4"
-  4 "MCA #5"
-  5 "MCA #6"
-  6 "MCA #7"
-  7 "MCA #8"
-  8 "Combined"
-}
-symbols {
-  0 "P=$(P),M=$(M)1"
-  1 "P=$(P),M=$(M)2"
-  2 "P=$(P),M=$(M)3"
-  3 "P=$(P),M=$(M)4"
-  4 "P=$(P),M=$(M)5"
-  5 "P=$(P),M=$(M)6"
-  6 "P=$(P),M=$(M)7"
-  7 "P=$(P),M=$(M)8"
-  8 "P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8"
-}
-replaceSymbols {
-  0 1
-  1 1
-  2 1
-  3 1
-  4 1
-  5 1
-  6 1
-  7 1
-  8 1
-}
-endObjectProperties
-
-# (Related Display)
-object relatedDisplayClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 962
-y 295
+y 320
 w 111
 h 20
 fgColor rgb 0 0 0
@@ -1815,7 +1808,7 @@ major 4
 minor 0
 release 0
 x 962
-y 320
+y 345
 w 111
 h 20
 fgColor rgb 0 0 0
@@ -1838,6 +1831,164 @@ symbols {
 }
 replaceSymbols {
   0 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 962
+y 270
+w 111
+h 20
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+font "helvetica-medium-r-12.0"
+icon
+buttonLabel "MCA Plots"
+numPvs 18
+numDsps 9
+displayFileName {
+  0 "mca.edl"
+  1 "mca.edl"
+  2 "mca.edl"
+  3 "mca.edl"
+  4 "mca.edl"
+  5 "mca.edl"
+  6 "mca.edl"
+  7 "mca.edl"
+  8 "dante8MCA.edl"
+}
+menuLabel {
+  0 "MCA #1"
+  1 "MCA #2"
+  2 "MCA #3"
+  3 "MCA #4"
+  4 "MCA #5"
+  5 "MCA #6"
+  6 "MCA #7"
+  7 "MCA #8"
+  8 "Combined"
+}
+symbols {
+  0 "P=$(P),M=$(M)1"
+  1 "P=$(P),M=$(M)2"
+  2 "P=$(P),M=$(M)3"
+  3 "P=$(P),M=$(M)4"
+  4 "P=$(P),M=$(M)5"
+  5 "P=$(P),M=$(M)6"
+  6 "P=$(P),M=$(M)7"
+  7 "P=$(P),M=$(M)8"
+  8 "P=$(P),R=$(R),M1=$(M)1,M2=$(M)2,M3=$(M)3,M4=$(M)4,M5=$(M)5,M6=$(M)6,M7=$(M)7,M8=$(M)8"
+}
+replaceSymbols {
+  0 1
+  1 1
+  2 1
+  3 1
+  4 1
+  5 1
+  6 1
+  7 1
+  8 1
+}
+endObjectProperties
+
+# (Related Display)
+object relatedDisplayClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 960
+y 295
+w 111
+h 20
+fgColor rgb 0 0 0
+bgColor rgb 29440 57088 65280
+topShadowColor rgb 55808 55808 55808
+botShadowColor rgb 17920 17920 17920
+font "helvetica-medium-r-12.0"
+icon
+buttonLabel "MCA ROIs"
+numPvs 32
+numDsps 16
+displayFileName {
+  0 "dante8ROI.edl"
+  1 "dante8ROI.edl"
+  2 "dante8ROI.edl"
+  3 "dante8ROI.edl"
+  4 "dante8ROI.edl"
+  5 "dante8ROI.edl"
+  6 "dante8ROI.edl"
+  7 "dante8ROI.edl"
+  8 "dante8ROI.edl"
+  9 "dante8ROI.edl"
+  10 "dante8ROI.edl"
+  11 "dante8ROI.edl"
+  12 "dante8ROI.edl"
+  13 "dante8ROI.edl"
+  14 "dante8ROI.edl"
+  15 "dante8ROI.edl"
+}
+menuLabel {
+  0 "ROI #0"
+  1 "ROI #1"
+  2 "ROI #2"
+  3 "ROI #3"
+  4 "ROI #4"
+  5 "ROI #5"
+  6 "ROI #6"
+  7 "ROI #7"
+  8 "ROI #8"
+  9 "ROI #9"
+  10 "ROI #10"
+  11 "ROI #11"
+  12 "ROI #12"
+  13 "ROI #13"
+  14 "ROI #14"
+  15 "ROI #15"
+}
+symbols {
+  0 "P=$(P),R=$(R),M=$(M),ROI=0"
+  1 "P=$(P),R=$(R),M=$(M),ROI=1"
+  2 "P=$(P),R=$(R),M=$(M),ROI=2"
+  3 "P=$(P),R=$(R),M=$(M),ROI=3"
+  4 "P=$(P),R=$(R),M=$(M),ROI=4"
+  5 "P=$(P),R=$(R),M=$(M),ROI=5"
+  6 "P=$(P),R=$(R),M=$(M),ROI=6"
+  7 "P=$(P),R=$(R),M=$(M),ROI=7"
+  8 "P=$(P),R=$(R),M=$(M),ROI=8"
+  9 "P=$(P),R=$(R),M=$(M),ROI=9"
+  10 "P=$(P),R=$(R),M=$(M),ROI=10"
+  11 "P=$(P),R=$(R),M=$(M),ROI=11"
+  12 "P=$(P),R=$(R),M=$(M),ROI=12"
+  13 "P=$(P),R=$(R),M=$(M),ROI=13"
+  14 "P=$(P),R=$(R),M=$(M),ROI=14"
+  15 "P=$(P),R=$(R),M=$(M),ROI=15"
+}
+replaceSymbols {
+  0 1
+  1 1
+  2 1
+  3 1
+  4 1
+  5 1
+  6 1
+  7 1
+  8 1
+  9 1
+  10 1
+  11 1
+  12 1
+  13 1
+  14 1
+  15 1
 }
 endObjectProperties
 
