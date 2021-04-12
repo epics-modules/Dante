@@ -56,7 +56,7 @@ fgColor rgb 65280 65280 65280
 bgColor index 3
 useDisplayBg
 value {
-  "Dante MCA Control ($(P)$(R))"
+  "Dante1 Control ($(P)$(R))"
 }
 endObjectProperties
 

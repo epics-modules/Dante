@@ -27,7 +27,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>text #9</name>
-    <text>Dante MCA Control ($(P)$(R))</text>
+    <text>Dante1 Control ($(P)$(R))</text>
     <y>3</y>
     <width>1140</width>
     <height>25</height>

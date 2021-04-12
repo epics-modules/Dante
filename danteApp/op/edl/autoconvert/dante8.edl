@@ -56,28 +56,15 @@ fgColor rgb 65280 65280 65280
 bgColor index 3
 useDisplayBg
 value {
-  "Dante MCA Control ($(P)$(R))"
+  "Dante8 Control ($(P)$(R))"
 }
 endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 5
-y 40
-w 350
-h 340
-
-beginGroup
 
 # (Embedded Window)
 object activePipClass
 beginObjectProperties
 major 4
-minor 1
+minor 0
 release 0
 x 5
 y 40
@@ -97,30 +84,11 @@ displayFileName {
 noScroll
 endObjectProperties
 
-endGroup
-
-visMin "A"
-visMax "1"
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 5
-y 385
-w 350
-h 80
-
-beginGroup
-
 # (Embedded Window)
 object activePipClass
 beginObjectProperties
 major 4
-minor 1
+minor 0
 release 0
 x 5
 y 385
@@ -138,12 +106,6 @@ displayFileName {
   0 "ADPlugins.edl"
 }
 noScroll
-endObjectProperties
-
-endGroup
-
-visMin "A"
-visMax "1"
 endObjectProperties
 
 # (Static Text)

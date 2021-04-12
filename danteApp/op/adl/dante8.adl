@@ -108,7 +108,7 @@ text {
 	"basic attribute" {
 		clr=0
 	}
-	textix="Dante MCA Control ($(P)$(R))"
+	textix="Dante8 Control ($(P)$(R))"
 	align="horiz. centered"
 }
 composite {
