@@ -552,7 +552,9 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
         {
         	*(spectrumXAxisBuffer_ + bin) = (bin + 1) * binEnergyEV;
         }
-        doCallbacksFloat64Array(spectrumXAxisBuffer_, numMcaChannels, DanteSpectrumXAxis, addr); 
+        doCallbacksFloat64Array(spectrumXAxisBuffer_, numMcaChannels, DanteSpectrumXAxis, addr);
+        // Must call setDanteConfiguration() because the energy parameters need to be recalculated and reloaded
+        this->setDanteConfiguration(addr);
     }
 
     if ((function == DanteMaxEnergy) ||
