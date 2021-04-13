@@ -219,7 +219,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     createParam(DanteLastTimeStampString,          asynParamFloat64, &DanteLastTimeStamp);
     createParam(DanteTriggersString,               asynParamInt32,   &DanteTriggers);
     createParam(DanteEventsString,                 asynParamInt32,   &DanteEvents);
-    createParam(DanteEdgeDTString,                 asynParamInt32,   &DanteEdgeDT);
+    createParam(DanteFastDTString,                 asynParamInt32,   &DanteFastDT);
     createParam(DanteFilt1DTString,                asynParamInt32,   &DanteFilt1DT);
     createParam(DanteZeroCountsString,             asynParamInt32,   &DanteZeroCounts);
     createParam(DanteBaselinesValueString,         asynParamInt32,   &DanteBaselinesValue);
@@ -229,23 +229,33 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     createParam(DanteResetCounterValueString,      asynParamInt32,   &DanteResetCounterValue);
 
     /* Configuration parameters */
-    createParam(DanteFastFilterThresholdString,     asynParamFloat64, &DanteFastFilterThreshold);
-    createParam(DanteEnergyFilterThresholdString,   asynParamFloat64, &DanteEnergyFilterThreshold);
-    createParam(DanteEnergyBaselineThresholdString, asynParamFloat64, &DanteEnergyBaselineThreshold);
-    createParam(DanteMaxRiseTimeString,             asynParamFloat64, &DanteMaxRiseTime);
-    createParam(DanteGainString,                    asynParamFloat64, &DanteGain);
-    createParam(DantePeakingTimeString,             asynParamFloat64, &DantePeakingTime);
-    createParam(DanteMaxPeakingTimeString,          asynParamFloat64, &DanteMaxPeakingTime);
-    createParam(DanteFlatTopString,                 asynParamFloat64, &DanteFlatTop);
-    createParam(DanteEdgePeakingTimeString,         asynParamFloat64, &DanteEdgePeakingTime);
-    createParam(DanteEdgeFlatTopString,             asynParamFloat64, &DanteEdgeFlatTop);
-    createParam(DanteResetRecoveryTimeString,       asynParamFloat64, &DanteResetRecoveryTime);
-    createParam(DanteZeroPeakFreqString,            asynParamFloat64, &DanteZeroPeakFreq);
-    createParam(DanteBaselineSamplesString,         asynParamInt32,   &DanteBaselineSamples);
-    createParam(DanteInvertedInputString,           asynParamInt32,   &DanteInvertedInput);
-    createParam(DanteTimeConstantString,            asynParamFloat64, &DanteTimeConstant);
-    createParam(DanteBaseOffsetString,              asynParamInt32,   &DanteBaseOffset);
-    createParam(DanteResetThresholdString,          asynParamInt32,   &DanteResetThreshold);
+    createParam(DanteFastFilterThresholdString,         asynParamFloat64, &DanteFastFilterThreshold);
+    createParam(DanteFastFilterThresholdRBVString,      asynParamFloat64, &DanteFastFilterThresholdRBV);
+    createParam(DanteEnergyFilterThresholdString,       asynParamFloat64, &DanteEnergyFilterThreshold);
+    createParam(DanteEnergyFilterThresholdRBVString,    asynParamFloat64, &DanteEnergyFilterThresholdRBV);
+    createParam(DanteBaselineThresholdString,           asynParamFloat64, &DanteBaselineThreshold);
+    createParam(DanteBaselineThresholdRBVString,        asynParamFloat64, &DanteBaselineThresholdRBV);
+    createParam(DanteMaxRiseTimeString,                 asynParamFloat64, &DanteMaxRiseTime);
+    createParam(DanteMaxRiseTimeRBVString,              asynParamFloat64, &DanteMaxRiseTimeRBV);
+    createParam(DanteGainString,                        asynParamFloat64, &DanteGain);
+    createParam(DantePeakingTimeString,                 asynParamFloat64, &DantePeakingTime);
+    createParam(DantePeakingTimeRBVString,              asynParamFloat64, &DantePeakingTimeRBV);
+    createParam(DanteMaxPeakingTimeString,              asynParamFloat64, &DanteMaxPeakingTime);
+    createParam(DanteMaxPeakingTimeRBVString,           asynParamFloat64, &DanteMaxPeakingTimeRBV);
+    createParam(DanteFlatTopString,                     asynParamFloat64, &DanteFlatTop);
+    createParam(DanteFlatTopRBVString,                  asynParamFloat64, &DanteFlatTopRBV);
+    createParam(DanteFastPeakingTimeString,             asynParamFloat64, &DanteFastPeakingTime);
+    createParam(DanteFastPeakingTimeRBVString,          asynParamFloat64, &DanteFastPeakingTimeRBV);
+    createParam(DanteFastFlatTopString,                 asynParamFloat64, &DanteFastFlatTop);
+    createParam(DanteFastFlatTopRBVString,              asynParamFloat64, &DanteFastFlatTopRBV);
+    createParam(DanteResetRecoveryTimeString,           asynParamFloat64, &DanteResetRecoveryTime);
+    createParam(DanteResetRecoveryTimeRBVString,        asynParamFloat64, &DanteResetRecoveryTimeRBV);
+    createParam(DanteZeroPeakFreqString,                asynParamFloat64, &DanteZeroPeakFreq);
+    createParam(DanteBaselineSamplesString,             asynParamInt32,   &DanteBaselineSamples);
+    createParam(DanteInvertedInputString,               asynParamInt32,   &DanteInvertedInput);
+    createParam(DanteTimeConstantString,                asynParamFloat64, &DanteTimeConstant);
+    createParam(DanteBaseOffsetString,                  asynParamInt32,   &DanteBaseOffset);
+    createParam(DanteResetThresholdString,              asynParamInt32,   &DanteResetThreshold);
     
     /* Other parameters */
     createParam(DanteInputModeString,               asynParamInt32,   &DanteInputMode);
@@ -353,21 +363,21 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
         setIntegerParam(i, mcaNumChannels,                2048);
         setDoubleParam (i, DanteFastFilterThreshold,      0.1);
         setDoubleParam (i, DanteEnergyFilterThreshold,    0.0);
-        setDoubleParam (i, DanteEnergyBaselineThreshold,  0.0);
+        setDoubleParam (i, DanteBaselineThreshold,        0.0);
         setDoubleParam (i, DanteMaxRiseTime,              0.25);
         setDoubleParam (i, DanteGain,                     1.0);
         setDoubleParam (i, DantePeakingTime,              1.0);
         setDoubleParam (i, DanteMaxPeakingTime,           0.0);
         setDoubleParam (i, DanteFlatTop,                  0.05);
-        setDoubleParam (i, DanteEdgePeakingTime,          0.03);
-        setDoubleParam (i, DanteEdgeFlatTop,              0.01);
+        setDoubleParam (i, DanteFastPeakingTime,          0.03);
+        setDoubleParam (i, DanteFastFlatTop,              0.01);
         setDoubleParam (i, DanteResetRecoveryTime,        6.0);
         setDoubleParam (i, DanteZeroPeakFreq,             1000.);
         setIntegerParam(i, DanteBaselineSamples,          64);
         setIntegerParam(i, DanteInvertedInput,            0);
         setDoubleParam (i, DanteTimeConstant,             0.0);
         setIntegerParam(i, DanteBaseOffset,               0);
-        setIntegerParam(i, DanteResetThreshold,           0);
+        setIntegerParam(i, DanteResetThreshold,           300);
     }
 
     /* Read the MCA and DXP parameters once */
@@ -560,14 +570,14 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
     if ((function == DanteMaxEnergy) ||
         (function == DanteFastFilterThreshold) ||
         (function == DanteEnergyFilterThreshold) ||
-        (function == DanteEnergyBaselineThreshold) ||
+        (function == DanteBaselineThreshold) ||
         (function == DanteMaxRiseTime) ||
         (function == DanteGain) ||
         (function == DantePeakingTime) ||
         (function == DanteMaxPeakingTime) ||
         (function == DanteFlatTop) ||
-        (function == DanteEdgePeakingTime) ||
-        (function == DanteEdgeFlatTop) ||
+        (function == DanteFastPeakingTime) ||
+        (function == DanteFastFlatTop) ||
         (function == DanteResetRecoveryTime) ||
         (function == DanteZeroPeakFreq) ||
         (function == DanteTimeConstant))
@@ -693,46 +703,46 @@ asynStatus Dante::setDanteConfiguration(int addr)
     
     getDoubleParam(addr, DanteFastFilterThreshold, &dValue);
     pConfig->fast_filter_thr = uint32_t(round(dValue / mcaBinWidth));
-    setDoubleParam(addr, DanteFastFilterThreshold, pConfig->fast_filter_thr * mcaBinWidth);
+    setDoubleParam(addr, DanteFastFilterThresholdRBV, pConfig->fast_filter_thr * mcaBinWidth);
     
     getDoubleParam(addr, DanteEnergyFilterThreshold, &dValue);
     pConfig->energy_filter_thr = uint32_t(round(dValue / mcaBinWidth));
-    setDoubleParam(addr, DanteEnergyFilterThreshold, pConfig->energy_filter_thr * mcaBinWidth);
+    setDoubleParam(addr, DanteEnergyFilterThresholdRBV, pConfig->energy_filter_thr * mcaBinWidth);
    
-    getDoubleParam(addr, DanteEnergyBaselineThreshold, &dValue);
+    getDoubleParam(addr, DanteBaselineThreshold, &dValue);
     pConfig->energy_baseline_thr = uint32_t(round(dValue / mcaBinWidth));
-    setDoubleParam(addr, DanteEnergyBaselineThreshold, pConfig->energy_baseline_thr * mcaBinWidth);
+    setDoubleParam(addr, DanteBaselineThresholdRBV, pConfig->energy_baseline_thr * mcaBinWidth);
 
     getDoubleParam(addr, DanteMaxRiseTime, &dValue);
     pConfig->max_risetime = uint32_t(round(dValue * usecToFastSample));
-    setDoubleParam(addr, DanteMaxRiseTime, pConfig->max_risetime / usecToFastSample);
+    setDoubleParam(addr, DanteMaxRiseTimeRBV, pConfig->max_risetime / usecToFastSample);
 
     getDoubleParam(addr, DanteGain, &dValue);
     pConfig->gain = dValue;
 
     getDoubleParam(addr, DantePeakingTime, &dValue);
     pConfig->peaking_time = uint32_t(round(dValue * usecToSlowSample));
-    setDoubleParam(addr, DantePeakingTime, pConfig->peaking_time / usecToSlowSample);
+    setDoubleParam(addr, DantePeakingTimeRBV, pConfig->peaking_time / usecToSlowSample);
 
     getDoubleParam(addr, DanteMaxPeakingTime, &dValue);
     pConfig->max_peaking_time = uint32_t(round(dValue * usecToSlowSample));
-    setDoubleParam(addr, DanteMaxPeakingTime, pConfig->max_peaking_time / usecToSlowSample);
+    setDoubleParam(addr, DanteMaxPeakingTimeRBV, pConfig->max_peaking_time / usecToSlowSample);
 
     getDoubleParam(addr, DanteFlatTop, &dValue);
     pConfig->flat_top = uint32_t(round(dValue * usecToSlowSample));
-    setDoubleParam(addr, DanteFlatTop, pConfig->flat_top / usecToSlowSample);
+    setDoubleParam(addr, DanteFlatTopRBV, pConfig->flat_top / usecToSlowSample);
 
-    getDoubleParam(addr, DanteEdgePeakingTime, &dValue);
+    getDoubleParam(addr, DanteFastPeakingTime, &dValue);
     pConfig->edge_peaking_time = uint32_t(round(dValue * usecToFastSample));
-    setDoubleParam(addr, DanteEdgePeakingTime, pConfig->edge_peaking_time / usecToFastSample);
+    setDoubleParam(addr, DanteFastPeakingTimeRBV, pConfig->edge_peaking_time / usecToFastSample);
 
-    getDoubleParam(addr, DanteEdgeFlatTop, &dValue);
+    getDoubleParam(addr, DanteFastFlatTop, &dValue);
     pConfig->edge_flat_top = uint32_t(round(dValue * usecToFastSample));
-    setDoubleParam(addr, DanteEdgeFlatTop, pConfig->edge_flat_top / usecToFastSample);
+    setDoubleParam(addr, DanteFastFlatTopRBV, pConfig->edge_flat_top / usecToFastSample);
 
     getDoubleParam(addr, DanteResetRecoveryTime, &dValue);
     pConfig->reset_recovery_time = uint32_t(round(dValue * usecToFastSample));
-    setDoubleParam(addr, DanteResetRecoveryTime, pConfig->reset_recovery_time / usecToFastSample);
+    setDoubleParam(addr, DanteResetRecoveryTimeRBV, pConfig->reset_recovery_time / usecToFastSample);
 
     getDoubleParam(addr, DanteZeroPeakFreq, &dValue);
     pConfig->zero_peak_freq = dValue/1000.;
@@ -744,7 +754,6 @@ asynStatus Dante::setDanteConfiguration(int addr)
     pConfig->inverted_input = iValue ? true : false;
 
     getDoubleParam(addr, DanteTimeConstant, &dValue);
-    // NEED TO CHECK UNITS HERE, not documented in DLL_SPP_Callback.h
     pConfig->time_constant = dValue;
 
     getIntegerParam(addr, DanteBaseOffset, &iValue);
@@ -817,7 +826,7 @@ bool Dante::dataAcquiring()
 asynStatus Dante::getAcquisitionStatistics(int addr)
 {
     double dvalue, realTime=0, liveTime=0, icr=0, ocr=0, lastTimeStamp=0;
-    int events=0, triggers=0, edgeDT=0, filt1DT=0, zeroCounts=0, baselinesValue=0;
+    int events=0, triggers=0, fastDT=0, filt1DT=0, zeroCounts=0, baselinesValue=0;
     int pupValue=0, pupF1Value=0, pupNotF1Value=0, resetCounterValue=0;
     int ivalue;
     int board=addr;
@@ -848,8 +857,8 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
             triggers = std::max(triggers, ivalue);
             getIntegerParam(i, DanteEvents, &ivalue);
             events = std::max(events, ivalue);
-            getIntegerParam(i, DanteEdgeDT, &ivalue);
-            edgeDT = std::max(edgeDT, ivalue);
+            getIntegerParam(i, DanteFastDT, &ivalue);
+            fastDT = std::max(fastDT, ivalue);
             getIntegerParam(i, DanteFilt1DT, &ivalue);
             filt1DT = std::max(filt1DT, ivalue);
             getIntegerParam(i, DanteZeroCounts, &ivalue);
@@ -872,7 +881,7 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
         setDoubleParam(addr, DanteLastTimeStamp,    lastTimeStamp);
         setIntegerParam(addr, DanteTriggers,        triggers);
         setIntegerParam(addr, DanteEvents,          events);
-        setIntegerParam(addr, DanteEdgeDT,          edgeDT);
+        setIntegerParam(addr, DanteFastDT,          fastDT);
         setIntegerParam(addr, DanteFilt1DT,         filt1DT);
         setIntegerParam(addr, DanteZeroCounts,      zeroCounts);
         setIntegerParam(addr, DanteBaselinesValue,  baselinesValue);
@@ -896,7 +905,7 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
             setDoubleParam(addr, DanteLastTimeStamp,    0);
             setIntegerParam(addr, DanteTriggers,        0);
             setIntegerParam(addr, DanteEvents,          0);
-            setIntegerParam(addr, DanteEdgeDT,          0);
+            setIntegerParam(addr, DanteFastDT,          0);
             setIntegerParam(addr, DanteFilt1DT,         0);
             setIntegerParam(addr, DanteZeroCounts,      0);
             setIntegerParam(addr, DanteBaselinesValue,  0);
@@ -915,7 +924,7 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
             setDoubleParam(addr,  DanteLastTimeStamp,     (double)pStats->last_timestamp);
             setIntegerParam(addr, DanteTriggers,          pStats->detected);
             setIntegerParam(addr, DanteEvents,            pStats->measured);
-            setIntegerParam(addr, DanteEdgeDT,            pStats->edge_dt);
+            setIntegerParam(addr, DanteFastDT,            pStats->edge_dt);
             setIntegerParam(addr, DanteFilt1DT,           pStats->filt1_dt);
             setIntegerParam(addr, DanteZeroCounts,        pStats->zerocounts);
             setIntegerParam(addr, DanteBaselinesValue,    pStats->baselines_value);
@@ -933,7 +942,7 @@ asynStatus Dante::getAcquisitionStatistics(int addr)
                 "     last time stamp=%f\n" 
                 "            triggers=%d\n" 
                 "              events=%d\n" 
-                "             edge dt=%d\n" 
+                "             fast dt=%d\n" 
                 "            filt1 dt=%d\n" 
                 "         zero counts=%d\n" 
                 "     baselines value=%d\n" 
@@ -1348,7 +1357,7 @@ asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d, numSpectra=%d\n",
         setDoubleParam(board, DanteLastTimeStamp,   (double)pAdvStats->last_timestamp);
         setIntegerParam(board, DanteEvents,         (int)pAdvStats->detected);
         setIntegerParam(board, DanteTriggers,       (int)pAdvStats->measured);
-        setIntegerParam(board, DanteEdgeDT,         (int)pAdvStats->edge_dt);
+        setIntegerParam(board, DanteFastDT,         (int)pAdvStats->edge_dt);
         setIntegerParam(board, DanteFilt1DT,        (int)pAdvStats->filt1_dt);
         setIntegerParam(board, DanteZeroCounts,     (int)pAdvStats->zerocounts);
         setIntegerParam(board, DanteBaselinesValue, (int)pAdvStats->baselines_value);
@@ -1492,7 +1501,7 @@ asynStatus Dante::pollListMode()
         setDoubleParam(board, DanteLastTimeStamp,      (double)pStats->last_timestamp);
         setIntegerParam(board, DanteEvents,            pStats->detected);
         setIntegerParam(board, DanteTriggers,          pStats->measured);
-        setIntegerParam(board, DanteEdgeDT,            pStats->edge_dt);
+        setIntegerParam(board, DanteFastDT,            pStats->edge_dt);
         setIntegerParam(board, DanteFilt1DT,           pStats->filt1_dt);
         setIntegerParam(board, DanteZeroCounts,        pStats->zerocounts);
         setIntegerParam(board, DanteBaselinesValue,    pStats->baselines_value);
@@ -1527,8 +1536,8 @@ void Dante::report(FILE *fp, int details)
             fprintf(fp, "         peaking_time: %d\n", pConfig->peaking_time);
             fprintf(fp, "     max_peaking_time: %d\n", pConfig->max_peaking_time);
             fprintf(fp, "             flat_top: %d\n", pConfig->flat_top);
-            fprintf(fp, "    edge_peaking_time: %d\n", pConfig->edge_peaking_time);
-            fprintf(fp, "        edge_flat_top: %d\n", pConfig->edge_flat_top);
+            fprintf(fp, "    fast_peaking_time: %d\n", pConfig->edge_peaking_time);
+            fprintf(fp, "        fast_flat_top: %d\n", pConfig->edge_flat_top);
             fprintf(fp, "  reset_recovery_time: %d\n", pConfig->reset_recovery_time);
             fprintf(fp, "       zero_peak_freq: %f\n", pConfig->zero_peak_freq);
             fprintf(fp, "     baseline_samples: %d\n", pConfig->baseline_samples);

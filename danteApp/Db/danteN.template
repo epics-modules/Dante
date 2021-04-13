@@ -106,9 +106,9 @@ record(longin,"$(P)$(R)Events") {
 }
 
 record(longin,"$(P)$(R)FastDeadTime") {
-    field(DESC,"EdgeDT")
+    field(DESC,"FastDT")
     field(DTYP, "asynInt32")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteEdgeDT")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteFastDT")
     field(SCAN, "I/O Intr")
 }
 
@@ -179,7 +179,7 @@ record(ai,"$(P)$(R)FastThreshold_RBV") {
     field(DESC,"Fast filter threshold")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteFastFilterThreshold")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteFastFilterThresholdRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -196,7 +196,7 @@ record(ai,"$(P)$(R)EnergyThreshold_RBV") {
     field(DESC,"Energy filter threshold")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteEnergyFilterThreshold")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteEnergyFilterThresholdRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -206,14 +206,14 @@ record(ao,"$(P)$(R)BaselineThreshold") {
     field(PREC,"3")
     field(VAL,"0")
     field(DTYP, "asynFloat64")
-    field(OUT,"@asyn($(PORT),$(ADDR))DanteEnergyBaselineThreshold")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteBaselineThreshold")
 }
 
 record(ai,"$(P)$(R)BaselineThreshold_RBV") {
     field(DESC,"Energy baseline threshold")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteEnergyBaselineThreshold")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteBaselineThresholdRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -230,7 +230,7 @@ record(ai,"$(P)$(R)MaxRiseTime_RBV") {
     field(DESC,"Max rise time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteMaxRiseTime")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteMaxRiseTimeRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -264,7 +264,7 @@ record(ai,"$(P)$(R)PeakingTime_RBV") {
     field(DESC,"Peaking time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DantePeakingTime")
+    field(INP,"@asyn($(PORT),$(ADDR))DantePeakingTimeRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -281,24 +281,24 @@ record(ai,"$(P)$(R)MaxPeakingTime_RBV") {
     field(DESC,"Max peaking time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteMaxPeakingTime")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteMaxPeakingTimeRBV")
     field(SCAN, "I/O Intr")
 }
 
 record(ao,"$(P)$(R)FastPeakingTime") {
-    field(DESC,"Edge peaking time")
+    field(DESC,"Fast peaking time")
     field(PINI,"YES")
     field(PREC,"3")
     field(VAL,"2")
     field(DTYP, "asynFloat64")
-    field(OUT,"@asyn($(PORT),$(ADDR))DanteEdgePeakingTime")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteFastPeakingTime")
 }
 
 record(ai,"$(P)$(R)FastPeakingTime_RBV") {
-    field(DESC,"Edge peaking time")
+    field(DESC,"Fast peaking time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteEdgePeakingTime")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteFastPeakingTimeRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -315,24 +315,24 @@ record(ai,"$(P)$(R)FlatTopTime_RBV") {
     field(DESC,"Flat top time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteFlatTop")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteFlatTopRBV")
     field(SCAN, "I/O Intr")
 }
 
 record(ao,"$(P)$(R)FastFlatTopTime") {
-    field(DESC,"Edge flat top time")
+    field(DESC,"Fast flat top time")
     field(PINI,"YES")
     field(PREC,"3")
     field(VAL,"0")
     field(DTYP, "asynFloat64")
-    field(OUT,"@asyn($(PORT),$(ADDR))DanteEdgeFlatTop")
+    field(OUT,"@asyn($(PORT),$(ADDR))DanteFastFlatTop")
 }
 
 record(ai,"$(P)$(R)FastFlatTopTime_RBV") {
-    field(DESC,"Edge flat top time")
+    field(DESC,"Fast flat top time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteEdgeFlatTop")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteFastFlatTopRBV")
     field(SCAN, "I/O Intr")
 }
 
@@ -351,7 +351,7 @@ record(ai,"$(P)$(R)ResetRecoveryTime_RBV") {
     field(DESC,"Reset recovery time")
     field(PREC,"3")
     field(DTYP, "asynFloat64")
-    field(INP,"@asyn($(PORT),$(ADDR))DanteResetRecoveryTime")
+    field(INP,"@asyn($(PORT),$(ADDR))DanteResetRecoveryTimeRBV")
     field(SCAN, "I/O Intr")
 }
 

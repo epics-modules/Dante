@@ -79,7 +79,7 @@ struct mappingAdvStats {
 #define DanteLastTimeStampString            "DanteLastTimeStamp"
 #define DanteTriggersString                 "DanteTriggers"
 #define DanteEventsString                   "DanteEvents"
-#define DanteEdgeDTString                   "DanteEdgeDT"
+#define DanteFastDTString                   "DanteFastDT"
 #define DanteFilt1DTString                  "DanteFilt1DT"
 #define DanteZeroCountsString               "DanteZeroCounts"
 #define DanteBaselinesValueString           "DanteBaselinesValue"
@@ -90,16 +90,26 @@ struct mappingAdvStats {
 
 /* Configuration parameters */
 #define DanteFastFilterThresholdString      "DanteFastFilterThreshold"
+#define DanteFastFilterThresholdRBVString   "DanteFastFilterThresholdRBV"
 #define DanteEnergyFilterThresholdString    "DanteEnergyFilterThreshold"
-#define DanteEnergyBaselineThresholdString  "DanteEnergyBaselineThreshold"
+#define DanteEnergyFilterThresholdRBVString "DanteEnergyFilterThresholdRBV"
+#define DanteBaselineThresholdString        "DanteBaselineThreshold"
+#define DanteBaselineThresholdRBVString     "DanteBaselineThresholdRBV"
 #define DanteMaxRiseTimeString              "DanteMaxRiseTime"
+#define DanteMaxRiseTimeRBVString           "DanteMaxRiseTimeRBV"
 #define DanteGainString                     "DanteGain"
 #define DantePeakingTimeString              "DantePeakingTime"
+#define DantePeakingTimeRBVString           "DantePeakingTimeRBV"
 #define DanteMaxPeakingTimeString           "DanteMaxPeakingTime"
+#define DanteMaxPeakingTimeRBVString        "DanteMaxPeakingTimeRBV"
 #define DanteFlatTopString                  "DanteFlatTop"
-#define DanteEdgePeakingTimeString          "DanteEdgePeakingTime"
-#define DanteEdgeFlatTopString              "DanteEdgeFlatTop"
+#define DanteFlatTopRBVString               "DanteFlatTopRBV"
+#define DanteFastPeakingTimeString          "DanteFastPeakingTime"
+#define DanteFastPeakingTimeRBVString       "DanteFastPeakingTimeRBV"
+#define DanteFastFlatTopString              "DanteFastFlatTop"
+#define DanteFastFlatTopRBVString           "DanteFastFlatTopRBV"
 #define DanteResetRecoveryTimeString        "DanteResetRecoveryTime"
+#define DanteResetRecoveryTimeRBVString     "DanteResetRecoveryTimeRBV"
 #define DanteZeroPeakFreqString             "DanteZeroPeakFreq"
 #define DanteBaselineSamplesString          "DanteBaselineSamples"
 #define DanteInvertedInputString            "DanteInvertedInput"
@@ -165,7 +175,7 @@ protected:
     int DanteLastTimeStamp;       /* float64 */
     int DanteTriggers;            /* uint32 */
     int DanteEvents;              /* uint32 */
-    int DanteEdgeDT;              /* uint32 */
+    int DanteFastDT;              /* uint32 */
     int DanteFilt1DT;             /* uint32 */
     int DanteZeroCounts;          /* uint32 */
     int DanteBaselinesValue;      /* uint32 */
@@ -176,20 +186,30 @@ protected:
 
     /* Configuration parameters */
     int DanteFastFilterThreshold;         /* float64, keV */
+    int DanteFastFilterThresholdRBV;      /* float64, keV */
     int DanteEnergyFilterThreshold;       /* float64, keV */
-    int DanteEnergyBaselineThreshold;     /* float64, keV */
+    int DanteEnergyFilterThresholdRBV;    /* float64, keV */
+    int DanteBaselineThreshold;           /* float64, keV */
+    int DanteBaselineThresholdRBV;        /* float64, keV */
     int DanteMaxRiseTime;                 /* float64, usec */
+    int DanteMaxRiseTimeRBV;              /* float64, usec */
     int DanteGain;                        /* float64, bins/ADC bit */
     int DantePeakingTime;                 /* float64, usec */
+    int DantePeakingTimeRBV;              /* float64, usec */
     int DanteMaxPeakingTime;              /* float64, usec */
+    int DanteMaxPeakingTimeRBV;           /* float64, usec */
     int DanteFlatTop;                     /* float64, usec */
-    int DanteEdgePeakingTime;             /* float64, usec */
-    int DanteEdgeFlatTop;                 /* float64, usec */
+    int DanteFlatTopRBV;                  /* float64, usec */
+    int DanteFastPeakingTime;             /* float64, usec */
+    int DanteFastPeakingTimeRBV;          /* float64, usec */
+    int DanteFastFlatTop;                 /* float64, usec */
+    int DanteFastFlatTopRBV;              /* float64, usec */
     int DanteResetRecoveryTime;           /* float64, usec */
+    int DanteResetRecoveryTimeRBV;        /* float64, usec */
     int DanteZeroPeakFreq;                /* float64, cps */
     int DanteBaselineSamples;             /* uint32 */
     int DanteInvertedInput;               /* uint32 */
-    int DanteTimeConstant;                /* float64, units? */
+    int DanteTimeConstant;                /* float64, microseconds */
     int DanteBaseOffset;                  /* uint32, bits */
     int DanteResetThreshold;              /* uint32, bits */
     
