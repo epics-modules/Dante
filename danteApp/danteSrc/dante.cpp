@@ -1135,6 +1135,8 @@ asynStatus Dante::startAcquiring()
       case DanteModeMCAMapping:
         setIntegerParam(DanteCurrentPixel, 0);
         msTime = (uint32_t)(presetReal * 1000);
+asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s calling start_map(), msTime=%u, mappingPoints=%d, numChannels=%d\n", 
+driverName, functionName, msTime, mappingPoints, numChannels);
         callId_ = start_map(danteIdentifier_, msTime, (uint32_t)mappingPoints, numChannels);
         waitReply(callId_, danteReply_, "start_map");
         break;
@@ -1271,7 +1273,7 @@ asynStatus Dante::pollMCAMappingMode()
             return asynError;
         }
 asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d, numSpectra=%d\n", driverName, functionName, board, itemp);
-        if (board == 0) {
+        if (board == activeBoards_[0]) {
             numAvailable = itemp;
         } else if (itemp < numAvailable) {
             numAvailable = itemp;
@@ -1414,7 +1416,7 @@ asynStatus Dante::pollListMode()
         itemp = std::min((int)itemp, listBufferSize);
         totalEvents += itemp;
         numEventsAvailable_[board] = itemp;
-        if (board == 0) {
+        if (board == activeBoards_[0]) {
             maxAvailable = itemp;
         } else if (itemp > maxAvailable) {
             maxAvailable = itemp;
