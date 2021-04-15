@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
     waitReply(callId, danteReply);
     printf("configure complete\n");
 
-    printf("Calling start_map\n");
+    printf("Calling start_map, acqTimeMs=%u, mappingPoints=%u, numMCAChannels=%u\n", acqTimeMs, mappingPoints, numMCAChannels);
     callId = start_map(danteIdentifier, acqTimeMs, mappingPoints, numMCAChannels);
     waitReply(callId, danteReply);
     printf("start_map complete\n");
@@ -236,6 +236,7 @@ int main(int argc, char *argv[])
     while (anyBoardBusy) {
         mySleep(pollTimeMs/1000.);
         anyBoardBusy = false;
+        uint32_t minAvailable;
         for (int board=0; board<numBoards; board++) {
             bool lastDataReceived;
             isLastDataReceived(danteIdentifier, board, lastDataReceived);
@@ -249,25 +250,30 @@ int main(int argc, char *argv[])
                 printf("%s::%s error calling getAvailableData\n", driverName, functionName);
             }
             printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable);
-            if (numAvailable == 0) continue;
-    
-            uint32_t spectraSize = numMCAChannels;
-    
+            if (board == 0) {
+                minAvailable = numAvailable;
+            } else if (numAvailable < minAvailable) {
+                minAvailable = numAvailable;
+            }
+        }
+        if (minAvailable == 0) continue;
+        printf("Minimum number of spectra available=%d\n", minAvailable);
+        uint32_t spectraSize = numMCAChannels;
+        for (int board=0; board<numBoards; board++) {
             // There is a bug in their library, need to allocate 4096 channels
-            //uint16_t *pMappingMCAData                = (uint16_t *) malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
-            uint16_t *pMappingMCAData                = (uint16_t *) malloc(numAvailable * 4096 * sizeof(uint16_t));
-            uint32_t *pSpectraId                     = (uint32_t *) malloc(numAvailable * sizeof(uint32_t));
-            struct mappingStats *pMappingStats       = (mappingStats *) malloc(numAvailable * sizeof(struct mappingStats));
-            struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(numAvailable * sizeof(struct mappingAdvStats));
+            //uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * numMCAChannels * sizeof(uint16_t));
+            uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * 4096 * sizeof(uint16_t));
+            uint32_t *pSpectraId                     = (uint32_t *) malloc(minAvailable * sizeof(uint32_t));
+            struct mappingStats *pMappingStats       = (mappingStats *) malloc(minAvailable * sizeof(struct mappingStats));
+            struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(minAvailable * sizeof(struct mappingAdvStats));
     
             if (!getAllData(danteIdentifier, board, pMappingMCAData, pSpectraId,
-                            (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, numAvailable)) {
+                            (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, minAvailable)) {
                 printf("%s::%s error calling getAllData\n", driverName, functionName);
             }
-    
-            currentPixel[board] += numAvailable;
+            currentPixel[board] += minAvailable;
             printf("getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n", 
-                board, numAvailable, pSpectraId[0], currentPixel[board]);
+                board, minAvailable, pSpectraId[0], currentPixel[board]);
             free(pMappingMCAData);
             free(pSpectraId);
             free(pMappingStats);
