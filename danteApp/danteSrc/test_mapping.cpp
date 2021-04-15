@@ -97,6 +97,7 @@ int main(int argc, char *argv[])
     uint32_t acqTimeMs;
     uint32_t pollTimeMs;
     uint32_t mappingPoints;
+    int board;
     int numMCAChannels = 2048;
     double maxEnergy = 25;
     double mcaBinWidth;
@@ -197,15 +198,17 @@ int main(int argc, char *argv[])
 
     mcaBinWidth = maxEnergy/numMCAChannels;
 
-    pConfig->fast_filter_thr = uint32_t(round(0.1 / mcaBinWidth));
-    pConfig->energy_filter_thr = uint32_t(round(3.0 / mcaBinWidth));
-    pConfig->energy_baseline_thr = uint32_t(round(3.0 / mcaBinWidth));
+    pConfig->fast_filter_thr = uint32_t(round(2.0 / mcaBinWidth));
+    pConfig->energy_filter_thr = uint32_t(round(0.0 / mcaBinWidth));
+    pConfig->energy_baseline_thr = uint32_t(round(0.0 / mcaBinWidth));
     pConfig->max_risetime = uint32_t(round(0.20 * usecToFastSample));
-    pConfig->gain = 1.0;
+    pConfig->gain = 7.0;
     pConfig->peaking_time = uint32_t(round(2.0 * usecToSlowSample));
-    pConfig->max_peaking_time = uint32_t(round(2.0 * usecToSlowSample));
+    //pConfig->max_peaking_time = uint32_t(round(2.0 * usecToSlowSample));
+    // Must be 0 for LE firmware
+    pConfig->max_peaking_time = uint32_t(round(0 * usecToSlowSample));
     pConfig->flat_top = uint32_t(round(0.10 * usecToSlowSample));
-    pConfig->edge_peaking_time = uint32_t(round(0.05 * usecToFastSample));
+    pConfig->edge_peaking_time = uint32_t(round(0.2 * usecToFastSample));
     pConfig->edge_flat_top = uint32_t(round(0.01 * usecToFastSample));
     pConfig->reset_recovery_time = uint32_t(round(4.0 * usecToFastSample));
     pConfig->zero_peak_freq = 1.;
@@ -214,18 +217,44 @@ int main(int argc, char *argv[])
     pConfig->time_constant = 0;
     pConfig->base_offset = 0;
     pConfig->overflow_recovery = uint32_t(round(0.0 * usecToFastSample));
-    pConfig->reset_threshold = 1000;
+    pConfig->reset_threshold = 300;
     pConfig->tail_coefficient = 0.0;
 
-    printf("Calling configure\n");
-    callId = configure(danteIdentifier, 0, *pConfig);
-    if (callId < 0) {
-        printf("%s:%s: error calling configure = %d\n",
-            driverName, functionName, callId);
-            return -1;
+    for (board=0; board<numBoards; board++) {
+        printf("Calling configure for board %d\n", board);
+        callId = configure(danteIdentifier, board, *pConfig);
+        if (callId < 0) {
+            printf("%s:%s: error calling configure = %d\n",
+                driverName, functionName, callId);
+                return -1;
+        }
+        waitReply(callId, danteReply);
+        printf("configure complete for board %d\n", board);
     }
-    waitReply(callId, danteReply);
-    printf("configure complete\n");
+
+    struct configuration_offset cfgOffset;
+    cfgOffset.offset_val1 = 128;
+    cfgOffset.offset_val2 = 128;
+    for (board=0; board<numBoards; board++) {
+        printf("Calling configure_offset for board %d\n", board);
+        callId = configure_offset(danteIdentifier, board, cfgOffset);
+        waitReply(callId, danteReply);
+        printf("configure_offset complete for board %d\n", board);
+    }
+
+    for (board=0; board<numBoards; board++) {
+        printf("Calling configure_input for board %d\n", board);
+        callId = configure_input(danteIdentifier, board, DC_HighImp);
+        waitReply(callId, danteReply);
+        printf("configure_input complete for board %d\n", board);
+    }
+
+    for (board=0; board<numBoards; board++) {
+        printf("Calling configure_gating for board %d\n", board);
+        callId = configure_gating(danteIdentifier, FreeRunning, board);
+        waitReply(callId, danteReply);
+        printf("configure_gating complete for board %d\n", board);
+    }
 
     printf("Calling start_map, acqTimeMs=%u, mappingPoints=%u, numMCAChannels=%u\n", acqTimeMs, mappingPoints, numMCAChannels);
     callId = start_map(danteIdentifier, acqTimeMs, mappingPoints, numMCAChannels);
@@ -237,7 +266,7 @@ int main(int argc, char *argv[])
         mySleep(pollTimeMs/1000.);
         anyBoardBusy = false;
         uint32_t minAvailable;
-        for (int board=0; board<numBoards; board++) {
+        for (board=0; board<numBoards; board++) {
             bool lastDataReceived;
             isLastDataReceived(danteIdentifier, board, lastDataReceived);
             if (lastDataReceived) {
@@ -259,7 +288,7 @@ int main(int argc, char *argv[])
         if (minAvailable == 0) continue;
         printf("Minimum number of spectra available=%d\n", minAvailable);
         uint32_t spectraSize = numMCAChannels;
-        for (int board=0; board<numBoards; board++) {
+        for (board=0; board<numBoards; board++) {
             // There is a bug in their library, need to allocate 4096 channels
             //uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * numMCAChannels * sizeof(uint16_t));
             uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * 4096 * sizeof(uint16_t));
