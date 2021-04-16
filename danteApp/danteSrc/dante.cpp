@@ -64,6 +64,7 @@ struct danteMessage {
 // This global is needed because their callback does not have a private pointer.
 // This will work as long as a single process does not create more than 1 Dante object
 Dante *pDanteGlobal;
+uint32_t totalMappingPointsCollected[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 static void danteCallback(uint16_t type, uint32_t call_id, uint32_t length, uint32_t* data)
 {
@@ -1133,6 +1134,14 @@ asynStatus Dante::startAcquiring()
         waitReply(callId_, danteReply_, "start");
         break;
       case DanteModeMCAMapping:
+	totalMappingPointsCollected[0] = 0;
+	totalMappingPointsCollected[1] = 0;
+	totalMappingPointsCollected[2] = 0;
+	totalMappingPointsCollected[3] = 0;
+	totalMappingPointsCollected[4] = 0;
+	totalMappingPointsCollected[5] = 0;
+	totalMappingPointsCollected[6] = 0;
+	totalMappingPointsCollected[7] = 0;
         setIntegerParam(DanteCurrentPixel, 0);
         msTime = (uint32_t)(presetReal * 1000);
 asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s calling start_map(), msTime=%u, mappingPoints=%d, numChannels=%d\n", 
@@ -1272,7 +1281,9 @@ asynStatus Dante::pollMCAMappingMode()
             asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s::%s error calling getAvailableData\n", driverName, functionName);
             return asynError;
         }
-asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d, numSpectra=%d\n", driverName, functionName, board, itemp);
+	asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s::getAvailableData(): board=%d, numSpectra=%d\n", driverName, functionName, board, itemp);
+	totalMappingPointsCollected[board] += itemp;
+	asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s - totalMappingPointsCollected - board=%d, totSpectra=%d\n", driverName, functionName, board, totalMappingPointsCollected[board]);
         if (board == activeBoards_[0]) {
             numAvailable = itemp;
         } else if (itemp < numAvailable) {
