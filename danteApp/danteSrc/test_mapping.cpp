@@ -97,6 +97,7 @@ int main(int argc, char *argv[])
     uint32_t acqTimeMs;
     uint32_t pollTimeMs;
     uint32_t mappingPoints;
+    uint32_t gatingMode;
     int board;
     int numMCAChannels = 2048;
     double maxEnergy = 25;
@@ -110,15 +111,17 @@ int main(int argc, char *argv[])
     char ipAddress[100];
     const char *functionName = "Dante";
 
-    if (argc != 5) {
-        printf("Usage: test_mapping ipAddress acquireTime pollTimeMs mappingPoints\n");
+    if (argc != 6) {
+        printf("Usage: test_mapping ipAddress acquireTime pollTimeMs mappingPoints gatingMode\n");
         exit(-1);
     }
     strcpy(ipAddress, argv[1]);
     acqTimeMs = atoi(argv[2]);
     pollTimeMs = atoi(argv[3]);
     mappingPoints = atoi(argv[4]);
-    printf("IP address=%s, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d\n", ipAddress, acqTimeMs, pollTimeMs, mappingPoints);
+    gatingMode = atoi(argv[5]);
+    printf("IP address=%s, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d, gatingMode=%d\n", 
+           ipAddress, acqTimeMs, pollTimeMs, mappingPoints, gatingMode);
 
     if (!InitLibrary()) {
         printf("%s::%s error calling InitLibrary\n", driverName, functionName);
@@ -250,8 +253,8 @@ int main(int argc, char *argv[])
     }
 
     for (board=0; board<numBoards; board++) {
-        printf("Calling configure_gating for board %d\n", board);
-        callId = configure_gating(danteIdentifier, FreeRunning, board);
+        printf("Calling configure_gating for board %d mode=%d\n", board, gatingMode);
+        callId = configure_gating(danteIdentifier, (GatingMode)gatingMode, board);
         waitReply(callId, danteReply);
         printf("configure_gating complete for board %d\n", board);
     }
