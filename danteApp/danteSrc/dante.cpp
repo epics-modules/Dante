@@ -536,11 +536,27 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
         for (int board=0; board<totalBoards_; board++) {
             int enable;
             getIntegerParam(board, DanteEnableBoard, &enable);
+			asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: getIntegerParam(DanteEnableBoard)=%d\n", driverName, functionName, board, enable);
             if (enable) {
-                activeBoards_.push_back(board);
-//                disableBoard(danteIdentifier_, board, false);
-            } else {
-//                disableBoard(danteIdentifier_, board, true);
+				callId_ = disableBoard(danteIdentifier_, board, false);
+				waitReply(callId_, danteReply_, "disableBoard");
+				if (callId_ != 0) {
+					activeBoards_.push_back(board);
+					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enabled. In list.\n", driverName, functionName, board);
+				}
+				else {
+					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enable failed. Not in list.\n", driverName, functionName, board);
+				}
+            }
+			else {
+				callId_ = disableBoard(danteIdentifier_, board, true);
+				waitReply(callId_, danteReply_, "disableBoard");
+				if (callId_ != 0) {
+					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disabled.\n", driverName, functionName, board);
+				}
+				else {
+					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disable failed.\n", driverName, functionName, board);
+				}
             }
         }
     }
