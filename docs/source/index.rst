@@ -633,10 +633,7 @@ and the number of MCA channels on the Dante8. The tests were done under the foll
 - WaitForPlugins = Yes
 - TriggerMode = FreeRunning
 
-The PresetReal time was decreased in 1 ms steps until the mapping mode acquisition was no longer keeping up on all boards.
-This is a conservative criterion, because sometimes even at shorter times the acquisition would successfully complete.  
-But it was likely to fail for more mapping points because spectra on the higher boards were not being read at the rate
-as the lower boards, so buffers are likely to eventually overflow.
+The PresetReal time was decreased in 1 ms steps until the mapping mode acquisition no longer collected the requested number of pixels.
 
 The PresetReal time on the Dante is limited to multiples of 1 ms,
 so the pixel rate in FreeRun mode is limited to 1000, 500, 333, 250, etc.
@@ -660,12 +657,12 @@ so the pixel rate in FreeRun mode is limited to 1000, 500, 333, 250, etc.
      - 1000
      - 1000
      - 500
-     - 250
+     - 333
    * - 4096
      - 1000
-     - 500
-     - 250
-     - 125
+     - 1000
+     - 1000
+     - 1000
 
 Dante8 externally triggered mapping mode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -683,10 +680,7 @@ and the number of MCA channels on the Dante8. The tests were done under the foll
 The Dante8 was triggered by an external programmable pulse generator.  The pulse width was 10 microseconds.
 The pulse generator was programmed to output 2000 pulses.
 
-The pulse frequency was increased until the mapping mode acquisition was no longer keeping up on all boards.
-This is a conservative criterion, because sometimes even at shorter times the acquisition would successfully complete.  
-But it was likely to fail for more mapping points because spectra on the higher boards were not being read at the rate
-as the lower boards, so buffers are likely to eventually overflow.
+The pulse frequency was increased until the mapping mode acquisition no longer collected the requested number of pixels.
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table:: Maximum pixel rate in Hz (spectra/board/second) for TriggerMode=Trig Rising
