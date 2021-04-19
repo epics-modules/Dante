@@ -12,6 +12,14 @@ include "NDArrayBase.template"
 # General parameters      #
 ###########################
 
+record(bo,"$(P)$(R)EnableConfigure") {
+    field(DTYP, "asynInt32")
+    field(OUT,"@asyn($(PORT))DanteEnableConfigure")
+    field(ZNAM, "Disable")
+    field(ONAM, "Enable")
+    field(VAL, "0")
+}
+
 record(longin,"$(P)$(R)CurrentPixel") {
     field(DESC,"Current pixel")
     field(DTYP, "asynInt32")
@@ -129,21 +137,21 @@ record(bo,"$(P)$(R)StopAll") {
 record(ao,"$(P)$(R)PresetReal") {
     field(DTYP, "asynFloat64")
     field(OUT, "@asyn($(PORT))MCA_PRESET_REAL")
-    field(PREC, "2")
+    field(PREC, "3")
 }
 
 record(ai,"$(P)$(R)ElapsedReal") {
     field(SCAN,"I/O Intr")
     field(DTYP, "asynFloat64")
     field(INP, "@asyn($(PORT))MCA_ELAPSED_REAL")
-    field(PREC, "2")
+    field(PREC, "3")
 }
 
 record(ai,"$(P)$(R)ElapsedLive") {
     field(SCAN,"I/O Intr")
     field(DTYP, "asynFloat64")
     field(INP, "@asyn($(PORT))MCA_ELAPSED_LIVE")
-    field(PREC, "2")
+    field(PREC, "3")
 }
 
 record(ai,"$(P)$(R)DeadTime") {

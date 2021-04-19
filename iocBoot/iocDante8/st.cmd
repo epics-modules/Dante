@@ -44,7 +44,7 @@ set_requestfile_path("$(DANTE)/danteApp/Db")
 set_requestfile_path("$(MCA)/mcaApp/Db")
 
 asynSetTraceIOMask($(PORT),0,ESCAPE)
-#asynSetTraceMask($(PORT),0,ERROR|DRIVER)
+asynSetTraceMask($(PORT),0,ERROR|WARNING)
 
 iocInit
 
@@ -53,3 +53,15 @@ seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=8")
 ### Start up the autosave task and tell it what to do.
 # Save settings every thirty seconds
 create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante:, M=mca1")
+
+# Wait 5 seconds for all records with PINI=YES to process
+epicsThreadSleep(5)
+
+# Enable downloading configurations
+dbpf("$(PREFIX)dante:EnableConfigure", "Enable")
+
+# There is a problem with the GatingMode record.
+# Even though it has PINI=YES and has already processed and written the value to the Dante,
+# the value appears to have been changed, and it need to be processed again.  
+# This needs to be tracked down.
+dbpf("$(PREFIX)dante:GatingMode.PROC", "1")

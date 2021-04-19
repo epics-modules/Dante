@@ -60,6 +60,7 @@ struct mappingAdvStats {
 #define DantePollTimeString                 "DantePollTime"
 #define DanteForceReadString                "DanteForceRead"
 #define DanteEnableBoardString              "DanteEnableBoard"
+#define DanteEnableConfigureString          "DanteEnableConfigure"
 
 /* Diagnostic trace parameters */
 #define DanteTraceDataString                "DanteTraceData"
@@ -156,6 +157,7 @@ protected:
     int DantePollTime;             /** < Status/data polling time in seconds */
     int DanteForceRead;            /** < Force reading MCA spectra - used for mcaData when addr=ALL */
     int DanteEnableBoard;          /** < Enable/disable specific board */
+    int DanteEnableConfigure;      /** < Enable/disable calling configure() when a parameter changes */
 
     /* Diagnostic trace parameters */
     int DanteTraceData;            /** < The trace array data (read) int32 array */

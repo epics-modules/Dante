@@ -200,6 +200,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     createParam(DantePollTimeString,               asynParamFloat64, &DantePollTime);
     createParam(DanteForceReadString,              asynParamInt32,   &DanteForceRead);
     createParam(DanteEnableBoardString,            asynParamInt32,   &DanteEnableBoard);
+    createParam(DanteEnableConfigureString,        asynParamInt32,   &DanteEnableConfigure);
 
     /* Diagnostic trace parameters */
     createParam(DanteTraceDataString,              asynParamInt32Array,   &DanteTraceData);
@@ -524,13 +525,22 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     else if (function == DanteReadTrace) {
         status = this->getTraces();
     }
+    else if ((function == DanteEnableConfigure) && (value == 1)) {
+        // enableConfigure has been set to 1, download configuration for all active boards
+        for (const auto& board: activeBoards_) {
+            setDanteConfiguration(board);
+        }
+    }
     else if (function == DanteEnableBoard) {
         activeBoards_.clear();
-        for (int i=0; i<totalBoards_; i++) {
+        for (int board=0; board<totalBoards_; board++) {
             int enable;
-            getIntegerParam(i, DanteEnableBoard, &enable);
+            getIntegerParam(board, DanteEnableBoard, &enable);
             if (enable) {
-                activeBoards_.push_back(i);
+                activeBoards_.push_back(board);
+//                disableBoard(danteIdentifier_, board, false);
+            } else {
+//                disableBoard(danteIdentifier_, board, true);
             }
         }
     }
@@ -692,12 +702,16 @@ asynStatus Dante::setDanteConfiguration(int addr)
     double maxEnergy;
     double dValue;
     int iValue;
+    int enableConfigure;
     double mcaBinWidth;
     double usecToFastSample = 1e-6/8e-9;
     double usecToSlowSample = 1e-6/32e-9;
     int numChannels;
     static const char *functionName = "setDanteParam";
 
+    getIntegerParam(addr, DanteEnableConfigure, &enableConfigure);
+    // If enableConfigure is 0 then we don't do anything
+    if (!enableConfigure) return asynSuccess;
     getDoubleParam(addr, DanteMaxEnergy, &maxEnergy);
     getIntegerParam(addr, mcaNumChannels, &numChannels);
     mcaBinWidth = maxEnergy/numChannels;
