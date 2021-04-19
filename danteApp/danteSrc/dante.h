@@ -6,31 +6,31 @@
 #include <epicsMessageQueue.h>
 
 typedef enum {
-    DanteModeMCA, 
+    DanteModeMCA,
     DanteModeMCAMapping,
     DanteModeList,
 } danteCollectMode_t;
 
 struct mappingStats {
-  	double real_time;
-  	double live_time;
-  	double ICR;
-  	double OCR;
+    double real_time;
+    double live_time;
+    double ICR;
+    double OCR;
 };
 
 struct mappingAdvStats {
-  	uint64_t last_timestamp;
-  	uint64_t detected;
-  	uint64_t measured;
-  	uint64_t edge_dt;
-  	uint64_t filt1_dt;
-  	uint64_t zerocounts;
-  	uint64_t baselines_value;
-  	uint64_t pup_value;
-  	uint64_t pup_f1_value;
-  	uint64_t pup_notf1_value;
-  	uint64_t reset_counter_value;
-  	uint64_t spectra_in_FIFO;
+    uint64_t last_timestamp;
+    uint64_t detected;
+    uint64_t measured;
+    uint64_t edge_dt;
+    uint64_t filt1_dt;
+    uint64_t zerocounts;
+    uint64_t baselines_value;
+    uint64_t pup_value;
+    uint64_t pup_f1_value;
+    uint64_t pup_notf1_value;
+    uint64_t reset_counter_value;
+    uint64_t spectra_in_FIFO;
     uint64_t x_position;
     uint64_t x_timestamp;
     uint64_t gateRising;
@@ -214,7 +214,7 @@ protected:
     int DanteTimeConstant;                /* float64, microseconds */
     int DanteBaseOffset;                  /* uint32, bits */
     int DanteResetThreshold;              /* uint32, bits */
-    
+
     /* Other parameters */
     int DanteInputMode;                   /* int32 */
     int DanteAnalogOffset;                /* int32, 8-bit DAC units */
@@ -278,7 +278,7 @@ private:
     epicsEvent *cmdStopEvent_;
     epicsEvent *stoppedEvent_;
     epicsMessageQueue *msgQ_;
-    
+
     char danteIdentifier_[MAX_DANTE_IDENTIFIER_LEN];
     uint32_t callId_;
     char danteReply_[MAX_DANTE_REPLY_LEN];
@@ -289,7 +289,7 @@ private:
     int32_t *traceBufferInt32_;
     epicsFloat64 *traceTimeBuffer_;
     epicsFloat64 *spectrumXAxisBuffer_;
-    
+
     bool polling_;
 
 };
