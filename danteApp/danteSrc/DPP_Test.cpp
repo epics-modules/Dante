@@ -18,6 +18,10 @@
 #include <map>
 #include <future>
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <math.h>
+#include <algorithm>
 
 #ifdef WIN32
 #include <direct.h>
@@ -29,6 +33,7 @@ char* GetCurrentWorkingDir(void) {
 #endif
 
 uint32_t answer_data[10];
+bool overall_result = true;
 
 #ifdef POLLINGLIB
 #define WAIT_ANS_RETRIES 100
@@ -204,207 +209,16 @@ bool check_func_result(char* func_to_test_str, bool func_to_test_res, int16_t bo
 	}
 }
 
-int32_t main(int argc, char* argv[])
+void Test_SingleSpectrum_Timed(char * identifier, uint16_t chain, uint32_t spectra_size)
 {
-#ifdef POLLING_LIB
-	printf("\n\nPOLLING library\n\n");
-#else
-	printf("\n\nCALLBACK library\n\n");
-#endif
-	bool overall_result = true;
-	bool result = true;
-	bool stopped = false;
-	uint16_t err_code = error_code::DLL_NO_ERROR;
-
-	char ip[] = "164.54.160.186";
-	char mask[] = "255.255.255.0";
-	char gw[] = "164.54.160.1";
-
-	char identifier[16];
-
-	// Test getLastError() Start.
-	overall_result = overall_result && check_func_result("getLastError()", getLastError(err_code));
-	// Test getLastError() End.	
-
-	// Test resetLastError() Start.
-	overall_result = overall_result && check_func_result("resetLastError()", resetLastError());
-	getLastError(err_code);
-	if (err_code != error_code::DLL_NO_ERROR)
-	{
-		std::cout << "WARNING:: checked error code after reset is: " << err_code << ". Test resetLastError(): Fail.\n\n";
-		overall_result = overall_result && false;
-	}
-	// Test resetLastError() End.
-
-#ifndef POLLINGLIB
-	// Test register_callback() Start.
-	overall_result = overall_result && check_func_result("register_callback()", register_callback(callback_func));
-	// Test register_callback() End.
-#endif
-
-	// Test initLibrary() Start.
-	overall_result = overall_result && check_func_result("InitLibrary()", InitLibrary());
-	// Test initLibrary() End.
-
-	// Test libVersion() Start.
-	uint32_t version_size = 20;
-	char version[20];
-	result = check_func_result("libVersion()", libVersion(version, version_size));
-	if (result)
-		std::cout << "Version is: " << version << "\n\n";
-	overall_result = overall_result && result;
-	// Test libVersion() End.
-
-	// Test flush_local_eth_conn() Start.
-	//overall_result = overall_result && check_func_result("flush_local_eth_conn()", flush_local_eth_conn(ip));
-	//std::this_thread::sleep_for(std::chrono::seconds(10)); // Wait for system to correctly close all connections.
-	// Test flush_local_eth_conn() End.
-
-	// Test add_to_query() Start.
-	overall_result = overall_result && check_func_result("add_to_query()", add_to_query(ip));
-	// Test add_to_query() End.
-
-	// Test remove_from_query() Start.
-	overall_result = overall_result && check_func_result("remove_from_query()", remove_from_query(ip));
-	// Test remove_from_query() End.
-
-	// If the device is connected via Ethernet, add it's IP to the query.
-	if (add_to_query(ip))
-	{
-		std::cout << "Added IP: " << std::string(ip) << " to the query.\n\n";
-
-	}
-	else
-	{
-		std::cout << "Error adding the IP to thew query.\n\n";
-		overall_result = overall_result && false;;
-	}
-
-	std::this_thread::sleep_for(std::chrono::seconds(4)); // Wait for the boards to be found by the DLL.
-
-	// Test get_dev_number() Start.
-	uint16_t dev_nb;
-	result = check_func_result("get_dev_number()", get_dev_number(dev_nb));
-	if (result)
-		std::cout << "Number of recognized boards: " << dev_nb << "\n\n";
-	overall_result = overall_result && result;
-	// Test get_dev_number() End.
-
-	// Test get_ids() Start.
-	uint16_t nb = 0;
-	uint16_t id_size = 16;
-	result = check_func_result("get_ids()", get_ids(identifier, nb, id_size));
-	if (result)
-	{
-		std::cout << "Identifier of recognized board: " << identifier << "\n\n";
-	}
-	overall_result = overall_result && result;
-	// Test get_ids() End.
-
-	// Test get_boards_in_chain() Start.
-	uint16_t chain = 1;
-	result = check_func_result("get_boards_in_chain()", get_boards_in_chain(identifier, chain));
-	if (result)
-		std::cout << "Number of boards in the chain: " << chain << "\n\n";
-	overall_result = overall_result && result;
-	// Test get_boards_in_chain() End.
-
-	uint32_t call_id;
-
-	// Test getFirmware() Start.
-	for (uint16_t i = 0; i < chain; i++)
-	{
-		overall_result = overall_result && check_func_result("getFirmware()", getFirmware(identifier, i), i);
-	}
-	// Test getFirmware() End.
-
-	// Test write_IP_configuration() Start.
-	overall_result = overall_result && check_func_result("write_IP_configuration()", write_IP_configuration(identifier, ip, mask, gw));
-	// Test write_IP_configuration() End.
-
-	// Test configure() Start.
-	autoScanSlaves(false);	// it is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
-	std::this_thread::sleep_for(std::chrono::milliseconds(50));	// wait 50ms
-
-	configuration cfg;
-	cfg.fast_filter_thr = 100;
-	cfg.energy_filter_thr = 5;
-	cfg.max_risetime = 5;
-	cfg.baseline_samples = 0;
-	cfg.edge_peaking_time = 4;
-	cfg.max_peaking_time = 64;
-	cfg.edge_flat_top = 1;
-	cfg.flat_top = 7;
-	cfg.gain = 1;
-	cfg.peaking_time = 64;
-	cfg.reset_recovery_time = 200;
-	cfg.inverted_input = false;
-	cfg.zero_peak_freq = 1;
-	for (uint16_t i = 0; i < chain; i++)
-	{
-		overall_result = overall_result && check_func_result("configure()", configure(identifier, i, cfg), i);
-	}
-	// Test configure() End.
-
-	// Test configure_gating() Start.
-	for (uint16_t i = 0; i < chain; i++)
-	{
-		overall_result = overall_result && check_func_result("configure_gating()", configure_gating(identifier, FreeRunning, i), i);
-	}
-	// Test configure_gating() End.
-
-	// Test configure_offset() Start.
-	configuration_offset cfg_offset;
-	cfg_offset.offset_val1 = 128;
-	cfg_offset.offset_val2 = 128;
-	for (uint16_t i = 0; i < chain; i++)
-	{
-		overall_result = overall_result && check_func_result("configure_offset()", configure_offset(identifier, i, cfg_offset), i);
-	}
-
-	// Test configure_offset() End.
-
-	// Test isRunning_system() Start.
-	std::cout << "Test isRunning_system().\n";
-	bool running = false;
-	for (uint16_t i = 0; i < chain; i++)
-		//while (1)
-	{
-		//uint16_t i = 0;
-		overall_result = overall_result && check_func_result("isRunning_system()", isRunning_system(identifier, i), i);
-	}
-	// Test isRunning_system() End.
-
-	// Test isLastDataReceived() Start.
-	std::cout << "Test isLastDataReceived().\n";
+	std::cout << "Test Spectrum Acquisition - Timed - " << spectra_size << " bins.\n";
+	uint16_t err_code;
+	double time = 2;
+	uint16_t bins = (uint16_t)spectra_size;
+	uint32_t result = true;
+	bool running = true;
 	bool LastDataReceived = false;
-	for (uint16_t i = 0; i < chain; i++)
-		overall_result = overall_result && check_func_result("isLastDataReceived()", isLastDataReceived(identifier, i, LastDataReceived), i);
-
-	// Test isLastDataReceived() End.
-
-	// Test clear_chain() Start.
-	overall_result = overall_result && check_func_result("clear_chain()", clear_chain(identifier));
-	// Test clear_chain() End. 
-
-	// Test clear_board() Start.
-	for (int32_t i = 0; i < chain; i++)
-	{
-		overall_result = overall_result && check_func_result("clear_board()", clear_board(identifier, i));
-	}
-
-	double time;
-	uint16_t bins;
-	uint32_t spectra_size;
-
-	// Test clear_board() End. 
-
-	// Test Spectrum Acquisition - Timed - 4096 bins. Start.
-	std::cout << "Test Spectrum Acquisition - Timed - 4096 bins.\n";
-	time = 2; // seconds.
-	bins = 4096;
-	result = true; running = true; LastDataReceived = false;
-	call_id = start(identifier, time, bins);
+	uint32_t call_id = start(identifier, time, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -420,10 +234,14 @@ int32_t main(int argc, char* argv[])
 					if (call_id)
 					{
 						if (!LastDataReceived)
-						{ running = true; break; }
+						{
+							running = true; break;
+						}
 					}
 					else
-					{ result = false; break; }
+					{
+						result = false; break;
+					}
 				}
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
@@ -446,14 +264,29 @@ int32_t main(int argc, char* argv[])
 	else
 		result = false;
 	uint64_t values4k[4096];
+	uint64_t values2k[2048];
+	uint64_t values1k[1024];
 	uint32_t id;
 	statistics stats;
-	spectra_size = 4096;
+
 	for (int32_t i = 0; i < chain; i++)
 	{
-		if (!getData(identifier, i, values4k, id, stats, spectra_size))
-			result = false;
-		if (values4k[95] == 0)
+		if (spectra_size == 4096)
+		{
+			if (!getData(identifier, i, values4k, id, stats, spectra_size))
+				result = false;
+		}
+		else if (spectra_size == 2048)
+		{
+			if (!getData(identifier, i, values2k, id, stats, spectra_size))
+				result = false;
+		}
+		else
+		{
+			if (!getData(identifier, i, values1k, id, stats, spectra_size))
+				result = false;
+		}
+		if ((spectra_size == 4096) && (values4k[95] == 0) || (spectra_size == 2048) && (values4k[47] == 0) || (spectra_size == 1024) && (values4k[23] == 0))
 		{
 			// There should be some counts here due to the zero peak.
 			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
@@ -462,242 +295,26 @@ int32_t main(int argc, char* argv[])
 	}
 	clear_chain(identifier);
 	if (result)
-		std::cout << "Test Spectrum Acquisition - Timed - 4096 bins: Ok.\n\n";
+		std::cout << "Test Spectrum Acquisition - Timed - " << spectra_size << " bins: Ok.\n\n";
 	else
 	{
 		getLastError(err_code);
 		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Spectrum Acquisition - Timed - 4096 bins: Failed.\n\n";
+		std::cout << "Test Spectrum Acquisition - Timed - " << spectra_size << " bins: Failed.\n\n";
 		overall_result = false;
 	}
+}
 
-	// Test Spectrum Acquisition - Timed - 4096 bins. End.
-
-
-
-	// Test Spectrum Acquisition - Timed - 2048 bins. Start.
-	std::cout << "Test Spectrum Acquisition - Timed - 2048 bins.\n";
-	time = 2; // seconds.
-	bins = 2048;
-	result = true; running = true; LastDataReceived = false;
-	call_id = start(identifier, time, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			while (running && result)
-			{
-				std::cout << "Acquisition in progress.\n";
-				for (int32_t i = 0; i < chain; i++)
-				{
-					running = false;
-					call_id = isLastDataReceived(identifier, i, LastDataReceived);
-					if (call_id)
-					{
-						if (!LastDataReceived)
-						{ running = true; break; }
-					}
-					else
-					{ result = false; break; }
-				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			}
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	std::cout << "Launching stop acquisition...\n";
-	call_id = stop(identifier);
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-		else
-			std::cout << "Acquisition Stopped.\n";
-	}
-	else
-		result = false;
-	uint64_t values2k[2048];
-	spectra_size = 2048;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getData(identifier, i, values2k, id, stats, spectra_size))
-			result = false;
-		if (values2k[47] == 0)
-		{
-			// There should be some counts here due to the zero peak.
-			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-			//result = false;
-		}
-	}
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Spectrum Acquisition - Timed - 2048 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Spectrum Acquisition - Timed - 2048 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Spectrum Acquisition - Timed - 2048 bins. End.
-
-	// Test Spectrum Acquisition - Timed - 1024 bins. Start.
-	std::cout << "Test Spectrum Acquisition - Timed - 1024 bins.\n";
-	time = 2; // seconds.
-	bins = 1024;
-	result = true; running = true; LastDataReceived = false;
-	call_id = start(identifier, time, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			while (running && result)
-			{
-				std::cout << "Acquisition in progress.\n";
-				for (int32_t i = 0; i < chain; i++)
-				{
-					running = false;
-					call_id = isLastDataReceived(identifier, i, LastDataReceived);
-					if (call_id)
-					{
-						if (!LastDataReceived)
-						{ running = true; break; }
-					}
-					else
-					{ result = false; break; }
-				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			}
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	std::cout << "Launching stop acquisition...\n";
-	call_id = stop(identifier);
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-		else
-			std::cout << "Acquisition Stopped.\n";
-	}
-	else
-		result = false;
-	uint64_t values1k[1024];
-	spectra_size = 1024;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getData(identifier, i, values1k, id, stats, spectra_size))
-			result = false;
-		if (values1k[23] == 0)
-		{
-			// There should be some counts here due to the zero peak.
-			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-			//result = false;
-		}
-	}
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Spectrum Acquisition - Timed - 1024 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Spectrum Acquisition - Timed - 1024 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Spectrum Acquisition - Timed - 1024 bins. End.
-
-	// Test Spectrum Acquisition - Free running - 4096 bins. Start.
-	std::cout << "Test Spectrum Acquisition - Free running - 4096 bins.\n";
-	time = 0; // Free running.
-	bins = 4096;
-	result = true; running = true; stopped = false; LastDataReceived = false;
-	call_id = start(identifier, time, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			do
-			{
-				std::cout << "Acquisition in progress.\n";
-				for (int32_t i = 0; i < chain; i++)
-				{
-					running = false;
-					call_id = isLastDataReceived(identifier, i, LastDataReceived);
-					if (call_id)
-					{
-						if (!LastDataReceived)
-						{ running = true; break; }
-					}
-					else
-					{ result = false; break; }
-				}
-
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-				if (!stopped)
-					std::cout << "Launching stop acquisition...\n";
-				call_id = stop(identifier);
-				stopped = true;
-				if (call_id > 0)
-				{
-					if (!wait_answer(call_id))
-						result = false;	
-				}
-				else
-					result = false;
-			} while (running && result);
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	spectra_size = 4096;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getData(identifier, i, values4k, id, stats, spectra_size))
-			result = false;
-		printf("Spectrum received. Zero peaks: %d\t- %d\n", values4k[95], values4k[93] + values4k[94] + values4k[95] + values4k[96] + values4k[97]);
-		if (values4k[95] == 0)
-		{
-			// There should be some counts here due to the zero peak.
-			std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-			//result = false;
-		}
-	}
-
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Spectrum Acquisition - Free running - 4096 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Spectrum Acquisition - Free running - 4096 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Spectrum Acquisition - Free running - 4096 bins. End.
-
-	// Test Map Acquisition - Timed - 4096 bins. Start.
-	std::cout << "Test Map Acquisition - Timed - 4096 bins.\n";
-	uint32_t sptime = 50; // milliseconds.
-	uint32_t points = 50;
-	bins = 4096;
-	result = true; running = true; LastDataReceived = false;
+void Test_Map_Timed(char * identifier, uint16_t chain, uint32_t spectra_size, uint32_t sptime, uint32_t points)
+{
+	std::cout << "Test Map Acquisition - Timed - " << spectra_size << " bins.\n";
+	uint16_t err_code;
+	uint16_t bins = (uint16_t)spectra_size;
+	uint32_t result = true;
+	bool running = true;
+	bool LastDataReceived = false;
 	uint32_t data_number = 0;
-	call_id = start_map(identifier, sptime, points, bins);
+	uint32_t call_id = start_map(identifier, sptime, points, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -713,10 +330,15 @@ int32_t main(int argc, char* argv[])
 					if (call_id)
 					{
 						if (!LastDataReceived)
-						{ running = true; break; }
+						{
+							running = true; break;
+						}
+						std::cout << "Board " << i << " - LastDataReceived! \n";
 					}
 					else
-					{ result = false; break; }
+					{
+						result = false; break;
+					}
 				}
 				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
@@ -727,45 +349,56 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
-	std::cout << "Launching stop acquisition...\n";
-	call_id = stop(identifier);
-	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-		else
-			std::cout << "Acquisition Stopped.\n";
-	}
-	else
-		result = false;
-		
+
+	//std::cout << "Launching stop acquisition...\n";
+	//call_id = stop(identifier);
+	////std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	//if (call_id > 0)
+	//{
+	//	if (!wait_answer(call_id))
+	//		result = false;
+	//	else
+	//		std::cout << "Acquisition Stopped.\n";
+	//}
+	//else
+	//	result = false;
+
 	uint16_t* values_map;
 	uint32_t* id_map;
 	double* stats_map;
 	uint64_t* advstats_map;
-	spectra_size = 4096;
+	uint16_t print_bin_index = spectra_size/42-1;
+
 	for (int32_t i = 0; i < chain; i++)
 	{
 		if (!getAvailableData(identifier, i, data_number))
 			result = false;
 		else
 		{
-		  std::cout << "Number of spectra available on board " << i << ": " << data_number << "\n";
-			values_map = new uint16_t[data_number * 4096];
+			
+			values_map = new uint16_t[data_number * spectra_size];
 			id_map = new uint32_t[data_number];
 			stats_map = new double[data_number * 4];
 			advstats_map = new uint64_t[data_number * 22];
-
 			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
 				result = false;
-				
-			if (values_map[95] == 0 || values_map[95 + 4096] == 0) // bin 96 of first two spectra.
-			{
-				// There should be some counts here due to the zero peak.
-				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-				//result = false;
-			}
+
+			std::cout << "Board " << i << " - getAvailableData returned: " << data_number << " - Spectra: ";
+			std::cout << "[" << print_bin_index << "][" << 1 << "] = "<< values_map[print_bin_index] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 2 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 3 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *2] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 4 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size * 3] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number - 3 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 4)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number-2 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 3)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number-1 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 2)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number -1)] << "\n";
+			
+			//{
+			//	// There should be some counts here due to the zero peak.
+			//	std::cout << "Problem board " << i << ": Zero peak not detected.\n";
+			//	//result = false;
+			//}
+			//system("PAUSE");
 			delete[] values_map;
 			delete[] id_map;
 			delete[] stats_map;
@@ -774,114 +407,27 @@ int32_t main(int argc, char* argv[])
 	}
 	clear_chain(identifier);
 	if (result)
-		std::cout << "Test Map Acquisition - Timed - 4096 bins: Ok.\n\n";
+		std::cout << "Test Map Acquisition - Timed - " << spectra_size << " bins: Ok.\n\n";
 	else
 	{
 		getLastError(err_code);
 		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Map Acquisition - Timed - 4096 bins: Failed.\n\n";
+		std::cout << "Test Map Acquisition - Timed - " << spectra_size << " bins: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test Map Acquisition - Timed - 4096 bins. End.
+}
 
-	// Test Map Acquisition - Timed - 2048 bins. Start.
-	std::cout << "Test Map Acquisition - Timed - 2048 bins.\n";
-	sptime = 50; // milliseconds.
-	points = 50;
-	bins = 2048;
-	result = true; running = true; LastDataReceived = false;
-	data_number = 0;
-	call_id = start_map(identifier, sptime, points, bins);
-	if (call_id > 0)
-	{
-		if (wait_answer(call_id))
-		{
-			std::cout << "Acquisition started.\n";
-			while (running && result)
-			{
-				std::cout << "Acquisition in progress.\n";
-				for (int32_t i = 0; i < chain; i++)
-				{
-					running = false;
-					call_id = isLastDataReceived(identifier, i, LastDataReceived);
-					if (call_id)
-					{
-						if (!LastDataReceived)
-						{ running = true; break; }
-					}
-					else
-					{ result = false; break; }
-				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			}
-			std::cout << "Acquisition finished.\n";
-		}
-		else
-			result = false;
-	}
-	else
-		result = false;
-	std::cout << "Launching stop acquisition...\n";
-	call_id = stop(identifier);
-	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	if (call_id > 0)
-	{
-		if (!wait_answer(call_id))
-			result = false;
-		else
-			std::cout << "Acquisition Stopped.\n";
-	}
-	else
-		result = false;
-		
-	spectra_size = 2048;
-	for (int32_t i = 0; i < chain; i++)
-	{
-		if (!getAvailableData(identifier, i, data_number))
-			result = false;
-		else
-		{
-		  // Program will crash if we only allocate 2048 channels, must allocate 4096
-			//values_map = new uint16_t[data_number * 2048];
-			values_map = new uint16_t[data_number * 4096];
-			id_map = new uint32_t[data_number];
-			stats_map = new double[data_number * 4];
-			advstats_map = new uint64_t[data_number * 22];
-
-			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
-				result = false;
-				
-			if (values_map[95] == 0 || values_map[95 + 2048] == 0) // bin 96 of first two spectra.
-			{
-				// There should be some counts here due to the zero peak.
-				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-				//result = false;
-			}
-			delete[] values_map;
-			delete[] id_map;
-			delete[] stats_map;
-			delete[] advstats_map;
-		}
-	}
-	clear_chain(identifier);
-	if (result)
-		std::cout << "Test Map Acquisition - Timed - 2048 bins: Ok.\n\n";
-	else
-	{
-		getLastError(err_code);
-		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Map Acquisition - Timed - 2048 bins: Failed.\n\n";
-		overall_result = false;
-	}
-	// Test Map Acquisition - Timed - 2048 bins. End.
-
-	// Test Map Acquisition - Free running - 4096 bins. Start.
-	std::cout << "Test Map Acquisition - Free running - 4096 bins.\n";
-	sptime = 100; // milliseconds.
-	points = 0; // Free running.
-	bins = 4096;
-	result = true; running = true; stopped = false; LastDataReceived = false;
-	call_id = start_map(identifier, sptime, points, bins);
+void Test_Map_FreeRunning(char * identifier, uint16_t chain, uint32_t spectra_size, uint32_t sptime, uint32_t points)
+{
+	std::cout << "Test Map Acquisition - Free Running - " << spectra_size << " bins.\n";
+	uint16_t err_code;
+	uint16_t bins = (uint16_t)spectra_size;
+	uint32_t result = true;
+	bool running = true;
+	bool LastDataReceived = false;
+	bool stopped = false;
+	uint32_t data_number = 0;
+	uint32_t call_id = start_map(identifier, sptime, points, bins);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -902,8 +448,8 @@ int32_t main(int argc, char* argv[])
 					else
 					{ result = false; break; }
 				}
-
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	
+				std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 				if (!stopped)
 					std::cout << "Launching stop acquisition...\n";
 				call_id = stop(identifier);
@@ -923,27 +469,37 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
-	spectra_size = 4096;
-	data_number = 0;
+
+	uint16_t* values_map;
+	uint32_t* id_map;
+	double* stats_map;
+	uint64_t* advstats_map;
+	uint16_t print_bin_index = spectra_size / 42 - 1;
+
 	for (int32_t i = 0; i < chain; i++)
 	{
 		if (!getAvailableData(identifier, i, data_number))
 			result = false;
 		else
 		{
-			values_map = new uint16_t[data_number * 4096];
+			values_map = new uint16_t[data_number * spectra_size];
 			id_map = new uint32_t[data_number];
 			stats_map = new double[data_number * 4];
 			advstats_map = new uint64_t[data_number * 22];
-
+	
 			if (!getAllData(identifier, i, values_map, id_map, stats_map, advstats_map, spectra_size, data_number))
 				result = false;
-			if (values_map[95] == 0 || values_map[95 + 4096] == 0) // bin 96 of first two spectra.
-			{
-				// There should be some counts here due to the zero peak.
-				std::cout << "Problem board " << i << ": Zero peak not detected.\n";
-				//result = false;
-			}
+			
+			std::cout << "Board " << i << " - getAvailableData returned: " << data_number << " - Spectra: ";
+			std::cout << "[" << print_bin_index << "][" << 1 << "] = " << values_map[print_bin_index] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 2 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 3 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size * 2] << " - ";
+			std::cout << "[" << print_bin_index << "][" << 4 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size * 3] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number - 3 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 4)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number - 2 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 3)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number - 1 << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 2)] << " - ";
+			std::cout << "[" << print_bin_index << "][" << data_number << "] = " << values_map[print_bin_index + (uint16_t)spectra_size *((uint16_t)data_number - 1)] << "\n";
+
 			delete[] values_map;
 			delete[] id_map;
 			delete[] stats_map;
@@ -952,26 +508,30 @@ int32_t main(int argc, char* argv[])
 	}
 	clear_chain(identifier);
 	if (result)
-		std::cout << "Test Map Acquisition - Free running - 4096 bins: Ok.\n\n";
+		std::cout << "Test Map Acquisition - Free Running - " << spectra_size << " bins: Ok.\n\n";
 	else
 	{
 		getLastError(err_code);
 		std::cout << "Error code is: " << err_code << ".\n";
-		std::cout << "Test Map Acquisition - Free running - 4096 bins: Failed.\n\n";
+		std::cout << "Test Map Acquisition - Free Running - " << spectra_size << " bins: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test Map Acquisition - Free running - 4096 bins. End.
+}
 
-	// Test Waveform Acquisition. Start.
+void Test_Wave_Timed(char * identifier, uint16_t chain)
+{
+	
 	std::cout << "Test Waveform Acquisition.\n";
-	time = 1; // seconds.
-	result = true;
+	uint16_t err_code;
+	double time = 1; // seconds.
+	bool result = true;
+	bool running = true;
 	uint16_t dec_ratio = 1;
 	unsigned int trig_mask = 1;
 	unsigned int trig_level = 0;
-	LastDataReceived = false;
+	bool LastDataReceived = false;
 	uint16_t length = 1;
-	call_id = start_waveform(identifier, 0, dec_ratio, trig_mask, trig_level, time, length);
+	uint32_t call_id = start_waveform(identifier, 0, dec_ratio, trig_mask, trig_level, time, length);
 	printf("Call id START WAVE: %d\n", call_id);
 	if (call_id > 0)
 	{
@@ -1011,13 +571,13 @@ int32_t main(int argc, char* argv[])
 	{
 		if (!getWaveData(identifier, i, wave, data_size))
 			result = false;
-		printf("%s board %d: %d-%d-%d-%d\n", identifier, i, wave[0], wave[1], wave[2], wave[3]);
-		if (!(wave[0] > 30000 && wave[0] < 34000))
-		{
-			// With grounded input the signal should be at 32000 ADC bins more or less.
-			std::cout << "Problem board " << i << ": Waveform acquisition out of range [30000 - 34000].\n";
-			//result = false;
-		}
+		printf("%s board %d: %d-%d-%d-%d\n", identifier, i, wave[0], wave[1], wave[2], wave[3], wave[14383]);
+		//if (!(wave[0] > 30000 && wave[0] < 34000))
+		//{
+		//	// With grounded input the signal should be at 32000 ADC bins more or less.
+		//	std::cout << "Problem board " << i << ": Waveform acquisition out of range [30000 - 34000].\n";
+		//	//result = false;
+		//}
 	}
 
 	clear_chain(identifier);
@@ -1030,13 +590,17 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test Waveform Acquisition: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test Waveform Acquisition. End.
+}
 
-	// Test List Mode Acquisition - Timed. Start.
+void Test_List_Timed(char * identifier, uint16_t chain)
+{
 	std::cout << "Test List Mode Acquisition - Timed.\n";
-	time = 2; // seconds.
-	result = true; running = true; LastDataReceived = false;
-	call_id = start_list(identifier, time);
+	uint16_t err_code;
+	double time = 2; // seconds.
+	bool result = true;
+	bool running = true;
+	bool LastDataReceived = false;
+	uint32_t call_id = start_list(identifier, time);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -1075,10 +639,10 @@ int32_t main(int argc, char* argv[])
 	else
 		result = false;
 	uint64_t* list_data;
-	data_number = 0;
+	uint32_t data_number = 0;
 
-	id;
-	stats;
+	uint32_t id;
+	statistics stats;
 
 	for (int32_t i = 0; i < chain; i++)
 	{
@@ -1109,13 +673,17 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test List Mode Acquisition - Timed: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test List Mode Acquisition - Timed. End.
+}
 
-	// Test List Mode Acquisition - Free running. Start.
+void Test_List_FreeRunning(char * identifier, uint16_t chain)
+{
 	std::cout << "Test List Mode Acquisition - Free running.\n";
-	time = 0; // Free running.
-	result = true; running = true; stopped = false; LastDataReceived = false;
-	call_id = start_list(identifier, time);
+	double time = 0; // Free running.
+	uint32_t result = true;
+	bool running = true;
+	bool stopped = false;
+	bool LastDataReceived = false;
+	uint32_t call_id = start_list(identifier, time);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -1158,7 +726,11 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
-	data_number = 0;
+	uint32_t data_number = 0;
+	uint64_t *list_data;
+	uint32_t id;
+	statistics stats;
+	uint16_t err_code;
 	for (int32_t i = 0; i < chain; i++)
 	{
 		if (!getAvailableData(identifier, i, data_number))
@@ -1188,16 +760,19 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test List Mode Acquisition - Free running: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test List Mode Acquisition - Timed. End.
+}
 
-	// Test List Wave Mode Acquisition - Timed. Start.
+void Test_ListWave_Timed(char * identifier, uint16_t chain)
+{
 	std::cout << "Test List Wave Mode Acquisition - Timed.\n";
-	time = 2; // seconds.
-	dec_ratio = 1;
+	double time = 2; // seconds.
+	uint16_t dec_ratio = 1;
 	uint16_t list_wave_length = 400;
 	uint16_t list_wave_offset = 0;
-	result = true; running = true; LastDataReceived = false;
-	call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
+	bool result = true;
+	bool running = true;
+	bool LastDataReceived = false;
+	uint32_t call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -1241,7 +816,11 @@ int32_t main(int argc, char* argv[])
 		result = false;
 	uint64_t* listw_values;
 	uint64_t* listw_wave_values = 0;
-	data_number = 0;
+	uint32_t data_number = 0;
+	uint16_t length = 1;
+	uint32_t id;
+	statistics stats;
+	uint16_t err_code;
 	for (int32_t i = 0; i < chain; i++)
 	{
 		if (!getAvailableData(identifier, i, data_number))
@@ -1271,16 +850,20 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test List Wave Mode Acquisition - Timed: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test List Mode Acquisition - Timed. End.
+}
 
-	// Test List Wave Mode Acquisition - Free running. Start.
+void Test_ListWave_FreeRunning(char * identifier, uint16_t chain)
+{
 	std::cout << "Test List Wave Mode Acquisition - Free running.\n";
-	time = 0; // Free running.
-	dec_ratio = 1;
-	list_wave_length = 400;
-	list_wave_offset = 0;
-	result = true; running = true; stopped = false; LastDataReceived = false;
-	call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
+	double time = 0; // Free running.
+	uint16_t dec_ratio = 1;
+	uint16_t list_wave_length = 400;
+	uint16_t list_wave_offset = 0;
+	bool result = true;
+	bool running = true;
+	bool stopped = false;
+	bool LastDataReceived = false;
+	uint32_t call_id = start_listwave(identifier, time, dec_ratio, list_wave_length, list_wave_offset);
 	if (call_id > 0)
 	{
 		if (wait_answer(call_id))
@@ -1326,7 +909,13 @@ int32_t main(int argc, char* argv[])
 	}
 	else
 		result = false;
-	data_number = 0;
+	uint32_t data_number = 0;
+	uint64_t *listw_values;
+	uint16_t length = 1;
+	uint64_t* listw_wave_values = 0;
+	uint32_t id;
+	statistics stats;
+	uint16_t err_code;
 	for (int32_t i = 0; i < chain; i++)
 	{
 		if (!getAvailableData(identifier, i, data_number))
@@ -1356,9 +945,255 @@ int32_t main(int argc, char* argv[])
 		std::cout << "Test List Wave Mode Acquisition - Free running: Failed.\n\n";
 		overall_result = false;
 	}
-	// Test List Mode Acquisition - Timed. End.
+}
 
+int32_t main(int argc, char* argv[])
+{
+#ifdef POLLING_LIB
+	printf("\n\nPOLLING library\n\n");
+#else
+	printf("\n\nCALLBACK library\n\n");
+#endif
+	bool result = true;
+	bool stopped = false;
+	uint16_t err_code = error_code::DLL_NO_ERROR;
 
+	char ip[] = "10.96.0.111d";
+	std::cout << "Insert IP Address of DANTE under test: ";
+	std::cin >> ip;
+	std::cout << "Inserted IP: " << ip << "\n\n";
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	char mask[] = "255.255.255.0";
+	char gw[] = "10.96.0.1";
+
+	char identifier[16];
+
+	// Test getLastError() Start.
+	overall_result = overall_result && check_func_result("getLastError()", getLastError(err_code));
+	// Test getLastError() End.	
+
+	// Test resetLastError() Start.
+	overall_result = overall_result && check_func_result("resetLastError()", resetLastError());
+	getLastError(err_code);
+	if (err_code != error_code::DLL_NO_ERROR)
+	{
+		std::cout << "WARNING:: checked error code after reset is: " << err_code << ". Test resetLastError(): Fail.\n\n";
+		overall_result = overall_result && false;
+	}
+	// Test resetLastError() End.
+
+#ifndef POLLINGLIB
+	// Test register_callback() Start.
+	overall_result = overall_result && check_func_result("register_callback()", register_callback(callback_func));
+	// Test register_callback() End.
+#endif
+
+	// Test initLibrary() Start.
+	overall_result = overall_result && check_func_result("InitLibrary()", InitLibrary());
+	// Test initLibrary() End.
+
+	// Test libVersion() Start.
+	uint32_t version_size = 20;
+	char version[20];
+	result = check_func_result("libVersion()", libVersion(version, version_size));
+	if (result)
+		std::cout << "Version is: " << version << "\n\n";
+	overall_result = overall_result && result;
+	// Test libVersion() End.
+
+	// Test flush_local_eth_conn() Start.
+	//overall_result = overall_result && check_func_result("flush_local_eth_conn()", flush_local_eth_conn(ip));
+	//std::this_thread::sleep_for(std::chrono::seconds(10)); // Wait for system to correctly close all connections.
+	//system("PAUSE");
+	// Test flush_local_eth_conn() End.
+
+	// Test add_to_query() Start.
+	overall_result = overall_result && check_func_result("add_to_query()", add_to_query(ip));
+	// Test add_to_query() End.
+
+	// Test remove_from_query() Start.
+	overall_result = overall_result && check_func_result("remove_from_query()", remove_from_query(ip));
+	// Test remove_from_query() End.
+
+	// If the device is connected via Ethernet, add it's IP to the query.
+	if (add_to_query(ip))
+	{
+		std::cout << "Added IP: " << std::string(ip) << " to the query.\n\n";
+
+	}
+	else
+	{
+		std::cout << "Error adding the IP to thew query.\n\n";
+		overall_result = overall_result && false;;
+	}
+
+	std::this_thread::sleep_for(std::chrono::seconds(4)); // Wait for the boards to be found by the DLL.
+
+	// Test get_dev_number() Start.
+	uint16_t dev_nb;
+	result = check_func_result("get_dev_number()", get_dev_number(dev_nb));
+	if (result)
+		std::cout << "Number of recognized boards: " << dev_nb << "\n\n";
+	overall_result = overall_result && result;
+	// Test get_dev_number() End.
+
+	// Test get_ids() Start.
+	uint16_t nb = 0;
+	uint16_t id_size = 16;
+	result = check_func_result("get_ids()", get_ids(identifier, nb, id_size));
+	if (result)
+	{
+		std::cout << "Identifier of recognized board: " << identifier << "\n\n";
+	}
+	overall_result = overall_result && result;
+	// Test get_ids() End.
+
+	//// Test get_boards_in_chain() Start.
+	uint16_t chain = 1;
+	bool all_boards = 0;
+	do
+	{
+		result = check_func_result("get_boards_in_chain()", get_boards_in_chain(identifier, chain));
+		if (result)
+			std::cout << "Number of boards in the chain: " << chain << "\n\n";
+		overall_result = overall_result && result;
+		if (chain == 8)
+			all_boards = 1;
+		std::this_thread::sleep_for(std::chrono::seconds(4)); // Wait for the boards to be found by the DLL.
+	} while (all_boards == 0);
+	// Test get_boards_in_chain() End.
+
+	//system("PAUSE");
+	////result = check_func_result("reset_daisy_chain()", reset_daisy_chain(identifier, 0));
+	//result = reset_daisy_chain(identifier, 0);
+	//if (result)
+	//	std::cout << "Reset daisy chain\n\n";
+	//overall_result = overall_result && result;
+	//std::this_thread::sleep_for(std::chrono::seconds(10)); // Wait for the boards to be found by the DLL.
+	//system("PAUSE");
+
+	uint32_t call_id;
+
+	// Test getFirmware() Start.
+	for (uint16_t i = 0; i < chain; i++)
+	{
+		overall_result = overall_result && check_func_result("getFirmware()", getFirmware(identifier, i), i);
+	}
+	// Test getFirmware() End.
+
+	// Test write_IP_configuration() Start.
+	//overall_result = overall_result && check_func_result("write_IP_configuration()", write_IP_configuration(identifier, ip, mask, gw));
+	// Test write_IP_configuration() End.
+
+	// Test configure() Start.
+	autoScanSlaves(false);	// it is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));	// wait 50ms
+
+	configuration cfg;
+	cfg.fast_filter_thr = 100;
+	cfg.energy_filter_thr = 5;
+	cfg.max_risetime = 5;
+	cfg.baseline_samples = 0;
+	cfg.edge_peaking_time = 4;
+	cfg.max_peaking_time = 64;
+	cfg.edge_flat_top = 1;
+	cfg.flat_top = 7;
+	cfg.gain = 1;
+	cfg.peaking_time = 64;
+	cfg.reset_recovery_time = 200;
+	cfg.inverted_input = false;
+	cfg.zero_peak_freq = 1;
+	//for (uint16_t i = 0; i < chain; i++)
+	//{
+	//	overall_result = overall_result && check_func_result("configure()", configure(identifier, i, cfg), i);
+	//}
+	overall_result = overall_result && check_func_result("configure()", configure(identifier, 255, cfg), 0);
+	// Test configure() End.
+
+	// Test configure_gating() Start.
+	for (uint16_t i = 0; i < chain; i++)
+	{
+		overall_result = overall_result && check_func_result("configure_gating()", configure_gating(identifier, FreeRunning, i), i);
+	}
+	// Test configure_gating() End.
+
+	// Test configure_offset() Start.
+	configuration_offset cfg_offset;
+	cfg_offset.offset_val1 = 128;
+	cfg_offset.offset_val2 = 128;
+	for (uint16_t i = 0; i < chain; i++)
+	{
+		overall_result = overall_result && check_func_result("configure_offset()", configure_offset(identifier, i, cfg_offset), i);
+	}
+
+	// Test configure_offset() End.
+
+	// Test isRunning_system() Start.
+	std::cout << "Test isRunning_system().\n";
+	bool running = false;
+	for (uint16_t i = 0; i < chain; i++)
+		overall_result = overall_result && check_func_result("isRunning_system()", isRunning_system(identifier, i), i);
+	// Test isRunning_system() End.
+
+	// Test isLastDataReceived() Start.
+	std::cout << "Test isLastDataReceived().\n";
+	bool LastDataReceived = false;
+	for (uint16_t i = 0; i < chain; i++)
+		overall_result = overall_result && check_func_result("isLastDataReceived()", isLastDataReceived(identifier, i, LastDataReceived), i);
+	// Test isLastDataReceived() End.
+
+	// Test clear_chain() Start.
+	overall_result = overall_result && check_func_result("clear_chain()", clear_chain(identifier));
+	// Test clear_chain() End. 
+
+	// Test clear_board() Start.
+	for (uint16_t i = 0; i < chain; i++)
+		overall_result = overall_result && check_func_result("clear_board()", clear_board(identifier, i));
+
+	// Test clear_board() End. 
+
+	// START ACQUISITION TESTS --------------------------------------------------------------------------------------------
+
+	// Test Spectrum Acquisition - Timed - 4096 bins.
+	//Test_SingleSpectrum_Timed(identifier, chain, 4096);
+
+	// Test Spectrum Acquisition - Timed - 2048 bins.
+	//Test_SingleSpectrum_Timed(identifier, chain, 2048);
+
+	// Test Spectrum Acquisition - Timed - 1024 bins.
+	//Test_SingleSpectrum_Timed(identifier, chain, 1024);
+	
+	// Test Map Acquisition - Timed - [1024 or 2048 or 4096] bins.
+	uint32_t map_bins;
+	uint32_t sptime;
+	uint32_t points;
+	std::cout << "Insert Map bins: ";
+	std::cin >> map_bins;
+	std::cout << "Insert Map spectra time: ";
+	std::cin >> sptime;
+	std::cout << "Insert Map points: ";
+	std::cin >> points;
+	Test_Map_Timed(identifier, chain, map_bins, sptime, points);
+
+	// Test Map Acquisition - Free running - [1024 or 2048 or 4096] bins.
+	Test_Map_FreeRunning(identifier, chain, map_bins, sptime, 0);
+
+	// Test Waveform Acquisition - Timed.
+	//Test_Wave_Timed(identifier, chain);
+
+	//// Test List Mode Acquisition - Timed.
+	//Test_List_Timed(identifier, chain);
+
+	//// Test List Mode Acquisition - Free running.
+	//Test_List_FreeRunning(identifier, chain);
+
+	//// Test List Wave Mode Acquisition - Timed.
+	//Test_ListWave_Timed(identifier, chain);
+
+	//// Test List Wave Mode Acquisition - Free running.
+	//Test_ListWave_FreeRunning(identifier, chain);
+
+	// END ACQUISITION TESTS -----------------------------------------------------------------------------------------------
 
 	// Test CloseLibrary() Start.
 	overall_result = overall_result && check_func_result("CloseLibrary()", CloseLibrary());
@@ -1368,12 +1203,5 @@ int32_t main(int argc, char* argv[])
 		std::cout << "All Tests Completed.\n\n";
 	else
 		std::cout << "At least one test failed.\n\n";
-
-	system("PAUSE");
 	return 0;
-}
-
-void TestSingleSpectrum4096(void)
-{
-
 }

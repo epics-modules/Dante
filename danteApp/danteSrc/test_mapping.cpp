@@ -293,8 +293,8 @@ int main(int argc, char *argv[])
         uint32_t spectraSize = numMCAChannels;
         for (board=0; board<numBoards; board++) {
             // There is a bug in their library, need to allocate 4096 channels
-            //uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * numMCAChannels * sizeof(uint16_t));
-            uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * 4096 * sizeof(uint16_t));
+            uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * numMCAChannels * sizeof(uint16_t));
+            //uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * 4096 * sizeof(uint16_t));
             uint32_t *pSpectraId                     = (uint32_t *) malloc(minAvailable * sizeof(uint32_t));
             struct mappingStats *pMappingStats       = (mappingStats *) malloc(minAvailable * sizeof(struct mappingStats));
             struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(minAvailable * sizeof(struct mappingAdvStats));
