@@ -94,12 +94,13 @@ int main(int argc, char *argv[])
 {
     int callId;
     uint32_t currentPixel[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    uint32_t numAvailable[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     uint32_t acqTimeMs;
     uint32_t pollTimeMs;
     uint32_t mappingPoints;
     uint32_t gatingMode;
     int board;
-    int numMCAChannels = 2048;
+    int numMCAChannels;
     double maxEnergy = 25;
     double mcaBinWidth;
     double usecToFastSample = 1e-6/8e-9;
@@ -111,17 +112,18 @@ int main(int argc, char *argv[])
     char ipAddress[100];
     const char *functionName = "Dante";
 
-    if (argc != 6) {
-        printf("Usage: test_mapping ipAddress acquireTime pollTimeMs mappingPoints gatingMode\n");
+    if (argc != 7) {
+        printf("Usage: test_mapping ipAddress mcaChannels acquireTime pollTimeMs mappingPoints gatingMode\n");
         exit(-1);
     }
-    strcpy(ipAddress, argv[1]);
-    acqTimeMs = atoi(argv[2]);
-    pollTimeMs = atoi(argv[3]);
-    mappingPoints = atoi(argv[4]);
-    gatingMode = atoi(argv[5]);
-    printf("IP address=%s, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d, gatingMode=%d\n", 
-           ipAddress, acqTimeMs, pollTimeMs, mappingPoints, gatingMode);
+    strcpy(ipAddress,     argv[1]);
+    numMCAChannels = atoi(argv[2]);
+    acqTimeMs   =    atoi(argv[3]);
+    pollTimeMs =     atoi(argv[4]);
+    mappingPoints =  atoi(argv[5]);
+    gatingMode =     atoi(argv[6]);
+    printf("IP address=%s, mcaChannels=%d, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d, gatingMode=%d\n", 
+           ipAddress, numMCAChannels, acqTimeMs, pollTimeMs, mappingPoints, gatingMode);
 
     if (!InitLibrary()) {
         printf("%s::%s error calling InitLibrary\n", driverName, functionName);
@@ -277,15 +279,14 @@ int main(int argc, char *argv[])
             } else {
                 anyBoardBusy = true;
             }
-            uint32_t numAvailable;
-            if (!getAvailableData(danteIdentifier, board, numAvailable)) {
+            if (!getAvailableData(danteIdentifier, board, numAvailable[board])) {
                 printf("%s::%s error calling getAvailableData\n", driverName, functionName);
             }
-            printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable);
+            printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable[board]);
             if (board == 0) {
-                minAvailable = numAvailable;
-            } else if (numAvailable < minAvailable) {
-                minAvailable = numAvailable;
+                minAvailable = numAvailable[board];
+            } else if (numAvailable[board] < minAvailable) {
+                minAvailable = numAvailable[board];
             }
         }
         if (minAvailable == 0) continue;
@@ -312,13 +313,17 @@ int main(int argc, char *argv[])
             free(pMappingAdvStats);
         }
     }
+    for (int board=0; board<numBoards; board++) {
+        getAvailableData(danteIdentifier, board, numAvailable[board]);
+        printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable[board]);
+    }
+    printf("Spectra collected on each board\n");
+    for (int board=0; board<numBoards; board++) {
+        printf("  Board %d, number collected=%d\n", board, currentPixel[board] + numAvailable[board]);
+    }
     callId = stop(danteIdentifier);
     waitReply(callId, danteReply);
     clear_chain(danteIdentifier);
-    printf("Spectra collected on each board\n");
-    for (int board=0; board<numBoards; board++) {
-        printf("  Board %d, number collected=%d\n", board, currentPixel[board]);
-    }
     printf("%s::%s calling CloseLibrary()\n", driverName, functionName);
     if (CloseLibrary()) {
         printf("%s::%s called CloseLibrary successfully\n", driverName, functionName);
