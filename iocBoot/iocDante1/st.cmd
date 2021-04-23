@@ -48,3 +48,16 @@ iocInit
 ### Start up the autosave task and tell it what to do.
 # Save settings every thirty seconds
 create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante1:, M=mca1")
+
+# Wait 1 seconds for all records with PINI=YES to process
+epicsThreadSleep(1)
+
+# Enable downloading configurations
+dbpf("$(PREFIX)dante1:EnableConfigure", "Enable")
+
+# There is a problem with the GatingMode record.
+# Even though it has PINI=YES and has already processed and written the value to the Dante,
+# the value appears to have been changed, and it need to be processed again.  
+# This needs to be tracked down.
+dbpf("$(PREFIX)dante1:GatingMode.PROC", "1")
+
