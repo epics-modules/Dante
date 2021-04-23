@@ -562,7 +562,7 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
     }
 
     /* Call the callback */
-    callParamCallbacks(addr, addr);
+    callParamCallbacks(addr);
     asynPrint(pasynUserSelf, ASYN_TRACE_FLOW,
         "%s:%s: exit\n",
         driverName, functionName);
@@ -624,7 +624,7 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
         newTraceTime_ = true;
     }
     /* Call the callback */
-    callParamCallbacks(addr, addr);
+    callParamCallbacks(addr);
 
     asynPrint(pasynUser, ASYN_TRACE_FLOW,
         "%s:%s: exit\n",
@@ -725,7 +725,7 @@ asynStatus Dante::setDanteConfiguration(int addr)
     int numChannels;
     static const char *functionName = "setDanteParam";
 
-    getIntegerParam(addr, DanteEnableConfigure, &enableConfigure);
+    getIntegerParam(DanteEnableConfigure, &enableConfigure);
     // If enableConfigure is 0 then we don't do anything
     if (!enableConfigure) return asynSuccess;
     getDoubleParam(addr, DanteMaxEnergy, &maxEnergy);
@@ -807,6 +807,7 @@ asynStatus Dante::setDanteConfiguration(int addr)
             return asynError;
     }
     waitReply(callId_, danteReply_, "configure");
+    callParamCallbacks(addr);
     return asynSuccess;
 }
 
@@ -1320,9 +1321,7 @@ asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s::getAvailableData(): board=
 
     // Now read the same number of spectra from each board
     for (const auto& board: activeBoards_) {
-        // There is a bug in their library, need to allocate 4096 channels
-        //pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
-        pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * 4096 * sizeof(uint16_t));
+        pMappingMCAData_   [board] = (uint16_t *)       malloc(numAvailable * numMCAChannels * sizeof(uint16_t));
         pMappingSpectrumId_[board] = (uint32_t *)       malloc(numAvailable * sizeof(uint32_t));
         pMappingStats_     [board] = (mappingStats *)   malloc(numAvailable * sizeof(mappingStats));
         pMappingAdvStats_  [board] = (mappingAdvStats *)malloc(numAvailable * sizeof(mappingAdvStats));
