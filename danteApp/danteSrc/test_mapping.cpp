@@ -78,7 +78,7 @@ static bool callbackComplete;
     }
     static double elapsed_time() {
         clock_gettime(CLOCK_MONOTONIC, &tnow);
-        return (((double)tnow.tv_sec + 1e-9*tnow.tv_nsec) - 
+        return (((double)tnow.tv_sec + 1e-9*tnow.tv_nsec) -
                 ((double)tstart.tv_sec + 1e-9*tstart.tv_nsec));
     }
 #endif
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
     pollTimeMs =     atoi(argv[4]);
     mappingPoints =  atoi(argv[5]);
     gatingMode =     atoi(argv[6]);
-    printf("IP address=%s, mcaChannels=%d, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d, gatingMode=%d\n", 
+    printf("IP address=%s, mcaChannels=%d, acquire time (ms)=%d, poll time (ms)=%d, mappingPoints=%d, gatingMode=%d\n",
            ipAddress, numMCAChannels, acqTimeMs, pollTimeMs, mappingPoints, gatingMode);
 
     if (!InitLibrary()) {
@@ -322,13 +322,13 @@ int main(int argc, char *argv[])
             uint32_t *pSpectraId                     = (uint32_t *) malloc(minAvailable * sizeof(uint32_t));
             struct mappingStats *pMappingStats       = (mappingStats *) malloc(minAvailable * sizeof(struct mappingStats));
             struct mappingAdvStats *pMappingAdvStats = (mappingAdvStats *)malloc(minAvailable * sizeof(struct mappingAdvStats));
-    
+
             if (!getAllData(danteIdentifier, board, pMappingMCAData, pSpectraId,
                             (double *)pMappingStats, (uint64_t*)pMappingAdvStats, spectraSize, minAvailable)) {
                 printf("%s::%s error calling getAllData\n", driverName, functionName);
             }
             currentPixel[board] += minAvailable;
-            printf("%7.4f getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n", 
+            printf("%7.4f getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n",
                 elapsed_time(), board, minAvailable, pSpectraId[0], currentPixel[board]);
             free(pMappingMCAData);
             free(pSpectraId);
