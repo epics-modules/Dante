@@ -28,6 +28,7 @@ LIB_SRCS += danteMED.st
 
 LIB_LIBS           += asyn 
 LIB_LIBS           += ADBase
+LIB_LIBS           += seq pv
 LIB_LIBS           += $(EPICS_BASE_IOC_LIBS)
 LIB_LIBS_WIN32     += XGL_DPP
 LIB_SYS_LIBS_Linux += XGL_DPP
