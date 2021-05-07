@@ -107,76 +107,76 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     pDanteGlobal = this;
 
     if (!InitLibrary()) {
-	      printf("%s::%s error calling InitLibrary\n", driverName, functionName);
-	      return;
+        printf("%s::%s error calling InitLibrary\n", driverName, functionName);
+        return;
     }
 
     char libraryVersion[20];
     uint32_t libSize = sizeof(libraryVersion);
-  	if (!libVersion(libraryVersion, libSize)) {
-	      printf("%s::%s error calling libVersion\n", driverName, functionName);
-	      return;
-  	}	else {
-	      printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
-  	}
+    if (!libVersion(libraryVersion, libSize)) {
+        printf("%s::%s error calling libVersion\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s library version=%s\n", driverName, functionName, libraryVersion);
+    }
 
     if (!add_to_query((char *)ipAddress)) {
-	      printf("%s::%s error calling add_to_query\n", driverName, functionName);
-	      return;
-  	}	else {
-	      printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
-  	}
+        printf("%s::%s error calling add_to_query\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s ipAddress added to query=%s\n", driverName, functionName, ipAddress);
+    }
 
     // Wait 5 seconds for devices to be found
     epicsThreadSleep(5.);
 
-	  uint16_t numDevices;
-	  if (!get_dev_number(numDevices)) {
-	      printf("%s::%s error calling get_dev_number\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
-	  }
+    uint16_t numDevices;
+    if (!get_dev_number(numDevices)) {
+        printf("%s::%s error calling get_dev_number\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s number of devices=%d\n", driverName, functionName, numDevices);
+    }
 
     uint16_t idSize = sizeof(danteIdentifier_);
     uint16_t deviceId = 0;
-	  if (!get_ids(danteIdentifier_, deviceId, idSize)) {
-	      printf("%s::%s error calling get_ids\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s danteIdentifier_=%s\n", driverName, functionName, danteIdentifier_);
-	  }
+    if (!get_ids(danteIdentifier_, deviceId, idSize)) {
+        printf("%s::%s error calling get_ids\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s danteIdentifier_=%s\n", driverName, functionName, danteIdentifier_);
+    }
 
-	  uint16_t chain = 1;
-	  if (!get_boards_in_chain(danteIdentifier_, chain)) {
-	      printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-	  }
+    uint16_t chain = 1;
+    if (!get_boards_in_chain(danteIdentifier_, chain)) {
+        printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
+    }
 
     // Wait a little bit for daisy chain synchronization and ask again for connected systems.
     epicsThreadSleep(1.0);
-	  if (!get_ids(danteIdentifier_, deviceId, idSize)) {
-	      printf("%s::%s error calling get_ids\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s danteIdentifier_=%s\n", driverName, functionName, danteIdentifier_);
-	  }
+    if (!get_ids(danteIdentifier_, deviceId, idSize)) {
+        printf("%s::%s error calling get_ids\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s danteIdentifier_=%s\n", driverName, functionName, danteIdentifier_);
+    }
 
-	  if (!get_boards_in_chain(danteIdentifier_, chain)) {
-	      printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
-	  }
+    if (!get_boards_in_chain(danteIdentifier_, chain)) {
+        printf("%s::%s error calling get_boards_in_chain\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s boards in chain=%d\n", driverName, functionName, chain);
+    }
 
-	  if (!register_callback(::danteCallback)) {
-	      printf("%s::%s error calling register_callback\n", driverName, functionName);
-	      return;
-	  } else {
-	      printf("%s::%s register callback OK\n", driverName, functionName);
-	  }
+    if (!register_callback(::danteCallback)) {
+        printf("%s::%s error calling register_callback\n", driverName, functionName);
+        return;
+    } else {
+        printf("%s::%s register callback OK\n", driverName, functionName);
+    }
 
     // Create the vector of active board numbers. Assume all boards are active for now
     totalBoards_ = std::min(totalBoards, (int)chain);
@@ -185,8 +185,8 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     }
 
     // It is necessary to disable the autoScanSlaves() when configuring, in order to prevent interlock problems. Keep disabled also for acquisitions.
-	  autoScanSlaves(false);
-	  epicsThreadSleep(0.050); 	// wait 50ms
+    autoScanSlaves(false);
+    epicsThreadSleep(0.050);     // wait 50ms
 
     /* General parameters */
     createParam(DanteCollectModeString,            asynParamInt32,   &DanteCollectMode);
@@ -332,9 +332,9 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     setDoubleParam(DantePollTime, 0.01);
     polling_ = 1;
     status = (epicsThreadCreate("acquisitionTask",
-                epicsThreadPriorityMedium,
-                epicsThreadGetStackSize(epicsThreadStackMedium),
-                (EPICSTHREADFUNC)acquisitionTaskC, this) == NULL);
+              epicsThreadPriorityMedium,
+              epicsThreadGetStackSize(epicsThreadStackMedium),
+              (EPICSTHREADFUNC)acquisitionTaskC, this) == NULL);
     if (status) {
         printf("%s:%s epicsThreadCreate failure for image task\n",
                 driverName, functionName);
@@ -536,27 +536,27 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
         for (int board=0; board<totalBoards_; board++) {
             int enable;
             getIntegerParam(board, DanteEnableBoard, &enable);
-			asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: getIntegerParam(DanteEnableBoard)=%d\n", driverName, functionName, board, enable);
+            asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: getIntegerParam(DanteEnableBoard)=%d\n", driverName, functionName, board, enable);
             if (enable) {
-				callId_ = disableBoard(danteIdentifier_, board, false);
-				waitReply(callId_, danteReply_, "disableBoard");
-				if (callId_ != 0) {
-					activeBoards_.push_back(board);
-					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enabled. In list.\n", driverName, functionName, board);
-				}
-				else {
-					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enable failed. Not in list.\n", driverName, functionName, board);
-				}
+                callId_ = disableBoard(danteIdentifier_, board, false);
+                waitReply(callId_, danteReply_, "disableBoard");
+                if (callId_ != 0) {
+                    activeBoards_.push_back(board);
+                    asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enabled. In list.\n", driverName, functionName, board);
+                }
+                else {
+                    asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board enable failed. Not in list.\n", driverName, functionName, board);
+                }
             }
-			else {
-				callId_ = disableBoard(danteIdentifier_, board, true);
-				waitReply(callId_, danteReply_, "disableBoard");
-				if (callId_ != 0) {
-					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disabled.\n", driverName, functionName, board);
-				}
-				else {
-					asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disable failed.\n", driverName, functionName, board);
-				}
+            else {
+                callId_ = disableBoard(danteIdentifier_, board, true);
+                waitReply(callId_, danteReply_, "disableBoard");
+                if (callId_ != 0) {
+                    asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disabled.\n", driverName, functionName, board);
+                }
+                else {
+                    asynPrint(pasynUserSelf, ASYN_TRACE_WARNING, "%s::%s board=%d: Board disable failed.\n", driverName, functionName, board);
+                }
             }
         }
     }
@@ -589,7 +589,7 @@ asynStatus Dante::writeFloat64( asynUser *pasynUser, epicsFloat64 value)
         double binEnergyEV = value / numMcaChannels;
         for(int bin=0; bin<numMcaChannels; bin++)
         {
-        	*(spectrumXAxisBuffer_ + bin) = (bin + 1) * binEnergyEV;
+            *(spectrumXAxisBuffer_ + bin) = (bin + 1) * binEnergyEV;
         }
         doCallbacksFloat64Array(spectrumXAxisBuffer_, numMcaChannels, DanteSpectrumXAxis, addr);
         // Must call setDanteConfiguration() because the energy parameters need to be recalculated and reloaded
