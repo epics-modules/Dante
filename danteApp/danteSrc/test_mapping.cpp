@@ -59,6 +59,30 @@ struct mappingAdvStats {
 
 static bool callbackComplete;
 
+#ifdef _WIN32
+    static FILETIME tstart, tnow;
+    static void startClock() {
+        GetSystemTimePreciseAsFileTime(&tstart);
+    }
+    static double elapsed_time() {
+        GetSystemTimePreciseAsFileTime(&tnow);
+        long long elapsed = (tnow.dwLowDateTime   + (((long long)tnow.dwHighDateTime)<<32)) -
+                            (tstart.dwLowDateTime + (((long long)tstart.dwHighDateTime)<<32));
+        return elapsed * 100e-9;
+    }
+
+#else
+    static struct timespec tstart, tnow;
+    static void startClock() {
+        clock_gettime(CLOCK_MONOTONIC, &tstart);
+    }
+    static double elapsed_time() {
+        clock_gettime(CLOCK_MONOTONIC, &tnow);
+        return (((double)tnow.tv_sec + 1e-9*tnow.tv_nsec) - 
+                ((double)tstart.tv_sec + 1e-9*tstart.tv_nsec));
+    }
+#endif
+
 static void mySleep(double seconds)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds((int)(seconds*1000)));
@@ -262,6 +286,7 @@ int main(int argc, char *argv[])
     }
 
     printf("Calling start_map, acqTimeMs=%u, mappingPoints=%u, numMCAChannels=%u\n", acqTimeMs, mappingPoints, numMCAChannels);
+    startClock();
     callId = start_map(danteIdentifier, acqTimeMs, mappingPoints, numMCAChannels);
     waitReply(callId, danteReply);
     printf("start_map complete\n");
@@ -275,14 +300,14 @@ int main(int argc, char *argv[])
             bool lastDataReceived;
             isLastDataReceived(danteIdentifier, board, lastDataReceived);
             if (lastDataReceived) {
-                printf("Acquisition complete on board %d\n", board);
+                printf("%7.4f Acquisition complete on board %d\n", elapsed_time(), board);
             } else {
                 anyBoardBusy = true;
             }
             if (!getAvailableData(danteIdentifier, board, numAvailable[board])) {
                 printf("%s::%s error calling getAvailableData\n", driverName, functionName);
             }
-            printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable[board]);
+            printf("%7.4f getAvailableData on board %d numAvailable=%d\n", elapsed_time(), board, numAvailable[board]);
             if (board == 0) {
                 minAvailable = numAvailable[board];
             } else if (numAvailable[board] < minAvailable) {
@@ -290,7 +315,7 @@ int main(int argc, char *argv[])
             }
         }
         if (minAvailable == 0) continue;
-        printf("Minimum number of spectra available=%d\n", minAvailable);
+        printf("%7.4f Minimum number of spectra available=%d\n", elapsed_time(), minAvailable);
         uint32_t spectraSize = numMCAChannels;
         for (board=0; board<numBoards; board++) {
             uint16_t *pMappingMCAData                = (uint16_t *) malloc(minAvailable * numMCAChannels * sizeof(uint16_t));
@@ -303,8 +328,8 @@ int main(int argc, char *argv[])
                 printf("%s::%s error calling getAllData\n", driverName, functionName);
             }
             currentPixel[board] += minAvailable;
-            printf("getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n", 
-                board, minAvailable, pSpectraId[0], currentPixel[board]);
+            printf("%7.4f getAllData board=%d, read %d spectra OK, pSpectraId[0]=%u, currentPixel=%d\n", 
+                elapsed_time(), board, minAvailable, pSpectraId[0], currentPixel[board]);
             free(pMappingMCAData);
             free(pSpectraId);
             free(pMappingStats);
@@ -313,9 +338,9 @@ int main(int argc, char *argv[])
     }
     for (int board=0; board<numBoards; board++) {
         getAvailableData(danteIdentifier, board, numAvailable[board]);
-        printf("getAvailableData on board %d numAvailable=%d\n", board, numAvailable[board]);
+        printf("%7.4f getAvailableData on board %d numAvailable=%d\n", elapsed_time(), board, numAvailable[board]);
     }
-    printf("Spectra collected on each board\n");
+    printf("%7.4f Spectra collected on each board\n", elapsed_time());
     for (int board=0; board<numBoards; board++) {
         printf("  Board %d, number collected=%d\n", board, currentPixel[board] + numAvailable[board]);
     }
