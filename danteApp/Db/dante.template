@@ -200,6 +200,17 @@ record(bo,"$(P)$(R)DoReadAll") {
     field(ONAM, "Read")
 }
 
+# This record scans periodically when acquisition is not active to keep the socket connection alive
+record(bo,"$(P)$(R)KeepAlive") {
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn($(PORT))DanteKeepAlive")
+    field(SCAN,"10 second")
+    field(DISV,"1")
+    field(SDIS,"$(P)$(R)MCAAcquireBusy NPP NMS")
+    field(ZNAM,"Done")
+    field(ONAM,"Poll")
+}
+
 record(bo,"$(P)$(R)ReadTrace") {
     field(DTYP, "asynInt32")
     field(OUT,"@asyn($(PORT))DanteReadTrace")
