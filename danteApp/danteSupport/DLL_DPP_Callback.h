@@ -170,35 +170,40 @@ struct configuration_offset {
 };
 
 enum GatingMode {
-	FreeRunning,			// Gating signal is ignored
-	TriggerRising,			// A new spectrum is acquired whenever a RISING edge of ext_trigger signal is detected
-	TriggerFalling,			// A new spectrum is acquired whenever a FALLING edge of ext_trigger signal is detected
-	TriggerBoth,			// A new spectrum is acquired whenever ANY edge of ext_trigger signal is detected
-	GatedHigh,				// Spectra are only acquired when the gating signal is HIGH
-	GatedLow				// Spectra are only acquired when the gating signal is LOW
+	FreeRunning		= 0,			// Gating signal is ignored
+	TriggerRising	= 1,			// A new spectrum is acquired whenever a RISING edge of ext_trigger signal is detected
+	TriggerFalling	= 2,			// A new spectrum is acquired whenever a FALLING edge of ext_trigger signal is detected
+	TriggerBoth		= 3,			// A new spectrum is acquired whenever ANY edge of ext_trigger signal is detected
+	GatedHigh		= 4,			// Spectra are only acquired when the gating signal is HIGH
+	GatedLow		= 5				// Spectra are only acquired when the gating signal is LOW
 };
 
 enum InputMode {
-	DC_HighImp,				// DC coupling, 10 K Ohm input R
-	DC_LowImp,				// DC coupling, 1  K Ohm input R
-	AC_Slow,				// AC coupling, 22 us time constant
-	AC_Fast					// AC coupling, 2.2  us time constant
+	DC_HighImp		,			// (01) DC coupling, 10 K Ohm input R
+	DC_LowImp		,			// (11) DC coupling, 1  K Ohm input R
+	AC_Slow			,			// (00) AC coupling, 22 us time constant
+	AC_Fast						// (10) AC coupling, 2.2  us time constant
 };
 
+/* Configure parameters of the DPP */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure(const char* identifier, uint16_t Board, const configuration cfg);
 
+/* Configure gating or triggering from external digital signal */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_gating(const char* identifier, const GatingMode GatingMode, uint16_t Board);
 
+/* Configure input as either DC or AC, and input impedance or time constant */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_input(const char* identifier, uint16_t Board, const InputMode InputMode);
 
-EXTERN DECLSPEC uint32_t   CALL_CONV reset_daisy_chain(const char* identifier, uint16_t Board);
-
+/* Legacy function - not to be used */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_emulator(const char * identifier, uint16_t Board, bool enable);
 
+/* Configure input analog offset */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_offset(const char* identifier, uint16_t Board, const configuration_offset cfg_offset);
 
+/* Configure the delay of the timestamp signal, to reduce the effect of skew between boards */
 EXTERN DECLSPEC uint32_t   CALL_CONV configure_timestamp_delay(const char* identifier, uint16_t Board, uint16_t ckpulses, uint16_t delay);
 
+/* Advanced functions - not to be used */
 EXTERN DECLSPEC uint32_t   CALL_CONV advanced_configure(const char* identifier, uint16_t Board, uint16_t address, uint32_t data);
 
 EXTERN DECLSPEC uint32_t   CALL_CONV advanced_read(const char* identifier, uint16_t Board, uint16_t address);
@@ -374,26 +379,38 @@ Write a new IP configuration. Changes will take effect after the board has been 
 EXTERN DECLSPEC uint32_t CALL_CONV write_IP_configuration(const char* identifier, char* IP, char* subnet_mask, char* gateway);
 
 /*
-Loads a new firmware via USB. With store to false, it will load to the system a temporary firmware (20 seconds) that will be lost if rebooted.
+Loads a new firmware via USB. LEGACY FUNCTION - only to be used to recover boards with corrupted firmware. Use load_new_firmware in all other cases.
+With store to false, it will load to the system a temporary firmware (20 seconds) that will be lost if rebooted.
 Otherwise whith store to true it will store the firmware on memory and it will persist even after power cycles.
-If board_no is set, the FW update on the defined number of boards; otherwise, autodiscovery is performed
-This last operation could take up to 40 seconds.
+If the board_num parameter is not equal to 0, the firmware will be downloaded to the defined number of boards; if it is equal to 0,
+the board chain will be scanned and the firmware will be downloaded on each board discovered.
 The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
 */
-EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char* identifier, bool store, char* filename, uint16_t board_num = 0);
-EXTERN DECLSPEC uint32_t  CALL_CONV load_new_firmware(const char* identifier, const char* filename, uint16_t board_num = 255);
+EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char * identifier, bool store, char * filename, uint16_t board_num );
+
+/*
+Loads a new firmware via Ethernet or via USB.
+If the board_num parameter is omitted or set to 255, the firmware will be downloaded to all detected boards. Otherwise, the firmware
+will be downloaded to the first N boards in the chain, where N = board_num.
+The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
+*/
+EXTERN DECLSPEC uint32_t  CALL_CONV load_new_firmware(const char * identifier, char * filename, uint16_t board_num);
 
 // Resets the communication on the entire chain.
 EXTERN DECLSPEC uint32_t  CALL_CONV global_reset(const char* identifier);
 
+/* Reset the board chain and restore the communication among boards */
+EXTERN DECLSPEC uint32_t   CALL_CONV reset_daisy_chain(const char* identifier, uint16_t Board);
+
 // Get the progress of the load firmware operation (floating number from 0 to 1);
 EXTERN DECLSPEC bool  CALL_CONV get_load_fw_progress(double& progress);
 
-/**
+/** Advanced function - not to be used
 *   Sets position limit in mapping mode and enables gating during the map.
 */
 EXTERN DECLSPEC uint32_t   CALL_CONV set_position_limit(const char* serial, const uint32_t position, const bool high);
-/**
+
+/** Advanced function - not to be used
 *   Disable position limit and gating in mapping mode.
 */
 EXTERN DECLSPEC uint32_t   CALL_CONV disable_position_limit(const char* serial);
