@@ -124,7 +124,7 @@ struct mappingAdvStats {
 #define DanteGatingModeString               "DanteGatingMode"
 #define DanteMappingPointsString            "DanteMappingPoints"
 #define DanteListBufferSizeString           "DanteListBufferSize"
-
+#define DanteKeepAliveString                "DanteKeepAlive"
 
 class Dante : public asynNDArrayDriver
 {
@@ -221,6 +221,8 @@ protected:
     int DanteGatingMode;                  /* int32 */
     int DanteMappingPoints;               /* int32 */
     int DanteListBufferSize;              /* int32 */
+    int DanteKeepAlive;                   /* int32 */
+
 
     /* Commands from MCA interface */
     int mcaData;                   /* int32Array, write/read */

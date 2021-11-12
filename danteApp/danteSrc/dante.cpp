@@ -264,6 +264,7 @@ Dante::Dante(const char *portName, const char *ipAddress, int totalBoards, size_
     createParam(DanteGatingModeString,              asynParamInt32,   &DanteGatingMode);
     createParam(DanteMappingPointsString,           asynParamInt32,   &DanteMappingPoints);
     createParam(DanteListBufferSizeString,          asynParamInt32,   &DanteListBufferSize);
+    createParam(DanteKeepAliveString,               asynParamInt32,   &DanteKeepAlive);
 
     /* Commands from MCA interface */
     createParam(mcaDataString,                     asynParamInt32Array, &mcaData);
@@ -559,6 +560,11 @@ asynStatus Dante::writeInt32( asynUser *pasynUser, epicsInt32 value)
                 }
             }
         }
+    }
+    else if (function == DanteKeepAlive) {
+        // This just periodically reads the firmware version of the first board to keep the socket alive
+        callId_ = getFirmware(danteIdentifier_, 0);
+        waitReply(callId_, danteReply_, "getFirmware");
     }
 
     /* Call the callback */
