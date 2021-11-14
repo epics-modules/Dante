@@ -38,7 +38,7 @@
 #include <epicsExport.h>
 #include "dante.h"
 
-#define DRIVER_VERSION       "1.0.0"
+#define DRIVER_VERSION       "1.1.0"
 #define MAX_CHANNELS_PER_CARD      8
 #define MAX_MCA_BINS            4096
 #define ALL_BOARDS              -1
