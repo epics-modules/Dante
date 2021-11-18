@@ -44,7 +44,7 @@ set_requestfile_path("$(DANTE)/danteApp/Db")
 set_requestfile_path("$(MCA)/mcaApp/Db")
 
 asynSetTraceIOMask($(PORT),0,ESCAPE)
-asynSetTraceMask($(PORT),0,ERROR|WARNING)
+#asynSetTraceMask($(PORT),0,ERROR|WARNING)
 
 iocInit
 
