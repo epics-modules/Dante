@@ -8,7 +8,7 @@ the configure/RELEASE file in each release of Dante.
 - Based on version 3.7.19 of the XGL_DPP library.
 - Requires firmware version 4.1.x
 - Adds a KeepAlive record required to keep the socket connected to the Dante
-  from closing due to inactivity in firmare 4.1.x.
+  from closing due to inactivity in firmware 4.1.x.
 - Changed documentation to rst, moved to https://epics-dante.readthedocs.io.
 
 ## R1-0 (April 9, 2021)
