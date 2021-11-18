@@ -386,7 +386,7 @@ If the board_num parameter is not equal to 0, the firmware will be downloaded to
 the board chain will be scanned and the firmware will be downloaded on each board discovered.
 The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
 */
-EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char * identifier, bool store, char * filename, uint16_t board_num );
+EXTERN DECLSPEC uint32_t  CALL_CONV load_firmware(const char* identifier, bool store, char* filename, uint16_t board_num);
 
 /*
 Loads a new firmware via Ethernet or via USB.
@@ -394,7 +394,8 @@ If the board_num parameter is omitted or set to 255, the firmware will be downlo
 will be downloaded to the first N boards in the chain, where N = board_num.
 The filename must contain the path in this format: C:\\ArbitraryDirectory\\firmware_name.bitc
 */
-EXTERN DECLSPEC uint32_t  CALL_CONV load_new_firmware(const char * identifier, char * filename, uint16_t board_num);
+EXTERN DECLSPEC uint32_t  CALL_CONV load_new_firmware(const char* identifier, const char* filename, uint16_t board_num);
+
 
 // Resets the communication on the entire chain.
 EXTERN DECLSPEC uint32_t  CALL_CONV global_reset(const char* identifier);
