@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration parameters &mdash; EPICS support for Dante X-ray spectrometers</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Run-time statistics" href="run_time_statistics.html" />
+    <link rel="prev" title="System controls" href="system_controls.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dante
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc_trace_waveforms.html">ADC trace waveforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioc_startup_script.html">IOC startup script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/configuration_parameters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration-parameters">
+<h1>Configuration parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this heading"></a></h1>
+<p>These records control the configuration of the digital signal processing. The readback (_RBV) values may differ slightly
+from the output values because of the discrete nature of the system clocks and MCA bins.</p>
+<p>These parameters are specific to a single board, and are contained in DanteN.template.</p>
+<table class="table-bordered table-striped table-hover docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS record names</p></th>
+<th class="head"><p>Record types</p></th>
+<th class="head"><p>drvInfo string</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EnableBoard, EnableBoard_RBV</p></td>
+<td><p>bo, bi</p></td>
+<td><p>DanteEnableBoard</p></td>
+<td><p>Enables (1) or disables (0) a board in a Dante8.  This allows using fewer than 8 channels on a Dante8.</p></td>
+</tr>
+<tr class="row-odd"><td><p>InputMode, InputMode_RBV</p></td>
+<td><p>mbbo, mbbi</p></td>
+<td><p>DanteInputMode</p></td>
+<td><p>The analog input mode. Choices are “DC_HiImp” (0), “DC_LoImp” (1). “AC_Slow” (2), and “AC_Fast” (3).</p></td>
+</tr>
+<tr class="row-even"><td><p>InputPolarity, InputPolarity_RBV</p></td>
+<td><p>bo, bi</p></td>
+<td><p>DanteInvertedInput</p></td>
+<td><p>The pre-amp output polarity. Choices are “Pos.” (0) and “Neg.” (1).</p></td>
+</tr>
+<tr class="row-odd"><td><p>MaxEnergy, MaxEnergy_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteMaxEnergy</p></td>
+<td><p>The actual energy of the last channel.  The user must provide this value based on the energy calibration.
+It is used to provide meaningful units for FastThreshold, EnergyThreshold, and BaselineThreshold.</p></td>
+</tr>
+<tr class="row-even"><td><p>AnalogOffset, AnalogOffset_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteAnalogOffset</p></td>
+<td><p>The analog offset applied to the input signal, 0 to 255.
+This offset must be adjusted to keep the input signal within the range of the ADC.
+This should be adjusted using the ADC Trace plot with a long sampling to see the range of the input
+signal through a reset event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResetThreshold, ResetThreshold_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteResetThreshold</p></td>
+<td><p>The reset threshold in ADC units per N 8 ns sample intervals. The Dante detects a reset the signal changes by more than this amount.
+The standard firmware uses N=6 and this ResetThreshold value.
+The high-rate firmware uses N=1 and fixes ResetThreshold=256, so this parameter has no effect.</p></td>
+</tr>
+<tr class="row-even"><td><p>ResetRecoveryTime, ResetRecoveryTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteResetRecoveryTime</p></td>
+<td><p>The time in microseconds to wait after a reset event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gain, Gain_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteGain</p></td>
+<td><p>The gain which controls the number of ADC units per MCA bin.  Gains of 1.0-8.0 are typical.</p></td>
+</tr>
+<tr class="row-even"><td><p>FastThreshold, FastThreshold_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteFastFilterThreshold</p></td>
+<td><p>The fast filter threshold in keV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FastPeakingTime, FastPeakingTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteEdgePeakingTime</p></td>
+<td><p>The peaking time of the fast filter in microseconds.</p></td>
+</tr>
+<tr class="row-even"><td><p>FastFlatTopTime, FastFlatTopTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteEdgeFlatTop</p></td>
+<td><p>The flat top time of the fast filter in microseconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p>EnergyThreshold, EnergyThreshold_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteEnergyFilterThreshold</p></td>
+<td><p>The energy filter threshold in keV.</p></td>
+</tr>
+<tr class="row-even"><td><p>PeakingTime, PeakingTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DantePeakingTime</p></td>
+<td><p>The peaking time of the slow filter in microseconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MaxPeakingTime, MaxPeakingTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteMaxPeakingTime</p></td>
+<td><p>The maximum peaking time of the slow filter in microseconds. Used only with the high-rate firmware.
+Must be set to 0 when using the standard firmware.</p></td>
+</tr>
+<tr class="row-even"><td><p>FlatTopTime, FlatTopTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteFlatTop</p></td>
+<td><p>The flat top time of the slow filter in microseconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p>BaselineThreshold, BaselineThreshold_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteEnergyBaselineThreshold</p></td>
+<td><p>The baseline filter threshold in keV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MaxRiseTime, MaxRiseTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteMaxRiseTime</p></td>
+<td><p>The maximum rise time in usec. Pulses with a longer rise time will be pileup rejected.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZeroPeakFreq, ZeroPeakFreq_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteZeroPeakFreq</p></td>
+<td><p>The frequency of the zero-energy peak in Hz.</p></td>
+</tr>
+<tr class="row-even"><td><p>BaselineSamples, BaselineSamples_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteBaselineSamples</p></td>
+<td><p>The number of baseline samples.  Typical value is 64.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TimeConstant, TimeConstant_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteTimeConstant</p></td>
+<td><p>The time constant. Used for digital deconvolution in the case of continuous reset signals.</p></td>
+</tr>
+<tr class="row-even"><td><p>BaseOffset, BaseOffset_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteBaseOffset</p></td>
+<td><p>The base offset. Used for digital deconvolution in the case of continuous reset signals.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system_controls.html" class="btn btn-neutral float-left" title="System controls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run_time_statistics.html" class="btn btn-neutral float-right" title="Run-time statistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mark Rivers.
+      <span class="lastupdated">Last updated on 2023-March-03.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dante &mdash; EPICS support for Dante X-ray spectrometers</title>
+  <title>Overview &mdash; EPICS support for Dante X-ray spectrometers</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,7 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="overview.html" /> 
+    <link rel="next" title="System controls" href="system_controls.html" />
+    <link rel="prev" title="Dante" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +30,7 @@
 
           
           
-          <a href="#" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             Dante
           </a>
 <div role="search">
@@ -40,8 +41,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
@@ -61,17 +62,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Dante</a>
+          <a href="index.html">Dante</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Dante</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Overview</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,43 +80,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dante">
-<h1>Dante<a class="headerlink" href="#dante" title="Permalink to this heading"></a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Mark Rivers, University of Chicago</p>
-</dd>
-</dl>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adc_trace_waveforms.html">ADC trace waveforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc_startup_script.html">IOC startup script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#dante8-free-running-mapping-mode">Dante8 free-running mapping mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#dante8-externally-triggered-mapping-mode">Dante8 externally triggered mapping mode</a></li>
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
+<p>This is an EPICS driver for the <a class="reference external" href="https://www.xglab.it">XGLab</a> Dante digital x-ray spectroscopy system.
+The source code is in the <a class="reference external" href="https://github.com/epics-modules/dante">dante</a> repository in the Github epics-modules project.
+The Dante is available in single channel (Dante1) and 8-channel (Dante8) versions.
+This module is intended to work with either, though it has currently only been tested on the single-channel version.
+In this document NumBoards refers to the number of enabled input channels, e.g. 1 for a Dante1, up to 8 for a
+Dante8, and &gt;8 for systems with more than one Dante8 daisy-chained together.
+If a channel is disabled then it is not counted in NumBoards.</p>
+<p>The Dante can collect data in 3 different modes:</p>
+<ul class="simple">
+<li><p>Single MCA spectrum.  It acquires a single MCA spectrum on all channels.</p></li>
+<li><p>MCA mapping mode.  It acquires multiple spectra in rapid succession, and it often used for making an x-ray map where there is an MCA
+spectrum for each channel at each pixel.  The advance to the next pixel can come from an internal clock or an external trigger.</p></li>
+<li><p>List mapping mode.  It acquires each x-ray event energy and timestamp in a list buffer.</p></li>
 </ul>
-</li>
-</ul>
-</div>
-</section>
+<p>The Dante driver is derived from the base class <a class="reference external" href="https://areadetector.github.io/master/ADCore/NDArray.html#asynndarraydriver">asynNDArrayDriver</a>, which is part of the EPICS <a class="reference external" href="https://areadetector.github.io">areaDetector</a> package.
+The allows the Dante driver to use all of the areaDetector plugins for file saving in MCA mapping and list modes,
+and for other purposes. It also implements the mca interface from the EPICS <a class="reference external" href="https://github.com/epics-modules/mca">mca</a> module.
+The EPICS mca record can be used to display the spectra and control the basic operation including Regions-of-Interest (ROIs).</p>
+<p>The Dante driver can be used on both Windows and Linux. A Windows machine with a USB interface is required
+to load new firmware.  Otherwise the module can be used from either Linux or Windows over Ethernet. The Linux library
+provided can run on most Linux versions, including RHEL7/Centos7.</p>
+<p>This document does not attempt to give an explanation of the principles of operation of the Dante, or a detailed explanation
+of the many configuration parameters for the digital pulse processing.  The user should consult the
+<a class="reference download internal" download="" href="_downloads/d7b53c618ddb4c28be0d33ad76736657/DANTE-4553%20Manual%20rev2.3.pdf"><code class="xref download docutils literal notranslate"><span class="pre">DanteManual</span></code></a> for this information.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Dante" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="system_controls.html" class="btn btn-neutral float-right" title="System controls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dante &mdash; EPICS support for Dante X-ray spectrometers</title>
+  <title>Run-time statistics &mdash; EPICS support for Dante X-ray spectrometers</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,7 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="overview.html" /> 
+    <link rel="next" title="medm screens" href="medm_screens.html" />
+    <link rel="prev" title="Configuration parameters" href="configuration_parameters.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +30,7 @@
 
           
           
-          <a href="#" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             Dante
           </a>
 <div role="search">
@@ -40,11 +41,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run-time statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
@@ -61,17 +62,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Dante</a>
+          <a href="index.html">Dante</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Dante</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Run-time statistics</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/run_time_statistics.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,43 +80,104 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dante">
-<h1>Dante<a class="headerlink" href="#dante" title="Permalink to this heading"></a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Mark Rivers, University of Chicago</p>
-</dd>
-</dl>
-<section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adc_trace_waveforms.html">ADC trace waveforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc_startup_script.html">IOC startup script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#dante8-free-running-mapping-mode">Dante8 free-running mapping mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#dante8-externally-triggered-mapping-mode">Dante8 externally triggered mapping mode</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
+  <section id="run-time-statistics">
+<h1>Run-time statistics<a class="headerlink" href="#run-time-statistics" title="Permalink to this heading"></a></h1>
+<p>These are the records for run-time statistics.</p>
+<p>These parameters are specific to a single board, and are contained in DanteN.template.</p>
+<table class="table-bordered table-striped table-hover docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS record names</p></th>
+<th class="head"><p>Record types</p></th>
+<th class="head"><p>drvInfo string</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ElapsedRealTime</p></td>
+<td><p>ai</p></td>
+<td><p>MCA_ELAPSED_REAL</p></td>
+<td><p>The elapsed real time in seconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ElapsedLiveTime</p></td>
+<td><p>ai</p></td>
+<td><p>MCA_ELAPSED_LIVE</p></td>
+<td><p>The elapsed live time in seconds.</p></td>
+</tr>
+<tr class="row-even"><td><p>InputCountRate</p></td>
+<td><p>ai</p></td>
+<td><p>DanteInputCountRate</p></td>
+<td><p>The input count rate in kHz.</p></td>
+</tr>
+<tr class="row-odd"><td><p>OutputCountRate</p></td>
+<td><p>ai</p></td>
+<td><p>DanteOutputCountRate</p></td>
+<td><p>The output count rate in kHz.</p></td>
+</tr>
+<tr class="row-even"><td><p>Triggers</p></td>
+<td><p>longin</p></td>
+<td><p>DanteTriggers</p></td>
+<td><p>The number of triggers received.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Events</p></td>
+<td><p>longin</p></td>
+<td><p>DanteEvents</p></td>
+<td><p>The number of events received.</p></td>
+</tr>
+<tr class="row-even"><td><p>FastDeadTime</p></td>
+<td><p>longin</p></td>
+<td><p>DanteEdgeDTime</p></td>
+<td><p>The fast deadtime in clock ticks.</p></td>
+</tr>
+<tr class="row-odd"><td><p>F1DeadTime</p></td>
+<td><p>longin</p></td>
+<td><p>DanteFilt1DT</p></td>
+<td><p>The filter 1 deadtime in clock ticks.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZeroCounts</p></td>
+<td><p>longin</p></td>
+<td><p>DanteZeroCounts</p></td>
+<td><p>The number of zero count events.</p></td>
+</tr>
+<tr class="row-odd"><td><p>BaselineCount</p></td>
+<td><p>longin</p></td>
+<td><p>DanteBaselinesValue</p></td>
+<td><p>The number of baseline events.</p></td>
+</tr>
+<tr class="row-even"><td><p>PileUp</p></td>
+<td><p>longin</p></td>
+<td><p>DantePUPValue</p></td>
+<td><p>The number of pileup events.</p></td>
+</tr>
+<tr class="row-odd"><td><p>F1PileUp</p></td>
+<td><p>longin</p></td>
+<td><p>DantePUPF1Value</p></td>
+<td><p>The number of filter 1 pileup events.</p></td>
+</tr>
+<tr class="row-even"><td><p>NotF1PileUp</p></td>
+<td><p>longin</p></td>
+<td><p>DantePUPNotF1Value</p></td>
+<td><p>The number of not filter 1 pileup events.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResetCounts</p></td>
+<td><p>longin</p></td>
+<td><p>DanteResetCounterValue</p></td>
+<td><p>The number of reset events.</p></td>
+</tr>
+<tr class="row-even"><td><p>LastTimeStamp</p></td>
+<td><p>ai</p></td>
+<td><p>DanteLastTimeStamp</p></td>
+<td><p>The last timestamp time in clock ticks.</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="configuration_parameters.html" class="btn btn-neutral float-left" title="Configuration parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="medm_screens.html" class="btn btn-neutral float-right" title="medm screens" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

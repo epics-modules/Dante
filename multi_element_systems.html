@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search &mdash; EPICS support for Dante X-ray spectrometers</title>
+  <title>Multi-element systems &mdash; EPICS support for Dante X-ray spectrometers</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
-    
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,10 +16,10 @@
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MCA mode" href="mca_mode.html" />
+    <link rel="prev" title="medm screens" href="medm_screens.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,20 +34,20 @@
             Dante
           </a>
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multi-element systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
@@ -70,8 +70,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
+      <li class="breadcrumb-item active">Multi-element systems</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/multi_element_systems.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,22 +80,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <section id="multi-element-systems">
+<h1>Multi-element systems<a class="headerlink" href="#multi-element-systems" title="Permalink to this heading"></a></h1>
+<p>Multi-element detector (MED) systems use an EPICS State Notation Language (SNL) program to synchronize and copy PVs.</p>
+<p>These are the records for multi-element detector systems. They are contained in danteMED.template.</p>
+<table class="table-bordered table-striped table-hover docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS record names</p></th>
+<th class="head"><p>Record type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SNLConnected</p></td>
+<td><p>bi</p></td>
+<td><p>Indicates whether or not the SNL program is running.</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeadTime</p></td>
+<td><p>ai</p></td>
+<td><p>The average deadtime of all the enabled boards.</p></td>
+</tr>
+<tr class="row-even"><td><p>IDeadTime</p></td>
+<td><p>ai</p></td>
+<td><p>The average instantaneous deadtime of all the enabled boards.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Copy[XXX]</p></td>
+<td><p>bo</p></td>
+<td><p>Copies the setting XXX from board 0 to all other enabled boards.
+XXX can be any of the configuration parameters described above,
+for example Gain, AnalogOffset, etc.
+XXX can also be the definition of the ROIs for the MCA records.
+In this case the copy can be either by MCA channel number, or by x-ray energy,
+using the calibration coefficients in the MCA record.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following is the MEDM screen dante8Parameters.adl. This screen is used with the Dante8.</p>
+<figure class="align-center">
+<img alt="_images/dante8Parameters.png" src="_images/dante8Parameters.png" />
+</figure>
+<p>The following is the MEDM screen dante8MCA.adl. This screen is used with the Dante8.</p>
+<figure class="align-center">
+<img alt="_images/dante8MCA.png" src="_images/dante8MCA.png" />
+</figure>
+<p>The following is the MEDM screen dante8Statistics.adl. This screen is used with the Dante8.</p>
+<figure class="align-center">
+<img alt="_images/dante8Statistics.png" src="_images/dante8Statistics.png" />
+</figure>
+<p>The following is the MEDM screen dante8ROI.adl. This screen is used with the Dante8.
+It allows copying the definition of 16 ROIs from board 0 to all boards.</p>
+<figure class="align-center">
+<img alt="_images/dante8ROI.png" src="_images/dante8ROI.png" />
+</figure>
+</section>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="medm_screens.html" class="btn btn-neutral float-left" title="medm screens" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mca_mode.html" class="btn btn-neutral float-right" title="MCA mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -118,14 +164,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

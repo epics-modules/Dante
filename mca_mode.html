@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search &mdash; EPICS support for Dante X-ray spectrometers</title>
+  <title>MCA mode &mdash; EPICS support for Dante X-ray spectrometers</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
-    
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,10 +16,10 @@
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MCA mapping mode" href="mca_mapping_mode.html" />
+    <link rel="prev" title="Multi-element systems" href="multi_element_systems.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,21 +34,21 @@
             Dante
           </a>
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MCA mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adc_trace_waveforms.html">ADC trace waveforms</a></li>
@@ -70,8 +70,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Search</li>
+      <li class="breadcrumb-item active">MCA mode</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mca_mode.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -79,22 +80,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <section id="mca-mode">
+<h1>MCA mode<a class="headerlink" href="#mca-mode" title="Permalink to this heading"></a></h1>
+<p>The MCA mode collects a single MCA record at a time.  It is compatible with the MCA record, and is the same
+as MCA operation on many other EPICS MCAs, e.g. Canberra AIM, Amptek, XIA (Saturn, Mercury, xMAP, FalconX), SIS38XX, and others.</p>
+<p>It only supports counting for a preset real time, or counting indefinitely (PresetReal=0).
+It does not support PresetLive or PresetCounts which some other MCAs do.</p>
+<p>The following is the MEDM screen mca.adl displaying the MCA spectrum as it is acquiring.</p>
+<figure class="align-center">
+<img alt="_images/dante_mca.png" src="_images/dante_mca.png" />
+</figure>
+<p>The following is the IDL MCA Display program showing the MCA spectrum as it is acquiring. This GUI allows defining ROIs
+graphically, fitting peaks and background, and many other features.</p>
+<figure class="align-center">
+<img alt="_images/dante_idl_mca.png" src="_images/dante_idl_mca.png" />
+</figure>
+</section>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="multi_element_systems.html" class="btn btn-neutral float-left" title="Multi-element systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mca_mapping_mode.html" class="btn btn-neutral float-right" title="MCA mapping mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -118,14 +127,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

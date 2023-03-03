@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADC trace waveforms &mdash; EPICS support for Dante X-ray spectrometers</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="IOC startup script" href="ioc_startup_script.html" />
+    <link rel="prev" title="List mode" href="list_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Dante
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_controls.html">System controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration_parameters.html">Configuration parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_time_statistics.html">Run-time statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="medm_screens.html">medm screens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_element_systems.html">Multi-element systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mca_mode.html">MCA mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mca_mapping_mode.html">MCA mapping mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_mode.html">List mode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ADC trace waveforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioc_startup_script.html">IOC startup script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Dante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ADC trace waveforms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/adc_trace_waveforms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adc-trace-waveforms">
+<h1>ADC trace waveforms<a class="headerlink" href="#adc-trace-waveforms" title="Permalink to this heading"></a></h1>
+<p>The Dante can collect ADC trace waveforms, which is effectively a digital oscilloscope of the pre-amp input signal.
+This very useful for setting the AnalogOffset record, and for diagnosing issues with the input.</p>
+<p>These are the records to control ADC traces. All of the records except TraceData affect all boards and are in dante.template.
+TraceData is specific to each board and is in danteN.template.</p>
+<table class="table-bordered table-striped table-hover docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS record names</p></th>
+<th class="head"><p>Record types</p></th>
+<th class="head"><p>drvInfo string</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReadTrace</p></td>
+<td><p>bo</p></td>
+<td><p>DanteReadTrace</p></td>
+<td><p>Arms the system to capture trace data on the next trigger event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TraceTimeArray</p></td>
+<td><p>waveform</p></td>
+<td><p>DanteTraceTimeArray</p></td>
+<td><p>Waveform record containing the time values for each point in TraceData. 64-bit float data type.</p></td>
+</tr>
+<tr class="row-even"><td><p>TraceTime, TraceTime_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteTraceTime</p></td>
+<td><p>Time per sample of the ADC trace data in microseconds. Allowed range is 0.016 to 0.512.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TraceLength, TraceLength_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteTraceLength</p></td>
+<td><p>The number of samples to read in the ADC trace.  This must be a multiple of 16384, and will be limited by the
+NELM field of the TraceData and TraceTimeArray waveform records.</p></td>
+</tr>
+<tr class="row-even"><td><p>TraceTriggerLevel, TraceTriggerLevel_RBV</p></td>
+<td><p>longout, longin</p></td>
+<td><p>DanteTraceTriggerLevel</p></td>
+<td><p>The trigger level in ADC units (0 to 65535).</p></td>
+</tr>
+<tr class="row-odd"><td><p>TraceTriggerRising, TraceTriggerRising_RBV</p></td>
+<td><p>bo, bi</p></td>
+<td><p>DanteTraceTriggerRising</p></td>
+<td><p>Trigger the ADC trace as it rises through TraceTriggerLevel. Choices are “No” (0) and “Yes” (1).</p></td>
+</tr>
+<tr class="row-even"><td><p>TraceTriggerFalling, TraceTriggerFalling_RBV</p></td>
+<td><p>bo, bi</p></td>
+<td><p>DanteTraceTriggerFalling</p></td>
+<td><p>Trigger the ADC trace as it fals through TraceTriggerLevel. Choices are “No” (0) and “Yes” (1).</p></td>
+</tr>
+<tr class="row-odd"><td><p>TraceTriggerInstant, TraceTriggerInstant_RBV</p></td>
+<td><p>bo, bi</p></td>
+<td><p>DanteTraceTriggerInstant</p></td>
+<td><p>Trigger the ADC trace even if a rising or falling trigger is not detected. Choices are “No” (0) and “Yes” (1).</p></td>
+</tr>
+<tr class="row-even"><td><p>TraceTriggerWait, TraceTriggerWait_RBV</p></td>
+<td><p>ao, ai</p></td>
+<td><p>DanteTraceTriggerWait</p></td>
+<td><p>The delay time after the trigger condition is satisfied before beginning the ADC trace.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TraceData</p></td>
+<td><p>waveform</p></td>
+<td><p>DanteTraceData</p></td>
+<td><p>Waveform record containing the ADC trace data. 32-bit integer data type.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following are the MEDM screen danteTrace.adl displaying two ADC traces. These were done with a Vortex SDD detctor and a Cd109 source,
+which produces Ag K x-rays.  The traces were captured with TraceTriggerRising=Yes and TraceTriggerLevel=50000.
+The first trace was done with TraceTime=0.512 microseconds, so the total time is 8192 microseconds. 2 resets are visible on this trace.
+The second trace was done with TraceTime=0.016 microseconds, so the total time is 256 microseconds.  The individual 22 keV Ag x-ray steps
+can be seen in this trace.</p>
+<figure class="align-center">
+<img alt="_images/dante_trace1.png" src="_images/dante_trace1.png" />
+</figure>
+<figure class="align-center">
+<img alt="_images/dante_trace2.png" src="_images/dante_trace2.png" />
+</figure>
+<p>The following is the MEDM screen dante8Trace.adl. This screen is used with the Dante8.</p>
+<figure class="align-center">
+<img alt="_images/dante8Trace.png" src="_images/dante8Trace.png" />
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="list_mode.html" class="btn btn-neutral float-left" title="List mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ioc_startup_script.html" class="btn btn-neutral float-right" title="IOC startup script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Mark Rivers.
+      <span class="lastupdated">Last updated on 2023-March-03.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
