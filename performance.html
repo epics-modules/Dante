@@ -11,9 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -83,9 +85,9 @@
            <div itemprop="articleBody">
              
   <section id="performance">
-<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading"></a></h1>
+<h1>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h1>
 <section id="dante8-free-running-mapping-mode">
-<h2>Dante8 free-running mapping mode<a class="headerlink" href="#dante8-free-running-mapping-mode" title="Permalink to this heading"></a></h2>
+<h2>Dante8 free-running mapping mode<a class="headerlink" href="#dante8-free-running-mapping-mode" title="Link to this heading"></a></h2>
 <p>The following table shows the maximum number of pixels/s for MCA mapping mode as a function of the number of boards enabled
 and the number of MCA channels on the Dante8. The tests were done under the following conditions:</p>
 <ul class="simple">
@@ -99,7 +101,7 @@ and the number of MCA channels on the Dante8. The tests were done under the foll
 <p>The PresetReal time on the Dante is limited to multiples of 1 ms,
 so the pixel rate in FreeRun mode is limited to 1000, 500, 333, 250, etc.</p>
 <table class="table-bordered table-striped table-hover docutils align-default" id="id1">
-<caption><span class="caption-text">Maximum pixel rate in Hz (spectra/board/second) for TriggerMode=FreeRunning</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<caption><span class="caption-text">Maximum pixel rate in Hz (spectra/board/second) for TriggerMode=FreeRunning</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>MCA Channels</p></th>
 <th class="head"><p>1 board  enabled</p></th>
@@ -131,7 +133,7 @@ so the pixel rate in FreeRun mode is limited to 1000, 500, 333, 250, etc.</p>
 </table>
 </section>
 <section id="dante8-externally-triggered-mapping-mode">
-<h2>Dante8 externally triggered mapping mode<a class="headerlink" href="#dante8-externally-triggered-mapping-mode" title="Permalink to this heading"></a></h2>
+<h2>Dante8 externally triggered mapping mode<a class="headerlink" href="#dante8-externally-triggered-mapping-mode" title="Link to this heading"></a></h2>
 <p>The following table shows the maximum number of pixels/s for MCA mapping mode as a function of the number of boards enabled
 and the number of MCA channels on the Dante8. The tests were done under the following conditions:</p>
 <ul class="simple">
@@ -146,7 +148,7 @@ and the number of MCA channels on the Dante8. The tests were done under the foll
 The pulse generator was programmed to output 2000 pulses.</p>
 <p>The pulse frequency was increased until the mapping mode acquisition no longer collected the requested number of pixels.</p>
 <table class="table-bordered table-striped table-hover docutils align-default" id="id2">
-<caption><span class="caption-text">Maximum pixel rate in Hz (spectra/board/second) for TriggerMode=Trig Rising</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<caption><span class="caption-text">Maximum pixel rate in Hz (spectra/board/second) for TriggerMode=Trig Rising</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>MCA Channels</p></th>
 <th class="head"><p>1 board  enabled</p></th>
@@ -194,7 +196,7 @@ and the EPICS IOC needs to be restarted.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Mark Rivers.
-      <span class="lastupdated">Last updated on 2023-March-24.
+      <span class="lastupdated">Last updated on 2023-November-20.
       </span></p>
   </div>
 
