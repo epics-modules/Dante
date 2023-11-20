@@ -1,5 +1,4 @@
 This directory contains files for the XGL Dante.  
-They were copied from the latest "DANTE DPP_4553 Redistributable Package" distribution:
-DANTE4553_RedistributablePackage_4014.3780.15140
+They were copied from the latest distribution: "DANTE-2.0.8.9 HR.zip" on November 20, 2023.
 They get installed before the DanteSrc directory is built on Linux and Windows.
 
