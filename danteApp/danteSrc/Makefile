@@ -9,7 +9,7 @@ include $(TOP)/configure/CONFIG
 DBD += mcaDanteSupport.dbd
 PROD_NAME = mcaDanteApp
 
-ifeq (linux-x86_64, $(findstring x86_64, $(T_A)))
+ifeq (x86_64, $(findstring x86_64, $(T_A)))
   USR_CXXFLAGS_Linux += -std=c++11
   LIBRARY_IOC_Linux += mcaDante
   PROD_IOC_Linux  += $(PROD_NAME)
