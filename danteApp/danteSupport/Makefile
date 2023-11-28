@@ -10,7 +10,7 @@ ifeq (windows-x64, $(findstring windows-x64, $(T_A)))
 LIB_INSTALLS  += ../os/WIN32/x64/XGL_DPP.lib
 BIN_INSTALLS  += ../os/WIN32/x64/XGL_DPP.dll
 
-else ifeq (linux-x86_64, $(findstring linux-x86_64, $(T_A)))
+else ifeq (x86_64, $(findstring x86_64, $(ARCH_CLASS)))
 LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so.3.7.19
 LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so.1
 LIB_INSTALLS  += ../os/Linux/libXGL_DPP.so
