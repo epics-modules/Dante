@@ -101,7 +101,7 @@ record(bo,"$(P)$(R)EraseStart") {
     field(FLNK,"$(P)$(R)EraseStartFanout")
 }
 
-record(dfanout, $(P)$(R)EraseStartFanout) {
+record(dfanout, "$(P)$(R)EraseStartFanout") {
     field(DOL, "1")
     field(OUTA, "$(P)$(R)StartAll PP")
     field(OUTB, "$(P)$(R)MCAAcquireBusy PP")
